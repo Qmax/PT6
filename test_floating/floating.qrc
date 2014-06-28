@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>gray_and_white_gradient_oval5.png</file>
+        <file>gradient_oval1.png</file>
+    </qresource>
+</RCC>
