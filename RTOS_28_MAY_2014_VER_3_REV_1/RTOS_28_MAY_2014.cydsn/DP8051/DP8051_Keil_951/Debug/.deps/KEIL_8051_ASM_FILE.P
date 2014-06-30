@@ -14,11 +14,3 @@ d:/RTOS_28_MAY_2014_VER_3_REV_1/RTOS_28_MAY_2014.cydsn/DP8051/DP8051_Keil_951/De
 
 d:/RTOS_28_MAY_2014_VER_3_REV_1/RTOS_28_MAY_2014.cydsn/Generated_Source/PSoC3/KeilStart.a51 : 
 
-d:/RTOS_28_MAY_2014_VER_3_REV_1/RTOS_28_MAY_2014.cydsn/DP8051/DP8051_Keil_951/Debug/RTX51_config.obj : d:/RTOS_28_MAY_2014_VER_3_REV_1/RTOS_28_MAY_2014.cydsn/Generated_Source/PSoC3/RTX51_config.a51 
-
-d:/RTOS_28_MAY_2014_VER_3_REV_1/RTOS_28_MAY_2014.cydsn/Generated_Source/PSoC3/RTX51_config.a51 : 
-
-d:/RTOS_28_MAY_2014_VER_3_REV_1/RTOS_28_MAY_2014.cydsn/DP8051/DP8051_Keil_951/Debug/cymem.obj : d:/RTOS_28_MAY_2014_VER_3_REV_1/RTOS_28_MAY_2014.cydsn/Generated_Source/PSoC3/cymem.a51 
-
-d:/RTOS_28_MAY_2014_VER_3_REV_1/RTOS_28_MAY_2014.cydsn/Generated_Source/PSoC3/cymem.a51 : 
-

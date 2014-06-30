@@ -1,4 +1,4 @@
-C51 COMPILER V9.51   QUADDECODER_PM                                                        06/25/2014 11:20:01 PAGE 1   
+C51 COMPILER V9.51   QUADDECODER_PM                                                        06/30/2014 14:51:06 PAGE 1   
 
 
 C51 COMPILER V9.51, COMPILATION OF MODULE QUADDECODER_PM
@@ -62,7 +62,7 @@ line level    source
   51          * Function Name: QuadDecoder_RestoreConfig
   52          ********************************************************************************
   53          * Summary:
-C51 COMPILER V9.51   QUADDECODER_PM                                                        06/25/2014 11:20:01 PAGE 2   
+C51 COMPILER V9.51   QUADDECODER_PM                                                        06/30/2014 14:51:06 PAGE 2   
 
   54          *  Restores the current user configuration of the component.
   55          *
@@ -126,7 +126,7 @@ line level    source
  113          * Function Name: QuadDecoder_Wakeup
  114          ********************************************************************************
  115          *
-C51 COMPILER V9.51   QUADDECODER_PM                                                        06/25/2014 11:20:01 PAGE 3   
+C51 COMPILER V9.51   QUADDECODER_PM                                                        06/30/2014 14:51:06 PAGE 3   
 
  116          * Summary:
  117          *  Prepare Quadrature Decoder Component to wake up.
@@ -164,7 +164,7 @@ line level    source
  149          
  150          /* [] END OF FILE */
  151          
-C51 COMPILER V9.51   QUADDECODER_PM                                                        06/25/2014 11:20:01 PAGE 4   
+C51 COMPILER V9.51   QUADDECODER_PM                                                        06/30/2014 14:51:06 PAGE 4   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -228,7 +228,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0003 900000      R     MOV     DPTR,#QuadDecoder_backup
 0006 E0                MOVX    A,@DPTR
 0007 FF                MOV     R7,A
-C51 COMPILER V9.51   QUADDECODER_PM                                                        06/25/2014 11:20:01 PAGE 5   
+C51 COMPILER V9.51   QUADDECODER_PM                                                        06/30/2014 14:51:06 PAGE 5   
 
 0008 EF                MOV     A,R7
 0009 6006              JZ      ?C0007

@@ -1,4 +1,4 @@
-C51 COMPILER V9.51   SPIS_INT                                                              06/25/2014 11:19:55 PAGE 1   
+C51 COMPILER V9.51   SPIS_INT                                                              06/30/2014 14:51:01 PAGE 1   
 
 
 C51 COMPILER V9.51, COMPILATION OF MODULE SPIS_INT
@@ -62,7 +62,7 @@ line level    source
   51          CY_ISR(SPIS_TX_ISR)
   52          {
   53   1      
-C51 COMPILER V9.51   SPIS_INT                                                              06/25/2014 11:19:55 PAGE 2   
+C51 COMPILER V9.51   SPIS_INT                                                              06/30/2014 14:51:01 PAGE 2   
 
   54   1          #if(SPIS_TX_SOFTWARE_BUF_ENABLED)
                       uint8 tmpStatus;
@@ -126,7 +126,7 @@ line level    source
  113          
  114          /*******************************************************************************
  115          * Function Name: SPIS_RX_ISR
-C51 COMPILER V9.51   SPIS_INT                                                              06/25/2014 11:19:55 PAGE 3   
+C51 COMPILER V9.51   SPIS_INT                                                              06/30/2014 14:51:01 PAGE 3   
 
  116          *
  117          * Summary:
@@ -190,7 +190,7 @@ line level    source
                           SPIS_rxBuffer[SPIS_rxBufferWrite] = rxData;
               
                           tmpStatus = SPIS_GET_STATUS_RX(SPIS_swStatusRx);
-C51 COMPILER V9.51   SPIS_INT                                                              06/25/2014 11:19:55 PAGE 4   
+C51 COMPILER V9.51   SPIS_INT                                                              06/30/2014 14:51:01 PAGE 4   
 
                           SPIS_swStatusRx = tmpStatus;
                       }
@@ -204,7 +204,7 @@ line level    source
  187   1      }
  188          
  189          /* [] END OF FILE */
-C51 COMPILER V9.51   SPIS_INT                                                              06/25/2014 11:19:55 PAGE 5   
+C51 COMPILER V9.51   SPIS_INT                                                              06/30/2014 14:51:01 PAGE 5   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 

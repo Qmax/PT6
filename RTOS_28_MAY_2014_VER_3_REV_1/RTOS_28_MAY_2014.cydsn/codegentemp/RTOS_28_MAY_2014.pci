@@ -1,5 +1,5 @@
 # RTOS_28_MAY_2014
-# 2014-06-26 05:36:20Z
+# 2014-06-30 09:18:27Z
 
 # IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
 dont_use_io iocell 1 0
@@ -50,6 +50,7 @@ set_io "PC_VI_2SEL0(0)" iocell 2 5
 set_io "PC_VI_2SEL1(0)" iocell 2 4
 set_io "PSoC_INT0(0)" iocell 3 7
 set_io "PSoC_INT1(0)" iocell 3 6
+set_io "PWM_Out(0)" iocell 0 5
 set_io "RS232_RX(0)" iocell 5 1
 set_io "RS232_TX(0)" iocell 5 0
 set_io "SCK(0)" iocell 5 5

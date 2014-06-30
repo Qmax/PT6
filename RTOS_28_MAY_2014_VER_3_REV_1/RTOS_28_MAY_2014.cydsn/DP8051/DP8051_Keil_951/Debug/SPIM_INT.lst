@@ -1,4 +1,4 @@
-C51 COMPILER V9.51   SPIM_INT                                                              06/25/2014 11:19:47 PAGE 1   
+C51 COMPILER V9.51   SPIM_INT                                                              06/30/2014 14:50:53 PAGE 1   
 
 
 C51 COMPILER V9.51, COMPILATION OF MODULE SPIM_INT
@@ -62,7 +62,7 @@ line level    source
   51          CY_ISR(SPIM_TX_ISR)
   52          {
   53   1          #if(SPIM_TX_SOFTWARE_BUF_ENABLED)
-C51 COMPILER V9.51   SPIM_INT                                                              06/25/2014 11:19:47 PAGE 2   
+C51 COMPILER V9.51   SPIM_INT                                                              06/30/2014 14:50:53 PAGE 2   
 
                       uint8 tmpStatus;
                   #endif /* (SPIM_TX_SOFTWARE_BUF_ENABLED) */
@@ -126,7 +126,7 @@ line level    source
  113          *
  114          * Summary:
  115          *  Interrupt Service Routine for RX portion of the SPI Master.
-C51 COMPILER V9.51   SPIM_INT                                                              06/25/2014 11:19:47 PAGE 3   
+C51 COMPILER V9.51   SPIM_INT                                                              06/30/2014 14:50:53 PAGE 3   
 
  116          *
  117          * Parameters:
@@ -190,7 +190,7 @@ line level    source
                           SPIM_rxBuffer[SPIM_rxBufferWrite] = rxData;
               
                           tmpStatus = SPIM_GET_STATUS_RX(SPIM_swStatusRx);
-C51 COMPILER V9.51   SPIM_INT                                                              06/25/2014 11:19:47 PAGE 4   
+C51 COMPILER V9.51   SPIM_INT                                                              06/30/2014 14:50:53 PAGE 4   
 
                           SPIM_swStatusRx = tmpStatus;
                       }
@@ -204,7 +204,7 @@ line level    source
  187   1      }
  188          
  189          /* [] END OF FILE */
-C51 COMPILER V9.51   SPIM_INT                                                              06/25/2014 11:19:47 PAGE 5   
+C51 COMPILER V9.51   SPIM_INT                                                              06/30/2014 14:50:53 PAGE 5   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 

@@ -1,4 +1,4 @@
-C51 COMPILER V9.51   QUADDECODER                                                           06/25/2014 11:20:00 PAGE 1   
+C51 COMPILER V9.51   QUADDECODER                                                           06/30/2014 14:51:06 PAGE 1   
 
 
 C51 COMPILER V9.51, COMPILATION OF MODULE QUADDECODER
@@ -62,7 +62,7 @@ line level    source
                   #endif /* QuadDecoder_COUNTER_SIZE == QuadDecoder_COUNTER_SIZE_32_BIT */
   52   1      }
   53          
-C51 COMPILER V9.51   QUADDECODER                                                           06/25/2014 11:20:00 PAGE 2   
+C51 COMPILER V9.51   QUADDECODER                                                           06/30/2014 14:51:06 PAGE 2   
 
   54          
   55          /*******************************************************************************
@@ -126,7 +126,7 @@ line level    source
  113          void QuadDecoder_Start(void) 
  114          {
  115   1          #if (QuadDecoder_COUNTER_SIZE == QuadDecoder_COUNTER_SIZE_8_BIT)
-C51 COMPILER V9.51   QUADDECODER                                                           06/25/2014 11:20:00 PAGE 3   
+C51 COMPILER V9.51   QUADDECODER                                                           06/30/2014 14:51:06 PAGE 3   
 
  116   1              QuadDecoder_Cnt8_Start();
  117   1              QuadDecoder_Cnt8_WriteCounter(QuadDecoder_COUNTER_INIT_VALUE);
@@ -190,7 +190,7 @@ line level    source
  175          
  176          /*******************************************************************************
  177          * Function Name: QuadDecoder_GetCounter
-C51 COMPILER V9.51   QUADDECODER                                                           06/25/2014 11:20:00 PAGE 4   
+C51 COMPILER V9.51   QUADDECODER                                                           06/30/2014 14:51:06 PAGE 4   
 
  178          ********************************************************************************
  179          *
@@ -254,7 +254,7 @@ line level    source
  237          *  value:  The new value. Parameter type is signed and per the counter size
  238          *  setting.
  239          *
-C51 COMPILER V9.51   QUADDECODER                                                           06/25/2014 11:20:00 PAGE 5   
+C51 COMPILER V9.51   QUADDECODER                                                           06/30/2014 14:51:06 PAGE 5   
 
  240          * Return:
  241          *  None.
@@ -318,7 +318,7 @@ line level    source
  299          *     2        Counter reset due to index, if index input is used.
  300          *     3        Invalid A, B inputs state transition.
  301          *
-C51 COMPILER V9.51   QUADDECODER                                                           06/25/2014 11:20:00 PAGE 6   
+C51 COMPILER V9.51   QUADDECODER                                                           06/30/2014 14:51:06 PAGE 6   
 
  302          *******************************************************************************/
  303          uint8 QuadDecoder_GetEvents(void) 
@@ -378,7 +378,7 @@ line level    source
  357          
  358          
  359          /* [] END OF FILE */
-C51 COMPILER V9.51   QUADDECODER                                                           06/25/2014 11:20:00 PAGE 7   
+C51 COMPILER V9.51   QUADDECODER                                                           06/30/2014 14:51:06 PAGE 7   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -442,7 +442,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0018 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 130
 0019         ?C0003:
-C51 COMPILER V9.51   QUADDECODER                                                           06/25/2014 11:20:00 PAGE 8   
+C51 COMPILER V9.51   QUADDECODER                                                           06/30/2014 14:51:06 PAGE 8   
 
                                            ; SOURCE LINE # 132
 0019 120000      R     LCALL   QuadDecoder_Enable
@@ -506,7 +506,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 001D 22                RET     
              ; FUNCTION QuadDecoder_GetCounter (END)
 
-C51 COMPILER V9.51   QUADDECODER                                                           06/25/2014 11:20:00 PAGE 9   
+C51 COMPILER V9.51   QUADDECODER                                                           06/30/2014 14:51:06 PAGE 9   
 
              ; FUNCTION _QuadDecoder_SetCounter (BEGIN)
                                            ; SOURCE LINE # 251
@@ -570,7 +570,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0005 EF                MOV     A,R7
 0006 540F              ANL     A,#0FH
 0008 FF                MOV     R7,A
-C51 COMPILER V9.51   QUADDECODER                                                           06/25/2014 11:20:00 PAGE 10  
+C51 COMPILER V9.51   QUADDECODER                                                           06/30/2014 14:51:06 PAGE 10  
 
                                            ; SOURCE LINE # 306
 0009         ?C0010:

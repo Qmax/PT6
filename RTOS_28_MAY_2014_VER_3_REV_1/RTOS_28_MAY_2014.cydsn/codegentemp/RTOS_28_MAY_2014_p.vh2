@@ -1,5 +1,5 @@
 -- Project:   RTOS_28_MAY_2014
--- Generated: 06/26/2014 11:06:20
+-- Generated: 06/30/2014 14:48:26
 -- 
 
 ENTITY RTOS_28_MAY_2014 IS
@@ -384,21 +384,23 @@ ARCHITECTURE __DEFAULT__ OF RTOS_28_MAY_2014 IS
     ATTRIBUTE Location OF PSoC_INT0(0) : LABEL IS "P3[7]";
     ATTRIBUTE lib_model OF PSoC_INT1(0) : LABEL IS "iocell32";
     ATTRIBUTE Location OF PSoC_INT1(0) : LABEL IS "P3[6]";
-    ATTRIBUTE lib_model OF RS232_RX(0) : LABEL IS "iocell33";
+    ATTRIBUTE lib_model OF PWM_Out(0) : LABEL IS "iocell33";
+    ATTRIBUTE Location OF PWM_Out(0) : LABEL IS "P0[5]";
+    ATTRIBUTE lib_model OF RS232_RX(0) : LABEL IS "iocell34";
     ATTRIBUTE Location OF RS232_RX(0) : LABEL IS "P5[1]";
-    ATTRIBUTE lib_model OF RS232_TX(0) : LABEL IS "iocell34";
+    ATTRIBUTE lib_model OF RS232_TX(0) : LABEL IS "iocell35";
     ATTRIBUTE Location OF RS232_TX(0) : LABEL IS "P5[0]";
-    ATTRIBUTE lib_model OF SCK(0) : LABEL IS "iocell35";
+    ATTRIBUTE lib_model OF SCK(0) : LABEL IS "iocell36";
     ATTRIBUTE Location OF SCK(0) : LABEL IS "P5[5]";
-    ATTRIBUTE lib_model OF SRC_0(0) : LABEL IS "iocell36";
+    ATTRIBUTE lib_model OF SRC_0(0) : LABEL IS "iocell37";
     ATTRIBUTE Location OF SRC_0(0) : LABEL IS "P2[6]";
-    ATTRIBUTE lib_model OF SRC_1(0) : LABEL IS "iocell37";
+    ATTRIBUTE lib_model OF SRC_1(0) : LABEL IS "iocell38";
     ATTRIBUTE Location OF SRC_1(0) : LABEL IS "P2[7]";
-    ATTRIBUTE lib_model OF SRC_2(0) : LABEL IS "iocell38";
+    ATTRIBUTE lib_model OF SRC_2(0) : LABEL IS "iocell39";
     ATTRIBUTE Location OF SRC_2(0) : LABEL IS "P12[4]";
-    ATTRIBUTE lib_model OF SRC_3(0) : LABEL IS "iocell39";
+    ATTRIBUTE lib_model OF SRC_3(0) : LABEL IS "iocell40";
     ATTRIBUTE Location OF SRC_3(0) : LABEL IS "P12[5]";
-    ATTRIBUTE lib_model OF SRC_4(0) : LABEL IS "iocell40";
+    ATTRIBUTE lib_model OF SRC_4(0) : LABEL IS "iocell41";
     ATTRIBUTE Location OF SRC_4(0) : LABEL IS "P6[4]";
     ATTRIBUTE lib_model OF \PWM:PWMUDB:genblk1:ctrlreg\ : LABEL IS "controlcell1";
     ATTRIBUTE lib_model OF \PWM:PWMUDB:runmode_enable\ : LABEL IS "macrocell7";

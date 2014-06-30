@@ -1,4 +1,4 @@
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 1   
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 1   
 
 
 C51 COMPILER V9.51, COMPILATION OF MODULE QUADDECODER_CNT8
@@ -62,7 +62,7 @@ line level    source
                           
                           /* Clear the mode bits for continuous run mode */
                           #if (CY_PSOC5A)
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 2   
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 2   
 
                               QuadDecoder_Cnt8_CONTROL2 &= ((uint8)(~QuadDecoder_Cnt8_CTRL_MODE_MASK));
                           #endif /* (CY_PSOC5A) */
@@ -126,7 +126,7 @@ line level    source
  113   1                  /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region critical*/
  114   1                  /* Enter Critical Region*/
  115   1                  QuadDecoder_Cnt8_interruptState = CyEnterCriticalSection();
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 3   
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 3   
 
  116   1                  
  117   1                  QuadDecoder_Cnt8_STATUS_AUX_CTRL |= QuadDecoder_Cnt8_STATUS_ACTL_INT_EN_MASK;
@@ -190,7 +190,7 @@ line level    source
  175          *   first time. Is used to ensure that initialization happens only once.
  176          *
  177          *******************************************************************************/
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 4   
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 4   
 
  178          void QuadDecoder_Cnt8_Start(void) 
  179          {
@@ -254,7 +254,7 @@ line level    source
  237          void QuadDecoder_Cnt8_SetInterruptMode(uint8 interruptsMask) 
  238          {
  239   1          QuadDecoder_Cnt8_STATUS_MASK = interruptsMask;
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 5   
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 5   
 
  240   1      }
  241          
@@ -318,7 +318,7 @@ line level    source
  299          *
  300          * Return: 
  301          *  (uint8) The contents of the control register
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 6   
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 6   
 
  302          *
  303          *******************************************************************************/
@@ -382,7 +382,7 @@ line level    source
  361   1          /* It is up to the user code to make sure there isn't already captured data in the FIFO */
  362   1          #if(QuadDecoder_Cnt8_UsingFixedFunction)
                               (void)CY_GET_REG16(QuadDecoder_Cnt8_COUNTER_LSB_PTR);
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 7   
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 7   
 
                       #else
  365   1                      (void)CY_GET_REG8(QuadDecoder_Cnt8_COUNTER_LSB_PTR_8BIT);
@@ -446,7 +446,7 @@ line level    source
  423          
  424          
  425          /*******************************************************************************
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 8   
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 8   
 
  426          * Function Name: QuadDecoder_Cnt8_ReadPeriod
  427          ********************************************************************************
@@ -510,7 +510,7 @@ line level    source
  485          * Return: 
  486          *  (uint8) Present compare value.
  487          *
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 9   
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 9   
 
  488          *******************************************************************************/
  489          uint8 QuadDecoder_Cnt8_ReadCompare(void) 
@@ -574,7 +574,7 @@ line level    source
  547          ********************************************************************************
  548          * Summary:
  549          *   This function clears all capture data from the capture FIFO
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 10  
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 10  
 
  550          *
  551          * Parameters:  
@@ -598,7 +598,7 @@ line level    source
  569          
  570          /* [] END OF FILE */
  571          
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 11  
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 11  
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -662,9 +662,9 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0050 EF                MOV     A,R7
 0051 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 117
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 12  
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 12  
 
-0052 90649C            MOV     DPTR,#0649CH
+0052 90649D            MOV     DPTR,#0649DH
 0055 E0                MOVX    A,@DPTR
 0056 FF                MOV     R7,A
 0057 EF                MOV     A,R7
@@ -726,7 +726,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 209
                                            ; SOURCE LINE # 212
 0000 90647E            MOV     DPTR,#0647EH
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 13  
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 13  
 
 0003 E0                MOVX    A,@DPTR
 0004 FF                MOV     R7,A
@@ -749,7 +749,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0005 900000      R     MOV     DPTR,#interruptsMask
 0008 E0                MOVX    A,@DPTR
 0009 FF                MOV     R7,A
-000A 90648C            MOV     DPTR,#0648CH
+000A 90648D            MOV     DPTR,#0648DH
 000D EF                MOV     A,R7
 000E F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 240
@@ -760,7 +760,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 261
                                            ; SOURCE LINE # 262
                                            ; SOURCE LINE # 263
-0000 90646C            MOV     DPTR,#0646CH
+0000 90646D            MOV     DPTR,#0646DH
 0003 E0                MOVX    A,@DPTR
 0004 FF                MOV     R7,A
                                            ; SOURCE LINE # 264
@@ -790,7 +790,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0005 900000      R     MOV     DPTR,#control
 0008 E0                MOVX    A,@DPTR
 0009 FF                MOV     R7,A
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 14  
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 14  
 
 000A 90647E            MOV     DPTR,#0647EH
 000D EF                MOV     A,R7
@@ -809,7 +809,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0005 900000      R     MOV     DPTR,#counter
 0008 E0                MOVX    A,@DPTR
 0009 FF                MOV     R7,A
-000A 90640B            MOV     DPTR,#0640BH
+000A 90640A            MOV     DPTR,#0640AH
 000D EF                MOV     A,R7
 000E F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 339
@@ -820,11 +820,11 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 357
                                            ; SOURCE LINE # 358
                                            ; SOURCE LINE # 365
-0000 90640B            MOV     DPTR,#0640BH
+0000 90640A            MOV     DPTR,#0640AH
 0003 E0                MOVX    A,@DPTR
 0004 FF                MOV     R7,A
                                            ; SOURCE LINE # 372
-0005 90644B            MOV     DPTR,#0644BH
+0005 90644A            MOV     DPTR,#0644AH
 0008 E0                MOVX    A,@DPTR
 0009 FF                MOV     R7,A
                                            ; SOURCE LINE # 374
@@ -836,7 +836,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 390
                                            ; SOURCE LINE # 391
                                            ; SOURCE LINE # 395
-0000 90644B            MOV     DPTR,#0644BH
+0000 90644A            MOV     DPTR,#0644AH
 0003 E0                MOVX    A,@DPTR
 0004 FF                MOV     R7,A
                                            ; SOURCE LINE # 397
@@ -854,9 +854,9 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0005 900000      R     MOV     DPTR,#period
 0008 E0                MOVX    A,@DPTR
 0009 FF                MOV     R7,A
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 15  
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 15  
 
-000A 90642B            MOV     DPTR,#0642BH
+000A 90642A            MOV     DPTR,#0642AH
 000D EF                MOV     A,R7
 000E F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 422
@@ -867,7 +867,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 438
                                            ; SOURCE LINE # 439
                                            ; SOURCE LINE # 443
-0000 90642B            MOV     DPTR,#0642BH
+0000 90642A            MOV     DPTR,#0642AH
 0003 E0                MOVX    A,@DPTR
 0004 FF                MOV     R7,A
                                            ; SOURCE LINE # 445
@@ -885,7 +885,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0005 900000      R     MOV     DPTR,#compare
 0008 E0                MOVX    A,@DPTR
 0009 FF                MOV     R7,A
-000A 90643B            MOV     DPTR,#0643BH
+000A 90643A            MOV     DPTR,#0643AH
 000D EF                MOV     A,R7
 000E F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 473
@@ -896,7 +896,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 489
                                            ; SOURCE LINE # 490
                                            ; SOURCE LINE # 491
-0000 90643B            MOV     DPTR,#0643BH
+0000 90643A            MOV     DPTR,#0643AH
 0003 E0                MOVX    A,@DPTR
 0004 FF                MOV     R7,A
                                            ; SOURCE LINE # 492
@@ -918,7 +918,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 564
 000A 80F4              SJMP    ?C0017
                                            ; SOURCE LINE # 566
-C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/25/2014 11:20:09 PAGE 16  
+C51 COMPILER V9.51   QUADDECODER_CNT8                                                      06/30/2014 14:51:14 PAGE 16  
 
 000C         ?C0019:
 000C 22                RET     
