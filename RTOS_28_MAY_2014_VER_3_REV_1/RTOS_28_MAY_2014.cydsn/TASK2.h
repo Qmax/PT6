@@ -15,7 +15,7 @@
 #include <rtx51tny.h>
 
 #include <device.h>
-extern unsigned char prnt_en,i,switch_cmd[],rx_word[],dat_cnt,cmd_exct,pos;
+extern unsigned char prnt_en,i,switch_cmd[],rx_word[],dat_cnt,cmd_exct,pos,prb_sts;
 extern uint16 delay;
 
 #define Code_ID 0x27

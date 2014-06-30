@@ -1,6 +1,6 @@
 // ======================================================================
 // RTOS_28_MAY_2014.v generated from TopDesign.cysch
-// 06/30/2014 at 15:47
+// 06/30/2014 at 18:02
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -831,6 +831,7 @@ module top ;
           wire  Net_96;
           wire  Net_95;
           wire  Net_93;
+          wire  Net_31;
           wire  Net_142;
           wire  Net_250;
           wire  Net_227;
@@ -840,7 +841,6 @@ module top ;
           wire  Net_183;
           wire  Net_182;
           wire  Net_181;
-          wire  Net_31;
           wire  Net_114;
           wire  Net_162;
           wire  Net_125;

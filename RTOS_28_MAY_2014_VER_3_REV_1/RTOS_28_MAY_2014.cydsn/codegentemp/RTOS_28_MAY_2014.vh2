@@ -2,7 +2,7 @@
 --	Conversion of RTOS_28_MAY_2014.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Mon Jun 30 15:48:01 2014
+--	Mon Jun 30 18:03:10 2014
 --
 
 USE cypress.cypress.all;

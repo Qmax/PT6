@@ -29,7 +29,7 @@ void task3 (void) _task_ 3
 	{
 		os_wait1(K_SIG);							//	Wait for signal from k_isr Interrupt routine
         
-        if(CyPins_ReadPin(K2_SENSE_P4_1))
+    /*    if(CyPins_ReadPin(K2_SENSE_P4_1))
             k_port = k_port | 0x80;
         else 
             k_port = k_port & 0x7F;
@@ -118,10 +118,11 @@ void task3 (void) _task_ 3
 		
 		k_val =  k_port;									//	Return key vale
 		CyIntEnable (24);							//	Enable k_isr Interrupt
-		if(embd_prb_int_config == 0x00)				//	Select PSoC_Int0
-		{
-			CyPins_ClearPin(PSoC_INT0_P3_7);		//	Interrupt line to CPU(i.MX51) Set low
-			CyPins_SetPin(PSoC_INT0_P3_7);			//	Interrupt line Set high
+		//if(embd_prb_int_config == 0x00)				//	Select PSoC_Int0
+		//{
+//			CyPins_ClearPin(PSoC_INT0_P3_7);		//	Interrupt line to CPU(i.MX51) Set low
+//          CyDelayUs(1);
+//			CyPins_SetPin(PSoC_INT0_P3_7);			//	Interrupt line Set high
 		}
 		else if(embd_prb_int_config == 0x01)		//	Select PSoC_Int1
 		{
@@ -129,7 +130,7 @@ void task3 (void) _task_ 3
 			CyPins_SetPin(PSoC_INT0_P3_7);			//	Interrupt line Set high
 //			CyPins_ClearPin(PSoC_INT1_P3_6);		//	Interrupt line to CPU(i.MX51) Set low
 //			CyPins_SetPin(PSoC_INT1_P3_6);			//	Interrupt line Set high
-		}
+		}*/
 	}
 }
 
@@ -137,6 +138,8 @@ CY_ISR(key_interrupt)							//	Relocated Key Pad ISR
 {
  	CyIntDisable (24);							//	Disable k_isr Interrupt
 	//k_port = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);	//	store the key Value from PORT 0 to k_port
+       
+    do{
         if(CyPins_ReadPin(K2_SENSE_P4_1))
             k_port = k_port | 0x80;
         else 
@@ -178,7 +181,10 @@ CY_ISR(key_interrupt)							//	Relocated Key Pad ISR
             k_port = k_port & 0xFE;        
 	
         k_port = k_port ^ 0x88;						//	Set Keysense active high '1'
-	
+        prb_sts = 0x89;
+        k_val =  k_port;
+    }while(!CyPins_ReadPin(KEY_INT));
+	/*
 	if(k_port)									//	Execute if Key probe connected
 	{
 		if(k_port & 0x77)    
@@ -196,7 +202,13 @@ CY_ISR(key_interrupt)							//	Relocated Key Pad ISR
 	{
 	  	KEY_ClearInterrupt();					//	Enable k_isr Interrupt
 		CyIntEnable (24);						//	Enable k_isr Interrupt
-	}
+	}*/
+			CyPins_ClearPin(PSoC_INT0_P3_7);		//	Interrupt line to CPU(i.MX51) Set low
+          CyDelayUs(1);
+			CyPins_SetPin(PSoC_INT0_P3_7);			//	Interrupt line Set high    
+            
+        KEY_ClearInterrupt();					//	Enable k_isr Interrupt
+		CyIntEnable (24);						//	Enable k_isr Interrupt
 
 }
 
