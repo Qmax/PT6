@@ -1,0 +1,379 @@
+C51 COMPILER V9.51   TASK3                                                                 06/25/2014 11:19:05 PAGE 1   
+
+
+C51 COMPILER V9.51, COMPILATION OF MODULE TASK3
+OBJECT MODULE PLACED IN .\DP8051\DP8051_Keil_951\Debug\TASK3.obj
+COMPILER INVOKED BY: C:\Program Files\Cypress\PSoC Creator\3.0\PSoC Creator\import\keil\pk51\9.51\C51\BIN\c51.exe .\TASK
+                    -3.c NOIV LARGE MODDP2 OMF2 VB(1) PR(.\DP8051\DP8051_Keil_951\Debug\TASK3.lst) CD DB NOIP OT(2,SIZE) INCDIR(.,.\Generated
+                    -_Source\PSoC3) OJ(.\DP8051\DP8051_Keil_951\Debug\TASK3.obj)
+
+line level    source
+
+   1          /* ========================================
+   2           *
+   3           * Copyright QMAX, 2012
+   4           * All Rights Reserved
+   5           * UNPUBLISHED, LICENSED SOFTWARE.
+   6           *
+   7           * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8           * WHICH IS THE PROPERTY OF QMAX.
+   9           *
+  10           * ========================================
+  11          */
+  12          
+  13          #include "TASK1.h"
+  14          #include "TASK2.h"
+  15          #include "TASK3.h"
+  16          
+  17          unsigned char k_val1,embd_prb_int_config;
+  18          uint8 count;
+  19          int t;
+  20          
+  21          CY_ISR_PROTO(key_interrupt);                                            //      prototype for reloacted keypad isr Interrupt
+  22          
+  23          void task3 (void) _task_ 3
+  24          {
+  25   1              k_isr_ClearPending();                                                   //      clear any pending Interrupt
+  26   1              k_isr_StartEx(key_interrupt);                                   //      Change the Interrupt Address to custom ISR routine
+  27   1                      
+  28   1              while (1)
+  29   1              {
+  30   2                      os_wait1(K_SIG);                                                        //      Wait for signal from k_isr Interrupt routine
+  31   2                      
+  32   2                      k_port = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);                     //      store the key Value from PORT 0 to k_port
+  33   2                      k_port = k_port ^ 0x88;                                                         //      Return key value
+  34   2                      
+  35   2                      do      {                                                                                               //      Key Debounce Logic: Interrupt disabled &
+  36   3                                      k_val1 = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);     //      key press on hold untill key is released
+  37   3                                      k_val1 = k_val1 & 0x77;                                         //      this line was included inside the loop on [29/11/2012]
+  38   3                      }       while(k_val1);                                                          //      This does not interrupt the UART Process
+  39   2                      
+  40   2                      k_val =  k_port;                                                                        //      Return key vale
+  41   2                      CyIntEnable (24);                                                       //      Enable k_isr Interrupt
+  42   2                      if(embd_prb_int_config == 0x00)                         //      Select PSoC_Int0
+  43   2                      {
+  44   3                              CyPins_ClearPin(PSoC_INT0_P3_7);                //      Interrupt line to CPU(i.MX51) Set low
+  45   3                              CyPins_SetPin(PSoC_INT0_P3_7);                  //      Interrupt line Set high
+  46   3                      }
+  47   2                      else if(embd_prb_int_config == 0x01)            //      Select PSoC_Int1
+  48   2                      {
+  49   3                              CyPins_ClearPin(PSoC_INT0_P3_7);                //      Interrupt line to CPU(i.MX51) Set low
+  50   3                              CyPins_SetPin(PSoC_INT0_P3_7);                  //      Interrupt line Set high
+  51   3      //                      CyPins_ClearPin(PSoC_INT1_P3_6);                //      Interrupt line to CPU(i.MX51) Set low
+  52   3      //                      CyPins_SetPin(PSoC_INT1_P3_6);                  //      Interrupt line Set high
+  53   3                      }
+C51 COMPILER V9.51   TASK3                                                                 06/25/2014 11:19:05 PAGE 2   
+
+  54   2              }
+  55   1      }
+  56          
+  57          CY_ISR(key_interrupt)                                                   //      Relocated Key Pad ISR
+  58          {
+  59   1              CyIntDisable (24);                                                      //      Disable k_isr Interrupt
+  60   1              k_port = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);     //      store the key Value from PORT 0 to k_port
+  61   1              k_port = k_port ^ 0x88;                                         //      Set Keysense active high '1'
+  62   1              
+  63   1              if(k_port)                                                                      //      Execute if Key probe connected
+  64   1              {
+  65   2                      if(k_port & 0x77)    
+  66   2                      {
+  67   3                              isr_send_signal(3);
+  68   3                              KEY_ClearInterrupt();                           //      Enable k_isr Interrupt
+  69   3                      }
+  70   2                      else
+  71   2                      {
+  72   3                              CyIntEnable (24);                                       //      Enable k_isr Interrupt
+  73   3                              KEY_ClearInterrupt();                           //      Enable k_isr Interrupt
+  74   3                      }
+  75   2              }
+  76   1              else
+  77   1              {
+  78   2                      KEY_ClearInterrupt();                                   //      Enable k_isr Interrupt
+  79   2                      CyIntEnable (24);                                               //      Enable k_isr Interrupt
+  80   2              }
+  81   1      
+  82   1      }
+  83          
+  84          void TASK_3 ()                                                                  //      INITIALISATION FUNCTION OF TASK3
+  85          {
+  86   1              os_create_task(3);                                                      //      CREATION OF TASK3
+  87   1      }
+  88          
+  89          /* [] END OF FILE */
+*** WARNING C316 IN LINE 89 OF .\TASK3.c: unterminated conditionals
+C51 COMPILER V9.51   TASK3                                                                 06/25/2014 11:19:05 PAGE 3   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION task3 (BEGIN)
+                                           ; SOURCE LINE # 23
+                                           ; SOURCE LINE # 25
+0000 120000      E     LCALL   k_isr_ClearPending
+                                           ; SOURCE LINE # 26
+0003 7E00        R     MOV     R6,#HIGH key_interrupt
+0005 7F00        R     MOV     R7,#LOW key_interrupt
+0007 120000      E     LCALL   _k_isr_StartEx
+000A         ?C0001:
+                                           ; SOURCE LINE # 28
+                                           ; SOURCE LINE # 29
+                                           ; SOURCE LINE # 30
+000A 7F01              MOV     R7,#01H
+000C 120000      E     LCALL   _os_wait1
+                                           ; SOURCE LINE # 32
+000F 905101            MOV     DPTR,#05101H
+0012 E0                MOVX    A,@DPTR
+0013 FF                MOV     R7,A
+0014 900000      E     MOV     DPTR,#k_port
+0017 EF                MOV     A,R7
+0018 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 33
+0019 900000      E     MOV     DPTR,#k_port
+001C E0                MOVX    A,@DPTR
+001D FF                MOV     R7,A
+001E EF                MOV     A,R7
+001F 6488              XRL     A,#088H
+0021 FF                MOV     R7,A
+0022 900000      E     MOV     DPTR,#k_port
+0025 EF                MOV     A,R7
+0026 F0                MOVX    @DPTR,A
+0027         ?C0005:
+                                           ; SOURCE LINE # 35
+                                           ; SOURCE LINE # 36
+0027 905101            MOV     DPTR,#05101H
+002A E0                MOVX    A,@DPTR
+002B FF                MOV     R7,A
+002C 900000      R     MOV     DPTR,#k_val1
+002F EF                MOV     A,R7
+0030 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 37
+0031 900000      R     MOV     DPTR,#k_val1
+0034 E0                MOVX    A,@DPTR
+0035 FF                MOV     R7,A
+0036 EF                MOV     A,R7
+0037 5477              ANL     A,#077H
+0039 FF                MOV     R7,A
+003A 900000      R     MOV     DPTR,#k_val1
+003D EF                MOV     A,R7
+003E F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 38
+003F 900000      R     MOV     DPTR,#k_val1
+0042 E0                MOVX    A,@DPTR
+0043 FF                MOV     R7,A
+0044 EF                MOV     A,R7
+0045 70E0              JNZ     ?C0005
+                                           ; SOURCE LINE # 40
+0047 900000      E     MOV     DPTR,#k_port
+004A E0                MOVX    A,@DPTR
+C51 COMPILER V9.51   TASK3                                                                 06/25/2014 11:19:05 PAGE 4   
+
+004B FF                MOV     R7,A
+004C 900000      E     MOV     DPTR,#k_val
+004F EF                MOV     A,R7
+0050 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 41
+0051 9044C3            MOV     DPTR,#044C3H
+0054 7401              MOV     A,#01H
+0056 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 42
+0057 900000      R     MOV     DPTR,#embd_prb_int_config
+005A E0                MOVX    A,@DPTR
+005B FF                MOV     R7,A
+005C EF                MOV     A,R7
+005D 7018              JNZ     ?C0006
+                                           ; SOURCE LINE # 43
+                                           ; SOURCE LINE # 44
+005F 90501F            MOV     DPTR,#0501FH
+0062 E0                MOVX    A,@DPTR
+0063 FF                MOV     R7,A
+0064 EF                MOV     A,R7
+0065 54FE              ANL     A,#0FEH
+0067 FF                MOV     R7,A
+0068 EF                MOV     A,R7
+0069 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 45
+006A 90501F            MOV     DPTR,#0501FH
+006D E0                MOVX    A,@DPTR
+006E FF                MOV     R7,A
+006F EF                MOV     A,R7
+0070 4401              ORL     A,#01H
+0072 FF                MOV     R7,A
+0073 EF                MOV     A,R7
+0074 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 46
+0075 8093              SJMP    ?C0001
+0077         ?C0006:
+                                           ; SOURCE LINE # 47
+0077 900000      R     MOV     DPTR,#embd_prb_int_config
+007A E0                MOVX    A,@DPTR
+007B FF                MOV     R7,A
+007C EF                MOV     A,R7
+007D B4018A            CJNE    A,#01H,?C0001
+                                           ; SOURCE LINE # 48
+                                           ; SOURCE LINE # 49
+0080 90501F            MOV     DPTR,#0501FH
+0083 E0                MOVX    A,@DPTR
+0084 FF                MOV     R7,A
+0085 EF                MOV     A,R7
+0086 54FE              ANL     A,#0FEH
+0088 FF                MOV     R7,A
+0089 EF                MOV     A,R7
+008A F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 50
+008B 90501F            MOV     DPTR,#0501FH
+008E E0                MOVX    A,@DPTR
+008F FF                MOV     R7,A
+0090 EF                MOV     A,R7
+0091 4401              ORL     A,#01H
+0093 FF                MOV     R7,A
+0094 EF                MOV     A,R7
+0095 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 53
+C51 COMPILER V9.51   TASK3                                                                 06/25/2014 11:19:05 PAGE 5   
+
+                                           ; SOURCE LINE # 54
+0096 020000      R     LJMP    ?C0001
+0099 22                RET     
+             ; FUNCTION task3 (END)
+
+             ; FUNCTION key_interrupt (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0F0              PUSH    B
+0004 C083              PUSH    DPH
+0006 C082              PUSH    DPL
+0008 C085              PUSH    DPH1
+000A C084              PUSH    DPL1
+000C C086              PUSH    DPS
+000E 758600            MOV     DPS,#00H
+0011 C000        E     PUSH    ?C?XPAGE1SFR
+0013 750000      E     MOV     ?C?XPAGE1SFR,#?C?XPAGE1RST
+0016 C0D0              PUSH    PSW
+0018 75D000            MOV     PSW,#00H
+001B C000              PUSH    AR0
+001D C001              PUSH    AR1
+001F C002              PUSH    AR2
+0021 C003              PUSH    AR3
+0023 C004              PUSH    AR4
+0025 C005              PUSH    AR5
+0027 C006              PUSH    AR6
+0029 C007              PUSH    AR7
+                                           ; SOURCE LINE # 57
+                                           ; SOURCE LINE # 59
+002B 9044CB            MOV     DPTR,#044CBH
+002E 7401              MOV     A,#01H
+0030 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 60
+0031 905101            MOV     DPTR,#05101H
+0034 E0                MOVX    A,@DPTR
+0035 FF                MOV     R7,A
+0036 900000      E     MOV     DPTR,#k_port
+0039 EF                MOV     A,R7
+003A F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 61
+003B 900000      E     MOV     DPTR,#k_port
+003E E0                MOVX    A,@DPTR
+003F FF                MOV     R7,A
+0040 EF                MOV     A,R7
+0041 6488              XRL     A,#088H
+0043 FF                MOV     R7,A
+0044 900000      E     MOV     DPTR,#k_port
+0047 EF                MOV     A,R7
+0048 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 63
+0049 900000      E     MOV     DPTR,#k_port
+004C E0                MOVX    A,@DPTR
+004D FF                MOV     R7,A
+004E EF                MOV     A,R7
+004F 6021              JZ      ?C0010
+                                           ; SOURCE LINE # 64
+                                           ; SOURCE LINE # 65
+0051 900000      E     MOV     DPTR,#k_port
+0054 E0                MOVX    A,@DPTR
+0055 FF                MOV     R7,A
+0056 EF                MOV     A,R7
+0057 5477              ANL     A,#077H
+0059 FF                MOV     R7,A
+C51 COMPILER V9.51   TASK3                                                                 06/25/2014 11:19:05 PAGE 6   
+
+005A EF                MOV     A,R7
+005B 600A              JZ      ?C0011
+                                           ; SOURCE LINE # 66
+                                           ; SOURCE LINE # 67
+005D 7F03              MOV     R7,#03H
+005F 120000      E     LCALL   _isr_send_signal
+                                           ; SOURCE LINE # 68
+0062 120000      E     LCALL   KEY_ClearInterrupt
+                                           ; SOURCE LINE # 69
+0065 8014              SJMP    ?C0014
+0067         ?C0011:
+                                           ; SOURCE LINE # 71
+                                           ; SOURCE LINE # 72
+0067 9044C3            MOV     DPTR,#044C3H
+006A 7401              MOV     A,#01H
+006C F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 73
+006D 120000      E     LCALL   KEY_ClearInterrupt
+                                           ; SOURCE LINE # 74
+                                           ; SOURCE LINE # 75
+0070 8009              SJMP    ?C0014
+0072         ?C0010:
+                                           ; SOURCE LINE # 77
+                                           ; SOURCE LINE # 78
+0072 120000      E     LCALL   KEY_ClearInterrupt
+                                           ; SOURCE LINE # 79
+0075 9044C3            MOV     DPTR,#044C3H
+0078 7401              MOV     A,#01H
+007A F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 80
+                                           ; SOURCE LINE # 82
+007B         ?C0014:
+007B D007              POP     AR7
+007D D006              POP     AR6
+007F D005              POP     AR5
+0081 D004              POP     AR4
+0083 D003              POP     AR3
+0085 D002              POP     AR2
+0087 D001              POP     AR1
+0089 D000              POP     AR0
+008B D0D0              POP     PSW
+008D D000        E     POP     ?C?XPAGE1SFR
+008F D086              POP     DPS
+0091 D084              POP     DPL1
+0093 D085              POP     DPH1
+0095 D082              POP     DPL
+0097 D083              POP     DPH
+0099 D0F0              POP     B
+009B D0E0              POP     ACC
+009D 32                RETI    
+             ; FUNCTION key_interrupt (END)
+
+             ; FUNCTION TASK_3 (BEGIN)
+                                           ; SOURCE LINE # 84
+                                           ; SOURCE LINE # 85
+                                           ; SOURCE LINE # 86
+0000 7F03              MOV     R7,#03H
+0002 120000      E     LCALL   _os_create_task
+                                           ; SOURCE LINE # 87
+0005 22                RET     
+             ; FUNCTION TASK_3 (END)
+
+C51 COMPILER V9.51   TASK3                                                                 06/25/2014 11:19:05 PAGE 7   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    318    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      5    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
