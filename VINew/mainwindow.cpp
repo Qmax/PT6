@@ -446,7 +446,7 @@ bool MainWindow::checkProbeStatus()
         unsigned short l_nProbeStaus=m_objFunctionalObject->getProbeStatus();
 
         unsigned short l_nStatus = (l_nProbeStaus & 0x11);
-//        qDebug()<<"Probe Status1:"<<hex<< l_nStatus<<m_nSelectedProbe;
+        qDebug()<<"Probe Status:"<<hex<< l_nProbeStaus;
         if(m_objVISubject->getProbeDialog(0) ==0)
         {
                 if(m_nSelectedProbe==0)
@@ -510,14 +510,18 @@ void MainWindow::doKeyFunction(int pKeyCode)
             bool l_BKey=false,l_nTKey=false;
             if (l_nTopKeyCode == 0x80)
             {
-                    //qDebug() << "Top Probe is Pressed" << hex<<(pKeyCode & 0x0F);
-                    pKeyCode = (pKeyCode & 0x0F);
+                qDebug() << "Probe-2 is Pressed" << hex<<(pKeyCode & 0xF0);
+                pKeyCode = (pKeyCode & 0xF0);
+//                    qDebug() << "Probe-1 is Pressed" << hex<<(pKeyCode & 0x0F);
+//                    pKeyCode = (pKeyCode & 0x0F);
                     l_nTKey=true;
             }
             if (l_nBottomKeyCode == 0x08)
             {
-                    //qDebug() << "Bottom Probe is Pressed" << hex<<(pKeyCode & 0xF0);
-                    pKeyCode = (pKeyCode & 0xF0);
+                qDebug() << "Probe-1 is Pressed" << hex<<(pKeyCode & 0x0F);
+                pKeyCode = (pKeyCode & 0x0F);
+//                    qDebug() << "Probe-2 is Pressed" << hex<<(pKeyCode & 0xF0);
+//                    pKeyCode = (pKeyCode & 0xF0);
                     l_BKey=true;
             }
             if(m_nSelectedProbe==0 && l_BKey==true)
@@ -742,14 +746,14 @@ void MainWindow::customEvent(QEvent *e)
         }
         if (e->type() == ((QEvent::Type) 1234)) {
                 IGPIOEvent->BlockSig(true);
-                //unsigned int l_nRegisterValue = m_objFunctionalObject->readEmbeddedKeyValue();
-                //qDebug() << "data read at 1E is" << hex<<l_nRegisterValue;
+                unsigned int l_nRegisterValue = m_objFunctionalObject->readEmbeddedKeyValue();
+                qDebug() << "data read at 1E is" << hex<<l_nRegisterValue;
                 //if ((l_nRegisterValue&0x0100) == 0x0100) {
                 if(1){
                         m_objFunctionalObject->writePSOC(0x01);
                         usleep(1000);
                         m_nKeyCode = m_objFunctionalObject->readPSOC();
-                        //qDebug() << "~~~~~~~~~~~~~~~~~~~~~~" << hex << m_nKeyCode<< "~~~~~~~~~~~~~~~~~~~~~~~~~~";
+                        qDebug() << "~~~~~~~~~~~~~~~~~~~~~~" << hex << m_nKeyCode<< "~~~~~~~~~~~~~~~~~~~~~~~~~~";
                 }
                 else{
                         qDebug()<<"Interrupt not raised";
