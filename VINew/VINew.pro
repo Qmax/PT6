@@ -1,5 +1,5 @@
 # -------------------------------------------------
-# Project created by Ravivarman,Qmax
+# Project created by Ravivarman.R,Qmax Test Equipments
 # -------------------------------------------------
 TARGET = VIInterface
 CONFIG += plugin
