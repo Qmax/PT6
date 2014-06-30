@@ -1,0 +1,1202 @@
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 1   
+
+
+C51 COMPILER V9.51, COMPILATION OF MODULE TASK3
+OBJECT MODULE PLACED IN .\DP8051\DP8051_Keil_951\Debug\TASK3.obj
+COMPILER INVOKED BY: C:\Program Files\Cypress\PSoC Creator\3.0\PSoC Creator\import\keil\pk51\9.51\C51\BIN\c51.exe .\TASK
+                    -3.c NOIV LARGE MODDP2 OMF2 VB(1) PR(.\DP8051\DP8051_Keil_951\Debug\TASK3.lst) CD DB NOIP OT(2,SIZE) INCDIR(.,.\Generated
+                    -_Source\PSoC3) OJ(.\DP8051\DP8051_Keil_951\Debug\TASK3.obj)
+
+line level    source
+
+   1          /* ========================================
+   2           *
+   3           * Copyright QMAX, 2012
+   4           * All Rights Reserved
+   5           * UNPUBLISHED, LICENSED SOFTWARE.
+   6           *
+   7           * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8           * WHICH IS THE PROPERTY OF QMAX.
+   9           *
+  10           * ========================================
+  11          */
+  12          
+  13          #include "TASK1.h"
+  14          #include "TASK2.h"
+  15          #include "TASK3.h"
+  16          
+  17          unsigned char k_val1,embd_prb_int_config;
+  18          uint8 count;
+  19          int t;
+  20          
+  21          CY_ISR_PROTO(key_interrupt);                                            //      prototype for reloacted keypad isr Interrupt
+  22          
+  23          void task3 (void) _task_ 3
+  24          {
+  25   1              k_isr_ClearPending();                                                   //      clear any pending Interrupt
+  26   1              k_isr_StartEx(key_interrupt);                                   //      Change the Interrupt Address to custom ISR routine
+  27   1                      
+  28   1              while (1)
+  29   1              {
+  30   2                      os_wait1(K_SIG);                                                        //      Wait for signal from k_isr Interrupt routine
+  31   2              
+  32   2              if(CyPins_ReadPin(K2_SENSE_P4_1))
+  33   2                  k_port = k_port | 0x80;
+  34   2              else 
+  35   2                  k_port = k_port & 0x7F;
+  36   2              
+  37   2              if(CyPins_ReadPin(Key2_0_P4_0))
+  38   2                  k_port = k_port | 0x40;
+  39   2              else 
+  40   2                  k_port = k_port & 0xBF;        
+  41   2              
+  42   2              if(CyPins_ReadPin(Key2_1_P12_3))
+  43   2                  k_port = k_port | 0x20;        
+  44   2              else 
+  45   2                  k_port = k_port & 0xDF;        
+  46   2              
+  47   2              if(CyPins_ReadPin(Key2_2_P12_2))
+  48   2                  k_port = k_port | 0x10;        
+  49   2              else 
+  50   2                  k_port = k_port & 0xEF;        
+  51   2              
+  52   2              if(CyPins_ReadPin(K1_SENSE_P0_3))
+  53   2                  k_port = k_port | 0x8;
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 2   
+
+  54   2              else 
+  55   2                  k_port = k_port & 0xF7;
+  56   2              
+  57   2              if(CyPins_ReadPin(Key1_0_P0_2))
+  58   2                  k_port = k_port | 0x4;
+  59   2              else 
+  60   2                  k_port = k_port & 0xFB;
+  61   2              
+  62   2              if(CyPins_ReadPin(Key1_1_P0_1))
+  63   2                  k_port = k_port | 0x2;
+  64   2              else 
+  65   2                  k_port = k_port & 0xFD;
+  66   2              
+  67   2              if(CyPins_ReadPin(Key1_2_P0_0))
+  68   2                  k_port = k_port | 0x1;
+  69   2              else 
+  70   2                  k_port = k_port & 0xFE;        
+  71   2              
+  72   2                      //k_port = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);                   //      store the key Value from PORT 0 to k_port
+  73   2                      k_port = k_port ^ 0x88;                                                         //      Return key value
+  74   2                      
+  75   2                      do      {                                                                                               //      Key Debounce Logic: Interrupt disabled &
+  76   3                  if(CyPins_ReadPin(K2_SENSE_P4_1))
+  77   3                      k_val1 = k_port | 0x80;
+  78   3                  else 
+  79   3                      k_val1 = k_port & 0x7F;
+  80   3                  
+  81   3                  if(CyPins_ReadPin(Key2_0_P4_0))
+  82   3                      k_val1 = k_port | 0x40;
+  83   3                  else 
+  84   3                      k_val1 = k_port & 0xBF;        
+  85   3                  
+  86   3                  if(CyPins_ReadPin(Key2_1_P12_3))
+  87   3                      k_val1 = k_port | 0x20;        
+  88   3                  else 
+  89   3                      k_val1 = k_port & 0xDF;        
+  90   3                  
+  91   3                  if(CyPins_ReadPin(Key2_2_P12_2))
+  92   3                      k_val1 = k_port | 0x10;        
+  93   3                  else 
+  94   3                      k_val1 = k_port & 0xEF;        
+  95   3                  
+  96   3                  if(CyPins_ReadPin(K1_SENSE_P0_3))
+  97   3                      k_val1 = k_port | 0x8;
+  98   3                  else 
+  99   3                      k_val1 = k_port & 0xF7;
+ 100   3                  
+ 101   3                  if(CyPins_ReadPin(Key1_0_P0_2))
+ 102   3                      k_val1 = k_port | 0x4;
+ 103   3                  else 
+ 104   3                      k_val1 = k_port & 0xFB;
+ 105   3                  
+ 106   3                  if(CyPins_ReadPin(Key1_1_P0_1))
+ 107   3                      k_val1 = k_port | 0x2;
+ 108   3                  else 
+ 109   3                      k_val1 = k_port & 0xFD;
+ 110   3                  
+ 111   3                  if(CyPins_ReadPin(Key1_2_P0_0))
+ 112   3                      k_val1 = k_port | 0x1;
+ 113   3                  else 
+ 114   3                      k_val1 = k_port & 0xFE;        
+ 115   3                                      //k_val1 = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);   //      key press on hold untill key is released
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 3   
+
+ 116   3                                      k_val1 = k_val1 & 0x77;                                         //      this line was included inside the loop on [29/11/2012]
+ 117   3                      }       while(k_val1);                                                          //      This does not interrupt the UART Process
+ 118   2                      
+ 119   2                      k_val =  k_port;                                                                        //      Return key vale
+ 120   2                      CyIntEnable (24);                                                       //      Enable k_isr Interrupt
+ 121   2                      if(embd_prb_int_config == 0x00)                         //      Select PSoC_Int0
+ 122   2                      {
+ 123   3                              CyPins_ClearPin(PSoC_INT0_P3_7);                //      Interrupt line to CPU(i.MX51) Set low
+ 124   3                              CyPins_SetPin(PSoC_INT0_P3_7);                  //      Interrupt line Set high
+ 125   3                      }
+ 126   2                      else if(embd_prb_int_config == 0x01)            //      Select PSoC_Int1
+ 127   2                      {
+ 128   3                              CyPins_ClearPin(PSoC_INT0_P3_7);                //      Interrupt line to CPU(i.MX51) Set low
+ 129   3                              CyPins_SetPin(PSoC_INT0_P3_7);                  //      Interrupt line Set high
+ 130   3      //                      CyPins_ClearPin(PSoC_INT1_P3_6);                //      Interrupt line to CPU(i.MX51) Set low
+ 131   3      //                      CyPins_SetPin(PSoC_INT1_P3_6);                  //      Interrupt line Set high
+ 132   3                      }
+ 133   2              }
+ 134   1      }
+ 135          
+ 136          CY_ISR(key_interrupt)                                                   //      Relocated Key Pad ISR
+ 137          {
+ 138   1              CyIntDisable (24);                                                      //      Disable k_isr Interrupt
+ 139   1              //k_port = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);   //      store the key Value from PORT 0 to k_port
+ 140   1              if(CyPins_ReadPin(K2_SENSE_P4_1))
+ 141   1                  k_port = k_port | 0x80;
+ 142   1              else 
+ 143   1                  k_port = k_port & 0x7F;
+ 144   1              
+ 145   1              if(CyPins_ReadPin(Key2_0_P4_0))
+ 146   1                  k_port = k_port | 0x40;
+ 147   1              else 
+ 148   1                  k_port = k_port & 0xBF;        
+ 149   1              
+ 150   1              if(CyPins_ReadPin(Key2_1_P12_3))
+ 151   1                  k_port = k_port | 0x20;        
+ 152   1              else 
+ 153   1                  k_port = k_port & 0xDF;        
+ 154   1              
+ 155   1              if(CyPins_ReadPin(Key2_2_P12_2))
+ 156   1                  k_port = k_port | 0x10;        
+ 157   1              else 
+ 158   1                  k_port = k_port & 0xEF;        
+ 159   1              
+ 160   1              if(CyPins_ReadPin(K1_SENSE_P0_3))
+ 161   1                  k_port = k_port | 0x8;
+ 162   1              else 
+ 163   1                  k_port = k_port & 0xF7;
+ 164   1              
+ 165   1              if(CyPins_ReadPin(Key1_0_P0_2))
+ 166   1                  k_port = k_port | 0x4;
+ 167   1              else 
+ 168   1                  k_port = k_port & 0xFB;
+ 169   1              
+ 170   1              if(CyPins_ReadPin(Key1_1_P0_1))
+ 171   1                  k_port = k_port | 0x2;
+ 172   1              else 
+ 173   1                  k_port = k_port & 0xFD;
+ 174   1              
+ 175   1              if(CyPins_ReadPin(Key1_2_P0_0))
+ 176   1                  k_port = k_port | 0x1;
+ 177   1              else 
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 4   
+
+ 178   1                  k_port = k_port & 0xFE;        
+ 179   1              
+ 180   1              k_port = k_port ^ 0x88;                                         //      Set Keysense active high '1'
+ 181   1              
+ 182   1              if(k_port)                                                                      //      Execute if Key probe connected
+ 183   1              {
+ 184   2                      if(k_port & 0x77)    
+ 185   2                      {
+ 186   3                              isr_send_signal(3);
+ 187   3                              KEY_ClearInterrupt();                           //      Enable k_isr Interrupt
+ 188   3                      }
+ 189   2                      else
+ 190   2                      {
+ 191   3                              CyIntEnable (24);                                       //      Enable k_isr Interrupt
+ 192   3                              KEY_ClearInterrupt();                           //      Enable k_isr Interrupt
+ 193   3                      }
+ 194   2              }
+ 195   1              else
+ 196   1              {
+ 197   2                      KEY_ClearInterrupt();                                   //      Enable k_isr Interrupt
+ 198   2                      CyIntEnable (24);                                               //      Enable k_isr Interrupt
+ 199   2              }
+ 200   1      
+ 201   1      }
+ 202          
+ 203          void TASK_3 ()                                                                  //      INITIALISATION FUNCTION OF TASK3
+ 204          {
+ 205   1              os_create_task(3);                                                      //      CREATION OF TASK3
+ 206   1      }
+ 207          
+ 208          /* [] END OF FILE */
+*** WARNING C316 IN LINE 208 OF .\TASK3.c: unterminated conditionals
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 5   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION task3 (BEGIN)
+                                           ; SOURCE LINE # 23
+                                           ; SOURCE LINE # 25
+0000 120000      E     LCALL   k_isr_ClearPending
+                                           ; SOURCE LINE # 26
+0003 7E00        R     MOV     R6,#HIGH key_interrupt
+0005 7F00        R     MOV     R7,#LOW key_interrupt
+0007 120000      E     LCALL   _k_isr_StartEx
+000A         ?C0001:
+                                           ; SOURCE LINE # 28
+                                           ; SOURCE LINE # 29
+                                           ; SOURCE LINE # 30
+000A 7F01              MOV     R7,#01H
+000C 120000      E     LCALL   _os_wait1
+                                           ; SOURCE LINE # 32
+000F 905021            MOV     DPTR,#05021H
+0012 E0                MOVX    A,@DPTR
+0013 FF                MOV     R7,A
+0014 EF                MOV     A,R7
+0015 30E410            JNB     ACC.4,?C0003
+                                           ; SOURCE LINE # 33
+0018 900000      E     MOV     DPTR,#k_port
+001B E0                MOVX    A,@DPTR
+001C FF                MOV     R7,A
+001D EF                MOV     A,R7
+001E 4480              ORL     A,#080H
+0020 FF                MOV     R7,A
+0021 900000      E     MOV     DPTR,#k_port
+0024 EF                MOV     A,R7
+0025 F0                MOVX    @DPTR,A
+0026 800E              SJMP    ?C0004
+0028         ?C0003:
+                                           ; SOURCE LINE # 35
+0028 900000      E     MOV     DPTR,#k_port
+002B E0                MOVX    A,@DPTR
+002C FF                MOV     R7,A
+002D EF                MOV     A,R7
+002E 547F              ANL     A,#07FH
+0030 FF                MOV     R7,A
+0031 900000      E     MOV     DPTR,#k_port
+0034 EF                MOV     A,R7
+0035 F0                MOVX    @DPTR,A
+0036         ?C0004:
+                                           ; SOURCE LINE # 37
+0036 905020            MOV     DPTR,#05020H
+0039 E0                MOVX    A,@DPTR
+003A FF                MOV     R7,A
+003B EF                MOV     A,R7
+003C 30E410            JNB     ACC.4,?C0005
+                                           ; SOURCE LINE # 38
+003F 900000      E     MOV     DPTR,#k_port
+0042 E0                MOVX    A,@DPTR
+0043 FF                MOV     R7,A
+0044 EF                MOV     A,R7
+0045 4440              ORL     A,#040H
+0047 FF                MOV     R7,A
+0048 900000      E     MOV     DPTR,#k_port
+004B EF                MOV     A,R7
+004C F0                MOVX    @DPTR,A
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 6   
+
+004D 800E              SJMP    ?C0006
+004F         ?C0005:
+                                           ; SOURCE LINE # 40
+004F 900000      E     MOV     DPTR,#k_port
+0052 E0                MOVX    A,@DPTR
+0053 FF                MOV     R7,A
+0054 EF                MOV     A,R7
+0055 54BF              ANL     A,#0BFH
+0057 FF                MOV     R7,A
+0058 900000      E     MOV     DPTR,#k_port
+005B EF                MOV     A,R7
+005C F0                MOVX    @DPTR,A
+005D         ?C0006:
+                                           ; SOURCE LINE # 42
+005D 905063            MOV     DPTR,#05063H
+0060 E0                MOVX    A,@DPTR
+0061 FF                MOV     R7,A
+0062 EF                MOV     A,R7
+0063 30E410            JNB     ACC.4,?C0007
+                                           ; SOURCE LINE # 43
+0066 900000      E     MOV     DPTR,#k_port
+0069 E0                MOVX    A,@DPTR
+006A FF                MOV     R7,A
+006B EF                MOV     A,R7
+006C 4420              ORL     A,#020H
+006E FF                MOV     R7,A
+006F 900000      E     MOV     DPTR,#k_port
+0072 EF                MOV     A,R7
+0073 F0                MOVX    @DPTR,A
+0074 800E              SJMP    ?C0008
+0076         ?C0007:
+                                           ; SOURCE LINE # 45
+0076 900000      E     MOV     DPTR,#k_port
+0079 E0                MOVX    A,@DPTR
+007A FF                MOV     R7,A
+007B EF                MOV     A,R7
+007C 54DF              ANL     A,#0DFH
+007E FF                MOV     R7,A
+007F 900000      E     MOV     DPTR,#k_port
+0082 EF                MOV     A,R7
+0083 F0                MOVX    @DPTR,A
+0084         ?C0008:
+                                           ; SOURCE LINE # 47
+0084 905062            MOV     DPTR,#05062H
+0087 E0                MOVX    A,@DPTR
+0088 FF                MOV     R7,A
+0089 EF                MOV     A,R7
+008A 30E410            JNB     ACC.4,?C0009
+                                           ; SOURCE LINE # 48
+008D 900000      E     MOV     DPTR,#k_port
+0090 E0                MOVX    A,@DPTR
+0091 FF                MOV     R7,A
+0092 EF                MOV     A,R7
+0093 4410              ORL     A,#010H
+0095 FF                MOV     R7,A
+0096 900000      E     MOV     DPTR,#k_port
+0099 EF                MOV     A,R7
+009A F0                MOVX    @DPTR,A
+009B 800E              SJMP    ?C0010
+009D         ?C0009:
+                                           ; SOURCE LINE # 50
+009D 900000      E     MOV     DPTR,#k_port
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 7   
+
+00A0 E0                MOVX    A,@DPTR
+00A1 FF                MOV     R7,A
+00A2 EF                MOV     A,R7
+00A3 54EF              ANL     A,#0EFH
+00A5 FF                MOV     R7,A
+00A6 900000      E     MOV     DPTR,#k_port
+00A9 EF                MOV     A,R7
+00AA F0                MOVX    @DPTR,A
+00AB         ?C0010:
+                                           ; SOURCE LINE # 52
+00AB 905003            MOV     DPTR,#05003H
+00AE E0                MOVX    A,@DPTR
+00AF FF                MOV     R7,A
+00B0 EF                MOV     A,R7
+00B1 30E410            JNB     ACC.4,?C0011
+                                           ; SOURCE LINE # 53
+00B4 900000      E     MOV     DPTR,#k_port
+00B7 E0                MOVX    A,@DPTR
+00B8 FF                MOV     R7,A
+00B9 EF                MOV     A,R7
+00BA 4408              ORL     A,#08H
+00BC FF                MOV     R7,A
+00BD 900000      E     MOV     DPTR,#k_port
+00C0 EF                MOV     A,R7
+00C1 F0                MOVX    @DPTR,A
+00C2 800E              SJMP    ?C0012
+00C4         ?C0011:
+                                           ; SOURCE LINE # 55
+00C4 900000      E     MOV     DPTR,#k_port
+00C7 E0                MOVX    A,@DPTR
+00C8 FF                MOV     R7,A
+00C9 EF                MOV     A,R7
+00CA 54F7              ANL     A,#0F7H
+00CC FF                MOV     R7,A
+00CD 900000      E     MOV     DPTR,#k_port
+00D0 EF                MOV     A,R7
+00D1 F0                MOVX    @DPTR,A
+00D2         ?C0012:
+                                           ; SOURCE LINE # 57
+00D2 905002            MOV     DPTR,#05002H
+00D5 E0                MOVX    A,@DPTR
+00D6 FF                MOV     R7,A
+00D7 EF                MOV     A,R7
+00D8 30E410            JNB     ACC.4,?C0013
+                                           ; SOURCE LINE # 58
+00DB 900000      E     MOV     DPTR,#k_port
+00DE E0                MOVX    A,@DPTR
+00DF FF                MOV     R7,A
+00E0 EF                MOV     A,R7
+00E1 4404              ORL     A,#04H
+00E3 FF                MOV     R7,A
+00E4 900000      E     MOV     DPTR,#k_port
+00E7 EF                MOV     A,R7
+00E8 F0                MOVX    @DPTR,A
+00E9 800E              SJMP    ?C0014
+00EB         ?C0013:
+                                           ; SOURCE LINE # 60
+00EB 900000      E     MOV     DPTR,#k_port
+00EE E0                MOVX    A,@DPTR
+00EF FF                MOV     R7,A
+00F0 EF                MOV     A,R7
+00F1 54FB              ANL     A,#0FBH
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 8   
+
+00F3 FF                MOV     R7,A
+00F4 900000      E     MOV     DPTR,#k_port
+00F7 EF                MOV     A,R7
+00F8 F0                MOVX    @DPTR,A
+00F9         ?C0014:
+                                           ; SOURCE LINE # 62
+00F9 905001            MOV     DPTR,#05001H
+00FC E0                MOVX    A,@DPTR
+00FD FF                MOV     R7,A
+00FE EF                MOV     A,R7
+00FF 30E410            JNB     ACC.4,?C0015
+                                           ; SOURCE LINE # 63
+0102 900000      E     MOV     DPTR,#k_port
+0105 E0                MOVX    A,@DPTR
+0106 FF                MOV     R7,A
+0107 EF                MOV     A,R7
+0108 4402              ORL     A,#02H
+010A FF                MOV     R7,A
+010B 900000      E     MOV     DPTR,#k_port
+010E EF                MOV     A,R7
+010F F0                MOVX    @DPTR,A
+0110 800E              SJMP    ?C0016
+0112         ?C0015:
+                                           ; SOURCE LINE # 65
+0112 900000      E     MOV     DPTR,#k_port
+0115 E0                MOVX    A,@DPTR
+0116 FF                MOV     R7,A
+0117 EF                MOV     A,R7
+0118 54FD              ANL     A,#0FDH
+011A FF                MOV     R7,A
+011B 900000      E     MOV     DPTR,#k_port
+011E EF                MOV     A,R7
+011F F0                MOVX    @DPTR,A
+0120         ?C0016:
+                                           ; SOURCE LINE # 67
+0120 905000            MOV     DPTR,#05000H
+0123 E0                MOVX    A,@DPTR
+0124 FF                MOV     R7,A
+0125 EF                MOV     A,R7
+0126 30E410            JNB     ACC.4,?C0017
+                                           ; SOURCE LINE # 68
+0129 900000      E     MOV     DPTR,#k_port
+012C E0                MOVX    A,@DPTR
+012D FF                MOV     R7,A
+012E EF                MOV     A,R7
+012F 4401              ORL     A,#01H
+0131 FF                MOV     R7,A
+0132 900000      E     MOV     DPTR,#k_port
+0135 EF                MOV     A,R7
+0136 F0                MOVX    @DPTR,A
+0137 800E              SJMP    ?C0018
+0139         ?C0017:
+                                           ; SOURCE LINE # 70
+0139 900000      E     MOV     DPTR,#k_port
+013C E0                MOVX    A,@DPTR
+013D FF                MOV     R7,A
+013E EF                MOV     A,R7
+013F 54FE              ANL     A,#0FEH
+0141 FF                MOV     R7,A
+0142 900000      E     MOV     DPTR,#k_port
+0145 EF                MOV     A,R7
+0146 F0                MOVX    @DPTR,A
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 9   
+
+0147         ?C0018:
+                                           ; SOURCE LINE # 73
+0147 900000      E     MOV     DPTR,#k_port
+014A E0                MOVX    A,@DPTR
+014B FF                MOV     R7,A
+014C EF                MOV     A,R7
+014D 6488              XRL     A,#088H
+014F FF                MOV     R7,A
+0150 900000      E     MOV     DPTR,#k_port
+0153 EF                MOV     A,R7
+0154 F0                MOVX    @DPTR,A
+0155         ?C0021:
+                                           ; SOURCE LINE # 75
+                                           ; SOURCE LINE # 76
+0155 905021            MOV     DPTR,#05021H
+0158 E0                MOVX    A,@DPTR
+0159 FF                MOV     R7,A
+015A EF                MOV     A,R7
+015B 30E410            JNB     ACC.4,?C0022
+                                           ; SOURCE LINE # 77
+015E 900000      E     MOV     DPTR,#k_port
+0161 E0                MOVX    A,@DPTR
+0162 FF                MOV     R7,A
+0163 EF                MOV     A,R7
+0164 4480              ORL     A,#080H
+0166 FF                MOV     R7,A
+0167 900000      R     MOV     DPTR,#k_val1
+016A EF                MOV     A,R7
+016B F0                MOVX    @DPTR,A
+016C 800E              SJMP    ?C0023
+016E         ?C0022:
+                                           ; SOURCE LINE # 79
+016E 900000      E     MOV     DPTR,#k_port
+0171 E0                MOVX    A,@DPTR
+0172 FF                MOV     R7,A
+0173 EF                MOV     A,R7
+0174 547F              ANL     A,#07FH
+0176 FF                MOV     R7,A
+0177 900000      R     MOV     DPTR,#k_val1
+017A EF                MOV     A,R7
+017B F0                MOVX    @DPTR,A
+017C         ?C0023:
+                                           ; SOURCE LINE # 81
+017C 905020            MOV     DPTR,#05020H
+017F E0                MOVX    A,@DPTR
+0180 FF                MOV     R7,A
+0181 EF                MOV     A,R7
+0182 30E410            JNB     ACC.4,?C0024
+                                           ; SOURCE LINE # 82
+0185 900000      E     MOV     DPTR,#k_port
+0188 E0                MOVX    A,@DPTR
+0189 FF                MOV     R7,A
+018A EF                MOV     A,R7
+018B 4440              ORL     A,#040H
+018D FF                MOV     R7,A
+018E 900000      R     MOV     DPTR,#k_val1
+0191 EF                MOV     A,R7
+0192 F0                MOVX    @DPTR,A
+0193 800E              SJMP    ?C0025
+0195         ?C0024:
+                                           ; SOURCE LINE # 84
+0195 900000      E     MOV     DPTR,#k_port
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 10  
+
+0198 E0                MOVX    A,@DPTR
+0199 FF                MOV     R7,A
+019A EF                MOV     A,R7
+019B 54BF              ANL     A,#0BFH
+019D FF                MOV     R7,A
+019E 900000      R     MOV     DPTR,#k_val1
+01A1 EF                MOV     A,R7
+01A2 F0                MOVX    @DPTR,A
+01A3         ?C0025:
+                                           ; SOURCE LINE # 86
+01A3 905063            MOV     DPTR,#05063H
+01A6 E0                MOVX    A,@DPTR
+01A7 FF                MOV     R7,A
+01A8 EF                MOV     A,R7
+01A9 30E410            JNB     ACC.4,?C0026
+                                           ; SOURCE LINE # 87
+01AC 900000      E     MOV     DPTR,#k_port
+01AF E0                MOVX    A,@DPTR
+01B0 FF                MOV     R7,A
+01B1 EF                MOV     A,R7
+01B2 4420              ORL     A,#020H
+01B4 FF                MOV     R7,A
+01B5 900000      R     MOV     DPTR,#k_val1
+01B8 EF                MOV     A,R7
+01B9 F0                MOVX    @DPTR,A
+01BA 800E              SJMP    ?C0027
+01BC         ?C0026:
+                                           ; SOURCE LINE # 89
+01BC 900000      E     MOV     DPTR,#k_port
+01BF E0                MOVX    A,@DPTR
+01C0 FF                MOV     R7,A
+01C1 EF                MOV     A,R7
+01C2 54DF              ANL     A,#0DFH
+01C4 FF                MOV     R7,A
+01C5 900000      R     MOV     DPTR,#k_val1
+01C8 EF                MOV     A,R7
+01C9 F0                MOVX    @DPTR,A
+01CA         ?C0027:
+                                           ; SOURCE LINE # 91
+01CA 905062            MOV     DPTR,#05062H
+01CD E0                MOVX    A,@DPTR
+01CE FF                MOV     R7,A
+01CF EF                MOV     A,R7
+01D0 30E410            JNB     ACC.4,?C0028
+                                           ; SOURCE LINE # 92
+01D3 900000      E     MOV     DPTR,#k_port
+01D6 E0                MOVX    A,@DPTR
+01D7 FF                MOV     R7,A
+01D8 EF                MOV     A,R7
+01D9 4410              ORL     A,#010H
+01DB FF                MOV     R7,A
+01DC 900000      R     MOV     DPTR,#k_val1
+01DF EF                MOV     A,R7
+01E0 F0                MOVX    @DPTR,A
+01E1 800E              SJMP    ?C0029
+01E3         ?C0028:
+                                           ; SOURCE LINE # 94
+01E3 900000      E     MOV     DPTR,#k_port
+01E6 E0                MOVX    A,@DPTR
+01E7 FF                MOV     R7,A
+01E8 EF                MOV     A,R7
+01E9 54EF              ANL     A,#0EFH
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 11  
+
+01EB FF                MOV     R7,A
+01EC 900000      R     MOV     DPTR,#k_val1
+01EF EF                MOV     A,R7
+01F0 F0                MOVX    @DPTR,A
+01F1         ?C0029:
+                                           ; SOURCE LINE # 96
+01F1 905003            MOV     DPTR,#05003H
+01F4 E0                MOVX    A,@DPTR
+01F5 FF                MOV     R7,A
+01F6 EF                MOV     A,R7
+01F7 30E410            JNB     ACC.4,?C0030
+                                           ; SOURCE LINE # 97
+01FA 900000      E     MOV     DPTR,#k_port
+01FD E0                MOVX    A,@DPTR
+01FE FF                MOV     R7,A
+01FF EF                MOV     A,R7
+0200 4408              ORL     A,#08H
+0202 FF                MOV     R7,A
+0203 900000      R     MOV     DPTR,#k_val1
+0206 EF                MOV     A,R7
+0207 F0                MOVX    @DPTR,A
+0208 800E              SJMP    ?C0031
+020A         ?C0030:
+                                           ; SOURCE LINE # 99
+020A 900000      E     MOV     DPTR,#k_port
+020D E0                MOVX    A,@DPTR
+020E FF                MOV     R7,A
+020F EF                MOV     A,R7
+0210 54F7              ANL     A,#0F7H
+0212 FF                MOV     R7,A
+0213 900000      R     MOV     DPTR,#k_val1
+0216 EF                MOV     A,R7
+0217 F0                MOVX    @DPTR,A
+0218         ?C0031:
+                                           ; SOURCE LINE # 101
+0218 905002            MOV     DPTR,#05002H
+021B E0                MOVX    A,@DPTR
+021C FF                MOV     R7,A
+021D EF                MOV     A,R7
+021E 30E410            JNB     ACC.4,?C0032
+                                           ; SOURCE LINE # 102
+0221 900000      E     MOV     DPTR,#k_port
+0224 E0                MOVX    A,@DPTR
+0225 FF                MOV     R7,A
+0226 EF                MOV     A,R7
+0227 4404              ORL     A,#04H
+0229 FF                MOV     R7,A
+022A 900000      R     MOV     DPTR,#k_val1
+022D EF                MOV     A,R7
+022E F0                MOVX    @DPTR,A
+022F 800E              SJMP    ?C0033
+0231         ?C0032:
+                                           ; SOURCE LINE # 104
+0231 900000      E     MOV     DPTR,#k_port
+0234 E0                MOVX    A,@DPTR
+0235 FF                MOV     R7,A
+0236 EF                MOV     A,R7
+0237 54FB              ANL     A,#0FBH
+0239 FF                MOV     R7,A
+023A 900000      R     MOV     DPTR,#k_val1
+023D EF                MOV     A,R7
+023E F0                MOVX    @DPTR,A
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 12  
+
+023F         ?C0033:
+                                           ; SOURCE LINE # 106
+023F 905001            MOV     DPTR,#05001H
+0242 E0                MOVX    A,@DPTR
+0243 FF                MOV     R7,A
+0244 EF                MOV     A,R7
+0245 30E410            JNB     ACC.4,?C0034
+                                           ; SOURCE LINE # 107
+0248 900000      E     MOV     DPTR,#k_port
+024B E0                MOVX    A,@DPTR
+024C FF                MOV     R7,A
+024D EF                MOV     A,R7
+024E 4402              ORL     A,#02H
+0250 FF                MOV     R7,A
+0251 900000      R     MOV     DPTR,#k_val1
+0254 EF                MOV     A,R7
+0255 F0                MOVX    @DPTR,A
+0256 800E              SJMP    ?C0035
+0258         ?C0034:
+                                           ; SOURCE LINE # 109
+0258 900000      E     MOV     DPTR,#k_port
+025B E0                MOVX    A,@DPTR
+025C FF                MOV     R7,A
+025D EF                MOV     A,R7
+025E 54FD              ANL     A,#0FDH
+0260 FF                MOV     R7,A
+0261 900000      R     MOV     DPTR,#k_val1
+0264 EF                MOV     A,R7
+0265 F0                MOVX    @DPTR,A
+0266         ?C0035:
+                                           ; SOURCE LINE # 111
+0266 905000            MOV     DPTR,#05000H
+0269 E0                MOVX    A,@DPTR
+026A FF                MOV     R7,A
+026B EF                MOV     A,R7
+026C 30E410            JNB     ACC.4,?C0036
+                                           ; SOURCE LINE # 112
+026F 900000      E     MOV     DPTR,#k_port
+0272 E0                MOVX    A,@DPTR
+0273 FF                MOV     R7,A
+0274 EF                MOV     A,R7
+0275 4401              ORL     A,#01H
+0277 FF                MOV     R7,A
+0278 900000      R     MOV     DPTR,#k_val1
+027B EF                MOV     A,R7
+027C F0                MOVX    @DPTR,A
+027D 800E              SJMP    ?C0037
+027F         ?C0036:
+                                           ; SOURCE LINE # 114
+027F 900000      E     MOV     DPTR,#k_port
+0282 E0                MOVX    A,@DPTR
+0283 FF                MOV     R7,A
+0284 EF                MOV     A,R7
+0285 54FE              ANL     A,#0FEH
+0287 FF                MOV     R7,A
+0288 900000      R     MOV     DPTR,#k_val1
+028B EF                MOV     A,R7
+028C F0                MOVX    @DPTR,A
+028D         ?C0037:
+                                           ; SOURCE LINE # 116
+028D 900000      R     MOV     DPTR,#k_val1
+0290 E0                MOVX    A,@DPTR
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 13  
+
+0291 FF                MOV     R7,A
+0292 EF                MOV     A,R7
+0293 5477              ANL     A,#077H
+0295 FF                MOV     R7,A
+0296 900000      R     MOV     DPTR,#k_val1
+0299 EF                MOV     A,R7
+029A F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 117
+029B 900000      R     MOV     DPTR,#k_val1
+029E E0                MOVX    A,@DPTR
+029F FF                MOV     R7,A
+02A0 EF                MOV     A,R7
+02A1 6003              JZ      $ + 5H
+02A3 020000      R     LJMP    ?C0021
+                                           ; SOURCE LINE # 119
+02A6 900000      E     MOV     DPTR,#k_port
+02A9 E0                MOVX    A,@DPTR
+02AA FF                MOV     R7,A
+02AB 900000      E     MOV     DPTR,#k_val
+02AE EF                MOV     A,R7
+02AF F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 120
+02B0 9044C3            MOV     DPTR,#044C3H
+02B3 7401              MOV     A,#01H
+02B5 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 121
+02B6 900000      R     MOV     DPTR,#embd_prb_int_config
+02B9 E0                MOVX    A,@DPTR
+02BA FF                MOV     R7,A
+02BB EF                MOV     A,R7
+02BC 7019              JNZ     ?C0038
+                                           ; SOURCE LINE # 122
+                                           ; SOURCE LINE # 123
+02BE 90501F            MOV     DPTR,#0501FH
+02C1 E0                MOVX    A,@DPTR
+02C2 FF                MOV     R7,A
+02C3 EF                MOV     A,R7
+02C4 54FE              ANL     A,#0FEH
+02C6 FF                MOV     R7,A
+02C7 EF                MOV     A,R7
+02C8 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 124
+02C9 90501F            MOV     DPTR,#0501FH
+02CC E0                MOVX    A,@DPTR
+02CD FF                MOV     R7,A
+02CE EF                MOV     A,R7
+02CF 4401              ORL     A,#01H
+02D1 FF                MOV     R7,A
+02D2 EF                MOV     A,R7
+02D3 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 125
+02D4 020000      R     LJMP    ?C0001
+02D7         ?C0038:
+                                           ; SOURCE LINE # 126
+02D7 900000      R     MOV     DPTR,#embd_prb_int_config
+02DA E0                MOVX    A,@DPTR
+02DB FF                MOV     R7,A
+02DC EF                MOV     A,R7
+02DD 6401              XRL     A,#01H
+02DF 6003              JZ      $ + 5H
+02E1 020000      R     LJMP    ?C0001
+                                           ; SOURCE LINE # 127
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 14  
+
+                                           ; SOURCE LINE # 128
+02E4 90501F            MOV     DPTR,#0501FH
+02E7 E0                MOVX    A,@DPTR
+02E8 FF                MOV     R7,A
+02E9 EF                MOV     A,R7
+02EA 54FE              ANL     A,#0FEH
+02EC FF                MOV     R7,A
+02ED EF                MOV     A,R7
+02EE F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 129
+02EF 90501F            MOV     DPTR,#0501FH
+02F2 E0                MOVX    A,@DPTR
+02F3 FF                MOV     R7,A
+02F4 EF                MOV     A,R7
+02F5 4401              ORL     A,#01H
+02F7 FF                MOV     R7,A
+02F8 EF                MOV     A,R7
+02F9 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 132
+                                           ; SOURCE LINE # 133
+02FA 020000      R     LJMP    ?C0001
+02FD 22                RET     
+             ; FUNCTION task3 (END)
+
+             ; FUNCTION key_interrupt (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0F0              PUSH    B
+0004 C083              PUSH    DPH
+0006 C082              PUSH    DPL
+0008 C085              PUSH    DPH1
+000A C084              PUSH    DPL1
+000C C086              PUSH    DPS
+000E 758600            MOV     DPS,#00H
+0011 C000        E     PUSH    ?C?XPAGE1SFR
+0013 750000      E     MOV     ?C?XPAGE1SFR,#?C?XPAGE1RST
+0016 C0D0              PUSH    PSW
+0018 75D000            MOV     PSW,#00H
+001B C000              PUSH    AR0
+001D C001              PUSH    AR1
+001F C002              PUSH    AR2
+0021 C003              PUSH    AR3
+0023 C004              PUSH    AR4
+0025 C005              PUSH    AR5
+0027 C006              PUSH    AR6
+0029 C007              PUSH    AR7
+                                           ; SOURCE LINE # 136
+                                           ; SOURCE LINE # 138
+002B 9044CB            MOV     DPTR,#044CBH
+002E 7401              MOV     A,#01H
+0030 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 140
+0031 905021            MOV     DPTR,#05021H
+0034 E0                MOVX    A,@DPTR
+0035 FF                MOV     R7,A
+0036 EF                MOV     A,R7
+0037 30E410            JNB     ACC.4,?C0042
+                                           ; SOURCE LINE # 141
+003A 900000      E     MOV     DPTR,#k_port
+003D E0                MOVX    A,@DPTR
+003E FF                MOV     R7,A
+003F EF                MOV     A,R7
+0040 4480              ORL     A,#080H
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 15  
+
+0042 FF                MOV     R7,A
+0043 900000      E     MOV     DPTR,#k_port
+0046 EF                MOV     A,R7
+0047 F0                MOVX    @DPTR,A
+0048 800E              SJMP    ?C0043
+004A         ?C0042:
+                                           ; SOURCE LINE # 143
+004A 900000      E     MOV     DPTR,#k_port
+004D E0                MOVX    A,@DPTR
+004E FF                MOV     R7,A
+004F EF                MOV     A,R7
+0050 547F              ANL     A,#07FH
+0052 FF                MOV     R7,A
+0053 900000      E     MOV     DPTR,#k_port
+0056 EF                MOV     A,R7
+0057 F0                MOVX    @DPTR,A
+0058         ?C0043:
+                                           ; SOURCE LINE # 145
+0058 905020            MOV     DPTR,#05020H
+005B E0                MOVX    A,@DPTR
+005C FF                MOV     R7,A
+005D EF                MOV     A,R7
+005E 30E410            JNB     ACC.4,?C0044
+                                           ; SOURCE LINE # 146
+0061 900000      E     MOV     DPTR,#k_port
+0064 E0                MOVX    A,@DPTR
+0065 FF                MOV     R7,A
+0066 EF                MOV     A,R7
+0067 4440              ORL     A,#040H
+0069 FF                MOV     R7,A
+006A 900000      E     MOV     DPTR,#k_port
+006D EF                MOV     A,R7
+006E F0                MOVX    @DPTR,A
+006F 800E              SJMP    ?C0045
+0071         ?C0044:
+                                           ; SOURCE LINE # 148
+0071 900000      E     MOV     DPTR,#k_port
+0074 E0                MOVX    A,@DPTR
+0075 FF                MOV     R7,A
+0076 EF                MOV     A,R7
+0077 54BF              ANL     A,#0BFH
+0079 FF                MOV     R7,A
+007A 900000      E     MOV     DPTR,#k_port
+007D EF                MOV     A,R7
+007E F0                MOVX    @DPTR,A
+007F         ?C0045:
+                                           ; SOURCE LINE # 150
+007F 905063            MOV     DPTR,#05063H
+0082 E0                MOVX    A,@DPTR
+0083 FF                MOV     R7,A
+0084 EF                MOV     A,R7
+0085 30E410            JNB     ACC.4,?C0046
+                                           ; SOURCE LINE # 151
+0088 900000      E     MOV     DPTR,#k_port
+008B E0                MOVX    A,@DPTR
+008C FF                MOV     R7,A
+008D EF                MOV     A,R7
+008E 4420              ORL     A,#020H
+0090 FF                MOV     R7,A
+0091 900000      E     MOV     DPTR,#k_port
+0094 EF                MOV     A,R7
+0095 F0                MOVX    @DPTR,A
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 16  
+
+0096 800E              SJMP    ?C0047
+0098         ?C0046:
+                                           ; SOURCE LINE # 153
+0098 900000      E     MOV     DPTR,#k_port
+009B E0                MOVX    A,@DPTR
+009C FF                MOV     R7,A
+009D EF                MOV     A,R7
+009E 54DF              ANL     A,#0DFH
+00A0 FF                MOV     R7,A
+00A1 900000      E     MOV     DPTR,#k_port
+00A4 EF                MOV     A,R7
+00A5 F0                MOVX    @DPTR,A
+00A6         ?C0047:
+                                           ; SOURCE LINE # 155
+00A6 905062            MOV     DPTR,#05062H
+00A9 E0                MOVX    A,@DPTR
+00AA FF                MOV     R7,A
+00AB EF                MOV     A,R7
+00AC 30E410            JNB     ACC.4,?C0048
+                                           ; SOURCE LINE # 156
+00AF 900000      E     MOV     DPTR,#k_port
+00B2 E0                MOVX    A,@DPTR
+00B3 FF                MOV     R7,A
+00B4 EF                MOV     A,R7
+00B5 4410              ORL     A,#010H
+00B7 FF                MOV     R7,A
+00B8 900000      E     MOV     DPTR,#k_port
+00BB EF                MOV     A,R7
+00BC F0                MOVX    @DPTR,A
+00BD 800E              SJMP    ?C0049
+00BF         ?C0048:
+                                           ; SOURCE LINE # 158
+00BF 900000      E     MOV     DPTR,#k_port
+00C2 E0                MOVX    A,@DPTR
+00C3 FF                MOV     R7,A
+00C4 EF                MOV     A,R7
+00C5 54EF              ANL     A,#0EFH
+00C7 FF                MOV     R7,A
+00C8 900000      E     MOV     DPTR,#k_port
+00CB EF                MOV     A,R7
+00CC F0                MOVX    @DPTR,A
+00CD         ?C0049:
+                                           ; SOURCE LINE # 160
+00CD 905003            MOV     DPTR,#05003H
+00D0 E0                MOVX    A,@DPTR
+00D1 FF                MOV     R7,A
+00D2 EF                MOV     A,R7
+00D3 30E410            JNB     ACC.4,?C0050
+                                           ; SOURCE LINE # 161
+00D6 900000      E     MOV     DPTR,#k_port
+00D9 E0                MOVX    A,@DPTR
+00DA FF                MOV     R7,A
+00DB EF                MOV     A,R7
+00DC 4408              ORL     A,#08H
+00DE FF                MOV     R7,A
+00DF 900000      E     MOV     DPTR,#k_port
+00E2 EF                MOV     A,R7
+00E3 F0                MOVX    @DPTR,A
+00E4 800E              SJMP    ?C0051
+00E6         ?C0050:
+                                           ; SOURCE LINE # 163
+00E6 900000      E     MOV     DPTR,#k_port
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 17  
+
+00E9 E0                MOVX    A,@DPTR
+00EA FF                MOV     R7,A
+00EB EF                MOV     A,R7
+00EC 54F7              ANL     A,#0F7H
+00EE FF                MOV     R7,A
+00EF 900000      E     MOV     DPTR,#k_port
+00F2 EF                MOV     A,R7
+00F3 F0                MOVX    @DPTR,A
+00F4         ?C0051:
+                                           ; SOURCE LINE # 165
+00F4 905002            MOV     DPTR,#05002H
+00F7 E0                MOVX    A,@DPTR
+00F8 FF                MOV     R7,A
+00F9 EF                MOV     A,R7
+00FA 30E410            JNB     ACC.4,?C0052
+                                           ; SOURCE LINE # 166
+00FD 900000      E     MOV     DPTR,#k_port
+0100 E0                MOVX    A,@DPTR
+0101 FF                MOV     R7,A
+0102 EF                MOV     A,R7
+0103 4404              ORL     A,#04H
+0105 FF                MOV     R7,A
+0106 900000      E     MOV     DPTR,#k_port
+0109 EF                MOV     A,R7
+010A F0                MOVX    @DPTR,A
+010B 800E              SJMP    ?C0053
+010D         ?C0052:
+                                           ; SOURCE LINE # 168
+010D 900000      E     MOV     DPTR,#k_port
+0110 E0                MOVX    A,@DPTR
+0111 FF                MOV     R7,A
+0112 EF                MOV     A,R7
+0113 54FB              ANL     A,#0FBH
+0115 FF                MOV     R7,A
+0116 900000      E     MOV     DPTR,#k_port
+0119 EF                MOV     A,R7
+011A F0                MOVX    @DPTR,A
+011B         ?C0053:
+                                           ; SOURCE LINE # 170
+011B 905001            MOV     DPTR,#05001H
+011E E0                MOVX    A,@DPTR
+011F FF                MOV     R7,A
+0120 EF                MOV     A,R7
+0121 30E410            JNB     ACC.4,?C0054
+                                           ; SOURCE LINE # 171
+0124 900000      E     MOV     DPTR,#k_port
+0127 E0                MOVX    A,@DPTR
+0128 FF                MOV     R7,A
+0129 EF                MOV     A,R7
+012A 4402              ORL     A,#02H
+012C FF                MOV     R7,A
+012D 900000      E     MOV     DPTR,#k_port
+0130 EF                MOV     A,R7
+0131 F0                MOVX    @DPTR,A
+0132 800E              SJMP    ?C0055
+0134         ?C0054:
+                                           ; SOURCE LINE # 173
+0134 900000      E     MOV     DPTR,#k_port
+0137 E0                MOVX    A,@DPTR
+0138 FF                MOV     R7,A
+0139 EF                MOV     A,R7
+013A 54FD              ANL     A,#0FDH
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 18  
+
+013C FF                MOV     R7,A
+013D 900000      E     MOV     DPTR,#k_port
+0140 EF                MOV     A,R7
+0141 F0                MOVX    @DPTR,A
+0142         ?C0055:
+                                           ; SOURCE LINE # 175
+0142 905000            MOV     DPTR,#05000H
+0145 E0                MOVX    A,@DPTR
+0146 FF                MOV     R7,A
+0147 EF                MOV     A,R7
+0148 30E410            JNB     ACC.4,?C0056
+                                           ; SOURCE LINE # 176
+014B 900000      E     MOV     DPTR,#k_port
+014E E0                MOVX    A,@DPTR
+014F FF                MOV     R7,A
+0150 EF                MOV     A,R7
+0151 4401              ORL     A,#01H
+0153 FF                MOV     R7,A
+0154 900000      E     MOV     DPTR,#k_port
+0157 EF                MOV     A,R7
+0158 F0                MOVX    @DPTR,A
+0159 800E              SJMP    ?C0057
+015B         ?C0056:
+                                           ; SOURCE LINE # 178
+015B 900000      E     MOV     DPTR,#k_port
+015E E0                MOVX    A,@DPTR
+015F FF                MOV     R7,A
+0160 EF                MOV     A,R7
+0161 54FE              ANL     A,#0FEH
+0163 FF                MOV     R7,A
+0164 900000      E     MOV     DPTR,#k_port
+0167 EF                MOV     A,R7
+0168 F0                MOVX    @DPTR,A
+0169         ?C0057:
+                                           ; SOURCE LINE # 180
+0169 900000      E     MOV     DPTR,#k_port
+016C E0                MOVX    A,@DPTR
+016D FF                MOV     R7,A
+016E EF                MOV     A,R7
+016F 6488              XRL     A,#088H
+0171 FF                MOV     R7,A
+0172 900000      E     MOV     DPTR,#k_port
+0175 EF                MOV     A,R7
+0176 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 182
+0177 900000      E     MOV     DPTR,#k_port
+017A E0                MOVX    A,@DPTR
+017B FF                MOV     R7,A
+017C EF                MOV     A,R7
+017D 6021              JZ      ?C0058
+                                           ; SOURCE LINE # 183
+                                           ; SOURCE LINE # 184
+017F 900000      E     MOV     DPTR,#k_port
+0182 E0                MOVX    A,@DPTR
+0183 FF                MOV     R7,A
+0184 EF                MOV     A,R7
+0185 5477              ANL     A,#077H
+0187 FF                MOV     R7,A
+0188 EF                MOV     A,R7
+0189 600A              JZ      ?C0059
+                                           ; SOURCE LINE # 185
+                                           ; SOURCE LINE # 186
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 19  
+
+018B 7F03              MOV     R7,#03H
+018D 120000      E     LCALL   _isr_send_signal
+                                           ; SOURCE LINE # 187
+0190 120000      E     LCALL   KEY_ClearInterrupt
+                                           ; SOURCE LINE # 188
+0193 8014              SJMP    ?C0062
+0195         ?C0059:
+                                           ; SOURCE LINE # 190
+                                           ; SOURCE LINE # 191
+0195 9044C3            MOV     DPTR,#044C3H
+0198 7401              MOV     A,#01H
+019A F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 192
+019B 120000      E     LCALL   KEY_ClearInterrupt
+                                           ; SOURCE LINE # 193
+                                           ; SOURCE LINE # 194
+019E 8009              SJMP    ?C0062
+01A0         ?C0058:
+                                           ; SOURCE LINE # 196
+                                           ; SOURCE LINE # 197
+01A0 120000      E     LCALL   KEY_ClearInterrupt
+                                           ; SOURCE LINE # 198
+01A3 9044C3            MOV     DPTR,#044C3H
+01A6 7401              MOV     A,#01H
+01A8 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 199
+                                           ; SOURCE LINE # 201
+01A9         ?C0062:
+01A9 D007              POP     AR7
+01AB D006              POP     AR6
+01AD D005              POP     AR5
+01AF D004              POP     AR4
+01B1 D003              POP     AR3
+01B3 D002              POP     AR2
+01B5 D001              POP     AR1
+01B7 D000              POP     AR0
+01B9 D0D0              POP     PSW
+01BB D000        E     POP     ?C?XPAGE1SFR
+01BD D086              POP     DPS
+01BF D084              POP     DPL1
+01C1 D085              POP     DPH1
+01C3 D082              POP     DPL
+01C5 D083              POP     DPH
+01C7 D0F0              POP     B
+01C9 D0E0              POP     ACC
+01CB 32                RETI    
+             ; FUNCTION key_interrupt (END)
+
+             ; FUNCTION TASK_3 (BEGIN)
+                                           ; SOURCE LINE # 203
+                                           ; SOURCE LINE # 204
+                                           ; SOURCE LINE # 205
+0000 7F03              MOV     R7,#03H
+0002 120000      E     LCALL   _os_create_task
+                                           ; SOURCE LINE # 206
+0005 22                RET     
+             ; FUNCTION TASK_3 (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1232    ----
+C51 COMPILER V9.51   TASK3                                                                 06/30/2014 15:53:57 PAGE 20  
+
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      5    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
