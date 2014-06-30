@@ -28,12 +28,91 @@ void task3 (void) _task_ 3
 	while (1)
 	{
 		os_wait1(K_SIG);							//	Wait for signal from k_isr Interrupt routine
-		
-		k_port = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);			//	store the key Value from PORT 0 to k_port
+        
+        if(CyPins_ReadPin(K2_SENSE_P4_1))
+            k_port = k_port | 0x80;
+        else 
+            k_port = k_port & 0x7F;
+        
+        if(CyPins_ReadPin(Key2_0_P4_0))
+            k_port = k_port | 0x40;
+        else 
+            k_port = k_port & 0xBF;        
+        
+        if(CyPins_ReadPin(Key2_1_P12_3))
+            k_port = k_port | 0x20;        
+        else 
+            k_port = k_port & 0xDF;        
+        
+        if(CyPins_ReadPin(Key2_2_P12_2))
+            k_port = k_port | 0x10;        
+        else 
+            k_port = k_port & 0xEF;        
+        
+        if(CyPins_ReadPin(K1_SENSE_P0_3))
+            k_port = k_port | 0x8;
+        else 
+            k_port = k_port & 0xF7;
+        
+        if(CyPins_ReadPin(Key1_0_P0_2))
+            k_port = k_port | 0x4;
+        else 
+            k_port = k_port & 0xFB;
+        
+        if(CyPins_ReadPin(Key1_1_P0_1))
+            k_port = k_port | 0x2;
+        else 
+            k_port = k_port & 0xFD;
+        
+        if(CyPins_ReadPin(Key1_2_P0_0))
+            k_port = k_port | 0x1;
+        else 
+            k_port = k_port & 0xFE;        
+        
+		//k_port = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);			//	store the key Value from PORT 0 to k_port
 		k_port = k_port ^ 0x88;								//	Return key value
        		
   		do	{												//	Key Debounce Logic: Interrupt disabled &
-		  		k_val1 = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);	//	key press on hold untill key is released
+            if(CyPins_ReadPin(K2_SENSE_P4_1))
+                k_val1 = k_port | 0x80;
+            else 
+                k_val1 = k_port & 0x7F;
+            
+            if(CyPins_ReadPin(Key2_0_P4_0))
+                k_val1 = k_port | 0x40;
+            else 
+                k_val1 = k_port & 0xBF;        
+            
+            if(CyPins_ReadPin(Key2_1_P12_3))
+                k_val1 = k_port | 0x20;        
+            else 
+                k_val1 = k_port & 0xDF;        
+            
+            if(CyPins_ReadPin(Key2_2_P12_2))
+                k_val1 = k_port | 0x10;        
+            else 
+                k_val1 = k_port & 0xEF;        
+            
+            if(CyPins_ReadPin(K1_SENSE_P0_3))
+                k_val1 = k_port | 0x8;
+            else 
+                k_val1 = k_port & 0xF7;
+            
+            if(CyPins_ReadPin(Key1_0_P0_2))
+                k_val1 = k_port | 0x4;
+            else 
+                k_val1 = k_port & 0xFB;
+            
+            if(CyPins_ReadPin(Key1_1_P0_1))
+                k_val1 = k_port | 0x2;
+            else 
+                k_val1 = k_port & 0xFD;
+            
+            if(CyPins_ReadPin(Key1_2_P0_0))
+                k_val1 = k_port | 0x1;
+            else 
+                k_val1 = k_port & 0xFE;        
+		  		//k_val1 = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);	//	key press on hold untill key is released
 				k_val1 = k_val1 & 0x77;						//	this line was included inside the loop on [29/11/2012]
     		}	while(k_val1);								//	This does not interrupt the UART Process
 		
@@ -57,8 +136,48 @@ void task3 (void) _task_ 3
 CY_ISR(key_interrupt)							//	Relocated Key Pad ISR
 {
  	CyIntDisable (24);							//	Disable k_isr Interrupt
-	k_port = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);	//	store the key Value from PORT 0 to k_port
-	k_port = k_port ^ 0x88;						//	Set Keysense active high '1'
+	//k_port = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);	//	store the key Value from PORT 0 to k_port
+        if(CyPins_ReadPin(K2_SENSE_P4_1))
+            k_port = k_port | 0x80;
+        else 
+            k_port = k_port & 0x7F;
+        
+        if(CyPins_ReadPin(Key2_0_P4_0))
+            k_port = k_port | 0x40;
+        else 
+            k_port = k_port & 0xBF;        
+        
+        if(CyPins_ReadPin(Key2_1_P12_3))
+            k_port = k_port | 0x20;        
+        else 
+            k_port = k_port & 0xDF;        
+        
+        if(CyPins_ReadPin(Key2_2_P12_2))
+            k_port = k_port | 0x10;        
+        else 
+            k_port = k_port & 0xEF;        
+        
+        if(CyPins_ReadPin(K1_SENSE_P0_3))
+            k_port = k_port | 0x8;
+        else 
+            k_port = k_port & 0xF7;
+        
+        if(CyPins_ReadPin(Key1_0_P0_2))
+            k_port = k_port | 0x4;
+        else 
+            k_port = k_port & 0xFB;
+        
+        if(CyPins_ReadPin(Key1_1_P0_1))
+            k_port = k_port | 0x2;
+        else 
+            k_port = k_port & 0xFD;
+        
+        if(CyPins_ReadPin(Key1_2_P0_0))
+            k_port = k_port | 0x1;
+        else 
+            k_port = k_port & 0xFE;        
+	
+        k_port = k_port ^ 0x88;						//	Set Keysense active high '1'
 	
 	if(k_port)									//	Execute if Key probe connected
 	{
