@@ -17,5 +17,5 @@ move "%~1\%~2\%~n3.hex" "%~1\%~2\%~n3.ihx"
 @IF %errorlevel% NEQ 0 EXIT /b %errorlevel% 
 CD /D "C:\Keil\UV4"
 @IF %errorlevel% NEQ 0 EXIT /b %errorlevel% 
-IF NOT EXIST "D:\PT6\RTOS_28_MAY_2014_VER_3_REV_1\RTOS_28_MAY_2014.cydsn\RTOS_28_MAY_2014.svd" rem "D:\PT6\RTOS_28_MAY_2014_VER_3_REV_1\RTOS_28_MAY_2014.cydsn\RTOS_28_MAY_2014.sfr"
+IF NOT EXIST "d:\PT6\RTOS_28_MAY_2014_VER_3_REV_1\RTOS_28_MAY_2014.cydsn\RTOS_28_MAY_2014.svd" rem "d:\PT6\RTOS_28_MAY_2014_VER_3_REV_1\RTOS_28_MAY_2014.cydsn\RTOS_28_MAY_2014.sfr"
 @IF %errorlevel% NEQ 0 EXIT /b %errorlevel% 

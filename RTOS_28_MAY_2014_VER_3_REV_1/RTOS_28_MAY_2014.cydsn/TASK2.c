@@ -50,7 +50,15 @@ void task2 (void) _task_ 2
 			}
 			else if(word == 0x01)					//	Embedded Probe Key
 			{
-				
+                k_val=0x00;
+				if(CyPins_ReadPin(K1_SENSE_P0_3))        k_val = k_val & 0xF7;
+                else                                     k_val = k_val & 0x08;
+                
+                if(CyPins_ReadPin(K2_SENSE_P4_1))        k_val = k_val | 0x7F;
+                else                                     k_val = k_val & 0x80;
+                
+                CyDelayUs(1000);
+                
 				UART_PutString("*");			//	STATUS ACKNOWLEDGEMENT to uP	//
 				while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
 				{
@@ -286,7 +294,6 @@ void task2 (void) _task_ 2
 			}
 			else if(word == 0x18)					//	Embedded Probe Status
 			{
-				prb_sts = 0x89;
 				//prb_sts = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);		//Port0 Read
 				//prb_sts = ~prb_sts;									//Invert Port0 Data
 				//prb_sts = prb_sts & 0x88;							//Mask the Key Pin Input from Port0 Data

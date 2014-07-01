@@ -29,45 +29,31 @@ void task3 (void) _task_ 3
 	{
 		os_wait1(K_SIG);							//	Wait for signal from k_isr Interrupt routine
         
-    /*    if(CyPins_ReadPin(K2_SENSE_P4_1))
-            k_port = k_port | 0x80;
-        else 
-            k_port = k_port & 0x7F;
+    /*           if(CyPins_ReadPin(K1_SENSE_P0_3))        k_port = k_port | 0x80;
+        else                                     k_port = k_port & 0x7F;    CyDelayUs(10);
         
-        if(CyPins_ReadPin(Key2_0_P4_0))
-            k_port = k_port | 0x40;
-        else 
-            k_port = k_port & 0xBF;        
+        if(CyPins_ReadPin(Key1_2_P0_0))          k_port = k_port | 0x40;
+        else                                     k_port = k_port & 0xBF;    CyDelayUs(10);
+
+        if(CyPins_ReadPin(Key1_1_P0_1))          k_port = k_port | 0x20;        
+        else                                     k_port = k_port & 0xDF;    CyDelayUs(10);        
         
-        if(CyPins_ReadPin(Key2_1_P12_3))
-            k_port = k_port | 0x20;        
-        else 
-            k_port = k_port & 0xDF;        
+        if(CyPins_ReadPin(Key1_0_P0_2))          k_port = k_port | 0x10;
+        else                                     k_port = k_port & 0xEF;    CyDelayUs(10);
         
-        if(CyPins_ReadPin(Key2_2_P12_2))
-            k_port = k_port | 0x10;        
-        else 
-            k_port = k_port & 0xEF;        
+
         
-        if(CyPins_ReadPin(K1_SENSE_P0_3))
-            k_port = k_port | 0x8;
-        else 
-            k_port = k_port & 0xF7;
+        if(CyPins_ReadPin(K2_SENSE_P4_1))        k_port = k_port | 0x8;
+        else                                     k_port = k_port & 0xF7;    CyDelayUs(10);
         
-        if(CyPins_ReadPin(Key1_0_P0_2))
-            k_port = k_port | 0x4;
-        else 
-            k_port = k_port & 0xFB;
+        if(CyPins_ReadPin(Key2_0_P4_0))          k_port = k_port | 0x1;
+        else                                     k_port = k_port & 0xFE;    CyDelayUs(10);
         
-        if(CyPins_ReadPin(Key1_1_P0_1))
-            k_port = k_port | 0x2;
-        else 
-            k_port = k_port & 0xFD;
+        if(CyPins_ReadPin(Key2_1_P12_3))         k_port = k_port | 0x2;
+        else                                     k_port = k_port & 0xFD;    CyDelayUs(10);
         
-        if(CyPins_ReadPin(Key1_2_P0_0))
-            k_port = k_port | 0x1;
-        else 
-            k_port = k_port & 0xFE;        
+        if(CyPins_ReadPin(Key2_2_P12_2))         k_port = k_port | 0x4;
+        else                                     k_port = k_port & 0xFB;    CyDelayUs(10);        
         
 		//k_port = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);			//	store the key Value from PORT 0 to k_port
 		k_port = k_port ^ 0x88;								//	Return key value
@@ -138,51 +124,38 @@ CY_ISR(key_interrupt)							//	Relocated Key Pad ISR
 {
  	CyIntDisable (24);							//	Disable k_isr Interrupt
 	//k_port = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);	//	store the key Value from PORT 0 to k_port
-       
+     k_port=0x00;  
     do{
-        if(CyPins_ReadPin(K2_SENSE_P4_1))
-            k_port = k_port | 0x80;
-        else 
-            k_port = k_port & 0x7F;
+        if(CyPins_ReadPin(K1_SENSE_P0_3))        k_port = k_port | 0x08;
+        else                                     k_port = k_port & 0xF7;
         
-        if(CyPins_ReadPin(Key2_0_P4_0))
-            k_port = k_port | 0x40;
-        else 
-            k_port = k_port & 0xBF;        
+        if(CyPins_ReadPin(Key1_2_P0_0))          k_port = k_port | 0x01;
+        else                                     k_port = k_port & 0xFE;
+
+        if(CyPins_ReadPin(Key1_1_P0_1))          k_port = k_port | 0x02;
+        else                                     k_port = k_port & 0xFD;
         
-        if(CyPins_ReadPin(Key2_1_P12_3))
-            k_port = k_port | 0x20;        
-        else 
-            k_port = k_port & 0xDF;        
+        if(CyPins_ReadPin(Key1_0_P0_2))          k_port = k_port | 0x04;
+        else                                     k_port = k_port & 0xFB;
         
-        if(CyPins_ReadPin(Key2_2_P12_2))
-            k_port = k_port | 0x10;        
-        else 
-            k_port = k_port & 0xEF;        
+
         
-        if(CyPins_ReadPin(K1_SENSE_P0_3))
-            k_port = k_port | 0x8;
-        else 
-            k_port = k_port & 0xF7;
+        if(CyPins_ReadPin(K2_SENSE_P4_1))        k_port = k_port | 0x80;
+        else                                     k_port = k_port & 0x7F;    
         
-        if(CyPins_ReadPin(Key1_0_P0_2))
-            k_port = k_port | 0x4;
-        else 
-            k_port = k_port & 0xFB;
+        if(CyPins_ReadPin(Key2_0_P4_0))          k_port = k_port | 0x40;
+        else                                     k_port = k_port & 0xBF;    
         
-        if(CyPins_ReadPin(Key1_1_P0_1))
-            k_port = k_port | 0x2;
-        else 
-            k_port = k_port & 0xFD;
+        if(CyPins_ReadPin(Key2_1_P12_3))         k_port = k_port | 0x20;
+        else                                     k_port = k_port & 0xDF;    
         
-        if(CyPins_ReadPin(Key1_2_P0_0))
-            k_port = k_port | 0x1;
-        else 
-            k_port = k_port & 0xFE;        
+        if(CyPins_ReadPin(Key2_2_P12_2))         k_port = k_port | 0x10;
+        else                                     k_port = k_port & 0xEF;    
 	
-        k_port = k_port ^ 0x88;						//	Set Keysense active high '1'
-        prb_sts = 0x89;
-        k_val =  k_port;
+        CyDelayUs(1000);        
+        
+        k_port = k_port  ^ 0x88;						//	Set Keysense active high '1'
+        prb_sts = k_port ;//& 0x77;
     }while(!CyPins_ReadPin(KEY_INT));
 	/*
 	if(k_port)									//	Execute if Key probe connected
@@ -203,9 +176,9 @@ CY_ISR(key_interrupt)							//	Relocated Key Pad ISR
 	  	KEY_ClearInterrupt();					//	Enable k_isr Interrupt
 		CyIntEnable (24);						//	Enable k_isr Interrupt
 	}*/
-			CyPins_ClearPin(PSoC_INT0_P3_7);		//	Interrupt line to CPU(i.MX51) Set low
-          CyDelayUs(1);
-			CyPins_SetPin(PSoC_INT0_P3_7);			//	Interrupt line Set high    
+		CyPins_ClearPin(PSoC_INT0_P3_7);		//	Interrupt line to CPU(i.MX51) Set low
+        CyDelayUs(1);
+		CyPins_SetPin(PSoC_INT0_P3_7);			//	Interrupt line Set high    
             
         KEY_ClearInterrupt();					//	Enable k_isr Interrupt
 		CyIntEnable (24);						//	Enable k_isr Interrupt
