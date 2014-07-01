@@ -1,5 +1,5 @@
 # -------------------------------------------------
-# Project created by Ravivarman.R,Qmax Test Equipments
+# Project created by QtCreator 2013-10-29T17:25:20
 # -------------------------------------------------
 TARGET = VIInterface
 CONFIG += plugin
