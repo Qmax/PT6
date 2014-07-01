@@ -449,7 +449,7 @@ void task2 (void) _task_ 2
                 {
                     ;
                 }
-                UART_ClearTxBuffer();                
+               UART_ClearTxBuffer();   
 			}			
 			else if(word == 0x55)					//	Loop Check
 			{
@@ -575,7 +575,7 @@ void task2 (void) _task_ 2
 			}
 			
 			cmd_exct = 0;
-			os_send_signal(1);						//	Send signal to TASK1 for execution
+     		os_send_signal(1);						//	Send signal to TASK1 for execution
 			++i;
 		}
 	}

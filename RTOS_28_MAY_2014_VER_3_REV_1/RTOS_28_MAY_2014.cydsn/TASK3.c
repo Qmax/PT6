@@ -152,7 +152,7 @@ CY_ISR(key_interrupt)							//	Relocated Key Pad ISR
         if(CyPins_ReadPin(Key2_2_P12_2))         k_port = k_port | 0x10;
         else                                     k_port = k_port & 0xEF;    
 	
-        CyDelayUs(1000);        
+        CyDelayUs(500);        
         
         k_port = k_port  ^ 0x88;						//	Set Keysense active high '1'
         prb_sts = k_port ;//& 0x77;

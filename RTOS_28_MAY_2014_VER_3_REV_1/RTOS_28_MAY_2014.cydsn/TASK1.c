@@ -1412,11 +1412,10 @@ void switching_main(unsigned char *cmd)		// Main Relay Switching Subroutine
 			break;
 
 		case 0x51:										
-		
+		    CyDelayUs(500);
 			cmd++;
             
             localCMD=*cmd;
-
             if (!CyPins_ReadPin(BSRC_IMP_SEL_P6_3)){
                 switch(*cmd){
       				UART_ClearRxBuffer();
