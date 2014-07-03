@@ -1,4 +1,4 @@
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 1   
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 1   
 
 
 C51 COMPILER V9.51, COMPILATION OF MODULE TASK2
@@ -62,13 +62,13 @@ line level    source
   51   3                              else if(word == 0x01)                                   //      Embedded Probe Key
   52   3                              {
   53   4                      k_val=0x00;
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 2   
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 2   
 
   54   4                                      if(CyPins_ReadPin(K1_SENSE_P0_3))        k_val = k_val & 0xF7;
-  55   4                      else                                     k_val = k_val & 0x08;
+  55   4                      else                                     k_val = k_val | 0x08;
   56   4                      
-  57   4                      if(CyPins_ReadPin(K2_SENSE_P4_1))        k_val = k_val | 0x7F;
-  58   4                      else                                     k_val = k_val & 0x80;
+  57   4                      if(CyPins_ReadPin(K2_SENSE_P4_1))        k_val = k_val & 0x7F;
+  58   4                      else                                     k_val = k_val | 0x80;
   59   4                      
   60   4                      CyDelayUs(1000);
   61   4                      
@@ -126,7 +126,7 @@ line level    source
  113   3                              {
  114   4                                      for(i=0; i<=8; i++)
  115   4                                      {
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 3   
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 3   
 
  116   5                                              rx_word[i]      = 0x00;
  117   5                                      }
@@ -190,7 +190,7 @@ line level    source
  175   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
  176   4                                      {
  177   5                                              ;
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 4   
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 4   
 
  178   5                                      }
  179   4      
@@ -254,7 +254,7 @@ line level    source
  237   3                              else if(word == 0x0B)                                   //      EX-MUX TEST Chnl ON
  238   3                              {
  239   4                                      i=0;
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 5   
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 5   
 
  240   4                                      rx_word[i]      = word;
  241   4                                      i++;
@@ -313,311 +313,343 @@ line level    source
  294   4                              }
  295   3                              else if(word == 0x18)                                   //      Embedded Probe Status
  296   3                              {
- 297   4                                      //prb_sts = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);          //Port0 Read
- 298   4                                      //prb_sts = ~prb_sts;                                                                   //Invert Port0 Data
- 299   4                                      //prb_sts = prb_sts & 0x88;                                                     //Mask the Key Pin Input from Port0 Data
- 300   4                                      //prb_sts = prb_sts >> 3;
- 301   4                                      
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 6   
+ 297   4                      if(prb_sts==0){
+ 298   5                          if(CyPins_ReadPin(K1_SENSE_P0_3))        k_port = k_port | 0x08;
+ 299   5                          else                                     k_port = k_port & 0xF7;
+ 300   5              
+ 301   5                          if(CyPins_ReadPin(Key1_2_P0_0))          k_port = k_port | 0x01;
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 6   
 
- 302   4                                      UART_PutString("*");                    //      STATUS ACKNOWLEDGEMENT to uP    //
- 303   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 304   4                                      {
- 305   5                                              ;
- 306   5                                      }
- 307   4                                      
- 308   4                                      UART_PutString("*");
- 309   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 310   4                                      {
- 311   5                                              ;
- 312   5                                      }
- 313   4                              
- 314   4                                      UART_PutString("*");
- 315   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 316   4                                      {
- 317   5                                              ;
- 318   5                                      }
- 319   4                              
- 320   4                                      UART_PutString("#");
- 321   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 322   4                                      {
- 323   5                                              ;
- 324   5                                      }
- 325   4                                      
- 326   4                                      UART_WriteTxData(prb_sts);
- 327   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 328   4                                      {
- 329   5                                              ;
- 330   5                                      }
- 331   4                              
- 332   4                                      cmd_exct        = 0;
- 333   4                                      dat_cnt         = 0;
- 334   4                              }
- 335   3                              else if(word == 0x1C)                                   //      Interrupt Pin Configuration
- 336   3                              {
- 337   4                                      i=0;
- 338   4                                      rx_word[i]      = word;
- 339   4                                      i++;
- 340   4                                      dat_cnt         = 1;
- 341   4                                      status          = 2;
- 342   4                                      
- 343   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
- 344   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 345   4                                      {
- 346   5                                              ;
- 347   5                                      }
- 348   4                              }
- 349   3                              else if(word == 0x40)                                   //      Debug Mode
- 350   3                              {
- 351   4                                      for(i=0; i<=8; i++)
+ 302   5                          else                                     k_port = k_port & 0xFE;
+ 303   5      
+ 304   5                          if(CyPins_ReadPin(Key1_1_P0_1))          k_port = k_port | 0x02;
+ 305   5                          else                                     k_port = k_port & 0xFD;
+ 306   5                          
+ 307   5                          if(CyPins_ReadPin(Key1_0_P0_2))          k_port = k_port | 0x04;
+ 308   5                          else                                     k_port = k_port & 0xFB;
+ 309   5                          
+ 310   5                          if(CyPins_ReadPin(K2_SENSE_P4_1))        k_port = k_port | 0x80;
+ 311   5                          else                                     k_port = k_port & 0x7F;    
+ 312   5                          
+ 313   5                          if(CyPins_ReadPin(Key2_0_P4_0))          k_port = k_port | 0x40;
+ 314   5                          else                                     k_port = k_port & 0xBF;    
+ 315   5                          
+ 316   5                          if(CyPins_ReadPin(Key2_1_P12_3))         k_port = k_port | 0x20;
+ 317   5                          else                                     k_port = k_port & 0xDF;    
+ 318   5                          
+ 319   5                          if(CyPins_ReadPin(Key2_2_P12_2))         k_port = k_port | 0x10;
+ 320   5                          else                                     k_port = k_port & 0xEF;    
+ 321   5                      
+ 322   5                          CyDelayUs(500);     
+ 323   5                          
+ 324   5                          k_port = k_port  ^ 0x88;                                            //      Set Keysense active high '1'
+ 325   5                          prb_sts = k_port ;
+ 326   5                      }
+ 327   4                                      //prb_sts = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);          //Port0 Read
+ 328   4                                      //prb_sts = ~prb_sts;                                                                   //Invert Port0 Data
+ 329   4                                      //prb_sts = prb_sts & 0x88;                                                     //Mask the Key Pin Input from Port0 Data
+ 330   4                                      //prb_sts = prb_sts >> 3;
+ 331   4                                      
+ 332   4                                      UART_PutString("*");                    //      STATUS ACKNOWLEDGEMENT to uP    //
+ 333   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 334   4                                      {
+ 335   5                                              ;
+ 336   5                                      }
+ 337   4                                      
+ 338   4                                      UART_PutString("*");
+ 339   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 340   4                                      {
+ 341   5                                              ;
+ 342   5                                      }
+ 343   4                              
+ 344   4                                      UART_PutString("*");
+ 345   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 346   4                                      {
+ 347   5                                              ;
+ 348   5                                      }
+ 349   4                              
+ 350   4                                      UART_PutString("#");
+ 351   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
  352   4                                      {
- 353   5                                              rx_word[i]      = 0x00;
+ 353   5                                              ;
  354   5                                      }
- 355   4                                      i=0;
- 356   4                                      rx_word[i]      = word;
- 357   4                                      switch_cmd[0] = rx_word[i];
- 358   4                                      os_send_signal(1);
- 359   4                                      
- 360   4                                      cmd_exct        = 0;
- 361   4                                      dat_cnt         = 0;
- 362   4                                      
- 363   4                              }
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 7   
+ 355   4                                      
+ 356   4                                      UART_WriteTxData(prb_sts);
+ 357   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 358   4                                      {
+ 359   5                                              ;
+ 360   5                                      }
+ 361   4                              
+ 362   4                                      cmd_exct        = 0;
+ 363   4                                      dat_cnt         = 0;
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 7   
 
- 364   3                              else if(word == 0x45)                                   //      Port Status Read
- 365   3                              {
- 366   4                                      for(i=0; i<=8; i++)
- 367   4                                      {
- 368   5                                              rx_word[i]      = 0x00;
- 369   5                                      }
- 370   4                                      i = 0;
- 371   4                                      rx_word[i]      = word;
- 372   4                                      switch_cmd[0] = rx_word[i];
- 373   4                                      os_send_signal(1);
- 374   4                                      
- 375   4                                      cmd_exct        = 0;
- 376   4                                      dat_cnt         = 0;
- 377   4                                      
+ 364   4                              }
+ 365   3                              else if(word == 0x1C)                                   //      Interrupt Pin Configuration
+ 366   3                              {
+ 367   4                                      i=0;
+ 368   4                                      rx_word[i]      = word;
+ 369   4                                      i++;
+ 370   4                                      dat_cnt         = 1;
+ 371   4                                      status          = 2;
+ 372   4                                      
+ 373   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
+ 374   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 375   4                                      {
+ 376   5                                              ;
+ 377   5                                      }
  378   4                              }
- 379   3                              else if(word == 0x46){                                  //      SRC IMP Status Read
- 380   4                                      for(i=0; i<=8; i++)
- 381   4                                      {
- 382   5                                              rx_word[i]      = 0x00;
- 383   5                                      }
- 384   4                                      i = 0;
- 385   4                                      rx_word[i]      = word;
- 386   4                                      switch_cmd[0] = rx_word[i];
- 387   4                                      os_send_signal(1);
- 388   4                      
- 389   4                                      cmd_exct        = 0;
- 390   4                                      dat_cnt         = 0;
- 391   4                                      
- 392   4                              }                       
- 393   3                              else if(word == 0x47)                                   //      SRC IMP ENABLE
- 394   3                              {
- 395   4                                      for(i=0; i<=8; i++)
- 396   4                                      {
- 397   5                                              rx_word[i]      = 0x00;
- 398   5                                      }
- 399   4                                      i=0;
- 400   4                                      rx_word[i]      = word;
- 401   4                                      switch_cmd[0] = rx_word[i];
- 402   4                                      os_send_signal(1);
- 403   4                                      
- 404   4                                      cmd_exct        = 0;
- 405   4                                      dat_cnt         = 0;
- 406   4                                      
- 407   4                              }            
- 408   3                              else if(word == 0x48)                                   //      SRC IMP DISABLE
- 409   3                              {
+ 379   3                              else if(word == 0x40)                                   //      Debug Mode
+ 380   3                              {
+ 381   4                                      for(i=0; i<=8; i++)
+ 382   4                                      {
+ 383   5                                              rx_word[i]      = 0x00;
+ 384   5                                      }
+ 385   4                                      i=0;
+ 386   4                                      rx_word[i]      = word;
+ 387   4                                      switch_cmd[0] = rx_word[i];
+ 388   4                                      os_send_signal(1);
+ 389   4                                      
+ 390   4                                      cmd_exct        = 0;
+ 391   4                                      dat_cnt         = 0;
+ 392   4                                      
+ 393   4                              }
+ 394   3                              else if(word == 0x45)                                   //      Port Status Read
+ 395   3                              {
+ 396   4                                      for(i=0; i<=8; i++)
+ 397   4                                      {
+ 398   5                                              rx_word[i]      = 0x00;
+ 399   5                                      }
+ 400   4                                      i = 0;
+ 401   4                                      rx_word[i]      = word;
+ 402   4                                      switch_cmd[0] = rx_word[i];
+ 403   4                                      os_send_signal(1);
+ 404   4                                      
+ 405   4                                      cmd_exct        = 0;
+ 406   4                                      dat_cnt         = 0;
+ 407   4                                      
+ 408   4                              }
+ 409   3                              else if(word == 0x46){                                  //      SRC IMP Status Read
  410   4                                      for(i=0; i<=8; i++)
  411   4                                      {
  412   5                                              rx_word[i]      = 0x00;
  413   5                                      }
- 414   4                                      i=0;
+ 414   4                                      i = 0;
  415   4                                      rx_word[i]      = word;
  416   4                                      switch_cmd[0] = rx_word[i];
  417   4                                      os_send_signal(1);
- 418   4                                      
+ 418   4                      
  419   4                                      cmd_exct        = 0;
  420   4                                      dat_cnt         = 0;
  421   4                                      
- 422   4                              }                        
- 423   3                              else if(word == 0x50)                                   //      BAUD RATE CHANGE
+ 422   4                              }                       
+ 423   3                              else if(word == 0x47)                                   //      SRC IMP ENABLE
  424   3                              {
- 425   4                                      i=0;
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 8   
+ 425   4                                      for(i=0; i<=8; i++)
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 8   
 
- 426   4                                      rx_word[i]      = word;
- 427   4                                      i++;
- 428   4                                      dat_cnt         = 1;
- 429   4                                      status          = 2;
- 430   4                                      
- 431   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
- 432   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 433   4                                      {
- 434   5                                              ;
- 435   5                                      }
- 436   4                              }
- 437   3                  else if(word == 0x51)                                       //      SRC IMP SELECTION
- 438   3                              {
- 439   4                                      i=0;
- 440   4                                      rx_word[i]      = word;
- 441   4                                      i++;
- 442   4                                      dat_cnt         = 1;
- 443   4                                      status          = 2;
- 444   4                                      
- 445   4                                      UART_ClearRxBuffer();
- 446   4                      UART_ClearTxBuffer();                
- 447   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
- 448   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 449   4                      {
- 450   5                          ;
- 451   5                      }
- 452   4                     UART_ClearTxBuffer();   
- 453   4                              }                       
- 454   3                              else if(word == 0x55)                                   //      Loop Check
- 455   3                              {
- 456   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
- 457   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 458   4                                      {
- 459   5                                              ;
- 460   5                                      }
- 461   4                                      
- 462   4                                      UART_ClearTxBuffer();
- 463   4                                      UART_WriteTxData(word);
- 464   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 465   4                                      {
- 466   5                                              ;
- 467   5                                      }
- 468   4                                      cmd_exct        = 0;
- 469   4                                      dat_cnt         = 0;
- 470   4                              }
- 471   3                              else if(word == 0x0D)                                   //      Print Stored Values
- 472   3                              {
- 473   4                                      cmd_exct        = 0;
- 474   4                                      dat_cnt         = 0;
- 475   4                                      prnt_en         = 1;
- 476   4                                      
+ 426   4                                      {
+ 427   5                                              rx_word[i]      = 0x00;
+ 428   5                                      }
+ 429   4                                      i=0;
+ 430   4                                      rx_word[i]      = word;
+ 431   4                                      switch_cmd[0] = rx_word[i];
+ 432   4                                      os_send_signal(1);
+ 433   4                                      
+ 434   4                                      cmd_exct        = 0;
+ 435   4                                      dat_cnt         = 0;
+ 436   4                                      
+ 437   4                              }            
+ 438   3                              else if(word == 0x48)                                   //      SRC IMP DISABLE
+ 439   3                              {
+ 440   4                                      for(i=0; i<=8; i++)
+ 441   4                                      {
+ 442   5                                              rx_word[i]      = 0x00;
+ 443   5                                      }
+ 444   4                                      i=0;
+ 445   4                                      rx_word[i]      = word;
+ 446   4                                      switch_cmd[0] = rx_word[i];
+ 447   4                                      os_send_signal(1);
+ 448   4                                      
+ 449   4                                      cmd_exct        = 0;
+ 450   4                                      dat_cnt         = 0;
+ 451   4                                      
+ 452   4                              }                        
+ 453   3                              else if(word == 0x50)                                   //      BAUD RATE CHANGE
+ 454   3                              {
+ 455   4                                      i=0;
+ 456   4                                      rx_word[i]      = word;
+ 457   4                                      i++;
+ 458   4                                      dat_cnt         = 1;
+ 459   4                                      status          = 2;
+ 460   4                                      
+ 461   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
+ 462   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 463   4                                      {
+ 464   5                                              ;
+ 465   5                                      }
+ 466   4                              }
+ 467   3                  else if(word == 0x51)                                       //      SRC IMP SELECTION
+ 468   3                              {
+ 469   4                                      i=0;
+ 470   4                                      rx_word[i]      = word;
+ 471   4                                      i++;
+ 472   4                                      dat_cnt         = 1;
+ 473   4                                      status          = 2;
+ 474   4                                      
+ 475   4                                      UART_ClearRxBuffer();
+ 476   4                      UART_ClearTxBuffer();                
  477   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
  478   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 479   4                                      {
- 480   5                                              ;
- 481   5                                      }
- 482   4                                      
- 483   4                                      os_send_signal(1);                                      //      Send signal to TASK1 for execution
- 484   4                              }
- 485   3                              else if(word == 0xDE)                                   //      PROGRAMMABLE DELAY
- 486   3                              {
- 487   4                                      for(i=0; i<=8; i++)
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 9   
+ 479   4                      {
+ 480   5                          ;
+ 481   5                      }
+ 482   4                     UART_ClearTxBuffer();   
+ 483   4                              }                       
+ 484   3                              else if(word == 0x55)                                   //      Loop Check
+ 485   3                              {
+ 486   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
+ 487   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 9   
 
  488   4                                      {
- 489   5                                              rx_word[i]      = 0x00;
+ 489   5                                              ;
  490   5                                      }
- 491   4                                      i=0;
- 492   4                                      rx_word[i]      = word;
- 493   4                                      i++;
- 494   4                                      dat_cnt         = 2;
- 495   4                                      status          = 3;
- 496   4                                      
- 497   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
- 498   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 499   4                                      {
- 500   5                                              ;
- 501   5                                      }
- 502   4                              }
- 503   3                              else if(word == 0xDD)                                   //      PROGRAMABLE DELAY VALUE READ BACK
- 504   3                              {
- 505   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
- 506   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 507   4                                      {
- 508   5                                              ;
- 509   5                                      }
- 510   4                                      
- 511   4                                      d_msb = delay >> 8;
+ 491   4                                      
+ 492   4                                      UART_ClearTxBuffer();
+ 493   4                                      UART_WriteTxData(word);
+ 494   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 495   4                                      {
+ 496   5                                              ;
+ 497   5                                      }
+ 498   4                                      cmd_exct        = 0;
+ 499   4                                      dat_cnt         = 0;
+ 500   4                              }
+ 501   3                              else if(word == 0x0D)                                   //      Print Stored Values
+ 502   3                              {
+ 503   4                                      cmd_exct        = 0;
+ 504   4                                      dat_cnt         = 0;
+ 505   4                                      prnt_en         = 1;
+ 506   4                                      
+ 507   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
+ 508   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 509   4                                      {
+ 510   5                                              ;
+ 511   5                                      }
  512   4                                      
- 513   4                                      UART_ClearTxBuffer();
- 514   4                                      UART_WriteTxData(d_msb);
- 515   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 516   4                                      {
- 517   5                                              ;
- 518   5                                      }
- 519   4      
- 520   4                                      UART_WriteTxData(delay);
- 521   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 522   4                                      {
- 523   5                                              ;
- 524   5                                      }
- 525   4                                      
- 526   4                                      cmd_exct        = 0;
- 527   4                                      dat_cnt         = 0;
- 528   4                              }
- 529   3                              else
- 530   3                              {
- 531   4                                      for(i = 0; i <= 31; i++)
- 532   4                                      {
- 533   5                                              rx_word[i]      = 0x00;
- 534   5                                      }
- 535   4                                      dat_cnt         = 0;
- 536   4                                      cmd_exct        = 0;
- 537   4                                      
- 538   4                                      UART_PutString("***?");
- 539   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
- 540   4                                      {
- 541   5                                              ;
- 542   5                                      }
- 543   4                              }
- 544   3                      }
- 545   2                      else if(dat_cnt)
- 546   2                      {
- 547   3                              rx_word[i]      = word;
- 548   3                              i++;
- 549   3                              dat_cnt--;
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 10  
+ 513   4                                      os_send_signal(1);                                      //      Send signal to TASK1 for execution
+ 514   4                              }
+ 515   3                              else if(word == 0xDE)                                   //      PROGRAMMABLE DELAY
+ 516   3                              {
+ 517   4                                      for(i=0; i<=8; i++)
+ 518   4                                      {
+ 519   5                                              rx_word[i]      = 0x00;
+ 520   5                                      }
+ 521   4                                      i=0;
+ 522   4                                      rx_word[i]      = word;
+ 523   4                                      i++;
+ 524   4                                      dat_cnt         = 2;
+ 525   4                                      status          = 3;
+ 526   4                                      
+ 527   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
+ 528   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 529   4                                      {
+ 530   5                                              ;
+ 531   5                                      }
+ 532   4                              }
+ 533   3                              else if(word == 0xDD)                                   //      PROGRAMABLE DELAY VALUE READ BACK
+ 534   3                              {
+ 535   4                                      UART_PutString("***#");                 //      STATUS ACKNOWLEDGEMENT to uP    //
+ 536   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 537   4                                      {
+ 538   5                                              ;
+ 539   5                                      }
+ 540   4                                      
+ 541   4                                      d_msb = delay >> 8;
+ 542   4                                      
+ 543   4                                      UART_ClearTxBuffer();
+ 544   4                                      UART_WriteTxData(d_msb);
+ 545   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 546   4                                      {
+ 547   5                                              ;
+ 548   5                                      }
+ 549   4      
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 10  
 
- 550   3                              if(dat_cnt == 0)
- 551   3                              {
- 552   4                                      cmd_exct = 1;
- 553   4                                      if(rx_word[0] == 0xDE)
- 554   4                                      {
- 555   5                                              delay = 0;
- 556   5                                              delay = delay + rx_word[1];
- 557   5                                              delay = delay << 8;
- 558   5                                              delay = delay + rx_word[2];
- 559   5                                      }
- 560   4                              }
- 561   3                              else
- 562   3                              {
- 563   4                                      cmd_exct = 0;
- 564   4                              }
- 565   3                      }
- 566   2                      if(cmd_exct == 1)
- 567   2                      {
- 568   3                              lst_byte = --i;
- 569   3                              cmd_set = status-1;
- 570   3                                      
- 571   3                              for(stat = status; stat > 0; stat--)
- 572   3                              {
- 573   4                                      switch_cmd[cmd_set] = rx_word[lst_byte];
- 574   4                                      lst_byte--;cmd_set--;
- 575   4                              }
- 576   3                              
- 577   3                              cmd_exct = 0;
- 578   3                      os_send_signal(1);                                              //      Send signal to TASK1 for execution
- 579   3                              ++i;
- 580   3                      }
- 581   2              }
- 582   1      }
- 583          
- 584          void TASK_2 ()                                                                          //      INITIALISATION FUNCTION OF TASK2
- 585          {
- 586   1              os_create_task(2);                                                              //      CREATION OF TASK2
- 587   1      }
- 588          
- 589          /* [] END OF FILE */
-*** WARNING C316 IN LINE 589 OF .\TASK2.c: unterminated conditionals
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 11  
+ 550   4                                      UART_WriteTxData(delay);
+ 551   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 552   4                                      {
+ 553   5                                              ;
+ 554   5                                      }
+ 555   4                                      
+ 556   4                                      cmd_exct        = 0;
+ 557   4                                      dat_cnt         = 0;
+ 558   4                              }
+ 559   3                              else
+ 560   3                              {
+ 561   4                                      for(i = 0; i <= 31; i++)
+ 562   4                                      {
+ 563   5                                              rx_word[i]      = 0x00;
+ 564   5                                      }
+ 565   4                                      dat_cnt         = 0;
+ 566   4                                      cmd_exct        = 0;
+ 567   4                                      
+ 568   4                                      UART_PutString("***?");
+ 569   4                                      while(!(UART_ReadTxStatus() & UART_TX_STS_FIFO_EMPTY))
+ 570   4                                      {
+ 571   5                                              ;
+ 572   5                                      }
+ 573   4                              }
+ 574   3                      }
+ 575   2                      else if(dat_cnt)
+ 576   2                      {
+ 577   3                              rx_word[i]      = word;
+ 578   3                              i++;
+ 579   3                              dat_cnt--;
+ 580   3                              if(dat_cnt == 0)
+ 581   3                              {
+ 582   4                                      cmd_exct = 1;
+ 583   4                                      if(rx_word[0] == 0xDE)
+ 584   4                                      {
+ 585   5                                              delay = 0;
+ 586   5                                              delay = delay + rx_word[1];
+ 587   5                                              delay = delay << 8;
+ 588   5                                              delay = delay + rx_word[2];
+ 589   5                                      }
+ 590   4                              }
+ 591   3                              else
+ 592   3                              {
+ 593   4                                      cmd_exct = 0;
+ 594   4                              }
+ 595   3                      }
+ 596   2                      if(cmd_exct == 1)
+ 597   2                      {
+ 598   3                              lst_byte = --i;
+ 599   3                              cmd_set = status-1;
+ 600   3                                      
+ 601   3                              for(stat = status; stat > 0; stat--)
+ 602   3                              {
+ 603   4                                      switch_cmd[cmd_set] = rx_word[lst_byte];
+ 604   4                                      lst_byte--;cmd_set--;
+ 605   4                              }
+ 606   3                              
+ 607   3                              cmd_exct = 0;
+ 608   3                      os_send_signal(1);                                              //      Send signal to TASK1 for execution
+ 609   3                              ++i;
+ 610   3                      }
+ 611   2              }
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 11  
+
+ 612   1      }
+ 613          
+ 614          void TASK_2 ()                                                                          //      INITIALISATION FUNCTION OF TASK2
+ 615          {
+ 616   1              os_create_task(2);                                                              //      CREATION OF TASK2
+ 617   1      }
+ 618          
+ 619          /* [] END OF FILE */
+*** WARNING C316 IN LINE 619 OF .\TASK2.c: unterminated conditionals
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 12  
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -681,7 +713,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 004A E4                CLR     A
 004B 3400        R     ADDC    A,#HIGH rx_word
 004D F583              MOV     DPH,A
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 12  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 13  
 
 004F EF                MOV     A,R7
 0050 F0                MOVX    @DPTR,A
@@ -708,13 +740,13 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 006C 120000      E     LCALL   UART_ReadTxStatus
 006F EF                MOV     A,R7
 0070 30E103            JNB     ACC.1,$ + 6H
-0073 020000      R     LJMP    ?C0168
+0073 020000      R     LJMP    ?C0185
                                            ; SOURCE LINE # 40
                                            ; SOURCE LINE # 42
 0076 80F4              SJMP    ?C0005
 0078         ?C0006:
                                            ; SOURCE LINE # 43
-0078 020000      R     LJMP    ?C0168
+0078 020000      R     LJMP    ?C0185
 007B         ?C0004:
                                            ; SOURCE LINE # 44
 007B 900000      R     MOV     DPTR,#word
@@ -734,7 +766,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 008E E4                CLR     A
 008F F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 50
-0090 020000      R     LJMP    ?C0168
+0090 020000      R     LJMP    ?C0185
 0093         ?C0008:
                                            ; SOURCE LINE # 51
 0093 900000      R     MOV     DPTR,#word
@@ -745,7 +777,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 009B 6003              JZ      $ + 5H
 009D 020000      R     LJMP    ?C0010
                                            ; SOURCE LINE # 52
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 13  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 14  
 
                                            ; SOURCE LINE # 53
 00A0 900000      R     MOV     DPTR,#k_val
@@ -773,7 +805,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 00C1 E0                MOVX    A,@DPTR
 00C2 FF                MOV     R7,A
 00C3 EF                MOV     A,R7
-00C4 5408              ANL     A,#08H
+00C4 4408              ORL     A,#08H
 00C6 FF                MOV     R7,A
 00C7 900000      R     MOV     DPTR,#k_val
 00CA EF                MOV     A,R7
@@ -789,7 +821,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 00D8 E0                MOVX    A,@DPTR
 00D9 FF                MOV     R7,A
 00DA EF                MOV     A,R7
-00DB 447F              ORL     A,#07FH
+00DB 547F              ANL     A,#07FH
 00DD FF                MOV     R7,A
 00DE 900000      R     MOV     DPTR,#k_val
 00E1 EF                MOV     A,R7
@@ -801,7 +833,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 00E8 E0                MOVX    A,@DPTR
 00E9 FF                MOV     R7,A
 00EA EF                MOV     A,R7
-00EB 5480              ANL     A,#080H
+00EB 4480              ORL     A,#080H
 00ED FF                MOV     R7,A
 00EE 900000      R     MOV     DPTR,#k_val
 00F1 EF                MOV     A,R7
@@ -809,7 +841,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 00F3         ?C0014:
                                            ; SOURCE LINE # 60
 00F3 7FE8              MOV     R7,#0E8H
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 14  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 15  
 
 00F5 7E03              MOV     R6,#03H
 00F7 120000      E     LCALL   _CyDelayUs
@@ -873,7 +905,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0142         ?C0023:
                                            ; SOURCE LINE # 87
 0142 120000      E     LCALL   UART_ReadTxStatus
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 15  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 16  
 
 0145 EF                MOV     A,R7
 0146 30E1F9            JNB     ACC.1,?C0023
@@ -893,7 +925,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0156 E4                CLR     A
 0157 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 94
-0158 020000      R     LJMP    ?C0168
+0158 020000      R     LJMP    ?C0185
 015B         ?C0010:
                                            ; SOURCE LINE # 95
 015B 900000      R     MOV     DPTR,#word
@@ -937,7 +969,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 018E         ?C0028:
                                            ; SOURCE LINE # 101
 018E 900000      E     MOV     DPTR,#i
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 16  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 17  
 
 0191 E4                CLR     A
 0192 F0                MOVX    @DPTR,A
@@ -983,7 +1015,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 01CC E4                CLR     A
 01CD F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 109
-01CE 020000      R     LJMP    ?C0168
+01CE 020000      R     LJMP    ?C0185
 01D1         ?C0026:
                                            ; SOURCE LINE # 112
 01D1 900000      R     MOV     DPTR,#word
@@ -1001,7 +1033,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 01E0 900000      E     MOV     DPTR,#i
 01E3 E0                MOVX    A,@DPTR
 01E4 FF                MOV     R7,A
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 17  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 18  
 
 01E5 EF                MOV     A,R7
 01E6 D3                SETB    C
@@ -1065,7 +1097,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0235 7F01              MOV     R7,#01H
 0237 120000      E     LCALL   _os_send_signal
                                            ; SOURCE LINE # 123
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 18  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 19  
 
 023A 900000      R     MOV     DPTR,#cmd_exct
 023D E4                CLR     A
@@ -1075,7 +1107,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0242 E4                CLR     A
 0243 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 126
-0244 020000      R     LJMP    ?C0168
+0244 020000      R     LJMP    ?C0185
 0247         ?C0031:
                                            ; SOURCE LINE # 127
 0247 900000      R     MOV     DPTR,#word
@@ -1129,7 +1161,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0287 E0                MOVX    A,@DPTR
 0288 FE                MOV     R6,A
 0289 7400        R     MOV     A,#LOW rx_word
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 19  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 20  
 
 028B 2E                ADD     A,R6
 028C F582              MOV     DPL,A
@@ -1165,7 +1197,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 02B8 E4                CLR     A
 02B9 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 141
-02BA 020000      R     LJMP    ?C0168
+02BA 020000      R     LJMP    ?C0185
 02BD         ?C0036:
                                            ; SOURCE LINE # 142
 02BD 900000      R     MOV     DPTR,#word
@@ -1193,7 +1225,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 02DA E0                MOVX    A,@DPTR
 02DB FF                MOV     R7,A
 02DC 7400        R     MOV     A,#LOW rx_word
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 20  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 21  
 
 02DE 2F                ADD     A,R7
 02DF F582              MOV     DPL,A
@@ -1255,9 +1287,9 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 032E E4                CLR     A
 032F F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 156
-0330 020000      R     LJMP    ?C0168
+0330 020000      R     LJMP    ?C0185
 0333         ?C0041:
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 21  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 22  
 
                                            ; SOURCE LINE # 157
 0333 900000      R     MOV     DPTR,#word
@@ -1321,7 +1353,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 165
 0381 900000      E     MOV     DPTR,#i
 0384 E0                MOVX    A,@DPTR
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 22  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 23  
 
 0385 FF                MOV     R7,A
 0386 7400        R     MOV     A,#LOW rx_word
@@ -1347,7 +1379,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 03A4 E4                CLR     A
 03A5 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 171
-03A6 020000      R     LJMP    ?C0168
+03A6 020000      R     LJMP    ?C0185
 03A9         ?C0046:
                                            ; SOURCE LINE # 172
 03A9 900000      R     MOV     DPTR,#word
@@ -1385,7 +1417,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 03D2         ?C0055:
                                            ; SOURCE LINE # 186
 03D2 900000      R     MOV     DPTR,#cmd_exct
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 23  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 24  
 
 03D5 E4                CLR     A
 03D6 F0                MOVX    @DPTR,A
@@ -1394,7 +1426,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 03DA E4                CLR     A
 03DB F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 189
-03DC 020000      R     LJMP    ?C0168
+03DC 020000      R     LJMP    ?C0185
 03DF         ?C0051:
                                            ; SOURCE LINE # 190
 03DF 900000      R     MOV     DPTR,#word
@@ -1449,10 +1481,10 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0419 900000      R     MOV     DPTR,#dat_cnt
 041C E4                CLR     A
 041D F0                MOVX    @DPTR,A
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 24  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 25  
 
                                            ; SOURCE LINE # 211
-041E 020000      R     LJMP    ?C0168
+041E 020000      R     LJMP    ?C0185
 0421         ?C0057:
                                            ; SOURCE LINE # 212
 0421 900000      R     MOV     DPTR,#word
@@ -1504,16 +1536,16 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0461 120000      E     LCALL   UART_ReadTxStatus
 0464 EF                MOV     A,R7
 0465 30E103            JNB     ACC.1,$ + 6H
-0468 020000      R     LJMP    ?C0168
+0468 020000      R     LJMP    ?C0185
                                            ; SOURCE LINE # 222
                                            ; SOURCE LINE # 224
 046B 80F4              SJMP    ?C0066
 046D         ?C0067:
                                            ; SOURCE LINE # 225
-046D 020000      R     LJMP    ?C0168
+046D 020000      R     LJMP    ?C0185
 0470         ?C0065:
                                            ; SOURCE LINE # 226
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 25  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 26  
 
 0470 900000      R     MOV     DPTR,#word
 0473 E0                MOVX    A,@DPTR
@@ -1568,7 +1600,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 04B8 E4                CLR     A
 04B9 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 236
-04BA 020000      R     LJMP    ?C0168
+04BA 020000      R     LJMP    ?C0185
 04BD         ?C0069:
                                            ; SOURCE LINE # 237
 04BD 900000      R     MOV     DPTR,#word
@@ -1577,7 +1609,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 04C2 EF                MOV     A,R7
 04C3 640B              XRL     A,#0BH
 04C5 7045              JNZ     ?C0071
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 26  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 27  
 
                                            ; SOURCE LINE # 238
                                            ; SOURCE LINE # 239
@@ -1622,13 +1654,13 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 04FD 120000      E     LCALL   UART_ReadTxStatus
 0500 EF                MOV     A,R7
 0501 30E103            JNB     ACC.1,$ + 6H
-0504 020000      R     LJMP    ?C0168
+0504 020000      R     LJMP    ?C0185
                                            ; SOURCE LINE # 247
                                            ; SOURCE LINE # 249
 0507 80F4              SJMP    ?C0072
 0509         ?C0073:
                                            ; SOURCE LINE # 250
-0509 020000      R     LJMP    ?C0168
+0509 020000      R     LJMP    ?C0185
 050C         ?C0071:
                                            ; SOURCE LINE # 251
 050C 900000      R     MOV     DPTR,#word
@@ -1641,7 +1673,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 253
 0516 900000      E     MOV     DPTR,#i
 0519 E4                CLR     A
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 27  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 28  
 
 051A F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 254
@@ -1682,13 +1714,13 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 054C 120000      E     LCALL   UART_ReadTxStatus
 054F EF                MOV     A,R7
 0550 30E103            JNB     ACC.1,$ + 6H
-0553 020000      R     LJMP    ?C0168
+0553 020000      R     LJMP    ?C0185
                                            ; SOURCE LINE # 261
                                            ; SOURCE LINE # 263
 0556 80F4              SJMP    ?C0076
 0558         ?C0077:
                                            ; SOURCE LINE # 264
-0558 020000      R     LJMP    ?C0168
+0558 020000      R     LJMP    ?C0185
 055B         ?C0075:
                                            ; SOURCE LINE # 265
 055B 900000      R     MOV     DPTR,#word
@@ -1705,7 +1737,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 056A         ?C0080:
 056A 900000      E     MOV     DPTR,#i
 056D E0                MOVX    A,@DPTR
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 28  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 29  
 
 056E FF                MOV     R7,A
 056F EF                MOV     A,R7
@@ -1769,7 +1801,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 274
 05BF 7F01              MOV     R7,#01H
 05C1 120000      E     LCALL   _os_send_signal
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 29  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 30  
 
                                            ; SOURCE LINE # 276
 05C4 900000      R     MOV     DPTR,#cmd_exct
@@ -1780,7 +1812,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 05CC E4                CLR     A
 05CD F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 279
-05CE 020000      R     LJMP    ?C0168
+05CE 020000      R     LJMP    ?C0185
 05D1         ?C0079:
                                            ; SOURCE LINE # 280
 05D1 900000      R     MOV     DPTR,#word
@@ -1833,7 +1865,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 060E 900000      E     MOV     DPTR,#i
 0611 E0                MOVX    A,@DPTR
 0612 FE                MOV     R6,A
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 30  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 31  
 
 0613 7400        R     MOV     A,#LOW rx_word
 0615 2E                ADD     A,R6
@@ -1870,7 +1902,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0642 E4                CLR     A
 0643 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 294
-0644 020000      R     LJMP    ?C0168
+0644 020000      R     LJMP    ?C0185
 0647         ?C0084:
                                            ; SOURCE LINE # 295
 0647 900000      R     MOV     DPTR,#word
@@ -1878,1270 +1910,1533 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 064B FF                MOV     R7,A
 064C EF                MOV     A,R7
 064D 6418              XRL     A,#018H
-064F 705C              JNZ     ?C0089
+064F 6003              JZ      $ + 5H
+0651 020000      R     LJMP    ?C0089
                                            ; SOURCE LINE # 296
-                                           ; SOURCE LINE # 302
-0651 7BFF              MOV     R3,#0FFH
-0653 7A00        R     MOV     R2,#HIGH ?SC_5
-0655 7900        R     MOV     R1,#LOW ?SC_5
-0657 120000      E     LCALL   _UART_PutString
-065A         ?C0090:
-                                           ; SOURCE LINE # 303
-065A 120000      E     LCALL   UART_ReadTxStatus
-065D EF                MOV     A,R7
-065E 30E1F9            JNB     ACC.1,?C0090
-                                           ; SOURCE LINE # 304
-                                           ; SOURCE LINE # 306
-0661         ?C0091:
-                                           ; SOURCE LINE # 308
-0661 7BFF              MOV     R3,#0FFH
-0663 7A00        R     MOV     R2,#HIGH ?SC_5
-0665 7900        R     MOV     R1,#LOW ?SC_5
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 31  
+                                           ; SOURCE LINE # 297
+0654 900000      R     MOV     DPTR,#prb_sts
+0657 E0                MOVX    A,@DPTR
+0658 FF                MOV     R7,A
+0659 EF                MOV     A,R7
+065A 6003              JZ      $ + 5H
+065C 020000      R     LJMP    ?C0090
+                                           ; SOURCE LINE # 298
+065F 905003            MOV     DPTR,#05003H
+0662 E0                MOVX    A,@DPTR
+0663 FF                MOV     R7,A
+0664 EF                MOV     A,R7
+0665 30E410            JNB     ACC.4,?C0091
+0668 900000      R     MOV     DPTR,#k_port
+066B E0                MOVX    A,@DPTR
+066C FF                MOV     R7,A
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 32  
 
-0667 120000      E     LCALL   _UART_PutString
-066A         ?C0092:
-                                           ; SOURCE LINE # 309
-066A 120000      E     LCALL   UART_ReadTxStatus
 066D EF                MOV     A,R7
-066E 30E1F9            JNB     ACC.1,?C0092
-                                           ; SOURCE LINE # 310
-                                           ; SOURCE LINE # 312
-0671         ?C0093:
-                                           ; SOURCE LINE # 314
-0671 7BFF              MOV     R3,#0FFH
-0673 7A00        R     MOV     R2,#HIGH ?SC_5
-0675 7900        R     MOV     R1,#LOW ?SC_5
-0677 120000      E     LCALL   _UART_PutString
-067A         ?C0094:
-                                           ; SOURCE LINE # 315
-067A 120000      E     LCALL   UART_ReadTxStatus
+066E 4408              ORL     A,#08H
+0670 FF                MOV     R7,A
+0671 900000      R     MOV     DPTR,#k_port
+0674 EF                MOV     A,R7
+0675 F0                MOVX    @DPTR,A
+0676 800E              SJMP    ?C0092
+0678         ?C0091:
+                                           ; SOURCE LINE # 299
+0678 900000      R     MOV     DPTR,#k_port
+067B E0                MOVX    A,@DPTR
+067C FF                MOV     R7,A
 067D EF                MOV     A,R7
-067E 30E1F9            JNB     ACC.1,?C0094
-                                           ; SOURCE LINE # 316
-                                           ; SOURCE LINE # 318
-0681         ?C0095:
-                                           ; SOURCE LINE # 320
-0681 7BFF              MOV     R3,#0FFH
-0683 7A00        R     MOV     R2,#HIGH ?SC_7
-0685 7900        R     MOV     R1,#LOW ?SC_7
-0687 120000      E     LCALL   _UART_PutString
-068A         ?C0096:
-                                           ; SOURCE LINE # 321
-068A 120000      E     LCALL   UART_ReadTxStatus
-068D EF                MOV     A,R7
-068E 30E1F9            JNB     ACC.1,?C0096
-                                           ; SOURCE LINE # 322
-                                           ; SOURCE LINE # 324
-0691         ?C0097:
-                                           ; SOURCE LINE # 326
-0691 900000      R     MOV     DPTR,#prb_sts
-0694 E0                MOVX    A,@DPTR
-0695 FF                MOV     R7,A
-0696 120000      E     LCALL   _UART_WriteTxData
-0699         ?C0098:
-                                           ; SOURCE LINE # 327
-0699 120000      E     LCALL   UART_ReadTxStatus
-069C EF                MOV     A,R7
-069D 30E1F9            JNB     ACC.1,?C0098
-                                           ; SOURCE LINE # 328
-                                           ; SOURCE LINE # 330
-06A0         ?C0099:
-                                           ; SOURCE LINE # 332
-06A0 900000      R     MOV     DPTR,#cmd_exct
-06A3 E4                CLR     A
-06A4 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 333
-06A5 900000      R     MOV     DPTR,#dat_cnt
-06A8 E4                CLR     A
-06A9 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 334
-06AA 020000      R     LJMP    ?C0168
-06AD         ?C0089:
-                                           ; SOURCE LINE # 335
-06AD 900000      R     MOV     DPTR,#word
+067E 54F7              ANL     A,#0F7H
+0680 FF                MOV     R7,A
+0681 900000      R     MOV     DPTR,#k_port
+0684 EF                MOV     A,R7
+0685 F0                MOVX    @DPTR,A
+0686         ?C0092:
+                                           ; SOURCE LINE # 301
+0686 905000            MOV     DPTR,#05000H
+0689 E0                MOVX    A,@DPTR
+068A FF                MOV     R7,A
+068B EF                MOV     A,R7
+068C 30E410            JNB     ACC.4,?C0093
+068F 900000      R     MOV     DPTR,#k_port
+0692 E0                MOVX    A,@DPTR
+0693 FF                MOV     R7,A
+0694 EF                MOV     A,R7
+0695 4401              ORL     A,#01H
+0697 FF                MOV     R7,A
+0698 900000      R     MOV     DPTR,#k_port
+069B EF                MOV     A,R7
+069C F0                MOVX    @DPTR,A
+069D 800E              SJMP    ?C0094
+069F         ?C0093:
+                                           ; SOURCE LINE # 302
+069F 900000      R     MOV     DPTR,#k_port
+06A2 E0                MOVX    A,@DPTR
+06A3 FF                MOV     R7,A
+06A4 EF                MOV     A,R7
+06A5 54FE              ANL     A,#0FEH
+06A7 FF                MOV     R7,A
+06A8 900000      R     MOV     DPTR,#k_port
+06AB EF                MOV     A,R7
+06AC F0                MOVX    @DPTR,A
+06AD         ?C0094:
+                                           ; SOURCE LINE # 304
+06AD 905001            MOV     DPTR,#05001H
 06B0 E0                MOVX    A,@DPTR
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 32  
-
 06B1 FF                MOV     R7,A
 06B2 EF                MOV     A,R7
-06B3 641C              XRL     A,#01CH
-06B5 7045              JNZ     ?C0101
-                                           ; SOURCE LINE # 336
-                                           ; SOURCE LINE # 337
-06B7 900000      E     MOV     DPTR,#i
-06BA E4                CLR     A
-06BB F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 338
-06BC 900000      R     MOV     DPTR,#word
-06BF E0                MOVX    A,@DPTR
-06C0 FF                MOV     R7,A
-06C1 900000      E     MOV     DPTR,#i
-06C4 E0                MOVX    A,@DPTR
-06C5 FE                MOV     R6,A
-06C6 7400        R     MOV     A,#LOW rx_word
-06C8 2E                ADD     A,R6
-06C9 F582              MOV     DPL,A
-06CB E4                CLR     A
-06CC 3400        R     ADDC    A,#HIGH rx_word
-06CE F583              MOV     DPH,A
-06D0 EF                MOV     A,R7
-06D1 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 339
-06D2 900000      E     MOV     DPTR,#i
-06D5 E0                MOVX    A,@DPTR
-06D6 04                INC     A
-06D7 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 340
-06D8 900000      R     MOV     DPTR,#dat_cnt
-06DB 7401              MOV     A,#01H
-06DD F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 341
-06DE 900000      R     MOV     DPTR,#status
-06E1 7402              MOV     A,#02H
-06E3 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 343
-06E4 7BFF              MOV     R3,#0FFH
-06E6 7A00        R     MOV     R2,#HIGH ?SC_0
-06E8 7900        R     MOV     R1,#LOW ?SC_0
-06EA 120000      E     LCALL   _UART_PutString
-06ED         ?C0102:
-                                           ; SOURCE LINE # 344
-06ED 120000      E     LCALL   UART_ReadTxStatus
-06F0 EF                MOV     A,R7
-06F1 30E103            JNB     ACC.1,$ + 6H
-06F4 020000      R     LJMP    ?C0168
-                                           ; SOURCE LINE # 345
-                                           ; SOURCE LINE # 347
-06F7 80F4              SJMP    ?C0102
-06F9         ?C0103:
-                                           ; SOURCE LINE # 348
-06F9 020000      R     LJMP    ?C0168
-06FC         ?C0101:
-                                           ; SOURCE LINE # 349
-06FC 900000      R     MOV     DPTR,#word
-06FF E0                MOVX    A,@DPTR
-0700 FF                MOV     R7,A
-0701 EF                MOV     A,R7
-0702 6440              XRL     A,#040H
-0704 706C              JNZ     ?C0105
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 33  
+06B3 30E410            JNB     ACC.4,?C0095
+06B6 900000      R     MOV     DPTR,#k_port
+06B9 E0                MOVX    A,@DPTR
+06BA FF                MOV     R7,A
+06BB EF                MOV     A,R7
+06BC 4402              ORL     A,#02H
+06BE FF                MOV     R7,A
+06BF 900000      R     MOV     DPTR,#k_port
+06C2 EF                MOV     A,R7
+06C3 F0                MOVX    @DPTR,A
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 33  
 
-                                           ; SOURCE LINE # 350
-                                           ; SOURCE LINE # 351
-0706 900000      E     MOV     DPTR,#i
-0709 E4                CLR     A
-070A F0                MOVX    @DPTR,A
-070B         ?C0106:
-070B 900000      E     MOV     DPTR,#i
-070E E0                MOVX    A,@DPTR
-070F FF                MOV     R7,A
+06C4 800E              SJMP    ?C0096
+06C6         ?C0095:
+                                           ; SOURCE LINE # 305
+06C6 900000      R     MOV     DPTR,#k_port
+06C9 E0                MOVX    A,@DPTR
+06CA FF                MOV     R7,A
+06CB EF                MOV     A,R7
+06CC 54FD              ANL     A,#0FDH
+06CE FF                MOV     R7,A
+06CF 900000      R     MOV     DPTR,#k_port
+06D2 EF                MOV     A,R7
+06D3 F0                MOVX    @DPTR,A
+06D4         ?C0096:
+                                           ; SOURCE LINE # 307
+06D4 905002            MOV     DPTR,#05002H
+06D7 E0                MOVX    A,@DPTR
+06D8 FF                MOV     R7,A
+06D9 EF                MOV     A,R7
+06DA 30E410            JNB     ACC.4,?C0097
+06DD 900000      R     MOV     DPTR,#k_port
+06E0 E0                MOVX    A,@DPTR
+06E1 FF                MOV     R7,A
+06E2 EF                MOV     A,R7
+06E3 4404              ORL     A,#04H
+06E5 FF                MOV     R7,A
+06E6 900000      R     MOV     DPTR,#k_port
+06E9 EF                MOV     A,R7
+06EA F0                MOVX    @DPTR,A
+06EB 800E              SJMP    ?C0098
+06ED         ?C0097:
+                                           ; SOURCE LINE # 308
+06ED 900000      R     MOV     DPTR,#k_port
+06F0 E0                MOVX    A,@DPTR
+06F1 FF                MOV     R7,A
+06F2 EF                MOV     A,R7
+06F3 54FB              ANL     A,#0FBH
+06F5 FF                MOV     R7,A
+06F6 900000      R     MOV     DPTR,#k_port
+06F9 EF                MOV     A,R7
+06FA F0                MOVX    @DPTR,A
+06FB         ?C0098:
+                                           ; SOURCE LINE # 310
+06FB 905021            MOV     DPTR,#05021H
+06FE E0                MOVX    A,@DPTR
+06FF FF                MOV     R7,A
+0700 EF                MOV     A,R7
+0701 30E410            JNB     ACC.4,?C0099
+0704 900000      R     MOV     DPTR,#k_port
+0707 E0                MOVX    A,@DPTR
+0708 FF                MOV     R7,A
+0709 EF                MOV     A,R7
+070A 4480              ORL     A,#080H
+070C FF                MOV     R7,A
+070D 900000      R     MOV     DPTR,#k_port
 0710 EF                MOV     A,R7
-0711 D3                SETB    C
-0712 9408              SUBB    A,#08H
-0714 5019              JNC     ?C0107
-                                           ; SOURCE LINE # 352
-                                           ; SOURCE LINE # 353
-0716 900000      E     MOV     DPTR,#i
-0719 E0                MOVX    A,@DPTR
-071A FF                MOV     R7,A
-071B 7400        R     MOV     A,#LOW rx_word
-071D 2F                ADD     A,R7
-071E F582              MOV     DPL,A
-0720 E4                CLR     A
-0721 3400        R     ADDC    A,#HIGH rx_word
-0723 F583              MOV     DPH,A
-0725 E4                CLR     A
-0726 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 354
-0727 900000      E     MOV     DPTR,#i
-072A E0                MOVX    A,@DPTR
-072B 04                INC     A
-072C F0                MOVX    @DPTR,A
-072D 80DC              SJMP    ?C0106
-072F         ?C0107:
-                                           ; SOURCE LINE # 355
-072F 900000      E     MOV     DPTR,#i
-0732 E4                CLR     A
-0733 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 356
-0734 900000      R     MOV     DPTR,#word
-0737 E0                MOVX    A,@DPTR
-0738 FF                MOV     R7,A
-0739 900000      E     MOV     DPTR,#i
-073C E0                MOVX    A,@DPTR
-073D FE                MOV     R6,A
-073E 7400        R     MOV     A,#LOW rx_word
-0740 2E                ADD     A,R6
-0741 F582              MOV     DPL,A
-0743 E4                CLR     A
-0744 3400        R     ADDC    A,#HIGH rx_word
-0746 F583              MOV     DPH,A
-0748 EF                MOV     A,R7
-0749 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 357
-074A 900000      E     MOV     DPTR,#i
-074D E0                MOVX    A,@DPTR
-074E FF                MOV     R7,A
-074F 7400        R     MOV     A,#LOW rx_word
-0751 2F                ADD     A,R7
-0752 F582              MOV     DPL,A
-0754 E4                CLR     A
-0755 3400        R     ADDC    A,#HIGH rx_word
-0757 F583              MOV     DPH,A
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 34  
+0711 F0                MOVX    @DPTR,A
+0712 800E              SJMP    ?C0100
+0714         ?C0099:
+                                           ; SOURCE LINE # 311
+0714 900000      R     MOV     DPTR,#k_port
+0717 E0                MOVX    A,@DPTR
+0718 FF                MOV     R7,A
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 34  
 
-0759 E0                MOVX    A,@DPTR
+0719 EF                MOV     A,R7
+071A 547F              ANL     A,#07FH
+071C FF                MOV     R7,A
+071D 900000      R     MOV     DPTR,#k_port
+0720 EF                MOV     A,R7
+0721 F0                MOVX    @DPTR,A
+0722         ?C0100:
+                                           ; SOURCE LINE # 313
+0722 905020            MOV     DPTR,#05020H
+0725 E0                MOVX    A,@DPTR
+0726 FF                MOV     R7,A
+0727 EF                MOV     A,R7
+0728 30E410            JNB     ACC.4,?C0101
+072B 900000      R     MOV     DPTR,#k_port
+072E E0                MOVX    A,@DPTR
+072F FF                MOV     R7,A
+0730 EF                MOV     A,R7
+0731 4440              ORL     A,#040H
+0733 FF                MOV     R7,A
+0734 900000      R     MOV     DPTR,#k_port
+0737 EF                MOV     A,R7
+0738 F0                MOVX    @DPTR,A
+0739 800E              SJMP    ?C0102
+073B         ?C0101:
+                                           ; SOURCE LINE # 314
+073B 900000      R     MOV     DPTR,#k_port
+073E E0                MOVX    A,@DPTR
+073F FF                MOV     R7,A
+0740 EF                MOV     A,R7
+0741 54BF              ANL     A,#0BFH
+0743 FF                MOV     R7,A
+0744 900000      R     MOV     DPTR,#k_port
+0747 EF                MOV     A,R7
+0748 F0                MOVX    @DPTR,A
+0749         ?C0102:
+                                           ; SOURCE LINE # 316
+0749 905063            MOV     DPTR,#05063H
+074C E0                MOVX    A,@DPTR
+074D FF                MOV     R7,A
+074E EF                MOV     A,R7
+074F 30E410            JNB     ACC.4,?C0103
+0752 900000      R     MOV     DPTR,#k_port
+0755 E0                MOVX    A,@DPTR
+0756 FF                MOV     R7,A
+0757 EF                MOV     A,R7
+0758 4420              ORL     A,#020H
 075A FF                MOV     R7,A
-075B 900000      R     MOV     DPTR,#switch_cmd
+075B 900000      R     MOV     DPTR,#k_port
 075E EF                MOV     A,R7
 075F F0                MOVX    @DPTR,A
+0760 800E              SJMP    ?C0104
+0762         ?C0103:
+                                           ; SOURCE LINE # 317
+0762 900000      R     MOV     DPTR,#k_port
+0765 E0                MOVX    A,@DPTR
+0766 FF                MOV     R7,A
+0767 EF                MOV     A,R7
+0768 54DF              ANL     A,#0DFH
+076A FF                MOV     R7,A
+076B 900000      R     MOV     DPTR,#k_port
+076E EF                MOV     A,R7
+076F F0                MOVX    @DPTR,A
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 35  
+
+0770         ?C0104:
+                                           ; SOURCE LINE # 319
+0770 905062            MOV     DPTR,#05062H
+0773 E0                MOVX    A,@DPTR
+0774 FF                MOV     R7,A
+0775 EF                MOV     A,R7
+0776 30E410            JNB     ACC.4,?C0105
+0779 900000      R     MOV     DPTR,#k_port
+077C E0                MOVX    A,@DPTR
+077D FF                MOV     R7,A
+077E EF                MOV     A,R7
+077F 4410              ORL     A,#010H
+0781 FF                MOV     R7,A
+0782 900000      R     MOV     DPTR,#k_port
+0785 EF                MOV     A,R7
+0786 F0                MOVX    @DPTR,A
+0787 800E              SJMP    ?C0106
+0789         ?C0105:
+                                           ; SOURCE LINE # 320
+0789 900000      R     MOV     DPTR,#k_port
+078C E0                MOVX    A,@DPTR
+078D FF                MOV     R7,A
+078E EF                MOV     A,R7
+078F 54EF              ANL     A,#0EFH
+0791 FF                MOV     R7,A
+0792 900000      R     MOV     DPTR,#k_port
+0795 EF                MOV     A,R7
+0796 F0                MOVX    @DPTR,A
+0797         ?C0106:
+                                           ; SOURCE LINE # 322
+0797 7FF4              MOV     R7,#0F4H
+0799 7E01              MOV     R6,#01H
+079B 120000      E     LCALL   _CyDelayUs
+                                           ; SOURCE LINE # 324
+079E 900000      R     MOV     DPTR,#k_port
+07A1 E0                MOVX    A,@DPTR
+07A2 FF                MOV     R7,A
+07A3 EF                MOV     A,R7
+07A4 6488              XRL     A,#088H
+07A6 FF                MOV     R7,A
+07A7 900000      R     MOV     DPTR,#k_port
+07AA EF                MOV     A,R7
+07AB F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 325
+07AC 900000      R     MOV     DPTR,#k_port
+07AF E0                MOVX    A,@DPTR
+07B0 FF                MOV     R7,A
+07B1 900000      R     MOV     DPTR,#prb_sts
+07B4 EF                MOV     A,R7
+07B5 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 326
+07B6         ?C0090:
+                                           ; SOURCE LINE # 332
+07B6 7BFF              MOV     R3,#0FFH
+07B8 7A00        R     MOV     R2,#HIGH ?SC_5
+07BA 7900        R     MOV     R1,#LOW ?SC_5
+07BC 120000      E     LCALL   _UART_PutString
+07BF         ?C0107:
+                                           ; SOURCE LINE # 333
+07BF 120000      E     LCALL   UART_ReadTxStatus
+07C2 EF                MOV     A,R7
+07C3 30E1F9            JNB     ACC.1,?C0107
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 36  
+
+                                           ; SOURCE LINE # 334
+                                           ; SOURCE LINE # 336
+07C6         ?C0108:
+                                           ; SOURCE LINE # 338
+07C6 7BFF              MOV     R3,#0FFH
+07C8 7A00        R     MOV     R2,#HIGH ?SC_5
+07CA 7900        R     MOV     R1,#LOW ?SC_5
+07CC 120000      E     LCALL   _UART_PutString
+07CF         ?C0109:
+                                           ; SOURCE LINE # 339
+07CF 120000      E     LCALL   UART_ReadTxStatus
+07D2 EF                MOV     A,R7
+07D3 30E1F9            JNB     ACC.1,?C0109
+                                           ; SOURCE LINE # 340
+                                           ; SOURCE LINE # 342
+07D6         ?C0110:
+                                           ; SOURCE LINE # 344
+07D6 7BFF              MOV     R3,#0FFH
+07D8 7A00        R     MOV     R2,#HIGH ?SC_5
+07DA 7900        R     MOV     R1,#LOW ?SC_5
+07DC 120000      E     LCALL   _UART_PutString
+07DF         ?C0111:
+                                           ; SOURCE LINE # 345
+07DF 120000      E     LCALL   UART_ReadTxStatus
+07E2 EF                MOV     A,R7
+07E3 30E1F9            JNB     ACC.1,?C0111
+                                           ; SOURCE LINE # 346
+                                           ; SOURCE LINE # 348
+07E6         ?C0112:
+                                           ; SOURCE LINE # 350
+07E6 7BFF              MOV     R3,#0FFH
+07E8 7A00        R     MOV     R2,#HIGH ?SC_7
+07EA 7900        R     MOV     R1,#LOW ?SC_7
+07EC 120000      E     LCALL   _UART_PutString
+07EF         ?C0113:
+                                           ; SOURCE LINE # 351
+07EF 120000      E     LCALL   UART_ReadTxStatus
+07F2 EF                MOV     A,R7
+07F3 30E1F9            JNB     ACC.1,?C0113
+                                           ; SOURCE LINE # 352
+                                           ; SOURCE LINE # 354
+07F6         ?C0114:
+                                           ; SOURCE LINE # 356
+07F6 900000      R     MOV     DPTR,#prb_sts
+07F9 E0                MOVX    A,@DPTR
+07FA FF                MOV     R7,A
+07FB 120000      E     LCALL   _UART_WriteTxData
+07FE         ?C0115:
+                                           ; SOURCE LINE # 357
+07FE 120000      E     LCALL   UART_ReadTxStatus
+0801 EF                MOV     A,R7
+0802 30E1F9            JNB     ACC.1,?C0115
                                            ; SOURCE LINE # 358
-0760 7F01              MOV     R7,#01H
-0762 120000      E     LCALL   _os_send_signal
                                            ; SOURCE LINE # 360
-0765 900000      R     MOV     DPTR,#cmd_exct
-0768 E4                CLR     A
-0769 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 361
-076A 900000      R     MOV     DPTR,#dat_cnt
-076D E4                CLR     A
-076E F0                MOVX    @DPTR,A
+0805         ?C0116:
+                                           ; SOURCE LINE # 362
+0805 900000      R     MOV     DPTR,#cmd_exct
+0808 E4                CLR     A
+0809 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 363
-076F 020000      R     LJMP    ?C0168
-0772         ?C0105:
+080A 900000      R     MOV     DPTR,#dat_cnt
+080D E4                CLR     A
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 37  
+
+080E F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 364
-0772 900000      R     MOV     DPTR,#word
-0775 E0                MOVX    A,@DPTR
-0776 FF                MOV     R7,A
-0777 EF                MOV     A,R7
-0778 6445              XRL     A,#045H
-077A 706C              JNZ     ?C0110
+080F 020000      R     LJMP    ?C0185
+0812         ?C0089:
                                            ; SOURCE LINE # 365
+0812 900000      R     MOV     DPTR,#word
+0815 E0                MOVX    A,@DPTR
+0816 FF                MOV     R7,A
+0817 EF                MOV     A,R7
+0818 641C              XRL     A,#01CH
+081A 7045              JNZ     ?C0118
                                            ; SOURCE LINE # 366
-077C 900000      E     MOV     DPTR,#i
-077F E4                CLR     A
-0780 F0                MOVX    @DPTR,A
-0781         ?C0111:
-0781 900000      E     MOV     DPTR,#i
-0784 E0                MOVX    A,@DPTR
-0785 FF                MOV     R7,A
-0786 EF                MOV     A,R7
-0787 D3                SETB    C
-0788 9408              SUBB    A,#08H
-078A 5019              JNC     ?C0112
                                            ; SOURCE LINE # 367
+081C 900000      E     MOV     DPTR,#i
+081F E4                CLR     A
+0820 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 368
-078C 900000      E     MOV     DPTR,#i
-078F E0                MOVX    A,@DPTR
-0790 FF                MOV     R7,A
-0791 7400        R     MOV     A,#LOW rx_word
-0793 2F                ADD     A,R7
-0794 F582              MOV     DPL,A
-0796 E4                CLR     A
-0797 3400        R     ADDC    A,#HIGH rx_word
-0799 F583              MOV     DPH,A
-079B E4                CLR     A
-079C F0                MOVX    @DPTR,A
+0821 900000      R     MOV     DPTR,#word
+0824 E0                MOVX    A,@DPTR
+0825 FF                MOV     R7,A
+0826 900000      E     MOV     DPTR,#i
+0829 E0                MOVX    A,@DPTR
+082A FE                MOV     R6,A
+082B 7400        R     MOV     A,#LOW rx_word
+082D 2E                ADD     A,R6
+082E F582              MOV     DPL,A
+0830 E4                CLR     A
+0831 3400        R     ADDC    A,#HIGH rx_word
+0833 F583              MOV     DPH,A
+0835 EF                MOV     A,R7
+0836 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 369
-079D 900000      E     MOV     DPTR,#i
-07A0 E0                MOVX    A,@DPTR
-07A1 04                INC     A
-07A2 F0                MOVX    @DPTR,A
-07A3 80DC              SJMP    ?C0111
-07A5         ?C0112:
+0837 900000      E     MOV     DPTR,#i
+083A E0                MOVX    A,@DPTR
+083B 04                INC     A
+083C F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 370
-07A5 900000      E     MOV     DPTR,#i
-07A8 E4                CLR     A
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 35  
-
-07A9 F0                MOVX    @DPTR,A
+083D 900000      R     MOV     DPTR,#dat_cnt
+0840 7401              MOV     A,#01H
+0842 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 371
-07AA 900000      R     MOV     DPTR,#word
-07AD E0                MOVX    A,@DPTR
-07AE FF                MOV     R7,A
-07AF 900000      E     MOV     DPTR,#i
-07B2 E0                MOVX    A,@DPTR
-07B3 FE                MOV     R6,A
-07B4 7400        R     MOV     A,#LOW rx_word
-07B6 2E                ADD     A,R6
-07B7 F582              MOV     DPL,A
-07B9 E4                CLR     A
-07BA 3400        R     ADDC    A,#HIGH rx_word
-07BC F583              MOV     DPH,A
-07BE EF                MOV     A,R7
-07BF F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 372
-07C0 900000      E     MOV     DPTR,#i
-07C3 E0                MOVX    A,@DPTR
-07C4 FF                MOV     R7,A
-07C5 7400        R     MOV     A,#LOW rx_word
-07C7 2F                ADD     A,R7
-07C8 F582              MOV     DPL,A
-07CA E4                CLR     A
-07CB 3400        R     ADDC    A,#HIGH rx_word
-07CD F583              MOV     DPH,A
-07CF E0                MOVX    A,@DPTR
-07D0 FF                MOV     R7,A
-07D1 900000      R     MOV     DPTR,#switch_cmd
-07D4 EF                MOV     A,R7
-07D5 F0                MOVX    @DPTR,A
+0843 900000      R     MOV     DPTR,#status
+0846 7402              MOV     A,#02H
+0848 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 373
-07D6 7F01              MOV     R7,#01H
-07D8 120000      E     LCALL   _os_send_signal
+0849 7BFF              MOV     R3,#0FFH
+084B 7A00        R     MOV     R2,#HIGH ?SC_0
+084D 7900        R     MOV     R1,#LOW ?SC_0
+084F 120000      E     LCALL   _UART_PutString
+0852         ?C0119:
+                                           ; SOURCE LINE # 374
+0852 120000      E     LCALL   UART_ReadTxStatus
+0855 EF                MOV     A,R7
+0856 30E103            JNB     ACC.1,$ + 6H
+0859 020000      R     LJMP    ?C0185
                                            ; SOURCE LINE # 375
-07DB 900000      R     MOV     DPTR,#cmd_exct
-07DE E4                CLR     A
-07DF F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 376
-07E0 900000      R     MOV     DPTR,#dat_cnt
-07E3 E4                CLR     A
-07E4 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 377
+085C 80F4              SJMP    ?C0119
+085E         ?C0120:
                                            ; SOURCE LINE # 378
-07E5 020000      R     LJMP    ?C0168
-07E8         ?C0110:
+085E 020000      R     LJMP    ?C0185
+0861         ?C0118:
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 38  
+
                                            ; SOURCE LINE # 379
-07E8 900000      R     MOV     DPTR,#word
-07EB E0                MOVX    A,@DPTR
-07EC FF                MOV     R7,A
-07ED EF                MOV     A,R7
-07EE 6446              XRL     A,#046H
-07F0 706C              JNZ     ?C0115
+0861 900000      R     MOV     DPTR,#word
+0864 E0                MOVX    A,@DPTR
+0865 FF                MOV     R7,A
+0866 EF                MOV     A,R7
+0867 6440              XRL     A,#040H
+0869 706C              JNZ     ?C0122
                                            ; SOURCE LINE # 380
-07F2 900000      E     MOV     DPTR,#i
-07F5 E4                CLR     A
-07F6 F0                MOVX    @DPTR,A
-07F7         ?C0116:
-07F7 900000      E     MOV     DPTR,#i
-07FA E0                MOVX    A,@DPTR
-07FB FF                MOV     R7,A
-07FC EF                MOV     A,R7
-07FD D3                SETB    C
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 36  
-
-07FE 9408              SUBB    A,#08H
-0800 5019              JNC     ?C0117
                                            ; SOURCE LINE # 381
+086B 900000      E     MOV     DPTR,#i
+086E E4                CLR     A
+086F F0                MOVX    @DPTR,A
+0870         ?C0123:
+0870 900000      E     MOV     DPTR,#i
+0873 E0                MOVX    A,@DPTR
+0874 FF                MOV     R7,A
+0875 EF                MOV     A,R7
+0876 D3                SETB    C
+0877 9408              SUBB    A,#08H
+0879 5019              JNC     ?C0124
                                            ; SOURCE LINE # 382
-0802 900000      E     MOV     DPTR,#i
-0805 E0                MOVX    A,@DPTR
-0806 FF                MOV     R7,A
-0807 7400        R     MOV     A,#LOW rx_word
-0809 2F                ADD     A,R7
-080A F582              MOV     DPL,A
-080C E4                CLR     A
-080D 3400        R     ADDC    A,#HIGH rx_word
-080F F583              MOV     DPH,A
-0811 E4                CLR     A
-0812 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 383
-0813 900000      E     MOV     DPTR,#i
-0816 E0                MOVX    A,@DPTR
-0817 04                INC     A
-0818 F0                MOVX    @DPTR,A
-0819 80DC              SJMP    ?C0116
-081B         ?C0117:
+087B 900000      E     MOV     DPTR,#i
+087E E0                MOVX    A,@DPTR
+087F FF                MOV     R7,A
+0880 7400        R     MOV     A,#LOW rx_word
+0882 2F                ADD     A,R7
+0883 F582              MOV     DPL,A
+0885 E4                CLR     A
+0886 3400        R     ADDC    A,#HIGH rx_word
+0888 F583              MOV     DPH,A
+088A E4                CLR     A
+088B F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 384
-081B 900000      E     MOV     DPTR,#i
-081E E4                CLR     A
-081F F0                MOVX    @DPTR,A
+088C 900000      E     MOV     DPTR,#i
+088F E0                MOVX    A,@DPTR
+0890 04                INC     A
+0891 F0                MOVX    @DPTR,A
+0892 80DC              SJMP    ?C0123
+0894         ?C0124:
                                            ; SOURCE LINE # 385
-0820 900000      R     MOV     DPTR,#word
-0823 E0                MOVX    A,@DPTR
-0824 FF                MOV     R7,A
-0825 900000      E     MOV     DPTR,#i
-0828 E0                MOVX    A,@DPTR
-0829 FE                MOV     R6,A
-082A 7400        R     MOV     A,#LOW rx_word
-082C 2E                ADD     A,R6
-082D F582              MOV     DPL,A
-082F E4                CLR     A
-0830 3400        R     ADDC    A,#HIGH rx_word
-0832 F583              MOV     DPH,A
-0834 EF                MOV     A,R7
-0835 F0                MOVX    @DPTR,A
+0894 900000      E     MOV     DPTR,#i
+0897 E4                CLR     A
+0898 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 386
-0836 900000      E     MOV     DPTR,#i
-0839 E0                MOVX    A,@DPTR
-083A FF                MOV     R7,A
-083B 7400        R     MOV     A,#LOW rx_word
-083D 2F                ADD     A,R7
-083E F582              MOV     DPL,A
-0840 E4                CLR     A
-0841 3400        R     ADDC    A,#HIGH rx_word
-0843 F583              MOV     DPH,A
-0845 E0                MOVX    A,@DPTR
-0846 FF                MOV     R7,A
-0847 900000      R     MOV     DPTR,#switch_cmd
-084A EF                MOV     A,R7
-084B F0                MOVX    @DPTR,A
+0899 900000      R     MOV     DPTR,#word
+089C E0                MOVX    A,@DPTR
+089D FF                MOV     R7,A
+089E 900000      E     MOV     DPTR,#i
+08A1 E0                MOVX    A,@DPTR
+08A2 FE                MOV     R6,A
+08A3 7400        R     MOV     A,#LOW rx_word
+08A5 2E                ADD     A,R6
+08A6 F582              MOV     DPL,A
+08A8 E4                CLR     A
+08A9 3400        R     ADDC    A,#HIGH rx_word
+08AB F583              MOV     DPH,A
+08AD EF                MOV     A,R7
+08AE F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 387
-084C 7F01              MOV     R7,#01H
-084E 120000      E     LCALL   _os_send_signal
-                                           ; SOURCE LINE # 389
-0851 900000      R     MOV     DPTR,#cmd_exct
-0854 E4                CLR     A
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 37  
+08AF 900000      E     MOV     DPTR,#i
+08B2 E0                MOVX    A,@DPTR
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 39  
 
-0855 F0                MOVX    @DPTR,A
+08B3 FF                MOV     R7,A
+08B4 7400        R     MOV     A,#LOW rx_word
+08B6 2F                ADD     A,R7
+08B7 F582              MOV     DPL,A
+08B9 E4                CLR     A
+08BA 3400        R     ADDC    A,#HIGH rx_word
+08BC F583              MOV     DPH,A
+08BE E0                MOVX    A,@DPTR
+08BF FF                MOV     R7,A
+08C0 900000      R     MOV     DPTR,#switch_cmd
+08C3 EF                MOV     A,R7
+08C4 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 388
+08C5 7F01              MOV     R7,#01H
+08C7 120000      E     LCALL   _os_send_signal
                                            ; SOURCE LINE # 390
-0856 900000      R     MOV     DPTR,#dat_cnt
-0859 E4                CLR     A
-085A F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 392
-085B 020000      R     LJMP    ?C0168
-085E         ?C0115:
+08CA 900000      R     MOV     DPTR,#cmd_exct
+08CD E4                CLR     A
+08CE F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 391
+08CF 900000      R     MOV     DPTR,#dat_cnt
+08D2 E4                CLR     A
+08D3 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 393
-085E 900000      R     MOV     DPTR,#word
-0861 E0                MOVX    A,@DPTR
-0862 FF                MOV     R7,A
-0863 EF                MOV     A,R7
-0864 6447              XRL     A,#047H
-0866 706C              JNZ     ?C0120
+08D4 020000      R     LJMP    ?C0185
+08D7         ?C0122:
                                            ; SOURCE LINE # 394
+08D7 900000      R     MOV     DPTR,#word
+08DA E0                MOVX    A,@DPTR
+08DB FF                MOV     R7,A
+08DC EF                MOV     A,R7
+08DD 6445              XRL     A,#045H
+08DF 706C              JNZ     ?C0127
                                            ; SOURCE LINE # 395
-0868 900000      E     MOV     DPTR,#i
-086B E4                CLR     A
-086C F0                MOVX    @DPTR,A
-086D         ?C0121:
-086D 900000      E     MOV     DPTR,#i
-0870 E0                MOVX    A,@DPTR
-0871 FF                MOV     R7,A
-0872 EF                MOV     A,R7
-0873 D3                SETB    C
-0874 9408              SUBB    A,#08H
-0876 5019              JNC     ?C0122
                                            ; SOURCE LINE # 396
+08E1 900000      E     MOV     DPTR,#i
+08E4 E4                CLR     A
+08E5 F0                MOVX    @DPTR,A
+08E6         ?C0128:
+08E6 900000      E     MOV     DPTR,#i
+08E9 E0                MOVX    A,@DPTR
+08EA FF                MOV     R7,A
+08EB EF                MOV     A,R7
+08EC D3                SETB    C
+08ED 9408              SUBB    A,#08H
+08EF 5019              JNC     ?C0129
                                            ; SOURCE LINE # 397
-0878 900000      E     MOV     DPTR,#i
-087B E0                MOVX    A,@DPTR
-087C FF                MOV     R7,A
-087D 7400        R     MOV     A,#LOW rx_word
-087F 2F                ADD     A,R7
-0880 F582              MOV     DPL,A
-0882 E4                CLR     A
-0883 3400        R     ADDC    A,#HIGH rx_word
-0885 F583              MOV     DPH,A
-0887 E4                CLR     A
-0888 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 398
-0889 900000      E     MOV     DPTR,#i
-088C E0                MOVX    A,@DPTR
-088D 04                INC     A
-088E F0                MOVX    @DPTR,A
-088F 80DC              SJMP    ?C0121
-0891         ?C0122:
+08F1 900000      E     MOV     DPTR,#i
+08F4 E0                MOVX    A,@DPTR
+08F5 FF                MOV     R7,A
+08F6 7400        R     MOV     A,#LOW rx_word
+08F8 2F                ADD     A,R7
+08F9 F582              MOV     DPL,A
+08FB E4                CLR     A
+08FC 3400        R     ADDC    A,#HIGH rx_word
+08FE F583              MOV     DPH,A
+0900 E4                CLR     A
+0901 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 399
-0891 900000      E     MOV     DPTR,#i
-0894 E4                CLR     A
-0895 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 400
-0896 900000      R     MOV     DPTR,#word
-0899 E0                MOVX    A,@DPTR
-089A FF                MOV     R7,A
-089B 900000      E     MOV     DPTR,#i
-089E E0                MOVX    A,@DPTR
-089F FE                MOV     R6,A
-08A0 7400        R     MOV     A,#LOW rx_word
-08A2 2E                ADD     A,R6
-08A3 F582              MOV     DPL,A
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 38  
+0902 900000      E     MOV     DPTR,#i
+0905 E0                MOVX    A,@DPTR
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 40  
 
-08A5 E4                CLR     A
-08A6 3400        R     ADDC    A,#HIGH rx_word
-08A8 F583              MOV     DPH,A
-08AA EF                MOV     A,R7
-08AB F0                MOVX    @DPTR,A
+0906 04                INC     A
+0907 F0                MOVX    @DPTR,A
+0908 80DC              SJMP    ?C0128
+090A         ?C0129:
+                                           ; SOURCE LINE # 400
+090A 900000      E     MOV     DPTR,#i
+090D E4                CLR     A
+090E F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 401
-08AC 900000      E     MOV     DPTR,#i
-08AF E0                MOVX    A,@DPTR
-08B0 FF                MOV     R7,A
-08B1 7400        R     MOV     A,#LOW rx_word
-08B3 2F                ADD     A,R7
-08B4 F582              MOV     DPL,A
-08B6 E4                CLR     A
-08B7 3400        R     ADDC    A,#HIGH rx_word
-08B9 F583              MOV     DPH,A
-08BB E0                MOVX    A,@DPTR
-08BC FF                MOV     R7,A
-08BD 900000      R     MOV     DPTR,#switch_cmd
-08C0 EF                MOV     A,R7
-08C1 F0                MOVX    @DPTR,A
+090F 900000      R     MOV     DPTR,#word
+0912 E0                MOVX    A,@DPTR
+0913 FF                MOV     R7,A
+0914 900000      E     MOV     DPTR,#i
+0917 E0                MOVX    A,@DPTR
+0918 FE                MOV     R6,A
+0919 7400        R     MOV     A,#LOW rx_word
+091B 2E                ADD     A,R6
+091C F582              MOV     DPL,A
+091E E4                CLR     A
+091F 3400        R     ADDC    A,#HIGH rx_word
+0921 F583              MOV     DPH,A
+0923 EF                MOV     A,R7
+0924 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 402
-08C2 7F01              MOV     R7,#01H
-08C4 120000      E     LCALL   _os_send_signal
-                                           ; SOURCE LINE # 404
-08C7 900000      R     MOV     DPTR,#cmd_exct
-08CA E4                CLR     A
-08CB F0                MOVX    @DPTR,A
+0925 900000      E     MOV     DPTR,#i
+0928 E0                MOVX    A,@DPTR
+0929 FF                MOV     R7,A
+092A 7400        R     MOV     A,#LOW rx_word
+092C 2F                ADD     A,R7
+092D F582              MOV     DPL,A
+092F E4                CLR     A
+0930 3400        R     ADDC    A,#HIGH rx_word
+0932 F583              MOV     DPH,A
+0934 E0                MOVX    A,@DPTR
+0935 FF                MOV     R7,A
+0936 900000      R     MOV     DPTR,#switch_cmd
+0939 EF                MOV     A,R7
+093A F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 403
+093B 7F01              MOV     R7,#01H
+093D 120000      E     LCALL   _os_send_signal
                                            ; SOURCE LINE # 405
-08CC 900000      R     MOV     DPTR,#dat_cnt
-08CF E4                CLR     A
-08D0 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 407
-08D1 020000      R     LJMP    ?C0168
-08D4         ?C0120:
+0940 900000      R     MOV     DPTR,#cmd_exct
+0943 E4                CLR     A
+0944 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 406
+0945 900000      R     MOV     DPTR,#dat_cnt
+0948 E4                CLR     A
+0949 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 408
-08D4 900000      R     MOV     DPTR,#word
-08D7 E0                MOVX    A,@DPTR
-08D8 FF                MOV     R7,A
-08D9 EF                MOV     A,R7
-08DA 6448              XRL     A,#048H
-08DC 706C              JNZ     ?C0125
+094A 020000      R     LJMP    ?C0185
+094D         ?C0127:
                                            ; SOURCE LINE # 409
+094D 900000      R     MOV     DPTR,#word
+0950 E0                MOVX    A,@DPTR
+0951 FF                MOV     R7,A
+0952 EF                MOV     A,R7
+0953 6446              XRL     A,#046H
+0955 706C              JNZ     ?C0132
                                            ; SOURCE LINE # 410
-08DE 900000      E     MOV     DPTR,#i
-08E1 E4                CLR     A
-08E2 F0                MOVX    @DPTR,A
-08E3         ?C0126:
-08E3 900000      E     MOV     DPTR,#i
-08E6 E0                MOVX    A,@DPTR
-08E7 FF                MOV     R7,A
-08E8 EF                MOV     A,R7
-08E9 D3                SETB    C
-08EA 9408              SUBB    A,#08H
-08EC 5019              JNC     ?C0127
+0957 900000      E     MOV     DPTR,#i
+095A E4                CLR     A
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 41  
+
+095B F0                MOVX    @DPTR,A
+095C         ?C0133:
+095C 900000      E     MOV     DPTR,#i
+095F E0                MOVX    A,@DPTR
+0960 FF                MOV     R7,A
+0961 EF                MOV     A,R7
+0962 D3                SETB    C
+0963 9408              SUBB    A,#08H
+0965 5019              JNC     ?C0134
                                            ; SOURCE LINE # 411
                                            ; SOURCE LINE # 412
-08EE 900000      E     MOV     DPTR,#i
-08F1 E0                MOVX    A,@DPTR
-08F2 FF                MOV     R7,A
-08F3 7400        R     MOV     A,#LOW rx_word
-08F5 2F                ADD     A,R7
-08F6 F582              MOV     DPL,A
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 39  
-
-08F8 E4                CLR     A
-08F9 3400        R     ADDC    A,#HIGH rx_word
-08FB F583              MOV     DPH,A
-08FD E4                CLR     A
-08FE F0                MOVX    @DPTR,A
+0967 900000      E     MOV     DPTR,#i
+096A E0                MOVX    A,@DPTR
+096B FF                MOV     R7,A
+096C 7400        R     MOV     A,#LOW rx_word
+096E 2F                ADD     A,R7
+096F F582              MOV     DPL,A
+0971 E4                CLR     A
+0972 3400        R     ADDC    A,#HIGH rx_word
+0974 F583              MOV     DPH,A
+0976 E4                CLR     A
+0977 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 413
-08FF 900000      E     MOV     DPTR,#i
-0902 E0                MOVX    A,@DPTR
-0903 04                INC     A
-0904 F0                MOVX    @DPTR,A
-0905 80DC              SJMP    ?C0126
-0907         ?C0127:
+0978 900000      E     MOV     DPTR,#i
+097B E0                MOVX    A,@DPTR
+097C 04                INC     A
+097D F0                MOVX    @DPTR,A
+097E 80DC              SJMP    ?C0133
+0980         ?C0134:
                                            ; SOURCE LINE # 414
-0907 900000      E     MOV     DPTR,#i
-090A E4                CLR     A
-090B F0                MOVX    @DPTR,A
+0980 900000      E     MOV     DPTR,#i
+0983 E4                CLR     A
+0984 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 415
-090C 900000      R     MOV     DPTR,#word
-090F E0                MOVX    A,@DPTR
-0910 FF                MOV     R7,A
-0911 900000      E     MOV     DPTR,#i
-0914 E0                MOVX    A,@DPTR
-0915 FE                MOV     R6,A
-0916 7400        R     MOV     A,#LOW rx_word
-0918 2E                ADD     A,R6
-0919 F582              MOV     DPL,A
-091B E4                CLR     A
-091C 3400        R     ADDC    A,#HIGH rx_word
-091E F583              MOV     DPH,A
-0920 EF                MOV     A,R7
-0921 F0                MOVX    @DPTR,A
+0985 900000      R     MOV     DPTR,#word
+0988 E0                MOVX    A,@DPTR
+0989 FF                MOV     R7,A
+098A 900000      E     MOV     DPTR,#i
+098D E0                MOVX    A,@DPTR
+098E FE                MOV     R6,A
+098F 7400        R     MOV     A,#LOW rx_word
+0991 2E                ADD     A,R6
+0992 F582              MOV     DPL,A
+0994 E4                CLR     A
+0995 3400        R     ADDC    A,#HIGH rx_word
+0997 F583              MOV     DPH,A
+0999 EF                MOV     A,R7
+099A F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 416
-0922 900000      E     MOV     DPTR,#i
-0925 E0                MOVX    A,@DPTR
-0926 FF                MOV     R7,A
-0927 7400        R     MOV     A,#LOW rx_word
-0929 2F                ADD     A,R7
-092A F582              MOV     DPL,A
-092C E4                CLR     A
-092D 3400        R     ADDC    A,#HIGH rx_word
-092F F583              MOV     DPH,A
-0931 E0                MOVX    A,@DPTR
-0932 FF                MOV     R7,A
-0933 900000      R     MOV     DPTR,#switch_cmd
-0936 EF                MOV     A,R7
-0937 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 417
-0938 7F01              MOV     R7,#01H
-093A 120000      E     LCALL   _os_send_signal
-                                           ; SOURCE LINE # 419
-093D 900000      R     MOV     DPTR,#cmd_exct
-0940 E4                CLR     A
-0941 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 420
-0942 900000      R     MOV     DPTR,#dat_cnt
-0945 E4                CLR     A
-0946 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 422
-0947 020000      R     LJMP    ?C0168
-094A         ?C0125:
-                                           ; SOURCE LINE # 423
-094A 900000      R     MOV     DPTR,#word
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 40  
+099B 900000      E     MOV     DPTR,#i
+099E E0                MOVX    A,@DPTR
+099F FF                MOV     R7,A
+09A0 7400        R     MOV     A,#LOW rx_word
+09A2 2F                ADD     A,R7
+09A3 F582              MOV     DPL,A
+09A5 E4                CLR     A
+09A6 3400        R     ADDC    A,#HIGH rx_word
+09A8 F583              MOV     DPH,A
+09AA E0                MOVX    A,@DPTR
+09AB FF                MOV     R7,A
+09AC 900000      R     MOV     DPTR,#switch_cmd
+09AF EF                MOV     A,R7
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 42  
 
-094D E0                MOVX    A,@DPTR
-094E FF                MOV     R7,A
-094F EF                MOV     A,R7
-0950 6450              XRL     A,#050H
-0952 7045              JNZ     ?C0130
+09B0 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 417
+09B1 7F01              MOV     R7,#01H
+09B3 120000      E     LCALL   _os_send_signal
+                                           ; SOURCE LINE # 419
+09B6 900000      R     MOV     DPTR,#cmd_exct
+09B9 E4                CLR     A
+09BA F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 420
+09BB 900000      R     MOV     DPTR,#dat_cnt
+09BE E4                CLR     A
+09BF F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 422
+09C0 020000      R     LJMP    ?C0185
+09C3         ?C0132:
+                                           ; SOURCE LINE # 423
+09C3 900000      R     MOV     DPTR,#word
+09C6 E0                MOVX    A,@DPTR
+09C7 FF                MOV     R7,A
+09C8 EF                MOV     A,R7
+09C9 6447              XRL     A,#047H
+09CB 706C              JNZ     ?C0137
                                            ; SOURCE LINE # 424
                                            ; SOURCE LINE # 425
-0954 900000      E     MOV     DPTR,#i
-0957 E4                CLR     A
-0958 F0                MOVX    @DPTR,A
+09CD 900000      E     MOV     DPTR,#i
+09D0 E4                CLR     A
+09D1 F0                MOVX    @DPTR,A
+09D2         ?C0138:
+09D2 900000      E     MOV     DPTR,#i
+09D5 E0                MOVX    A,@DPTR
+09D6 FF                MOV     R7,A
+09D7 EF                MOV     A,R7
+09D8 D3                SETB    C
+09D9 9408              SUBB    A,#08H
+09DB 5019              JNC     ?C0139
                                            ; SOURCE LINE # 426
-0959 900000      R     MOV     DPTR,#word
-095C E0                MOVX    A,@DPTR
-095D FF                MOV     R7,A
-095E 900000      E     MOV     DPTR,#i
-0961 E0                MOVX    A,@DPTR
-0962 FE                MOV     R6,A
-0963 7400        R     MOV     A,#LOW rx_word
-0965 2E                ADD     A,R6
-0966 F582              MOV     DPL,A
-0968 E4                CLR     A
-0969 3400        R     ADDC    A,#HIGH rx_word
-096B F583              MOV     DPH,A
-096D EF                MOV     A,R7
-096E F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 427
-096F 900000      E     MOV     DPTR,#i
-0972 E0                MOVX    A,@DPTR
-0973 04                INC     A
-0974 F0                MOVX    @DPTR,A
+09DD 900000      E     MOV     DPTR,#i
+09E0 E0                MOVX    A,@DPTR
+09E1 FF                MOV     R7,A
+09E2 7400        R     MOV     A,#LOW rx_word
+09E4 2F                ADD     A,R7
+09E5 F582              MOV     DPL,A
+09E7 E4                CLR     A
+09E8 3400        R     ADDC    A,#HIGH rx_word
+09EA F583              MOV     DPH,A
+09EC E4                CLR     A
+09ED F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 428
-0975 900000      R     MOV     DPTR,#dat_cnt
-0978 7401              MOV     A,#01H
-097A F0                MOVX    @DPTR,A
+09EE 900000      E     MOV     DPTR,#i
+09F1 E0                MOVX    A,@DPTR
+09F2 04                INC     A
+09F3 F0                MOVX    @DPTR,A
+09F4 80DC              SJMP    ?C0138
+09F6         ?C0139:
                                            ; SOURCE LINE # 429
-097B 900000      R     MOV     DPTR,#status
-097E 7402              MOV     A,#02H
-0980 F0                MOVX    @DPTR,A
+09F6 900000      E     MOV     DPTR,#i
+09F9 E4                CLR     A
+09FA F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 430
+09FB 900000      R     MOV     DPTR,#word
+09FE E0                MOVX    A,@DPTR
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 43  
+
+09FF FF                MOV     R7,A
+0A00 900000      E     MOV     DPTR,#i
+0A03 E0                MOVX    A,@DPTR
+0A04 FE                MOV     R6,A
+0A05 7400        R     MOV     A,#LOW rx_word
+0A07 2E                ADD     A,R6
+0A08 F582              MOV     DPL,A
+0A0A E4                CLR     A
+0A0B 3400        R     ADDC    A,#HIGH rx_word
+0A0D F583              MOV     DPH,A
+0A0F EF                MOV     A,R7
+0A10 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 431
-0981 7BFF              MOV     R3,#0FFH
-0983 7A00        R     MOV     R2,#HIGH ?SC_0
-0985 7900        R     MOV     R1,#LOW ?SC_0
-0987 120000      E     LCALL   _UART_PutString
-098A         ?C0131:
-                                           ; SOURCE LINE # 432
-098A 120000      E     LCALL   UART_ReadTxStatus
-098D EF                MOV     A,R7
-098E 30E103            JNB     ACC.1,$ + 6H
-0991 020000      R     LJMP    ?C0168
-                                           ; SOURCE LINE # 433
-                                           ; SOURCE LINE # 435
-0994 80F4              SJMP    ?C0131
-0996         ?C0132:
-                                           ; SOURCE LINE # 436
-0996 020000      R     LJMP    ?C0168
-0999         ?C0130:
-                                           ; SOURCE LINE # 437
-0999 900000      R     MOV     DPTR,#word
-099C E0                MOVX    A,@DPTR
-099D FF                MOV     R7,A
-099E EF                MOV     A,R7
-099F 6451              XRL     A,#051H
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 41  
-
-09A1 7049              JNZ     ?C0134
-                                           ; SOURCE LINE # 438
-                                           ; SOURCE LINE # 439
-09A3 900000      E     MOV     DPTR,#i
-09A6 E4                CLR     A
-09A7 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 440
-09A8 900000      R     MOV     DPTR,#word
-09AB E0                MOVX    A,@DPTR
-09AC FF                MOV     R7,A
-09AD 900000      E     MOV     DPTR,#i
-09B0 E0                MOVX    A,@DPTR
-09B1 FE                MOV     R6,A
-09B2 7400        R     MOV     A,#LOW rx_word
-09B4 2E                ADD     A,R6
-09B5 F582              MOV     DPL,A
-09B7 E4                CLR     A
-09B8 3400        R     ADDC    A,#HIGH rx_word
-09BA F583              MOV     DPH,A
-09BC EF                MOV     A,R7
-09BD F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 441
-09BE 900000      E     MOV     DPTR,#i
-09C1 E0                MOVX    A,@DPTR
-09C2 04                INC     A
-09C3 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 442
-09C4 900000      R     MOV     DPTR,#dat_cnt
-09C7 7401              MOV     A,#01H
-09C9 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 443
-09CA 900000      R     MOV     DPTR,#status
-09CD 7402              MOV     A,#02H
-09CF F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 445
-09D0 120000      E     LCALL   UART_ClearRxBuffer
-                                           ; SOURCE LINE # 446
-09D3 120000      E     LCALL   UART_ClearTxBuffer
-                                           ; SOURCE LINE # 447
-09D6 7BFF              MOV     R3,#0FFH
-09D8 7A00        R     MOV     R2,#HIGH ?SC_0
-09DA 7900        R     MOV     R1,#LOW ?SC_0
-09DC 120000      E     LCALL   _UART_PutString
-09DF         ?C0135:
-                                           ; SOURCE LINE # 448
-09DF 120000      E     LCALL   UART_ReadTxStatus
-09E2 EF                MOV     A,R7
-09E3 30E1F9            JNB     ACC.1,?C0135
-                                           ; SOURCE LINE # 449
-                                           ; SOURCE LINE # 451
-09E6         ?C0136:
-                                           ; SOURCE LINE # 452
-09E6 120000      E     LCALL   UART_ClearTxBuffer
-                                           ; SOURCE LINE # 453
-09E9 020000      R     LJMP    ?C0168
-09EC         ?C0134:
-                                           ; SOURCE LINE # 454
-09EC 900000      R     MOV     DPTR,#word
-09EF E0                MOVX    A,@DPTR
-09F0 FF                MOV     R7,A
-09F1 EF                MOV     A,R7
-09F2 6455              XRL     A,#055H
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 42  
-
-09F4 702F              JNZ     ?C0138
-                                           ; SOURCE LINE # 455
-                                           ; SOURCE LINE # 456
-09F6 7BFF              MOV     R3,#0FFH
-09F8 7A00        R     MOV     R2,#HIGH ?SC_0
-09FA 7900        R     MOV     R1,#LOW ?SC_0
-09FC 120000      E     LCALL   _UART_PutString
-09FF         ?C0139:
-                                           ; SOURCE LINE # 457
-09FF 120000      E     LCALL   UART_ReadTxStatus
-0A02 EF                MOV     A,R7
-0A03 30E1F9            JNB     ACC.1,?C0139
-                                           ; SOURCE LINE # 458
-                                           ; SOURCE LINE # 460
-0A06         ?C0140:
-                                           ; SOURCE LINE # 462
-0A06 120000      E     LCALL   UART_ClearTxBuffer
-                                           ; SOURCE LINE # 463
-0A09 900000      R     MOV     DPTR,#word
-0A0C E0                MOVX    A,@DPTR
-0A0D FF                MOV     R7,A
-0A0E 120000      E     LCALL   _UART_WriteTxData
-0A11         ?C0141:
-                                           ; SOURCE LINE # 464
-0A11 120000      E     LCALL   UART_ReadTxStatus
-0A14 EF                MOV     A,R7
-0A15 30E1F9            JNB     ACC.1,?C0141
-                                           ; SOURCE LINE # 465
-                                           ; SOURCE LINE # 467
-0A18         ?C0142:
-                                           ; SOURCE LINE # 468
-0A18 900000      R     MOV     DPTR,#cmd_exct
+0A11 900000      E     MOV     DPTR,#i
+0A14 E0                MOVX    A,@DPTR
+0A15 FF                MOV     R7,A
+0A16 7400        R     MOV     A,#LOW rx_word
+0A18 2F                ADD     A,R7
+0A19 F582              MOV     DPL,A
 0A1B E4                CLR     A
-0A1C F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 469
-0A1D 900000      R     MOV     DPTR,#dat_cnt
-0A20 E4                CLR     A
-0A21 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 470
-0A22 020000      R     LJMP    ?C0168
-0A25         ?C0138:
-                                           ; SOURCE LINE # 471
-0A25 900000      R     MOV     DPTR,#word
-0A28 E0                MOVX    A,@DPTR
-0A29 FF                MOV     R7,A
-0A2A EF                MOV     A,R7
-0A2B B40D28            CJNE    A,#0DH,?C0144
-                                           ; SOURCE LINE # 472
-                                           ; SOURCE LINE # 473
-0A2E 900000      R     MOV     DPTR,#cmd_exct
-0A31 E4                CLR     A
-0A32 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 474
-0A33 900000      R     MOV     DPTR,#dat_cnt
-0A36 E4                CLR     A
-0A37 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 475
-0A38 900000      E     MOV     DPTR,#prnt_en
-0A3B 7401              MOV     A,#01H
-0A3D F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 477
-0A3E 7BFF              MOV     R3,#0FFH
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 43  
+0A1C 3400        R     ADDC    A,#HIGH rx_word
+0A1E F583              MOV     DPH,A
+0A20 E0                MOVX    A,@DPTR
+0A21 FF                MOV     R7,A
+0A22 900000      R     MOV     DPTR,#switch_cmd
+0A25 EF                MOV     A,R7
+0A26 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 432
+0A27 7F01              MOV     R7,#01H
+0A29 120000      E     LCALL   _os_send_signal
+                                           ; SOURCE LINE # 434
+0A2C 900000      R     MOV     DPTR,#cmd_exct
+0A2F E4                CLR     A
+0A30 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 435
+0A31 900000      R     MOV     DPTR,#dat_cnt
+0A34 E4                CLR     A
+0A35 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 437
+0A36 020000      R     LJMP    ?C0185
+0A39         ?C0137:
+                                           ; SOURCE LINE # 438
+0A39 900000      R     MOV     DPTR,#word
+0A3C E0                MOVX    A,@DPTR
+0A3D FF                MOV     R7,A
+0A3E EF                MOV     A,R7
+0A3F 6448              XRL     A,#048H
+0A41 706C              JNZ     ?C0142
+                                           ; SOURCE LINE # 439
+                                           ; SOURCE LINE # 440
+0A43 900000      E     MOV     DPTR,#i
+0A46 E4                CLR     A
+0A47 F0                MOVX    @DPTR,A
+0A48         ?C0143:
+0A48 900000      E     MOV     DPTR,#i
+0A4B E0                MOVX    A,@DPTR
+0A4C FF                MOV     R7,A
+0A4D EF                MOV     A,R7
+0A4E D3                SETB    C
+0A4F 9408              SUBB    A,#08H
+0A51 5019              JNC     ?C0144
+                                           ; SOURCE LINE # 441
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 44  
 
-0A40 7A00        R     MOV     R2,#HIGH ?SC_0
-0A42 7900        R     MOV     R1,#LOW ?SC_0
-0A44 120000      E     LCALL   _UART_PutString
-0A47         ?C0145:
+                                           ; SOURCE LINE # 442
+0A53 900000      E     MOV     DPTR,#i
+0A56 E0                MOVX    A,@DPTR
+0A57 FF                MOV     R7,A
+0A58 7400        R     MOV     A,#LOW rx_word
+0A5A 2F                ADD     A,R7
+0A5B F582              MOV     DPL,A
+0A5D E4                CLR     A
+0A5E 3400        R     ADDC    A,#HIGH rx_word
+0A60 F583              MOV     DPH,A
+0A62 E4                CLR     A
+0A63 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 443
+0A64 900000      E     MOV     DPTR,#i
+0A67 E0                MOVX    A,@DPTR
+0A68 04                INC     A
+0A69 F0                MOVX    @DPTR,A
+0A6A 80DC              SJMP    ?C0143
+0A6C         ?C0144:
+                                           ; SOURCE LINE # 444
+0A6C 900000      E     MOV     DPTR,#i
+0A6F E4                CLR     A
+0A70 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 445
+0A71 900000      R     MOV     DPTR,#word
+0A74 E0                MOVX    A,@DPTR
+0A75 FF                MOV     R7,A
+0A76 900000      E     MOV     DPTR,#i
+0A79 E0                MOVX    A,@DPTR
+0A7A FE                MOV     R6,A
+0A7B 7400        R     MOV     A,#LOW rx_word
+0A7D 2E                ADD     A,R6
+0A7E F582              MOV     DPL,A
+0A80 E4                CLR     A
+0A81 3400        R     ADDC    A,#HIGH rx_word
+0A83 F583              MOV     DPH,A
+0A85 EF                MOV     A,R7
+0A86 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 446
+0A87 900000      E     MOV     DPTR,#i
+0A8A E0                MOVX    A,@DPTR
+0A8B FF                MOV     R7,A
+0A8C 7400        R     MOV     A,#LOW rx_word
+0A8E 2F                ADD     A,R7
+0A8F F582              MOV     DPL,A
+0A91 E4                CLR     A
+0A92 3400        R     ADDC    A,#HIGH rx_word
+0A94 F583              MOV     DPH,A
+0A96 E0                MOVX    A,@DPTR
+0A97 FF                MOV     R7,A
+0A98 900000      R     MOV     DPTR,#switch_cmd
+0A9B EF                MOV     A,R7
+0A9C F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 447
+0A9D 7F01              MOV     R7,#01H
+0A9F 120000      E     LCALL   _os_send_signal
+                                           ; SOURCE LINE # 449
+0AA2 900000      R     MOV     DPTR,#cmd_exct
+0AA5 E4                CLR     A
+0AA6 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 450
+0AA7 900000      R     MOV     DPTR,#dat_cnt
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 45  
+
+0AAA E4                CLR     A
+0AAB F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 452
+0AAC 020000      R     LJMP    ?C0185
+0AAF         ?C0142:
+                                           ; SOURCE LINE # 453
+0AAF 900000      R     MOV     DPTR,#word
+0AB2 E0                MOVX    A,@DPTR
+0AB3 FF                MOV     R7,A
+0AB4 EF                MOV     A,R7
+0AB5 6450              XRL     A,#050H
+0AB7 7045              JNZ     ?C0147
+                                           ; SOURCE LINE # 454
+                                           ; SOURCE LINE # 455
+0AB9 900000      E     MOV     DPTR,#i
+0ABC E4                CLR     A
+0ABD F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 456
+0ABE 900000      R     MOV     DPTR,#word
+0AC1 E0                MOVX    A,@DPTR
+0AC2 FF                MOV     R7,A
+0AC3 900000      E     MOV     DPTR,#i
+0AC6 E0                MOVX    A,@DPTR
+0AC7 FE                MOV     R6,A
+0AC8 7400        R     MOV     A,#LOW rx_word
+0ACA 2E                ADD     A,R6
+0ACB F582              MOV     DPL,A
+0ACD E4                CLR     A
+0ACE 3400        R     ADDC    A,#HIGH rx_word
+0AD0 F583              MOV     DPH,A
+0AD2 EF                MOV     A,R7
+0AD3 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 457
+0AD4 900000      E     MOV     DPTR,#i
+0AD7 E0                MOVX    A,@DPTR
+0AD8 04                INC     A
+0AD9 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 458
+0ADA 900000      R     MOV     DPTR,#dat_cnt
+0ADD 7401              MOV     A,#01H
+0ADF F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 459
+0AE0 900000      R     MOV     DPTR,#status
+0AE3 7402              MOV     A,#02H
+0AE5 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 461
+0AE6 7BFF              MOV     R3,#0FFH
+0AE8 7A00        R     MOV     R2,#HIGH ?SC_0
+0AEA 7900        R     MOV     R1,#LOW ?SC_0
+0AEC 120000      E     LCALL   _UART_PutString
+0AEF         ?C0148:
+                                           ; SOURCE LINE # 462
+0AEF 120000      E     LCALL   UART_ReadTxStatus
+0AF2 EF                MOV     A,R7
+0AF3 30E103            JNB     ACC.1,$ + 6H
+0AF6 020000      R     LJMP    ?C0185
+                                           ; SOURCE LINE # 463
+                                           ; SOURCE LINE # 465
+0AF9 80F4              SJMP    ?C0148
+0AFB         ?C0149:
+                                           ; SOURCE LINE # 466
+0AFB 020000      R     LJMP    ?C0185
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 46  
+
+0AFE         ?C0147:
+                                           ; SOURCE LINE # 467
+0AFE 900000      R     MOV     DPTR,#word
+0B01 E0                MOVX    A,@DPTR
+0B02 FF                MOV     R7,A
+0B03 EF                MOV     A,R7
+0B04 6451              XRL     A,#051H
+0B06 7049              JNZ     ?C0151
+                                           ; SOURCE LINE # 468
+                                           ; SOURCE LINE # 469
+0B08 900000      E     MOV     DPTR,#i
+0B0B E4                CLR     A
+0B0C F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 470
+0B0D 900000      R     MOV     DPTR,#word
+0B10 E0                MOVX    A,@DPTR
+0B11 FF                MOV     R7,A
+0B12 900000      E     MOV     DPTR,#i
+0B15 E0                MOVX    A,@DPTR
+0B16 FE                MOV     R6,A
+0B17 7400        R     MOV     A,#LOW rx_word
+0B19 2E                ADD     A,R6
+0B1A F582              MOV     DPL,A
+0B1C E4                CLR     A
+0B1D 3400        R     ADDC    A,#HIGH rx_word
+0B1F F583              MOV     DPH,A
+0B21 EF                MOV     A,R7
+0B22 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 471
+0B23 900000      E     MOV     DPTR,#i
+0B26 E0                MOVX    A,@DPTR
+0B27 04                INC     A
+0B28 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 472
+0B29 900000      R     MOV     DPTR,#dat_cnt
+0B2C 7401              MOV     A,#01H
+0B2E F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 473
+0B2F 900000      R     MOV     DPTR,#status
+0B32 7402              MOV     A,#02H
+0B34 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 475
+0B35 120000      E     LCALL   UART_ClearRxBuffer
+                                           ; SOURCE LINE # 476
+0B38 120000      E     LCALL   UART_ClearTxBuffer
+                                           ; SOURCE LINE # 477
+0B3B 7BFF              MOV     R3,#0FFH
+0B3D 7A00        R     MOV     R2,#HIGH ?SC_0
+0B3F 7900        R     MOV     R1,#LOW ?SC_0
+0B41 120000      E     LCALL   _UART_PutString
+0B44         ?C0152:
                                            ; SOURCE LINE # 478
-0A47 120000      E     LCALL   UART_ReadTxStatus
-0A4A EF                MOV     A,R7
-0A4B 30E1F9            JNB     ACC.1,?C0145
+0B44 120000      E     LCALL   UART_ReadTxStatus
+0B47 EF                MOV     A,R7
+0B48 30E1F9            JNB     ACC.1,?C0152
                                            ; SOURCE LINE # 479
                                            ; SOURCE LINE # 481
-0A4E         ?C0146:
+0B4B         ?C0153:
+                                           ; SOURCE LINE # 482
+0B4B 120000      E     LCALL   UART_ClearTxBuffer
                                            ; SOURCE LINE # 483
-0A4E 7F01              MOV     R7,#01H
-0A50 120000      E     LCALL   _os_send_signal
+0B4E 020000      R     LJMP    ?C0185
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 47  
+
+0B51         ?C0151:
                                            ; SOURCE LINE # 484
-0A53 020000      R     LJMP    ?C0168
-0A56         ?C0144:
+0B51 900000      R     MOV     DPTR,#word
+0B54 E0                MOVX    A,@DPTR
+0B55 FF                MOV     R7,A
+0B56 EF                MOV     A,R7
+0B57 6455              XRL     A,#055H
+0B59 702F              JNZ     ?C0155
                                            ; SOURCE LINE # 485
-0A56 900000      R     MOV     DPTR,#word
-0A59 E0                MOVX    A,@DPTR
-0A5A FF                MOV     R7,A
-0A5B EF                MOV     A,R7
-0A5C 64DE              XRL     A,#0DEH
-0A5E 706E              JNZ     ?C0148
                                            ; SOURCE LINE # 486
+0B5B 7BFF              MOV     R3,#0FFH
+0B5D 7A00        R     MOV     R2,#HIGH ?SC_0
+0B5F 7900        R     MOV     R1,#LOW ?SC_0
+0B61 120000      E     LCALL   _UART_PutString
+0B64         ?C0156:
                                            ; SOURCE LINE # 487
-0A60 900000      E     MOV     DPTR,#i
-0A63 E4                CLR     A
-0A64 F0                MOVX    @DPTR,A
-0A65         ?C0149:
-0A65 900000      E     MOV     DPTR,#i
-0A68 E0                MOVX    A,@DPTR
-0A69 FF                MOV     R7,A
-0A6A EF                MOV     A,R7
-0A6B D3                SETB    C
-0A6C 9408              SUBB    A,#08H
-0A6E 5019              JNC     ?C0150
+0B64 120000      E     LCALL   UART_ReadTxStatus
+0B67 EF                MOV     A,R7
+0B68 30E1F9            JNB     ACC.1,?C0156
                                            ; SOURCE LINE # 488
-                                           ; SOURCE LINE # 489
-0A70 900000      E     MOV     DPTR,#i
-0A73 E0                MOVX    A,@DPTR
-0A74 FF                MOV     R7,A
-0A75 7400        R     MOV     A,#LOW rx_word
-0A77 2F                ADD     A,R7
-0A78 F582              MOV     DPL,A
-0A7A E4                CLR     A
-0A7B 3400        R     ADDC    A,#HIGH rx_word
-0A7D F583              MOV     DPH,A
-0A7F E4                CLR     A
-0A80 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 490
-0A81 900000      E     MOV     DPTR,#i
-0A84 E0                MOVX    A,@DPTR
-0A85 04                INC     A
-0A86 F0                MOVX    @DPTR,A
-0A87 80DC              SJMP    ?C0149
-0A89         ?C0150:
-                                           ; SOURCE LINE # 491
-0A89 900000      E     MOV     DPTR,#i
-0A8C E4                CLR     A
-0A8D F0                MOVX    @DPTR,A
+0B6B         ?C0157:
                                            ; SOURCE LINE # 492
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 44  
-
-0A8E 900000      R     MOV     DPTR,#word
-0A91 E0                MOVX    A,@DPTR
-0A92 FF                MOV     R7,A
-0A93 900000      E     MOV     DPTR,#i
-0A96 E0                MOVX    A,@DPTR
-0A97 FE                MOV     R6,A
-0A98 7400        R     MOV     A,#LOW rx_word
-0A9A 2E                ADD     A,R6
-0A9B F582              MOV     DPL,A
-0A9D E4                CLR     A
-0A9E 3400        R     ADDC    A,#HIGH rx_word
-0AA0 F583              MOV     DPH,A
-0AA2 EF                MOV     A,R7
-0AA3 F0                MOVX    @DPTR,A
+0B6B 120000      E     LCALL   UART_ClearTxBuffer
                                            ; SOURCE LINE # 493
-0AA4 900000      E     MOV     DPTR,#i
-0AA7 E0                MOVX    A,@DPTR
-0AA8 04                INC     A
-0AA9 F0                MOVX    @DPTR,A
+0B6E 900000      R     MOV     DPTR,#word
+0B71 E0                MOVX    A,@DPTR
+0B72 FF                MOV     R7,A
+0B73 120000      E     LCALL   _UART_WriteTxData
+0B76         ?C0158:
                                            ; SOURCE LINE # 494
-0AAA 900000      R     MOV     DPTR,#dat_cnt
-0AAD 7402              MOV     A,#02H
-0AAF F0                MOVX    @DPTR,A
+0B76 120000      E     LCALL   UART_ReadTxStatus
+0B79 EF                MOV     A,R7
+0B7A 30E1F9            JNB     ACC.1,?C0158
                                            ; SOURCE LINE # 495
-0AB0 900000      R     MOV     DPTR,#status
-0AB3 7403              MOV     A,#03H
-0AB5 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 497
-0AB6 7BFF              MOV     R3,#0FFH
-0AB8 7A00        R     MOV     R2,#HIGH ?SC_0
-0ABA 7900        R     MOV     R1,#LOW ?SC_0
-0ABC 120000      E     LCALL   _UART_PutString
-0ABF         ?C0152:
+0B7D         ?C0159:
                                            ; SOURCE LINE # 498
-0ABF 120000      E     LCALL   UART_ReadTxStatus
-0AC2 EF                MOV     A,R7
-0AC3 30E103            JNB     ACC.1,$ + 6H
-0AC6 020000      R     LJMP    ?C0168
+0B7D 900000      R     MOV     DPTR,#cmd_exct
+0B80 E4                CLR     A
+0B81 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 499
+0B82 900000      R     MOV     DPTR,#dat_cnt
+0B85 E4                CLR     A
+0B86 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 500
+0B87 020000      R     LJMP    ?C0185
+0B8A         ?C0155:
                                            ; SOURCE LINE # 501
-0AC9 80F4              SJMP    ?C0152
-0ACB         ?C0153:
+0B8A 900000      R     MOV     DPTR,#word
+0B8D E0                MOVX    A,@DPTR
+0B8E FF                MOV     R7,A
+0B8F EF                MOV     A,R7
+0B90 B40D28            CJNE    A,#0DH,?C0161
                                            ; SOURCE LINE # 502
-0ACB 020000      R     LJMP    ?C0168
-0ACE         ?C0148:
                                            ; SOURCE LINE # 503
-0ACE 900000      R     MOV     DPTR,#word
-0AD1 E0                MOVX    A,@DPTR
-0AD2 FF                MOV     R7,A
-0AD3 EF                MOV     A,R7
-0AD4 64DD              XRL     A,#0DDH
-0AD6 7052              JNZ     ?C0155
+0B93 900000      R     MOV     DPTR,#cmd_exct
+0B96 E4                CLR     A
+0B97 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 504
+0B98 900000      R     MOV     DPTR,#dat_cnt
+0B9B E4                CLR     A
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 48  
+
+0B9C F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 505
-0AD8 7BFF              MOV     R3,#0FFH
-0ADA 7A00        R     MOV     R2,#HIGH ?SC_0
-0ADC 7900        R     MOV     R1,#LOW ?SC_0
-0ADE 120000      E     LCALL   _UART_PutString
-0AE1         ?C0156:
-                                           ; SOURCE LINE # 506
-0AE1 120000      E     LCALL   UART_ReadTxStatus
-0AE4 EF                MOV     A,R7
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 45  
-
-0AE5 30E1F9            JNB     ACC.1,?C0156
+0B9D 900000      E     MOV     DPTR,#prnt_en
+0BA0 7401              MOV     A,#01H
+0BA2 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 507
+0BA3 7BFF              MOV     R3,#0FFH
+0BA5 7A00        R     MOV     R2,#HIGH ?SC_0
+0BA7 7900        R     MOV     R1,#LOW ?SC_0
+0BA9 120000      E     LCALL   _UART_PutString
+0BAC         ?C0162:
+                                           ; SOURCE LINE # 508
+0BAC 120000      E     LCALL   UART_ReadTxStatus
+0BAF EF                MOV     A,R7
+0BB0 30E1F9            JNB     ACC.1,?C0162
                                            ; SOURCE LINE # 509
-0AE8         ?C0157:
                                            ; SOURCE LINE # 511
-0AE8 900000      E     MOV     DPTR,#delay
-0AEB E0                MOVX    A,@DPTR
-0AEC FE                MOV     R6,A
-0AED A3                INC     DPTR
-0AEE E0                MOVX    A,@DPTR
-0AEF FF                MOV     R7,A
-0AF0 EE                MOV     A,R6
-0AF1 FF                MOV     R7,A
-0AF2 7E00              MOV     R6,#00H
-0AF4 900000      R     MOV     DPTR,#d_msb
-0AF7 EF                MOV     A,R7
-0AF8 F0                MOVX    @DPTR,A
+0BB3         ?C0163:
                                            ; SOURCE LINE # 513
-0AF9 120000      E     LCALL   UART_ClearTxBuffer
+0BB3 7F01              MOV     R7,#01H
+0BB5 120000      E     LCALL   _os_send_signal
                                            ; SOURCE LINE # 514
-0AFC 900000      R     MOV     DPTR,#d_msb
-0AFF E0                MOVX    A,@DPTR
-0B00 FF                MOV     R7,A
-0B01 120000      E     LCALL   _UART_WriteTxData
-0B04         ?C0158:
+0BB8 020000      R     LJMP    ?C0185
+0BBB         ?C0161:
                                            ; SOURCE LINE # 515
-0B04 120000      E     LCALL   UART_ReadTxStatus
-0B07 EF                MOV     A,R7
-0B08 30E1F9            JNB     ACC.1,?C0158
+0BBB 900000      R     MOV     DPTR,#word
+0BBE E0                MOVX    A,@DPTR
+0BBF FF                MOV     R7,A
+0BC0 EF                MOV     A,R7
+0BC1 64DE              XRL     A,#0DEH
+0BC3 706E              JNZ     ?C0165
                                            ; SOURCE LINE # 516
+                                           ; SOURCE LINE # 517
+0BC5 900000      E     MOV     DPTR,#i
+0BC8 E4                CLR     A
+0BC9 F0                MOVX    @DPTR,A
+0BCA         ?C0166:
+0BCA 900000      E     MOV     DPTR,#i
+0BCD E0                MOVX    A,@DPTR
+0BCE FF                MOV     R7,A
+0BCF EF                MOV     A,R7
+0BD0 D3                SETB    C
+0BD1 9408              SUBB    A,#08H
+0BD3 5019              JNC     ?C0167
                                            ; SOURCE LINE # 518
-0B0B         ?C0159:
+                                           ; SOURCE LINE # 519
+0BD5 900000      E     MOV     DPTR,#i
+0BD8 E0                MOVX    A,@DPTR
+0BD9 FF                MOV     R7,A
+0BDA 7400        R     MOV     A,#LOW rx_word
+0BDC 2F                ADD     A,R7
+0BDD F582              MOV     DPL,A
+0BDF E4                CLR     A
+0BE0 3400        R     ADDC    A,#HIGH rx_word
+0BE2 F583              MOV     DPH,A
+0BE4 E4                CLR     A
+0BE5 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 520
-0B0B 900000      E     MOV     DPTR,#delay
-0B0E E0                MOVX    A,@DPTR
-0B0F FE                MOV     R6,A
-0B10 A3                INC     DPTR
-0B11 E0                MOVX    A,@DPTR
-0B12 FF                MOV     R7,A
-0B13 120000      E     LCALL   _UART_WriteTxData
-0B16         ?C0160:
+0BE6 900000      E     MOV     DPTR,#i
+0BE9 E0                MOVX    A,@DPTR
+0BEA 04                INC     A
+0BEB F0                MOVX    @DPTR,A
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 49  
+
+0BEC 80DC              SJMP    ?C0166
+0BEE         ?C0167:
                                            ; SOURCE LINE # 521
-0B16 120000      E     LCALL   UART_ReadTxStatus
-0B19 EF                MOV     A,R7
-0B1A 30E1F9            JNB     ACC.1,?C0160
+0BEE 900000      E     MOV     DPTR,#i
+0BF1 E4                CLR     A
+0BF2 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 522
+0BF3 900000      R     MOV     DPTR,#word
+0BF6 E0                MOVX    A,@DPTR
+0BF7 FF                MOV     R7,A
+0BF8 900000      E     MOV     DPTR,#i
+0BFB E0                MOVX    A,@DPTR
+0BFC FE                MOV     R6,A
+0BFD 7400        R     MOV     A,#LOW rx_word
+0BFF 2E                ADD     A,R6
+0C00 F582              MOV     DPL,A
+0C02 E4                CLR     A
+0C03 3400        R     ADDC    A,#HIGH rx_word
+0C05 F583              MOV     DPH,A
+0C07 EF                MOV     A,R7
+0C08 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 523
+0C09 900000      E     MOV     DPTR,#i
+0C0C E0                MOVX    A,@DPTR
+0C0D 04                INC     A
+0C0E F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 524
-0B1D         ?C0161:
-                                           ; SOURCE LINE # 526
-0B1D 900000      R     MOV     DPTR,#cmd_exct
-0B20 E4                CLR     A
-0B21 F0                MOVX    @DPTR,A
+0C0F 900000      R     MOV     DPTR,#dat_cnt
+0C12 7402              MOV     A,#02H
+0C14 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 525
+0C15 900000      R     MOV     DPTR,#status
+0C18 7403              MOV     A,#03H
+0C1A F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 527
-0B22 900000      R     MOV     DPTR,#dat_cnt
-0B25 E4                CLR     A
-0B26 F0                MOVX    @DPTR,A
+0C1B 7BFF              MOV     R3,#0FFH
+0C1D 7A00        R     MOV     R2,#HIGH ?SC_0
+0C1F 7900        R     MOV     R1,#LOW ?SC_0
+0C21 120000      E     LCALL   _UART_PutString
+0C24         ?C0169:
                                            ; SOURCE LINE # 528
-0B27 020000      R     LJMP    ?C0168
-0B2A         ?C0155:
-                                           ; SOURCE LINE # 530
+0C24 120000      E     LCALL   UART_ReadTxStatus
+0C27 EF                MOV     A,R7
+0C28 30E103            JNB     ACC.1,$ + 6H
+0C2B 020000      R     LJMP    ?C0185
+                                           ; SOURCE LINE # 529
                                            ; SOURCE LINE # 531
-0B2A 900000      E     MOV     DPTR,#i
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 46  
-
-0B2D E4                CLR     A
-0B2E F0                MOVX    @DPTR,A
-0B2F         ?C0163:
-0B2F 900000      E     MOV     DPTR,#i
-0B32 E0                MOVX    A,@DPTR
-0B33 FF                MOV     R7,A
-0B34 EF                MOV     A,R7
-0B35 D3                SETB    C
-0B36 941F              SUBB    A,#01FH
-0B38 5019              JNC     ?C0164
+0C2E 80F4              SJMP    ?C0169
+0C30         ?C0170:
                                            ; SOURCE LINE # 532
+0C30 020000      R     LJMP    ?C0185
+0C33         ?C0165:
                                            ; SOURCE LINE # 533
-0B3A 900000      E     MOV     DPTR,#i
-0B3D E0                MOVX    A,@DPTR
-0B3E FF                MOV     R7,A
-0B3F 7400        R     MOV     A,#LOW rx_word
-0B41 2F                ADD     A,R7
-0B42 F582              MOV     DPL,A
-0B44 E4                CLR     A
-0B45 3400        R     ADDC    A,#HIGH rx_word
-0B47 F583              MOV     DPH,A
-0B49 E4                CLR     A
-0B4A F0                MOVX    @DPTR,A
+0C33 900000      R     MOV     DPTR,#word
+0C36 E0                MOVX    A,@DPTR
+0C37 FF                MOV     R7,A
+0C38 EF                MOV     A,R7
+0C39 64DD              XRL     A,#0DDH
+0C3B 7052              JNZ     ?C0172
                                            ; SOURCE LINE # 534
-0B4B 900000      E     MOV     DPTR,#i
-0B4E E0                MOVX    A,@DPTR
-0B4F 04                INC     A
-0B50 F0                MOVX    @DPTR,A
-0B51 80DC              SJMP    ?C0163
-0B53         ?C0164:
                                            ; SOURCE LINE # 535
-0B53 900000      R     MOV     DPTR,#dat_cnt
-0B56 E4                CLR     A
-0B57 F0                MOVX    @DPTR,A
+0C3D 7BFF              MOV     R3,#0FFH
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 50  
+
+0C3F 7A00        R     MOV     R2,#HIGH ?SC_0
+0C41 7900        R     MOV     R1,#LOW ?SC_0
+0C43 120000      E     LCALL   _UART_PutString
+0C46         ?C0173:
                                            ; SOURCE LINE # 536
-0B58 900000      R     MOV     DPTR,#cmd_exct
-0B5B E4                CLR     A
-0B5C F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 538
-0B5D 7BFF              MOV     R3,#0FFH
-0B5F 7A00        R     MOV     R2,#HIGH ?SC_9
-0B61 7900        R     MOV     R1,#LOW ?SC_9
-0B63 120000      E     LCALL   _UART_PutString
-0B66         ?C0166:
+0C46 120000      E     LCALL   UART_ReadTxStatus
+0C49 EF                MOV     A,R7
+0C4A 30E1F9            JNB     ACC.1,?C0173
+                                           ; SOURCE LINE # 537
                                            ; SOURCE LINE # 539
-0B66 120000      E     LCALL   UART_ReadTxStatus
-0B69 EF                MOV     A,R7
-0B6A 30E103            JNB     ACC.1,$ + 6H
-0B6D 020000      R     LJMP    ?C0168
-                                           ; SOURCE LINE # 540
-                                           ; SOURCE LINE # 542
-0B70 80F4              SJMP    ?C0166
-0B72         ?C0167:
+0C4D         ?C0174:
+                                           ; SOURCE LINE # 541
+0C4D 900000      E     MOV     DPTR,#delay
+0C50 E0                MOVX    A,@DPTR
+0C51 FE                MOV     R6,A
+0C52 A3                INC     DPTR
+0C53 E0                MOVX    A,@DPTR
+0C54 FF                MOV     R7,A
+0C55 EE                MOV     A,R6
+0C56 FF                MOV     R7,A
+0C57 7E00              MOV     R6,#00H
+0C59 900000      R     MOV     DPTR,#d_msb
+0C5C EF                MOV     A,R7
+0C5D F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 543
+0C5E 120000      E     LCALL   UART_ClearTxBuffer
                                            ; SOURCE LINE # 544
-0B72 020000      R     LJMP    ?C0168
-0B75         ?C0003:
+0C61 900000      R     MOV     DPTR,#d_msb
+0C64 E0                MOVX    A,@DPTR
+0C65 FF                MOV     R7,A
+0C66 120000      E     LCALL   _UART_WriteTxData
+0C69         ?C0175:
                                            ; SOURCE LINE # 545
-0B75 900000      R     MOV     DPTR,#dat_cnt
-0B78 E0                MOVX    A,@DPTR
-0B79 FF                MOV     R7,A
-0B7A EF                MOV     A,R7
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 47  
-
-0B7B 607C              JZ      ?C0168
+0C69 120000      E     LCALL   UART_ReadTxStatus
+0C6C EF                MOV     A,R7
+0C6D 30E1F9            JNB     ACC.1,?C0175
                                            ; SOURCE LINE # 546
-                                           ; SOURCE LINE # 547
-0B7D 900000      R     MOV     DPTR,#word
-0B80 E0                MOVX    A,@DPTR
-0B81 FF                MOV     R7,A
-0B82 900000      E     MOV     DPTR,#i
-0B85 E0                MOVX    A,@DPTR
-0B86 FE                MOV     R6,A
-0B87 7400        R     MOV     A,#LOW rx_word
-0B89 2E                ADD     A,R6
-0B8A F582              MOV     DPL,A
-0B8C E4                CLR     A
-0B8D 3400        R     ADDC    A,#HIGH rx_word
-0B8F F583              MOV     DPH,A
-0B91 EF                MOV     A,R7
-0B92 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 548
-0B93 900000      E     MOV     DPTR,#i
-0B96 E0                MOVX    A,@DPTR
-0B97 04                INC     A
-0B98 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 549
-0B99 900000      R     MOV     DPTR,#dat_cnt
-0B9C E0                MOVX    A,@DPTR
-0B9D 14                DEC     A
-0B9E F0                MOVX    @DPTR,A
+0C70         ?C0176:
                                            ; SOURCE LINE # 550
-0B9F 900000      R     MOV     DPTR,#dat_cnt
-0BA2 E0                MOVX    A,@DPTR
-0BA3 FF                MOV     R7,A
-0BA4 EF                MOV     A,R7
-0BA5 704D              JNZ     ?C0170
+0C70 900000      E     MOV     DPTR,#delay
+0C73 E0                MOVX    A,@DPTR
+0C74 FE                MOV     R6,A
+0C75 A3                INC     DPTR
+0C76 E0                MOVX    A,@DPTR
+0C77 FF                MOV     R7,A
+0C78 120000      E     LCALL   _UART_WriteTxData
+0C7B         ?C0177:
                                            ; SOURCE LINE # 551
+0C7B 120000      E     LCALL   UART_ReadTxStatus
+0C7E EF                MOV     A,R7
+0C7F 30E1F9            JNB     ACC.1,?C0177
                                            ; SOURCE LINE # 552
-0BA7 900000      R     MOV     DPTR,#cmd_exct
-0BAA 7401              MOV     A,#01H
-0BAC F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 553
-0BAD 900000      R     MOV     DPTR,#rx_word
-0BB0 E0                MOVX    A,@DPTR
-0BB1 FF                MOV     R7,A
-0BB2 EF                MOV     A,R7
-0BB3 B4DE43            CJNE    A,#0DEH,?C0168
                                            ; SOURCE LINE # 554
-                                           ; SOURCE LINE # 555
-0BB6 900000      E     MOV     DPTR,#delay
-0BB9 E4                CLR     A
-0BBA F0                MOVX    @DPTR,A
-0BBB A3                INC     DPTR
-0BBC E4                CLR     A
-0BBD F0                MOVX    @DPTR,A
+0C82         ?C0178:
                                            ; SOURCE LINE # 556
-0BBE 900000      R     MOV     DPTR,#rx_word+01H
-0BC1 E0                MOVX    A,@DPTR
-0BC2 FF                MOV     R7,A
-0BC3 7E00              MOV     R6,#00H
-0BC5 900000      E     MOV     DPTR,#delay
-0BC8 EE                MOV     A,R6
-0BC9 8FF0              MOV     B,R7
-0BCB 120000      E     LCALL   ?C?IILDX
+0C82 900000      R     MOV     DPTR,#cmd_exct
+0C85 E4                CLR     A
+0C86 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 557
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 48  
+0C87 900000      R     MOV     DPTR,#dat_cnt
+0C8A E4                CLR     A
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 51  
 
-0BCE 900000      E     MOV     DPTR,#delay
-0BD1 E0                MOVX    A,@DPTR
-0BD2 FE                MOV     R6,A
-0BD3 A3                INC     DPTR
-0BD4 E0                MOVX    A,@DPTR
-0BD5 FF                MOV     R7,A
-0BD6 EF                MOV     A,R7
-0BD7 7F00              MOV     R7,#00H
-0BD9 FE                MOV     R6,A
-0BDA 900000      E     MOV     DPTR,#delay
-0BDD EE                MOV     A,R6
-0BDE F0                MOVX    @DPTR,A
-0BDF A3                INC     DPTR
-0BE0 EF                MOV     A,R7
-0BE1 F0                MOVX    @DPTR,A
+0C8B F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 558
-0BE2 900000      R     MOV     DPTR,#rx_word+02H
-0BE5 E0                MOVX    A,@DPTR
-0BE6 FF                MOV     R7,A
-0BE7 7E00              MOV     R6,#00H
-0BE9 900000      E     MOV     DPTR,#delay
-0BEC EE                MOV     A,R6
-0BED 8FF0              MOV     B,R7
-0BEF 120000      E     LCALL   ?C?IILDX
-                                           ; SOURCE LINE # 559
+0C8C 020000      R     LJMP    ?C0185
+0C8F         ?C0172:
                                            ; SOURCE LINE # 560
-0BF2 8005              SJMP    ?C0168
-0BF4         ?C0170:
+                                           ; SOURCE LINE # 561
+0C8F 900000      E     MOV     DPTR,#i
+0C92 E4                CLR     A
+0C93 F0                MOVX    @DPTR,A
+0C94         ?C0180:
+0C94 900000      E     MOV     DPTR,#i
+0C97 E0                MOVX    A,@DPTR
+0C98 FF                MOV     R7,A
+0C99 EF                MOV     A,R7
+0C9A D3                SETB    C
+0C9B 941F              SUBB    A,#01FH
+0C9D 5019              JNC     ?C0181
                                            ; SOURCE LINE # 562
                                            ; SOURCE LINE # 563
-0BF4 900000      R     MOV     DPTR,#cmd_exct
-0BF7 E4                CLR     A
-0BF8 F0                MOVX    @DPTR,A
+0C9F 900000      E     MOV     DPTR,#i
+0CA2 E0                MOVX    A,@DPTR
+0CA3 FF                MOV     R7,A
+0CA4 7400        R     MOV     A,#LOW rx_word
+0CA6 2F                ADD     A,R7
+0CA7 F582              MOV     DPL,A
+0CA9 E4                CLR     A
+0CAA 3400        R     ADDC    A,#HIGH rx_word
+0CAC F583              MOV     DPH,A
+0CAE E4                CLR     A
+0CAF F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 564
+0CB0 900000      E     MOV     DPTR,#i
+0CB3 E0                MOVX    A,@DPTR
+0CB4 04                INC     A
+0CB5 F0                MOVX    @DPTR,A
+0CB6 80DC              SJMP    ?C0180
+0CB8         ?C0181:
                                            ; SOURCE LINE # 565
-0BF9         ?C0168:
+0CB8 900000      R     MOV     DPTR,#dat_cnt
+0CBB E4                CLR     A
+0CBC F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 566
-0BF9 900000      R     MOV     DPTR,#cmd_exct
-0BFC E0                MOVX    A,@DPTR
-0BFD FF                MOV     R7,A
-0BFE EF                MOV     A,R7
-0BFF 6401              XRL     A,#01H
-0C01 6003              JZ      $ + 5H
-0C03 020000      R     LJMP    ?C0001
-                                           ; SOURCE LINE # 567
+0CBD 900000      R     MOV     DPTR,#cmd_exct
+0CC0 E4                CLR     A
+0CC1 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 568
-0C06 900000      E     MOV     DPTR,#i
-0C09 E0                MOVX    A,@DPTR
-0C0A 14                DEC     A
-0C0B FF                MOV     R7,A
-0C0C F0                MOVX    @DPTR,A
-0C0D 900000      R     MOV     DPTR,#lst_byte
-0C10 EF                MOV     A,R7
-0C11 F0                MOVX    @DPTR,A
+0CC2 7BFF              MOV     R3,#0FFH
+0CC4 7A00        R     MOV     R2,#HIGH ?SC_9
+0CC6 7900        R     MOV     R1,#LOW ?SC_9
+0CC8 120000      E     LCALL   _UART_PutString
+0CCB         ?C0183:
                                            ; SOURCE LINE # 569
-0C12 900000      R     MOV     DPTR,#status
-0C15 E0                MOVX    A,@DPTR
-0C16 FF                MOV     R7,A
-0C17 EF                MOV     A,R7
-0C18 14                DEC     A
-0C19 FF                MOV     R7,A
-0C1A 900000      R     MOV     DPTR,#cmd_set
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 49  
-
-0C1D EF                MOV     A,R7
-0C1E F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 571
-0C1F 900000      R     MOV     DPTR,#status
-0C22 E0                MOVX    A,@DPTR
-0C23 FF                MOV     R7,A
-0C24 900000      R     MOV     DPTR,#stat
-0C27 EF                MOV     A,R7
-0C28 F0                MOVX    @DPTR,A
-0C29         ?C0174:
-0C29 900000      R     MOV     DPTR,#stat
-0C2C E0                MOVX    A,@DPTR
-0C2D FF                MOV     R7,A
-0C2E EF                MOV     A,R7
-0C2F D3                SETB    C
-0C30 9400              SUBB    A,#00H
-0C32 4036              JC      ?C0175
+0CCB 120000      E     LCALL   UART_ReadTxStatus
+0CCE EF                MOV     A,R7
+0CCF 30E103            JNB     ACC.1,$ + 6H
+0CD2 020000      R     LJMP    ?C0185
+                                           ; SOURCE LINE # 570
                                            ; SOURCE LINE # 572
+0CD5 80F4              SJMP    ?C0183
+0CD7         ?C0184:
                                            ; SOURCE LINE # 573
-0C34 900000      R     MOV     DPTR,#lst_byte
-0C37 E0                MOVX    A,@DPTR
-0C38 FF                MOV     R7,A
-0C39 7400        R     MOV     A,#LOW rx_word
-0C3B 2F                ADD     A,R7
-0C3C F582              MOV     DPL,A
-0C3E E4                CLR     A
-0C3F 3400        R     ADDC    A,#HIGH rx_word
-0C41 F583              MOV     DPH,A
-0C43 E0                MOVX    A,@DPTR
-0C44 FF                MOV     R7,A
-0C45 900000      R     MOV     DPTR,#cmd_set
-0C48 E0                MOVX    A,@DPTR
-0C49 FE                MOV     R6,A
-0C4A 7400        R     MOV     A,#LOW switch_cmd
-0C4C 2E                ADD     A,R6
-0C4D F582              MOV     DPL,A
-0C4F E4                CLR     A
-0C50 3400        R     ADDC    A,#HIGH switch_cmd
-0C52 F583              MOV     DPH,A
-0C54 EF                MOV     A,R7
-0C55 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 574
-0C56 900000      R     MOV     DPTR,#lst_byte
-0C59 E0                MOVX    A,@DPTR
-0C5A 14                DEC     A
-0C5B F0                MOVX    @DPTR,A
-0C5C 900000      R     MOV     DPTR,#cmd_set
-0C5F E0                MOVX    A,@DPTR
-0C60 14                DEC     A
-0C61 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 575
-0C62 900000      R     MOV     DPTR,#stat
-0C65 E0                MOVX    A,@DPTR
-0C66 14                DEC     A
-0C67 F0                MOVX    @DPTR,A
-0C68 80BF              SJMP    ?C0174
-0C6A         ?C0175:
-                                           ; SOURCE LINE # 577
-0C6A 900000      R     MOV     DPTR,#cmd_exct
-0C6D E4                CLR     A
-0C6E F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 578
-C51 COMPILER V9.51   TASK2                                                                 07/01/2014 18:08:18 PAGE 50  
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 52  
 
-0C6F 7F01              MOV     R7,#01H
-0C71 120000      E     LCALL   _os_send_signal
+0CD7 020000      R     LJMP    ?C0185
+0CDA         ?C0003:
+                                           ; SOURCE LINE # 575
+0CDA 900000      R     MOV     DPTR,#dat_cnt
+0CDD E0                MOVX    A,@DPTR
+0CDE FF                MOV     R7,A
+0CDF EF                MOV     A,R7
+0CE0 607C              JZ      ?C0185
+                                           ; SOURCE LINE # 576
+                                           ; SOURCE LINE # 577
+0CE2 900000      R     MOV     DPTR,#word
+0CE5 E0                MOVX    A,@DPTR
+0CE6 FF                MOV     R7,A
+0CE7 900000      E     MOV     DPTR,#i
+0CEA E0                MOVX    A,@DPTR
+0CEB FE                MOV     R6,A
+0CEC 7400        R     MOV     A,#LOW rx_word
+0CEE 2E                ADD     A,R6
+0CEF F582              MOV     DPL,A
+0CF1 E4                CLR     A
+0CF2 3400        R     ADDC    A,#HIGH rx_word
+0CF4 F583              MOV     DPH,A
+0CF6 EF                MOV     A,R7
+0CF7 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 578
+0CF8 900000      E     MOV     DPTR,#i
+0CFB E0                MOVX    A,@DPTR
+0CFC 04                INC     A
+0CFD F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 579
-0C74 900000      E     MOV     DPTR,#i
-0C77 E0                MOVX    A,@DPTR
-0C78 04                INC     A
-0C79 F0                MOVX    @DPTR,A
+0CFE 900000      R     MOV     DPTR,#dat_cnt
+0D01 E0                MOVX    A,@DPTR
+0D02 14                DEC     A
+0D03 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 580
+0D04 900000      R     MOV     DPTR,#dat_cnt
+0D07 E0                MOVX    A,@DPTR
+0D08 FF                MOV     R7,A
+0D09 EF                MOV     A,R7
+0D0A 704D              JNZ     ?C0187
                                            ; SOURCE LINE # 581
-0C7A 020000      R     LJMP    ?C0001
-0C7D 22                RET     
+                                           ; SOURCE LINE # 582
+0D0C 900000      R     MOV     DPTR,#cmd_exct
+0D0F 7401              MOV     A,#01H
+0D11 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 583
+0D12 900000      R     MOV     DPTR,#rx_word
+0D15 E0                MOVX    A,@DPTR
+0D16 FF                MOV     R7,A
+0D17 EF                MOV     A,R7
+0D18 B4DE43            CJNE    A,#0DEH,?C0185
+                                           ; SOURCE LINE # 584
+                                           ; SOURCE LINE # 585
+0D1B 900000      E     MOV     DPTR,#delay
+0D1E E4                CLR     A
+0D1F F0                MOVX    @DPTR,A
+0D20 A3                INC     DPTR
+0D21 E4                CLR     A
+0D22 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 586
+0D23 900000      R     MOV     DPTR,#rx_word+01H
+0D26 E0                MOVX    A,@DPTR
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 53  
+
+0D27 FF                MOV     R7,A
+0D28 7E00              MOV     R6,#00H
+0D2A 900000      E     MOV     DPTR,#delay
+0D2D EE                MOV     A,R6
+0D2E 8FF0              MOV     B,R7
+0D30 120000      E     LCALL   ?C?IILDX
+                                           ; SOURCE LINE # 587
+0D33 900000      E     MOV     DPTR,#delay
+0D36 E0                MOVX    A,@DPTR
+0D37 FE                MOV     R6,A
+0D38 A3                INC     DPTR
+0D39 E0                MOVX    A,@DPTR
+0D3A FF                MOV     R7,A
+0D3B EF                MOV     A,R7
+0D3C 7F00              MOV     R7,#00H
+0D3E FE                MOV     R6,A
+0D3F 900000      E     MOV     DPTR,#delay
+0D42 EE                MOV     A,R6
+0D43 F0                MOVX    @DPTR,A
+0D44 A3                INC     DPTR
+0D45 EF                MOV     A,R7
+0D46 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 588
+0D47 900000      R     MOV     DPTR,#rx_word+02H
+0D4A E0                MOVX    A,@DPTR
+0D4B FF                MOV     R7,A
+0D4C 7E00              MOV     R6,#00H
+0D4E 900000      E     MOV     DPTR,#delay
+0D51 EE                MOV     A,R6
+0D52 8FF0              MOV     B,R7
+0D54 120000      E     LCALL   ?C?IILDX
+                                           ; SOURCE LINE # 589
+                                           ; SOURCE LINE # 590
+0D57 8005              SJMP    ?C0185
+0D59         ?C0187:
+                                           ; SOURCE LINE # 592
+                                           ; SOURCE LINE # 593
+0D59 900000      R     MOV     DPTR,#cmd_exct
+0D5C E4                CLR     A
+0D5D F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 594
+                                           ; SOURCE LINE # 595
+0D5E         ?C0185:
+                                           ; SOURCE LINE # 596
+0D5E 900000      R     MOV     DPTR,#cmd_exct
+0D61 E0                MOVX    A,@DPTR
+0D62 FF                MOV     R7,A
+0D63 EF                MOV     A,R7
+0D64 6401              XRL     A,#01H
+0D66 6003              JZ      $ + 5H
+0D68 020000      R     LJMP    ?C0001
+                                           ; SOURCE LINE # 597
+                                           ; SOURCE LINE # 598
+0D6B 900000      E     MOV     DPTR,#i
+0D6E E0                MOVX    A,@DPTR
+0D6F 14                DEC     A
+0D70 FF                MOV     R7,A
+0D71 F0                MOVX    @DPTR,A
+0D72 900000      R     MOV     DPTR,#lst_byte
+0D75 EF                MOV     A,R7
+0D76 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 599
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 54  
+
+0D77 900000      R     MOV     DPTR,#status
+0D7A E0                MOVX    A,@DPTR
+0D7B FF                MOV     R7,A
+0D7C EF                MOV     A,R7
+0D7D 14                DEC     A
+0D7E FF                MOV     R7,A
+0D7F 900000      R     MOV     DPTR,#cmd_set
+0D82 EF                MOV     A,R7
+0D83 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 601
+0D84 900000      R     MOV     DPTR,#status
+0D87 E0                MOVX    A,@DPTR
+0D88 FF                MOV     R7,A
+0D89 900000      R     MOV     DPTR,#stat
+0D8C EF                MOV     A,R7
+0D8D F0                MOVX    @DPTR,A
+0D8E         ?C0191:
+0D8E 900000      R     MOV     DPTR,#stat
+0D91 E0                MOVX    A,@DPTR
+0D92 FF                MOV     R7,A
+0D93 EF                MOV     A,R7
+0D94 D3                SETB    C
+0D95 9400              SUBB    A,#00H
+0D97 4036              JC      ?C0192
+                                           ; SOURCE LINE # 602
+                                           ; SOURCE LINE # 603
+0D99 900000      R     MOV     DPTR,#lst_byte
+0D9C E0                MOVX    A,@DPTR
+0D9D FF                MOV     R7,A
+0D9E 7400        R     MOV     A,#LOW rx_word
+0DA0 2F                ADD     A,R7
+0DA1 F582              MOV     DPL,A
+0DA3 E4                CLR     A
+0DA4 3400        R     ADDC    A,#HIGH rx_word
+0DA6 F583              MOV     DPH,A
+0DA8 E0                MOVX    A,@DPTR
+0DA9 FF                MOV     R7,A
+0DAA 900000      R     MOV     DPTR,#cmd_set
+0DAD E0                MOVX    A,@DPTR
+0DAE FE                MOV     R6,A
+0DAF 7400        R     MOV     A,#LOW switch_cmd
+0DB1 2E                ADD     A,R6
+0DB2 F582              MOV     DPL,A
+0DB4 E4                CLR     A
+0DB5 3400        R     ADDC    A,#HIGH switch_cmd
+0DB7 F583              MOV     DPH,A
+0DB9 EF                MOV     A,R7
+0DBA F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 604
+0DBB 900000      R     MOV     DPTR,#lst_byte
+0DBE E0                MOVX    A,@DPTR
+0DBF 14                DEC     A
+0DC0 F0                MOVX    @DPTR,A
+0DC1 900000      R     MOV     DPTR,#cmd_set
+0DC4 E0                MOVX    A,@DPTR
+0DC5 14                DEC     A
+0DC6 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 605
+0DC7 900000      R     MOV     DPTR,#stat
+0DCA E0                MOVX    A,@DPTR
+0DCB 14                DEC     A
+0DCC F0                MOVX    @DPTR,A
+C51 COMPILER V9.51   TASK2                                                                 07/02/2014 14:49:09 PAGE 55  
+
+0DCD 80BF              SJMP    ?C0191
+0DCF         ?C0192:
+                                           ; SOURCE LINE # 607
+0DCF 900000      R     MOV     DPTR,#cmd_exct
+0DD2 E4                CLR     A
+0DD3 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 608
+0DD4 7F01              MOV     R7,#01H
+0DD6 120000      E     LCALL   _os_send_signal
+                                           ; SOURCE LINE # 609
+0DD9 900000      E     MOV     DPTR,#i
+0DDC E0                MOVX    A,@DPTR
+0DDD 04                INC     A
+0DDE F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 610
+                                           ; SOURCE LINE # 611
+0DDF 020000      R     LJMP    ?C0001
+0DE2 22                RET     
              ; FUNCTION task2 (END)
 
              ; FUNCTION TASK_2 (BEGIN)
-                                           ; SOURCE LINE # 584
-                                           ; SOURCE LINE # 585
-                                           ; SOURCE LINE # 586
+                                           ; SOURCE LINE # 614
+                                           ; SOURCE LINE # 615
+                                           ; SOURCE LINE # 616
 0000 7F02              MOV     R7,#02H
 0002 120000      E     LCALL   _os_create_task
-                                           ; SOURCE LINE # 587
+                                           ; SOURCE LINE # 617
 0005 22                RET     
              ; FUNCTION TASK_2 (END)
 
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   3204    ----
+   CODE SIZE        =   3561    ----
    CONSTANT SIZE    =     14    ----
    XDATA SIZE       =     44       8
    PDATA SIZE       =   ----    ----

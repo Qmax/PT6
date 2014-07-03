@@ -52,10 +52,10 @@ void task2 (void) _task_ 2
 			{
                 k_val=0x00;
 				if(CyPins_ReadPin(K1_SENSE_P0_3))        k_val = k_val & 0xF7;
-                else                                     k_val = k_val & 0x08;
+                else                                     k_val = k_val | 0x08;
                 
-                if(CyPins_ReadPin(K2_SENSE_P4_1))        k_val = k_val | 0x7F;
-                else                                     k_val = k_val & 0x80;
+                if(CyPins_ReadPin(K2_SENSE_P4_1))        k_val = k_val & 0x7F;
+                else                                     k_val = k_val | 0x80;
                 
                 CyDelayUs(1000);
                 
@@ -294,6 +294,36 @@ void task2 (void) _task_ 2
 			}
 			else if(word == 0x18)					//	Embedded Probe Status
 			{
+                if(prb_sts==0){
+                    if(CyPins_ReadPin(K1_SENSE_P0_3))        k_port = k_port | 0x08;
+                    else                                     k_port = k_port & 0xF7;
+        
+                    if(CyPins_ReadPin(Key1_2_P0_0))          k_port = k_port | 0x01;
+                    else                                     k_port = k_port & 0xFE;
+
+                    if(CyPins_ReadPin(Key1_1_P0_1))          k_port = k_port | 0x02;
+                    else                                     k_port = k_port & 0xFD;
+                    
+                    if(CyPins_ReadPin(Key1_0_P0_2))          k_port = k_port | 0x04;
+                    else                                     k_port = k_port & 0xFB;
+                    
+                    if(CyPins_ReadPin(K2_SENSE_P4_1))        k_port = k_port | 0x80;
+                    else                                     k_port = k_port & 0x7F;    
+                    
+                    if(CyPins_ReadPin(Key2_0_P4_0))          k_port = k_port | 0x40;
+                    else                                     k_port = k_port & 0xBF;    
+                    
+                    if(CyPins_ReadPin(Key2_1_P12_3))         k_port = k_port | 0x20;
+                    else                                     k_port = k_port & 0xDF;    
+                    
+                    if(CyPins_ReadPin(Key2_2_P12_2))         k_port = k_port | 0x10;
+                    else                                     k_port = k_port & 0xEF;    
+            	
+                    CyDelayUs(500);     
+                    
+                    k_port = k_port  ^ 0x88;						//	Set Keysense active high '1'
+                    prb_sts = k_port ;
+                }
 				//prb_sts = CY_GET_REG8(CYDEV_IO_PRT_PRT0_PS);		//Port0 Read
 				//prb_sts = ~prb_sts;									//Invert Port0 Data
 				//prb_sts = prb_sts & 0x88;							//Mask the Key Pin Input from Port0 Data
