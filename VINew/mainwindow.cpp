@@ -230,7 +230,42 @@ void MainWindow::InitializeUILibraries()
     ui->singleCap_2->setVisible(false);
     ui->butAM->setVisible(false);
 
-
+    //~~~~~~~~Check for debug panel~~~~~~~~~~~~~~~~~~~~~~~~
+    QStringList l_strdebugPanel;
+    QFile textFile2("debugPanel.txt");
+    if (textFile2.open(QIODevice::ReadOnly))
+    {
+        QTextStream textStream(&textFile2);
+        while (!textStream.atEnd())
+        {
+            l_strdebugPanel.append(textStream.readLine());
+            if(l_strdebugPanel.value(0)=="1")
+                ui->debugPanel->setVisible(true);
+            else
+                ui->debugPanel->setVisible(false);
+        }
+    }else{
+        ui->debugPanel->setVisible(false);
+    }
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~Load X-Y Axis Box~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    QStringList stringList;
+    bool ok=true;
+    QFile textFile("AdjustXYaxisVI.txt");
+    if (textFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream textStream(&textFile);
+        while (!textStream.atEnd())
+        {
+            stringList.append(textStream.readLine());
+        }
+        ui->xAxisBox->setValue(stringList.value(0).toDouble(&ok));
+        ui->yAxisBox->setValue(stringList.value(1).toDouble(&ok));
+    }else{
+        ui->xAxisBox->setValue(0.0);
+        ui->yAxisBox->setValue(0.0);
+    }
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 
 void MainWindow::notifyClipObserver()
@@ -336,12 +371,12 @@ void MainWindow::notifyProbeObserver()
 		{
 //			qDebug()<<"DUAL";
 			ui->lblProbeComparison_2->setText("Average");
-		    ui->frame_23->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/icm.png)");
+/*		    ui->frame_23->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/icm.png)");
 		    ui->frame_22->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/icm.png)");
 		    ui->frame_22->setGeometry(17,30,90,40);
 		    ui->frame_23->setGeometry(17,80,90,40);
 		    ui->frame_20->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;");
-		    ui->frame_20->setGeometry(120,38,100,15);
+		    ui->frame_20->setGeometry(120,38,100,15);02072014*/
 	    	ui->butProbe1->setStyleSheet(knobON);
 	    	ui->butProbe2->setStyleSheet(knobON);
 
@@ -443,15 +478,17 @@ bool MainWindow::showMessageBox(bool ok, bool cancel, QString text, QString okTe
 bool MainWindow::checkProbeStatus()
 {
 //		qDebug()<<"Probe Dialog Status:"<<m_objVISubject->getProbeDialog(0);
-        unsigned short l_nProbeStaus=m_objFunctionalObject->getProbeStatus();
+		unsigned short l_nProbeStaus=m_objFunctionalObject->/*writePSOC(0x01);*/getProbeStatus();
+/*    	usleep(1000);
+    	unsigned short l_nProbeStaus=m_objFunctionalObject->readPSOC();*/
 
         unsigned short l_nStatus = (l_nProbeStaus & 0x11);
-        qDebug()<<"Probe Status:"<<hex<< l_nProbeStaus;
+        qDebug()<<"MainWindow::Probe Status:"<<hex<< l_nProbeStaus;
         if(m_objVISubject->getProbeDialog(0) ==0)
         {
                 if(m_nSelectedProbe==0)
                 {
-                        if((l_nProbeStaus&0x01)!=0x01)
+                        if((l_nProbeStaus&0x08)!=0x08)
                         {
 
                                 /*IPTMessageBox->QMsgBox*/showMessageBox(true,false,"Connect Probe1");
@@ -460,11 +497,11 @@ bool MainWindow::checkProbeStatus()
                 }
                 else if(m_nSelectedProbe==1)
                 {
-                        if((l_nProbeStaus&0x10)!=0x10)
+                       /* if((l_nProbeStaus&0x80)!=0x80)
                         {
-                                /*IPTMessageBox->QMsgBox*/showMessageBox(true,false,"Connect Probe2");
+                                IPTMessageBox->QMsgBoxshowMessageBox(true,false,"Connect Probe2");
                                 return false;
-                        }//commented on 18062014 RRV
+                        }*///commented on 18062014 RRV
                 }
                 else if( m_nSelectedProbe==2 && m_bAutoCurveFit == false)
                 {
@@ -476,11 +513,11 @@ bool MainWindow::checkProbeStatus()
         }
         else if(m_objVISubject->getProbeDialog(0) ==1)
         {
-                if((l_nProbeStaus&0x11)!=0x11)
+                /*if((l_nProbeStaus&0x88)!=0x88)
                 {
-                        /*IPTMessageBox->QMsgBox*/showMessageBox(true,false,"Connect Probe1 & Probe2");
+                        IPTMessageBox->QMsgBoxshowMessageBox(true,false,"Connect Probe1 & Probe2");
                         return false;
-                }//commented on 18062014 RRV
+                }*///commented on 18062014 RRV
         }
 
         return true;
@@ -510,25 +547,21 @@ void MainWindow::doKeyFunction(int pKeyCode)
             bool l_BKey=false,l_nTKey=false;
             if (l_nTopKeyCode == 0x80)
             {
-                qDebug() << "Probe-2 is Pressed" << hex<<(pKeyCode & 0xF0);
-                pKeyCode = (pKeyCode & 0xF0);
-//                    qDebug() << "Probe-1 is Pressed" << hex<<(pKeyCode & 0x0F);
-//                    pKeyCode = (pKeyCode & 0x0F);
+                    qDebug() << "Probe-2 is Pressed" << hex<<(pKeyCode & 0xF0);
+                    pKeyCode = (pKeyCode & 0xF0);
                     l_nTKey=true;
             }
             if (l_nBottomKeyCode == 0x08)
             {
-                qDebug() << "Probe-1 is Pressed" << hex<<(pKeyCode & 0x0F);
-                pKeyCode = (pKeyCode & 0x0F);
-//                    qDebug() << "Probe-2 is Pressed" << hex<<(pKeyCode & 0xF0);
-//                    pKeyCode = (pKeyCode & 0xF0);
+                    qDebug() << "Probe-1 is Pressed" << hex<<(pKeyCode & 0x0F);
+                    pKeyCode = (pKeyCode & 0x0F);
                     l_BKey=true;
             }
             if(m_nSelectedProbe==0 && l_BKey==true)
                     return;
             if(m_nSelectedProbe==1 && l_nTKey==true)
                     return;
-//            qDebug() << "KeyCode:"<<hex<<pKeyCode<<m_objVISubject->getIndexTemplate(0,true);
+            qDebug() << "KeyCode:"<<hex<<pKeyCode;
 
             if ((m_objVISubject->getIndexTemplate(0,true) == "VOL/FQ/IMP" && (pKeyCode == 0x0c || pKeyCode == 0x90))
                             || (m_objVISubject->getIndexTemplate(1,true) == "VOL/FQ/IMP" && (pKeyCode == 0x0a || pKeyCode == 0xa0))
@@ -747,18 +780,20 @@ void MainWindow::customEvent(QEvent *e)
         if (e->type() == ((QEvent::Type) 1234)) {
                 IGPIOEvent->BlockSig(true);
                 unsigned int l_nRegisterValue = m_objFunctionalObject->readEmbeddedKeyValue();
-                qDebug() << "data read at 1E is" << hex<<l_nRegisterValue;
+//                qDebug() << "data read at 1E is" << hex<<l_nRegisterValue;
                 //if ((l_nRegisterValue&0x0100) == 0x0100) {
                 if(1){
                         m_objFunctionalObject->writePSOC(0x01);
                         usleep(1000);
                         m_nKeyCode = m_objFunctionalObject->readPSOC();
-                        qDebug() << "~~~~~~~~~~~~~~~~~~~~~~" << hex << m_nKeyCode<< "~~~~~~~~~~~~~~~~~~~~~~~~~~";
+
+                        qDebug() << "KeyCode"<<hex << m_nKeyCode;
+                        qDebug()<<"Key Data:"<<hex<<m_objFunctionalObject->getProbeStatus();
                 }
                 else{
                         qDebug()<<"Interrupt not raised";
                 }
-                doKeyFunction(m_nKeyCode);
+                doKeyFunction(m_objFunctionalObject->getProbeStatus());
                 IGPIOEvent->BlockSig(false);
                 //m_objFunctionalObject->CLEARINT();
         }
@@ -941,23 +976,23 @@ void MainWindow::initialiseInteractive()
     	qDebug()<<"Dual Mode:"<<m_nSelectedProbe;
             if(m_nSelectedProbe==0)
             {
-                    ui->redPallete->setPalette(Qt::red);
-                    ui->errPallete->setPalette(Qt::green);
-            }
-            if(m_nSelectedProbe==1)
-            {
                     ui->redPallete->setPalette(Qt::green);
                     ui->errPallete->setPalette(Qt::red);
             }
+            if(m_nSelectedProbe==1)
+            {
+                    ui->redPallete->setPalette(Qt::red);
+                    ui->errPallete->setPalette(Qt::green);
+            }
     }
 
-       // movie = new QMovie(":/Symbols/ajax-loader.gif");
-        //ISplash->selectSplashImage(2);
-        //ISplash->setPos(10,158,90,42);
+//        movie = new QMovie(":/Symbols/ajax-loader.gif");
+//        ISplash->selectSplashImage(2);
+//        ISplash->setPos(10,158,90,42);
 //        ui->lblMovie->setMovie(movie);
 //        movie->setSpeed(250);
-    //    movie->start();
-      //  ui->lblStatus->setText("Running...");
+//        movie->start();
+//        ui->lblStatus->setText("Running...");
         m_objFunctionalObject->driveVI();
 }
 
@@ -1003,12 +1038,12 @@ void MainWindow::on_butProClip_clicked()
 		ui->grpEmbedded->setDisabled(true);
 		if(m_bClipLearn== true)
 			notifyClipObserver();
-	    ui->frame_20->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/25PinDIN.png)");
+/*	    ui->frame_20->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/25PinDIN.png)");
 	    ui->frame_20->setGeometry(121,20,110,50);
 	    ui->frame_22->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
 	    ui->frame_23->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
 	    ui->frame_22->setGeometry(28,38,60,15);
-	    ui->frame_23->setGeometry(30,90,60,15);
+	    ui->frame_23->setGeometry(30,90,60,15);02072014*/
 
 	//	notifyProbeObserver();
 	}
@@ -1033,7 +1068,7 @@ void MainWindow::on_butProClip_clicked()
 
 void MainWindow::on_startButton_clicked()
 {
-    qDebug() << "Start VI Interactive";
+    qDebug() << "Start/Stop VI Interactive";
 
     ui->storeBox->setStyleSheet(highlightOFF);
     ui->startBox->setStyleSheet(highlightON);
@@ -1305,12 +1340,12 @@ void MainWindow::on_butClip_clicked()
     ui->butLearn->setDisabled(false);
     ui->startBox->setDisabled(true);
     m_objClipDialog->show();
-    ui->frame_20->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/25PinDIN.png)");
+/*    ui->frame_20->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/25PinDIN.png)");
     ui->frame_20->setGeometry(121,20,110,50);
     ui->frame_22->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
     ui->frame_23->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
     ui->frame_22->setGeometry(28,38,60,15);
-    ui->frame_23->setGeometry(30,90,60,15);
+    ui->frame_23->setGeometry(30,90,60,15);20072014*/
 }
 
 void MainWindow::on_butProbe_clicked()
@@ -1630,12 +1665,18 @@ void MainWindow::on_butProbe1_clicked()
 //        ui->errPallete->setPalette(Qt::green);
     	return;
     }
-    ui->frame_22->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/icm.png)");
+/*    ui->frame_22->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/icm.png)");
     ui->frame_22->setGeometry(17,30,90,40);
     ui->frame_23->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;	");
     ui->frame_23->setGeometry(30,90,60,15);
     ui->frame_20->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;");
-    ui->frame_20->setGeometry(120,38,100,15);
+    ui->frame_20->setGeometry(120,38,100,15);02072014*/
+    ui->vi1->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->vi2->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->frame_31->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->frame_20->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->dso1_outer_3->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->dso_outer_3->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
 //    qDebug()<<"Probe Status:"<<m_nSelectedProbe;
 
 }
@@ -1668,13 +1709,18 @@ void MainWindow::on_butProbe2_clicked()
 
     	return;
     }
-    ui->frame_23->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/icm.png)");
+/*    ui->frame_23->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/icm.png)");
     ui->frame_23->setGeometry(17,80,90,40);
     ui->frame_22->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
     ui->frame_22->setGeometry(28,38,60,15);
     ui->frame_20->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;");
-    ui->frame_20->setGeometry(120,38,100,15);
-
+    ui->frame_20->setGeometry(120,38,100,15);02072014*/
+    ui->vi1->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->vi2->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->frame_31->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->frame_20->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->dso1_outer_3->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->dso_outer_3->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
 //    qDebug()<<"Probe Status:"<<m_nSelectedProbe;
 }
 
@@ -1688,12 +1734,18 @@ void MainWindow::on_butExternal_clicked()
 
 	if(m_objVISubject->getProbeDialog(0)==1) return;
     m_nSelectedProbe=2;
-    ui->frame_20->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/25PinDIN.png)");
+/*    ui->frame_20->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/25PinDIN.png)");
     ui->frame_20->setGeometry(121,20,110,50);
     ui->frame_22->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
     ui->frame_23->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
     ui->frame_22->setGeometry(28,38,60,15);
-    ui->frame_23->setGeometry(30,90,60,15);
+    ui->frame_23->setGeometry(30,90,60,15);02072014*/
+    ui->vi1->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->vi2->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->frame_31->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->frame_20->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->dso1_outer_3->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->dso_outer_3->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
 
 //    qDebug()<<"Probe Status:"<<m_nSelectedProbe;
 }
@@ -1707,6 +1759,13 @@ void MainWindow::on_butExternal_2_clicked()
 
     if(m_objVISubject->getProbeDialog(0)==1) return;
     m_nSelectedProbe=3;
+
+    ui->vi1->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->vi2->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->frame_31->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->frame_20->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->dso1_outer_3->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+    ui->dso_outer_3->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
 
 //    qDebug()<<"Probe Status:"<<m_nSelectedProbe;
 }
@@ -3018,4 +3077,20 @@ short int MainWindow::checkGreaterVoltages()
 		}
 	else
 		return 0;
+}
+
+void MainWindow::on_xAxisBox_valueChanged(double )
+{
+    QFile outFile("AdjustXYaxisVI.txt");
+    outFile.open(QIODevice::WriteOnly);
+    QTextStream ts(&outFile);
+    ts <<(ui->xAxisBox->value())<<endl<<(ui->yAxisBox->value())<<endl;
+}
+
+void MainWindow::on_yAxisBox_valueChanged(double )
+{
+    QFile outFile("AdjustXYaxisVI.txt");
+    outFile.open(QIODevice::WriteOnly);
+    QTextStream ts(&outFile);
+    ts <<(ui->xAxisBox->value())<<endl<<(ui->yAxisBox->value())<<endl;
 }

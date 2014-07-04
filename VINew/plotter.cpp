@@ -2,6 +2,9 @@
 #include <qdebug.h>
 #include "unistd.h"
 
+#include <QFile>
+#include <QTextStream>
+
 Plotter::Plotter(QWidget *parent) :
     QWidget(parent,Qt::FramelessWindowHint | Qt::WindowSystemMenuHint)
 {
@@ -191,7 +194,7 @@ void Plotter::mousePressEvent(QMouseEvent *event)
 {
     if( m_bRubberbandDrag == false)
         return;
-   /* QRect rect(Margin,Margin,width()-2*Margin,height()-2*Margin);
+    QRect rect(Margin,Margin,width()-2*Margin,height()-2*Margin);
     if(event->button() == Qt::LeftButton)
     {
         if(rect.contains(event->pos()))
@@ -206,26 +209,26 @@ void Plotter::mousePressEvent(QMouseEvent *event)
                 setCursor(Qt::CrossCursor);
             }
         }
-    }*/
+    }
 }
 
 void Plotter::mouseMoveEvent(QMouseEvent *event)
 {
     if( m_bRubberbandDrag == false)
         return;
-    /*if(rubberBandIsShown)
+    if(rubberBandIsShown)
     {
         updateRubberBandRegion();
         rubberBandRect.setBottomRight(event->pos());
         updateRubberBandRegion();
-    }*/
+    }
 }
 
 void Plotter::mouseReleaseEvent(QMouseEvent *event)
 {
     if( m_bRubberbandDrag == false)
         return;
- /*   if((event->button() == Qt::LeftButton) && rubberBandIsShown)
+    if((event->button() == Qt::LeftButton) && rubberBandIsShown)
     {
         rubberBandIsShown = false;
         updateRubberBandRegion();
@@ -249,7 +252,7 @@ void Plotter::mouseReleaseEvent(QMouseEvent *event)
         zoomStack.resize(curZoom + 1);
         zoomStack.append(settings);
         zoomIn();
-    }*/
+    }
 }
 
 
@@ -438,21 +441,21 @@ void Plotter::drawGrid(QPainter *painter)
         pen.setColor(objColor);
         pen.setWidth(1);
         painter->setPen(pen);
-        painter->drawLine(Margin+rect.width()/2,Margin,Margin+rect.width()/2,Margin+rect.height());
-        painter->drawLine(Margin,Margin+rect.height()/2-1,Margin+rect.width(),Margin+rect.height()/2-1);
+/*vertical line*/        painter->drawLine(Margin+rect.width()/2-1,Margin,Margin+rect.width()/2-1,Margin+rect.height());
+/*horizontal line*/      painter->drawLine(Margin,Margin+rect.height()/2-1,Margin+rect.width(),Margin+rect.height()/2-1);
 
         for(int i=0;i<rect.height();i+=((rect.height()/settings.numYTicks)/2))
         {
             if(i!=0 && i%2!=0)
             {
-                painter->drawLine(Margin+rect.width()/2-3,Margin+i,Margin+rect.width()/2+3,Margin+i);
+/*vertical grid*/   painter->drawLine((Margin+rect.width()/2-3)-1,Margin+i,(Margin+rect.width()/2+3)-1,Margin+i);
             }
         }
-        for(int j=0;j<rect.width();j+=(rect.width()/settings.numXTicks) )
+        for(int j=0;j<rect.width();j=j+(rect.width()/settings.numXTicks)+5 )
         {
             if(j!=0)
             {
-                painter->drawLine(Margin+j,Margin+rect.height()/2-3,Margin+j,Margin+rect.height()/2+3);
+/*horizontal grid*/  painter->drawLine(Margin+j-5,Margin+rect.height()/2-3,Margin+j-5,Margin+rect.height()/2+3);
             }
         }
 
@@ -643,8 +646,24 @@ void Plotter::drawBand(QPainter *painter,int pId)
 
 void Plotter::drawCurves(QPainter *painter)
 {
-	//printf("Inside DrawCurves Clear ID %d\n",m_nClearID);
-	//qDebug()<<"Clear Curve Trace Index:" << m_nClearID;
+	//~~~~~~~~Adjust X-y Axis ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    QStringList stringList;
+    bool ok=true;
+    QFile textFile("AdjustXYaxisVI.txt");
+    if (textFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream textStream(&textFile);
+        while (!textStream.atEnd())
+        {
+            stringList.append(textStream.readLine());
+        }
+        adjustXaxis=stringList.value(0).toDouble(&ok);
+        adjustYaxis=stringList.value(1).toDouble(&ok);
+    }else{
+        adjustXaxis=5.5;
+        adjustYaxis=0;
+    }
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     static const QColor colorForIds[8] = {Qt::red,Qt::green,Qt::cyan,Qt::magenta,Qt::yellow,Qt::white,Qt::gray,Qt::black};
     PlotSettings settings = zoomStack[curZoom];
     if( m_moveFlag == true)
@@ -703,7 +722,7 @@ void Plotter::drawCurves(QPainter *painter)
             if(m_ZoomFlag == false)
             {
                 if(m_bVIMode == true)
-                    x = ((rect.width()/2)+5.0  + ((dx)*(((rect.width()-1)))/(settings.spanX())));
+                    x = ((rect.width()/2)+adjustXaxis  + ((dx)*(((rect.width()-1)))/(settings.spanX())));
                 else
                     x = (rect.left()+ ((dx)*(((rect.width()-1)))/(settings.spanX())));
 
@@ -713,7 +732,7 @@ void Plotter::drawCurves(QPainter *painter)
 //                    printf(" Coord-Y %f\n",dy/2.0);
                 }
                 else
-                    y = (((Margin+rect.height()/2)+5) - ((dy+m_nOffset)*((rect.height()-1))/(settings.spanY())));
+                    y = (((Margin+rect.height()/2)+adjustYaxis) - ((dy+m_nOffset)*((rect.height()-1))/(settings.spanY())));//TO CHANGE THE Y AXIS IN THE GRAPH
                // printf(" Coord- X & Y %f %f\n",x,y);
             }
             else if(m_ZoomFlag == true)

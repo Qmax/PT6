@@ -897,14 +897,9 @@ protected:
 
     void GenerateIPoints(short pChannelValue,int pWaveTrace )
     {
-       // printf("Acutal Data Count %d\n",m_strActualData.count());
-//    	qDebug() << "Trace Flag:"<< pWaveTrace<<m_objWaveData->m_bCalibChecked<<pChannelValue;
         double l_nXPoint =0.0,l_nYPoint =0.0;
 
         QVector<QPointF> l_nData;
-       // qDebug()<<"-------------------------- Calibration Data ----------------------------------------------------";
-      // qDebug()<<"Constant:"<<m_objWaveData->m_nCalibrationConstant<<"Gain:"<<m_objWaveData->m_nCalibrationGain;
-       // qDebug()<<"------------------------------------------------------------------------------------------------";
         for(int l_nIndex=0;l_nIndex<m_strActualData.count();l_nIndex++)
         {
             if(pWaveTrace==0)
@@ -913,12 +908,8 @@ protected:
                 l_nYPoint = convertToVIPoint(m_strReferenceData[l_nIndex]) - convertToVIPoint(m_strActualData[l_nIndex]);
     			if(m_objWaveData->m_bCalibChecked)
     			{
-    				// y = mx + c
-    				//double l_nTempYPoint =(m_objWaveData->m_nCalibrationGain * l_nYPoint) +m_objWaveData->m_nCalibrationConstant;
     				double l_nTempYPoint = (l_nYPoint - m_objWaveData->m_nCalibrationConstant) / m_objWaveData->m_nCalibrationGain;
-    				//double l_nTempXPoint = (l_nXPoint - m_objWaveData->m_nCalibrationConstant) / m_objWaveData->m_nCalibrationGain;
-    				l_nYPoint = l_nTempYPoint;//*m_objWaveData->m_nScreenAmplitude;
-    				//l_nXPoint = l_nTempXPoint;
+    				l_nYPoint = l_nTempYPoint;
     			}
     			l_nData.append(QPointF(l_nXPoint,l_nYPoint));
             }
@@ -927,21 +918,17 @@ protected:
                 l_nYPoint = converToVTPoint(m_strActualData[l_nIndex]);
     			if(m_objWaveData->m_bCalibChecked)
     			{
-    				//double l_nTempYPoint =(m_objWaveData->m_nCalibrationGain * l_nYPoint) +m_objWaveData->m_nCalibrationConstant;
-    				// y = (x-b) / m
     				double l_nTempYPoint = (l_nYPoint - m_objWaveData->m_nCalibrationConstant) / m_objWaveData->m_nCalibrationGain;
     				l_nYPoint = l_nTempYPoint;
     			}
-    			//qDebug()<<l_nYPoint;
     			l_nData.append(QPointF(l_nXPoint,l_nYPoint));
-    			//qDebug()<<l_nXPoint;
                 l_nXPoint += m_objWaveData->m_nTimeperSample;
 
             }
             if(pWaveTrace==2)
             {
                 l_nXPoint = converttoVZPoint(m_strActualData[l_nIndex]) ;
-                l_nYPoint = l_nXPoint / 1000.0 ;// Impedance Value is hardcoded will be replaced
+                l_nYPoint = l_nXPoint / 1000.0 ;
                 l_nData.append(QPointF(l_nXPoint,l_nYPoint));
             }
             if(pWaveTrace==3)
@@ -950,21 +937,16 @@ protected:
 				l_nYPoint = convertToVIPoint(m_strReferenceData[l_nIndex]) - convertToVIPoint(m_strActualData[l_nIndex]);
     			if(m_objWaveData->m_bCalibChecked)
     			{
-    				//double l_nTempYPoint =(m_objWaveData->m_nCalibrationGain * l_nYPoint) +m_objWaveData->m_nCalibrationConstant;
-    				// y = (x-b) / m
     				double l_nTempYPoint = (l_nYPoint - m_objWaveData->m_nCalibrationConstant) / m_objWaveData->m_nCalibrationGain;
     				l_nYPoint = l_nTempYPoint;
-    				//printf("XPoint %f YPoint %f Calibration Constants %f %f\n",l_nXPoint,l_nYPoint,m_objWaveData->m_nCalibrationConstant,m_objWaveData->m_nCalibrationGain);
     			}
 
 				l_nData.append(QPointF(l_nXPoint,l_nYPoint));
 			}
-        //printf("XPoint: %f == YPoint: %f\n",l_nXPoint,l_nYPoint);
 
         }
         if(pWaveTrace==3)
         {
-        	//qDebug() << "Inside Band Trace";
             setBandData(0,l_nData,m_objWaveData->m_nEnvelopBand);
         }
         else

@@ -138,7 +138,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="vi.qrc">
        <normaloff>:/res/Delete.png</normaloff>:/res/Delete.png</iconset>
      </property>
      <property name="iconSize">
@@ -211,1208 +211,6 @@ border-top:1px solid gray;
        <height>70</height>
       </size>
      </property>
-    </widget>
-   </widget>
-   <widget class="QFrame" name="frontPanel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>434</y>
-      <width>692</width>
-      <height>160</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>DejaVu Sans</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QFrame{border:1px solid black; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #dadbff);border-radius:10px;}
-QLabel{border:1px solid rgba(0,0,0,0);}
-</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QFrame" name="frame">
-     <property name="geometry">
-      <rect>
-       <x>105</x>
-       <y>7</y>
-       <width>230</width>
-       <height>146</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVu Sans</family>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}
-QLabel{border:1px solid rgba(0,0,0,0);}
-
-</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="label_4w">
-      <property name="geometry">
-       <rect>
-        <x>47</x>
-        <y>130</y>
-        <width>60</width>
-        <height>15</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:gray;</string>
-      </property>
-      <property name="text">
-       <string>4 WIRE</string>
-      </property>
-     </widget>
-     <widget class="QFrame" name="DMM2W_P2">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>35</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:15px;
-image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
-</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="DMMI_P1">
-      <property name="geometry">
-       <rect>
-        <x>185</x>
-        <y>34</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:15px;
-image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
-</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="DMM4W_P12">
-      <property name="geometry">
-       <rect>
-        <x>25</x>
-        <y>93</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="DMM4W_P1">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>98</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:15px;
-image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="DMM4W_P22">
-      <property name="geometry">
-       <rect>
-        <x>95</x>
-        <y>93</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="DMMI_P12">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>29</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
-</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_2w">
-      <property name="geometry">
-       <rect>
-        <x>34</x>
-        <y>73</y>
-        <width>90</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:gray;</string>
-      </property>
-      <property name="text">
-       <string>VOLT</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QFrame" name="DMM2W_P22">
-      <property name="geometry">
-       <rect>
-        <x>95</x>
-        <y>30</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
-</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="DMM2W_P12">
-      <property name="geometry">
-       <rect>
-        <x>25</x>
-        <y>30</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
-</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_Amp">
-      <property name="geometry">
-       <rect>
-        <x>152</x>
-        <y>66</y>
-        <width>40</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:gray;</string>
-      </property>
-      <property name="text">
-       <string>AMP</string>
-      </property>
-     </widget>
-     <widget class="QFrame" name="DMM2W_P1">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>35</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:15px;
-image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
-</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="DMM4W_P2">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>98</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:15px;
-image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_20">
-      <property name="geometry">
-       <rect>
-        <x>5</x>
-        <y>3</y>
-        <width>220</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color:blue;
-color:white;
-border:1px solid black;
-border-radius:10px;</string>
-      </property>
-      <property name="text">
-       <string>DIGITAL MULTI METER</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QFrame" name="DMMI_P12_2">
-      <property name="geometry">
-       <rect>
-        <x>168</x>
-        <y>77</y>
-        <width>50</width>
-        <height>50</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid rgba(0,0,0,0);
-image: url(:/res/fuse.png);</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_Amp_2">
-      <property name="geometry">
-       <rect>
-        <x>167</x>
-        <y>127</y>
-        <width>50</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:black;</string>
-      </property>
-      <property name="text">
-       <string>FUSE</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QFrame" name="frame_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>7</y>
-       <width>92</width>
-       <height>146</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVu Sans</family>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}
-QLabel{border:1px solid rgba(0,0,0,0);}
-
-</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="label_10">
-      <property name="geometry">
-       <rect>
-        <x>25</x>
-        <y>130</y>
-        <width>38</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:gray;</string>
-      </property>
-      <property name="text">
-       <string>CH2</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_9">
-      <property name="geometry">
-       <rect>
-        <x>26</x>
-        <y>72</y>
-        <width>38</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:gray;</string>
-      </property>
-      <property name="text">
-       <string>CH1</string>
-      </property>
-     </widget>
-     <widget class="QFrame" name="dso1_outer">
-      <property name="geometry">
-       <rect>
-        <x>25</x>
-        <y>30</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:20px;
-image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <widget class="QFrame" name="dso1_inner">
-       <property name="geometry">
-        <rect>
-         <x>15</x>
-         <y>15</y>
-         <width>10</width>
-         <height>10</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>DejaVu Sans</family>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:1px solid gray;border-radius:4px;
-</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QFrame" name="dso_outer">
-      <property name="geometry">
-       <rect>
-        <x>25</x>
-        <y>90</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:20px;
-image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <widget class="QFrame" name="dso_inner">
-       <property name="geometry">
-        <rect>
-         <x>15</x>
-         <y>15</y>
-         <width>10</width>
-         <height>10</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>DejaVu Sans</family>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:1px solid gray;border-radius:4px;
-</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QLabel" name="label_19">
-      <property name="geometry">
-       <rect>
-        <x>6</x>
-        <y>3</y>
-        <width>80</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color:blue;
-color:white;
-border:1px solid black;
-border-radius:10px;</string>
-      </property>
-      <property name="text">
-       <string>DSO</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QFrame" name="frame_3">
-     <property name="geometry">
-      <rect>
-       <x>338</x>
-       <y>7</y>
-       <width>250</width>
-       <height>146</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVu Sans</family>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}
-QLabel{border:1px solid rgba(0,0,0,0);}
-
-</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="label_21">
-      <property name="geometry">
-       <rect>
-        <x>5</x>
-        <y>3</y>
-        <width>240</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color:blue;
-color:white;
-border:1px solid black;
-border-radius:10px;</string>
-      </property>
-      <property name="text">
-       <string>QSM-VI/ICM/SHORT LOCATOR</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QFrame" name="frame_22">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>27</x>
-        <y>30</y>
-        <width>70</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QFrame
-{
-	image: url(:/res/icm.png);
-
-border:0px solid gray;
-}</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="frame_23">
-      <property name="geometry">
-       <rect>
-        <x>27</x>
-        <y>85</y>
-        <width>70</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QFrame
-{
-image:url(:/res/icm.png);
-border:0px solid gray;
-}</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="frame_21">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>90</y>
-        <width>80</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"> border:1px solid gray;
- border-top-right-radius: 8px;
- border-top-left-radius: 8px;
- border-bottom-right-radius: 15px;
- border-bottom-left-radius: 15px;</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_16">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>113</y>
-        <width>41</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:black;</string>
-      </property>
-      <property name="text">
-       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;VI2&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_14">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>120</y>
-        <width>60</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:gray;</string>
-      </property>
-      <property name="text">
-       <string>GUARD</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_17">
-      <property name="geometry">
-       <rect>
-        <x>42</x>
-        <y>61</y>
-        <width>30</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:black;</string>
-      </property>
-      <property name="text">
-       <string>VI1</string>
-      </property>
-     </widget>
-     <widget class="QFrame" name="frame_20">
-      <property name="geometry">
-       <rect>
-        <x>119</x>
-        <y>30</y>
-        <width>110</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QFrame
-{
-image: url(:/res/25PinDIN.png);
-border:0px solid gray;
-}</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_15">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>60</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:black;</string>
-      </property>
-      <property name="text">
-       <string>EXTERNAL</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QFrame" name="frame_4">
-     <property name="geometry">
-      <rect>
-       <x>590</x>
-       <y>7</y>
-       <width>90</width>
-       <height>85</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVu Sans</family>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}
-QLabel{border:1px solid rgba(0,0,0,0);}
-
-</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="label_24">
-      <property name="geometry">
-       <rect>
-        <x>6</x>
-        <y>3</y>
-        <width>80</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color:blue;
-color:white;
-border:1px solid black;
-border-radius:10px;</string>
-      </property>
-      <property name="text">
-       <string>AWG</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QFrame" name="frame_17">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>27</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:1px solid gray;border-radius:20px;
-</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <widget class="QFrame" name="frame_19">
-       <property name="geometry">
-        <rect>
-         <x>16</x>
-         <y>15</y>
-         <width>10</width>
-         <height>10</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>DejaVu Sans</family>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:1px solid gray;border-radius:4px;
-</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QLabel" name="label_13">
-      <property name="geometry">
-       <rect>
-        <x>26</x>
-        <y>68</y>
-        <width>30</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:gray;</string>
-      </property>
-      <property name="text">
-       <string>FG</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QFrame" name="frame_7">
-     <property name="geometry">
-      <rect>
-       <x>590</x>
-       <y>96</y>
-       <width>90</width>
-       <height>57</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVu Sans</family>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}
-QLabel{border:1px solid rgba(0,0,0,0);}
-
-</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="label_26">
-      <property name="geometry">
-       <rect>
-        <x>26</x>
-        <y>71</y>
-        <width>30</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:gray;</string>
-      </property>
-      <property name="text">
-       <string>FG</string>
-      </property>
-     </widget>
-     <widget class="QFrame" name="frame_8">
-      <property name="geometry">
-       <rect>
-        <x>24</x>
-        <y>14</y>
-        <width>10</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="frame_9">
-      <property name="geometry">
-       <rect>
-        <x>51</x>
-        <y>14</y>
-        <width>10</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-       </font>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_2w_2">
-      <property name="geometry">
-       <rect>
-        <x>19</x>
-        <y>0</y>
-        <width>50</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>8</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>5V 1KHz</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_2w_3">
-      <property name="geometry">
-       <rect>
-        <x>15</x>
-        <y>43</y>
-        <width>60</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>DejaVu Sans</family>
-        <pointsize>8</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>REF GND</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
     </widget>
    </widget>
    <widget class="QGroupBox" name="PCBox">
@@ -1776,7 +574,7 @@ background-color:grey
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="vi.qrc">
        <normaloff>:/res/Probe.png</normaloff>:/res/Probe.png</iconset>
      </property>
      <property name="iconSize">
@@ -1897,7 +695,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="vi.qrc">
        <normaloff>:/res/Store.png</normaloff>:/res/Store.png</iconset>
      </property>
      <property name="iconSize">
@@ -1998,7 +796,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="vi.qrc">
        <normaloff>:/res/Calibar.png</normaloff>:/res/Calibar.png</iconset>
      </property>
      <property name="iconSize">
@@ -2072,7 +870,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="vi.qrc">
        <normaloff>:/res/Start.png</normaloff>:/res/Start.png</iconset>
      </property>
      <property name="iconSize">
@@ -2155,7 +953,7 @@ background-color:rgba(0,0,0,0)</string>
        <string/>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="vi.qrc">
         <normaloff>:/res/up-icon.png</normaloff>:/res/up-icon.png</iconset>
       </property>
       <property name="iconSize">
@@ -2186,7 +984,7 @@ background-color:rgba(0,0,0,0);</string>
        <string/>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="vi.qrc">
         <normaloff>:/res/down-icon.png</normaloff>:/res/down-icon.png</iconset>
       </property>
       <property name="iconSize">
@@ -5659,7 +4457,7 @@ background-color:grey
 }</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="vi.qrc">
         <normaloff>:/res/settings.png</normaloff>:/res/settings.png</iconset>
       </property>
       <property name="iconSize">
@@ -5693,7 +4491,7 @@ border:1px solid rgba(0,0,0,0);
        <string/>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="vi.qrc">
         <normaloff>:/res/pressedOrange.png</normaloff>:/res/pressedOrange.png</iconset>
       </property>
       <property name="iconSize">
@@ -9383,7 +8181,7 @@ border:1px solid rgba(0,0,0,0);
        <string/>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="vi.qrc">
         <normaloff>:/res/48L.png</normaloff>:/res/48L.png</iconset>
       </property>
       <property name="iconSize">
@@ -9422,7 +8220,7 @@ border:1px solid rgba(0,0,0,0);
        <string/>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="vi.qrc">
         <normaloff>:/res/48M.png</normaloff>:/res/48M.png</iconset>
       </property>
       <property name="iconSize">
@@ -9462,7 +8260,7 @@ border:1px solid rgba(0,0,0,0);
        <string/>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="vi.qrc">
         <normaloff>:/res/48R.png</normaloff>:/res/48R.png</iconset>
       </property>
       <property name="iconSize">
@@ -9640,7 +8438,7 @@ background-color:grey
        <string/>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="vi.qrc">
         <normaloff>:/res/settings.png</normaloff>:/res/settings.png</iconset>
       </property>
       <property name="iconSize">
@@ -10987,18 +9785,1588 @@ p, li { white-space: pre-wrap; }
      </widget>
     </widget>
    </widget>
-   <zorder>deleteBox</zorder>
-   <zorder>ExitBox</zorder>
-   <zorder>frontPanel</zorder>
-   <zorder>PCBox</zorder>
-   <zorder>storeBox</zorder>
-   <zorder>CalibBox</zorder>
-   <zorder>startBox</zorder>
-   <zorder>grpInteractive</zorder>
-   <zorder>selectFrame</zorder>
+   <widget class="QFrame" name="frontPanel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>434</y>
+      <width>692</width>
+      <height>160</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QFrame{border:1px solid black; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #dadbff);border-radius:10px;}
+QLabel{border:1px solid rgba(0,0,0,0);}
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QFrame" name="frame">
+     <property name="geometry">
+      <rect>
+       <x>328</x>
+       <y>81</y>
+       <width>300</width>
+       <height>76</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}
+QLabel{border:1px solid rgba(0,0,0,0);}
+
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_4w">
+      <property name="geometry">
+       <rect>
+        <x>243</x>
+        <y>60</y>
+        <width>20</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="DMM2W_P2">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>25</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:15px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QFrame" name="DMMI_P1">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>25</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:15px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
+
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QFrame" name="DMM4W_P12">
+      <property name="geometry">
+       <rect>
+        <x>235</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QFrame" name="DMM4W_P1">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>25</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:15px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QFrame" name="DMMI_P12">
+      <property name="geometry">
+       <rect>
+        <x>125</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2w">
+      <property name="geometry">
+       <rect>
+        <x>35</x>
+        <y>60</y>
+        <width>20</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>V</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QFrame" name="DMM2W_P22">
+      <property name="geometry">
+       <rect>
+        <x>75</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QFrame" name="DMM2W_P12">
+      <property name="geometry">
+       <rect>
+        <x>25</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_Amp">
+      <property name="geometry">
+       <rect>
+        <x>83</x>
+        <y>60</y>
+        <width>20</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>C</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="DMM2W_P1">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>25</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:15px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_27">
+      <property name="geometry">
+       <rect>
+        <x>6</x>
+        <y>3</y>
+        <width>287</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:blue;
+color:white;
+border:1px solid black;
+border-radius:8px;</string>
+      </property>
+      <property name="text">
+       <string>DIGITAL MULTI METER</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_Amp_2">
+      <property name="geometry">
+       <rect>
+        <x>176</x>
+        <y>60</y>
+        <width>50</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:black;</string>
+      </property>
+      <property name="text">
+       <string>FUSE</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="DMMI_P12_2">
+      <property name="geometry">
+       <rect>
+        <x>178</x>
+        <y>16</y>
+        <width>44</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid rgba(0,0,0,0);
+image: url(:/res/fuse.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_Amp_5">
+      <property name="geometry">
+       <rect>
+        <x>129</x>
+        <y>60</y>
+        <width>35</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>mA</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame_2">
+     <property name="geometry">
+      <rect>
+       <x>328</x>
+       <y>3</y>
+       <width>300</width>
+       <height>76</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}
+QLabel{border:1px solid rgba(0,0,0,0);}
+
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_28">
+      <property name="geometry">
+       <rect>
+        <x>97</x>
+        <y>59</y>
+        <width>38</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>CH2</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_29">
+      <property name="geometry">
+       <rect>
+        <x>23</x>
+        <y>59</y>
+        <width>38</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>CH1</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="dso1_outer">
+      <property name="geometry">
+       <rect>
+        <x>22</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="dso1_inner">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>15</y>
+         <width>10</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:1px solid gray;border-radius:4px;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="dso_outer">
+      <property name="geometry">
+       <rect>
+        <x>96</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="dso_inner">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>15</y>
+         <width>10</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:1px solid gray;border-radius:4px;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_30">
+      <property name="geometry">
+       <rect>
+        <x>7</x>
+        <y>3</y>
+        <width>287</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:blue;
+color:white;
+border:1px solid black;
+border-radius:8px;</string>
+      </property>
+      <property name="text">
+       <string>DSO / AWG</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_37">
+      <property name="geometry">
+       <rect>
+        <x>238</x>
+        <y>59</y>
+        <width>43</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>AWG</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame_17">
+      <property name="geometry">
+       <rect>
+        <x>237</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="frame_19">
+       <property name="geometry">
+        <rect>
+         <x>16</x>
+         <y>15</y>
+         <width>10</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:1px solid gray;border-radius:4px;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_53">
+      <property name="geometry">
+       <rect>
+        <x>168</x>
+        <y>59</y>
+        <width>35</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>EXT</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame_29">
+      <property name="geometry">
+       <rect>
+        <x>167</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="frame_30">
+       <property name="geometry">
+        <rect>
+         <x>16</x>
+         <y>15</y>
+         <width>10</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:1px solid gray;border-radius:4px;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame_3">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>80</y>
+       <width>300</width>
+       <height>76</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}
+QLabel{border:1px solid rgba(0,0,0,0);}
+
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_31">
+      <property name="geometry">
+       <rect>
+        <x>6</x>
+        <y>3</y>
+        <width>287</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:blue;
+color:white;
+border:1px solid black;
+border-radius:8px;</string>
+      </property>
+      <property name="text">
+       <string>QSM-VI/ICM/SHORT LOCATOR</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_33">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>119</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:black;</string>
+      </property>
+      <property name="text">
+       <string>GUARD</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="vi2">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_55">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>59</y>
+        <width>84</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>VI1/SL/ICM</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_58">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>59</y>
+        <width>100</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>VI2/EXT MUX</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="vi1">
+      <property name="geometry">
+       <rect>
+        <x>24</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_59">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>58</y>
+        <width>90</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>GUARDING</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame_21">
+      <property name="geometry">
+       <rect>
+        <x>193</x>
+        <y>27</y>
+        <width>80</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"> border:1px solid gray;
+ border-top-right-radius: 8px;
+ border-top-left-radius: 8px;
+ border-bottom-right-radius: 15px;
+ border-bottom-left-radius: 15px;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame_4">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>3</y>
+       <width>300</width>
+       <height>76</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}
+QLabel{border:1px solid rgba(0,0,0,0);}
+
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_32">
+      <property name="geometry">
+       <rect>
+        <x>97</x>
+        <y>59</y>
+        <width>38</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>AH3</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_34">
+      <property name="geometry">
+       <rect>
+        <x>23</x>
+        <y>59</y>
+        <width>38</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>AH1</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="dso1_outer_3">
+      <property name="geometry">
+       <rect>
+        <x>22</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="dso1_inner_3">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>15</y>
+         <width>10</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:1px solid gray;border-radius:4px;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="dso_outer_3">
+      <property name="geometry">
+       <rect>
+        <x>96</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="dso_inner_3">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>15</y>
+         <width>10</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:1px solid gray;border-radius:4px;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_35">
+      <property name="geometry">
+       <rect>
+        <x>7</x>
+        <y>3</y>
+        <width>287</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:blue;
+color:white;
+border:1px solid black;
+border-radius:8px;</string>
+      </property>
+      <property name="text">
+       <string>AH EXTERNAL CHANNEL</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_38">
+      <property name="geometry">
+       <rect>
+        <x>237</x>
+        <y>59</y>
+        <width>43</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>AH0</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame_20">
+      <property name="geometry">
+       <rect>
+        <x>237</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="frame_22">
+       <property name="geometry">
+        <rect>
+         <x>16</x>
+         <y>15</y>
+         <width>10</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:1px solid gray;border-radius:4px;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_54">
+      <property name="geometry">
+       <rect>
+        <x>167</x>
+        <y>59</y>
+        <width>35</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:gray;</string>
+      </property>
+      <property name="text">
+       <string>AH2</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame_31">
+      <property name="geometry">
+       <rect>
+        <x>167</x>
+        <y>20</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:20px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="frame_32">
+       <property name="geometry">
+        <rect>
+         <x>16</x>
+         <y>15</y>
+         <width>10</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:1px solid gray;border-radius:4px;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame_7">
+     <property name="geometry">
+      <rect>
+       <x>638</x>
+       <y>4</y>
+       <width>40</width>
+       <height>152</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}
+QLabel{border:1px solid rgba(0,0,0,0);}
+
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_56">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>119</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:black;</string>
+      </property>
+      <property name="text">
+       <string>GUARD</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="DMM4W_P1_4">
+      <property name="geometry">
+       <rect>
+        <x>7</x>
+        <y>31</y>
+        <width>27</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:12px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="frame_23">
+       <property name="geometry">
+        <rect>
+         <x>8</x>
+         <y>9</y>
+         <width>10</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:1px solid gray;border-radius:4px;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="DMM4W_P1_3">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>103</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:1px solid gray;border-radius:15px;
+image: url(:/new/prefix1/Button-Blank-Gray-icon.png);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="frame_33">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>10</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:1px solid gray;border-radius:4px;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_36">
+      <property name="geometry">
+       <rect>
+        <x>4</x>
+        <y>5</y>
+        <width>34</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:blue;
+color:white;
+border:1px solid black;
+border-radius:8px;</string>
+      </property>
+      <property name="text">
+       <string>REF</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_57">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>79</y>
+        <width>34</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:blue;
+color:white;
+border:1px solid black;
+border-radius:8px;</string>
+      </property>
+      <property name="text">
+       <string>GND</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="debugPanel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>434</y>
+      <width>692</width>
+      <height>160</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QFrame{border:1px solid black; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #dadbff);border-radius:10px;}
+QLabel{border:1px solid rgba(0,0,0,0);}
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QFrame" name="frame_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>211</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}
+QLabel{border:1px solid rgba(0,0,0,0);}
+
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_41">
+      <property name="geometry">
+       <rect>
+        <x>7</x>
+        <y>3</y>
+        <width>200</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:blue;
+color:white;
+border:1px solid black;
+border-radius:8px;</string>
+      </property>
+      <property name="text">
+       <string>Adjust X-Y Axis of Graph</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="yAxisBox">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>63</y>
+        <width>111</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QDoubleSpinBox::up-button {
+     width: 50px; 
+ }
+QDoubleSpinBox::down-button {
+     width: 50px;
+ }</string>
+      </property>
+      <property name="decimals">
+       <number>1</number>
+      </property>
+      <property name="minimum">
+       <double>-99.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="xAxis">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>33</y>
+        <width>70</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>14</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {color:black;border: rgba(0,0,0,0);}</string>
+      </property>
+      <property name="text">
+       <string>X-Axis :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="YAxis">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>74</y>
+        <width>70</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>14</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {color:black;border: rgba(0,0,0,0);}</string>
+      </property>
+      <property name="text">
+       <string>Y-Axis :</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="xAxisBox">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>23</y>
+        <width>111</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QDoubleSpinBox::up-button {
+     width: 50px; 
+ }
+QDoubleSpinBox::down-button {
+     width: 50px;
+ }</string>
+      </property>
+      <property name="decimals">
+       <number>1</number>
+      </property>
+      <property name="minimum">
+       <double>-99.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+     </widget>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="vi.qrc"/>
+ </resources>
  <connections/>
 </ui>

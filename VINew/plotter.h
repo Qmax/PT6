@@ -118,6 +118,8 @@ signals:
 protected:
     stWaveData* m_objPlotData;
     short int m_nCompareWaveIndex;
+	double adjustXaxis,adjustYaxis;//added by RRV 03072014
+
 
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);

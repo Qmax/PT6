@@ -164,6 +164,10 @@ void VIFunctionalLogic::doMemoryCalibration()
 
     // prompt user if probe is not connect if connected ensure probes are open.
     // check for SPICodeID exists if not flag user Memory problem.
+	unsigned short temp_Voltage=m_objVISubject->getIndexTemplate(0);
+	unsigned short temp_Frequency=m_objVISubject->getIndexTemplate(1);
+	unsigned short temp_Impedance=m_objVISubject->getIndexTemplate(2);
+
 	if(checkSPICodeID() == false)
 	{
 		qDebug() << "CodeID not done";
@@ -200,6 +204,11 @@ void VIFunctionalLogic::doMemoryCalibration()
     }
     m_obVIHWInstance.stopDrive();
     ENINT();
+
+    m_objVISubject->setIndexTemplate(0,temp_Voltage);
+    m_objVISubject->setIndexTemplate(1,temp_Frequency);
+    m_objVISubject->setIndexTemplate(2,temp_Impedance);
+    switchVIF();
 }
 void VIFunctionalLogic::onCommonGNDRelay(bool pFlag)
 {
@@ -368,13 +377,11 @@ void VIFunctionalLogic::driveVI()
 {
 	//m_obVIHWInstance.resetDAC();
     GenerateSINEPattern();
-    //qDebug()<< "DFIFO Generated";
+//    qDebug()<< "DFIFO Generated";
     switchVIF();
-    //qDebug()<< "VIF Switched";
+//    qDebug()<< "VIF Switched";
     loadDriveFIFO();
-
     ReadCalibrationFunctionFile();
-    //qDebug()<< "Drife FIFO Loded";
 }
 
 void VIFunctionalLogic::peformDriveConfiguration()
@@ -554,7 +561,7 @@ void VIFunctionalLogic::loadDriveFIFO()
 void VIFunctionalLogic::peformDrive()
 {
     m_obVIHWInstance.performDrive();
-   // qDebug() << "Drive Perfomed";
+//    qDebug() << "Drive Perfomed";
 }
 
 void VIFunctionalLogic::checkforDriveDoneBit()
@@ -694,7 +701,7 @@ void VIFunctionalLogic::switchVoltage()
 //   }
     int index=0;
     double l_nVoltValue = m_objVISubject->getVoltageValue();
-    //qDebug()<<"Voltage:"<<l_nVoltValue;
+    qDebug()<<"Voltage:"<<l_nVoltValue;
 	if(l_nVoltValue>0.5&&l_nVoltValue<=1.5){
 		index=1;
 	}else if(l_nVoltValue>1.5&&l_nVoltValue<=3.5){
@@ -706,7 +713,7 @@ void VIFunctionalLogic::switchVoltage()
 	}else if(l_nVoltValue<=0.6){
 		index=0;
 	}
-	qDebug()<<"Selected Calib Index:"<<index;
+//	qDebug()<<"Selected Calib Index:"<<index;
 	   m_obVIHWInstance.setVoltageConstant(m_nRangeConstant[index]);
 	   m_obVIHWInstance.setVoltageGain(m_nRangeSlope[index]);
 

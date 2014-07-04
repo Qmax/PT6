@@ -24,6 +24,8 @@
 #include "RLCInterface.h"
 #include <qmovie.h>
 #include <QMessageBox>
+#include <QFile>
+#include <QTextStream>
 
 #define MAXCOUNT 5
 #define REFERENCE_THRESHOLD	 0.4
@@ -54,7 +56,6 @@ public:
     void updateVI();
     void notifyProbeObserver();
     void notifyClipObserver();
-
 
 protected:
     // Interface Variables
@@ -172,6 +173,8 @@ private:
     Ui::MainWindow *ui;
 
 private slots:
+    void on_yAxisBox_valueChanged(double );
+    void on_xAxisBox_valueChanged(double );
     void on_butExternal_2_clicked();
     void on_tblFrequency_clicked();
     void on_tblImpedance_clicked();

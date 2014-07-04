@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Fri Jun 27 17:58:45 2014
+** Created: Thu Jul 3 17:26:51 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QDoubleSpinBox>
 #include <QtGui/QFrame>
 #include <QtGui/QGridLayout>
 #include <QtGui/QGroupBox>
@@ -36,53 +37,6 @@ public:
     QPushButton *deleteButton;
     QGroupBox *ExitBox;
     QPushButton *exit;
-    QFrame *frontPanel;
-    QFrame *frame;
-    QLabel *label_4w;
-    QFrame *DMM2W_P2;
-    QFrame *DMMI_P1;
-    QFrame *DMM4W_P12;
-    QFrame *DMM4W_P1;
-    QFrame *DMM4W_P22;
-    QFrame *DMMI_P12;
-    QLabel *label_2w;
-    QFrame *DMM2W_P22;
-    QFrame *DMM2W_P12;
-    QLabel *label_Amp;
-    QFrame *DMM2W_P1;
-    QFrame *DMM4W_P2;
-    QLabel *label_20;
-    QFrame *DMMI_P12_2;
-    QLabel *label_Amp_2;
-    QFrame *frame_2;
-    QLabel *label_10;
-    QLabel *label_9;
-    QFrame *dso1_outer;
-    QFrame *dso1_inner;
-    QFrame *dso_outer;
-    QFrame *dso_inner;
-    QLabel *label_19;
-    QFrame *frame_3;
-    QLabel *label_21;
-    QFrame *frame_22;
-    QFrame *frame_23;
-    QFrame *frame_21;
-    QLabel *label_16;
-    QLabel *label_14;
-    QLabel *label_17;
-    QFrame *frame_20;
-    QLabel *label_15;
-    QFrame *frame_4;
-    QLabel *label_24;
-    QFrame *frame_17;
-    QFrame *frame_19;
-    QLabel *label_13;
-    QFrame *frame_7;
-    QLabel *label_26;
-    QFrame *frame_8;
-    QFrame *frame_9;
-    QLabel *label_2w_2;
-    QLabel *label_2w_3;
     QGroupBox *PCBox;
     QPushButton *butProClip;
     QLabel *singleCap_7;
@@ -172,6 +126,75 @@ public:
     QLabel *lblDriveSettings;
     QLabel *lblComparisonMode;
     QLabel *lblTestStatus;
+    QFrame *frontPanel;
+    QFrame *frame;
+    QLabel *label_4w;
+    QFrame *DMM2W_P2;
+    QFrame *DMMI_P1;
+    QFrame *DMM4W_P12;
+    QFrame *DMM4W_P1;
+    QFrame *DMMI_P12;
+    QLabel *label_2w;
+    QFrame *DMM2W_P22;
+    QFrame *DMM2W_P12;
+    QLabel *label_Amp;
+    QFrame *DMM2W_P1;
+    QLabel *label_27;
+    QLabel *label_Amp_2;
+    QFrame *DMMI_P12_2;
+    QLabel *label_Amp_5;
+    QFrame *frame_2;
+    QLabel *label_28;
+    QLabel *label_29;
+    QFrame *dso1_outer;
+    QFrame *dso1_inner;
+    QFrame *dso_outer;
+    QFrame *dso_inner;
+    QLabel *label_30;
+    QLabel *label_37;
+    QFrame *frame_17;
+    QFrame *frame_19;
+    QLabel *label_53;
+    QFrame *frame_29;
+    QFrame *frame_30;
+    QFrame *frame_3;
+    QLabel *label_31;
+    QLabel *label_33;
+    QFrame *vi2;
+    QLabel *label_55;
+    QLabel *label_58;
+    QFrame *vi1;
+    QLabel *label_59;
+    QFrame *frame_21;
+    QFrame *frame_4;
+    QLabel *label_32;
+    QLabel *label_34;
+    QFrame *dso1_outer_3;
+    QFrame *dso1_inner_3;
+    QFrame *dso_outer_3;
+    QFrame *dso_inner_3;
+    QLabel *label_35;
+    QLabel *label_38;
+    QFrame *frame_20;
+    QFrame *frame_22;
+    QLabel *label_54;
+    QFrame *frame_31;
+    QFrame *frame_32;
+    QFrame *frame_7;
+    QLabel *label_56;
+    QFrame *DMM4W_P1_4;
+    QFrame *frame_23;
+    QFrame *DMM4W_P1_3;
+    QFrame *frame_33;
+    QLabel *label_36;
+    QLabel *label_57;
+    QFrame *debugPanel;
+    QFrame *frame_5;
+    QLabel *label_41;
+    QDoubleSpinBox *yAxisBox;
+    QLabel *xAxis;
+    QLabel *YAxis;
+    QDoubleSpinBox *xAxisBox;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -247,380 +270,6 @@ public:
         icon1.addFile(QString::fromUtf8(":/logout-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         exit->setIcon(icon1);
         exit->setIconSize(QSize(70, 70));
-        frontPanel = new QFrame(centralWidget);
-        frontPanel->setObjectName(QString::fromUtf8("frontPanel"));
-        frontPanel->setGeometry(QRect(10, 434, 692, 160));
-        frontPanel->setFont(font);
-        frontPanel->setStyleSheet(QString::fromUtf8("QFrame{border:1px solid black; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #dadbff);border-radius:10px;}\n"
-"QLabel{border:1px solid rgba(0,0,0,0);}\n"
-""));
-        frontPanel->setFrameShape(QFrame::StyledPanel);
-        frontPanel->setFrameShadow(QFrame::Raised);
-        frame = new QFrame(frontPanel);
-        frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setGeometry(QRect(105, 7, 230, 146));
-        frame->setFont(font);
-        frame->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
-"QLabel{border:1px solid rgba(0,0,0,0);}\n"
-"\n"
-""));
-        frame->setFrameShape(QFrame::StyledPanel);
-        frame->setFrameShadow(QFrame::Raised);
-        label_4w = new QLabel(frame);
-        label_4w->setObjectName(QString::fromUtf8("label_4w"));
-        label_4w->setGeometry(QRect(47, 130, 60, 15));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font1.setPointSize(11);
-        font1.setBold(false);
-        font1.setWeight(50);
-        label_4w->setFont(font1);
-        label_4w->setStyleSheet(QString::fromUtf8("color:gray;"));
-        DMM2W_P2 = new QFrame(frame);
-        DMM2W_P2->setObjectName(QString::fromUtf8("DMM2W_P2"));
-        DMM2W_P2->setGeometry(QRect(100, 35, 31, 31));
-        DMM2W_P2->setFont(font);
-        DMM2W_P2->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:15px;\n"
-"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
-""));
-        DMM2W_P2->setFrameShape(QFrame::StyledPanel);
-        DMM2W_P2->setFrameShadow(QFrame::Raised);
-        DMMI_P1 = new QFrame(frame);
-        DMMI_P1->setObjectName(QString::fromUtf8("DMMI_P1"));
-        DMMI_P1->setGeometry(QRect(185, 34, 31, 31));
-        DMMI_P1->setFont(font);
-        DMMI_P1->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:15px;\n"
-"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
-""));
-        DMMI_P1->setFrameShape(QFrame::StyledPanel);
-        DMMI_P1->setFrameShadow(QFrame::Raised);
-        DMM4W_P12 = new QFrame(frame);
-        DMM4W_P12->setObjectName(QString::fromUtf8("DMM4W_P12"));
-        DMM4W_P12->setGeometry(QRect(25, 93, 41, 41));
-        DMM4W_P12->setFont(font);
-        DMM4W_P12->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
-        DMM4W_P12->setFrameShape(QFrame::StyledPanel);
-        DMM4W_P12->setFrameShadow(QFrame::Raised);
-        DMM4W_P1 = new QFrame(frame);
-        DMM4W_P1->setObjectName(QString::fromUtf8("DMM4W_P1"));
-        DMM4W_P1->setGeometry(QRect(30, 98, 31, 31));
-        DMM4W_P1->setFont(font);
-        DMM4W_P1->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:15px;\n"
-"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
-        DMM4W_P1->setFrameShape(QFrame::StyledPanel);
-        DMM4W_P1->setFrameShadow(QFrame::Raised);
-        DMM4W_P22 = new QFrame(frame);
-        DMM4W_P22->setObjectName(QString::fromUtf8("DMM4W_P22"));
-        DMM4W_P22->setGeometry(QRect(95, 93, 41, 41));
-        DMM4W_P22->setFont(font);
-        DMM4W_P22->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
-        DMM4W_P22->setFrameShape(QFrame::StyledPanel);
-        DMM4W_P22->setFrameShadow(QFrame::Raised);
-        DMMI_P12 = new QFrame(frame);
-        DMMI_P12->setObjectName(QString::fromUtf8("DMMI_P12"));
-        DMMI_P12->setGeometry(QRect(180, 29, 41, 41));
-        DMMI_P12->setFont(font);
-        DMMI_P12->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
-""));
-        DMMI_P12->setFrameShape(QFrame::StyledPanel);
-        DMMI_P12->setFrameShadow(QFrame::Raised);
-        label_2w = new QLabel(frame);
-        label_2w->setObjectName(QString::fromUtf8("label_2w"));
-        label_2w->setGeometry(QRect(34, 73, 90, 17));
-        label_2w->setFont(font1);
-        label_2w->setStyleSheet(QString::fromUtf8("color:gray;"));
-        label_2w->setAlignment(Qt::AlignCenter);
-        DMM2W_P22 = new QFrame(frame);
-        DMM2W_P22->setObjectName(QString::fromUtf8("DMM2W_P22"));
-        DMM2W_P22->setGeometry(QRect(95, 30, 41, 41));
-        DMM2W_P22->setFont(font);
-        DMM2W_P22->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
-""));
-        DMM2W_P22->setFrameShape(QFrame::StyledPanel);
-        DMM2W_P22->setFrameShadow(QFrame::Raised);
-        DMM2W_P12 = new QFrame(frame);
-        DMM2W_P12->setObjectName(QString::fromUtf8("DMM2W_P12"));
-        DMM2W_P12->setGeometry(QRect(25, 30, 41, 41));
-        DMM2W_P12->setFont(font);
-        DMM2W_P12->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
-""));
-        DMM2W_P12->setFrameShape(QFrame::StyledPanel);
-        DMM2W_P12->setFrameShadow(QFrame::Raised);
-        label_Amp = new QLabel(frame);
-        label_Amp->setObjectName(QString::fromUtf8("label_Amp"));
-        label_Amp->setGeometry(QRect(152, 66, 40, 17));
-        label_Amp->setFont(font1);
-        label_Amp->setStyleSheet(QString::fromUtf8("color:gray;"));
-        DMM2W_P1 = new QFrame(frame);
-        DMM2W_P1->setObjectName(QString::fromUtf8("DMM2W_P1"));
-        DMM2W_P1->setGeometry(QRect(30, 35, 31, 31));
-        DMM2W_P1->setFont(font);
-        DMM2W_P1->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:15px;\n"
-"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
-""));
-        DMM2W_P1->setFrameShape(QFrame::StyledPanel);
-        DMM2W_P1->setFrameShadow(QFrame::Raised);
-        DMM4W_P2 = new QFrame(frame);
-        DMM4W_P2->setObjectName(QString::fromUtf8("DMM4W_P2"));
-        DMM4W_P2->setGeometry(QRect(100, 98, 31, 31));
-        DMM4W_P2->setFont(font);
-        DMM4W_P2->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:15px;\n"
-"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
-        DMM4W_P2->setFrameShape(QFrame::StyledPanel);
-        DMM4W_P2->setFrameShadow(QFrame::Raised);
-        label_20 = new QLabel(frame);
-        label_20->setObjectName(QString::fromUtf8("label_20"));
-        label_20->setGeometry(QRect(5, 3, 220, 20));
-        QFont font2;
-        font2.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font2.setBold(true);
-        font2.setWeight(75);
-        label_20->setFont(font2);
-        label_20->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
-"color:white;\n"
-"border:1px solid black;\n"
-"border-radius:10px;"));
-        label_20->setAlignment(Qt::AlignCenter);
-        DMMI_P12_2 = new QFrame(frame);
-        DMMI_P12_2->setObjectName(QString::fromUtf8("DMMI_P12_2"));
-        DMMI_P12_2->setGeometry(QRect(168, 77, 50, 50));
-        DMMI_P12_2->setStyleSheet(QString::fromUtf8("border:1px solid rgba(0,0,0,0);\n"
-"image: url(:/res/fuse.png);"));
-        DMMI_P12_2->setFrameShape(QFrame::StyledPanel);
-        DMMI_P12_2->setFrameShadow(QFrame::Raised);
-        label_Amp_2 = new QLabel(frame);
-        label_Amp_2->setObjectName(QString::fromUtf8("label_Amp_2"));
-        label_Amp_2->setGeometry(QRect(167, 127, 50, 17));
-        label_Amp_2->setFont(font1);
-        label_Amp_2->setStyleSheet(QString::fromUtf8("color:black;"));
-        frame_2 = new QFrame(frontPanel);
-        frame_2->setObjectName(QString::fromUtf8("frame_2"));
-        frame_2->setGeometry(QRect(10, 7, 92, 146));
-        frame_2->setFont(font);
-        frame_2->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
-"QLabel{border:1px solid rgba(0,0,0,0);}\n"
-"\n"
-""));
-        frame_2->setFrameShape(QFrame::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Raised);
-        label_10 = new QLabel(frame_2);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
-        label_10->setGeometry(QRect(25, 130, 38, 17));
-        label_10->setFont(font1);
-        label_10->setStyleSheet(QString::fromUtf8("color:gray;"));
-        label_9 = new QLabel(frame_2);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
-        label_9->setGeometry(QRect(26, 72, 38, 17));
-        label_9->setFont(font1);
-        label_9->setStyleSheet(QString::fromUtf8("color:gray;"));
-        dso1_outer = new QFrame(frame_2);
-        dso1_outer->setObjectName(QString::fromUtf8("dso1_outer"));
-        dso1_outer->setGeometry(QRect(25, 30, 41, 41));
-        dso1_outer->setFont(font);
-        dso1_outer->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
-"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
-        dso1_outer->setFrameShape(QFrame::StyledPanel);
-        dso1_outer->setFrameShadow(QFrame::Raised);
-        dso1_inner = new QFrame(dso1_outer);
-        dso1_inner->setObjectName(QString::fromUtf8("dso1_inner"));
-        dso1_inner->setGeometry(QRect(15, 15, 10, 10));
-        dso1_inner->setFont(font);
-        dso1_inner->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
-""));
-        dso1_inner->setFrameShape(QFrame::StyledPanel);
-        dso1_inner->setFrameShadow(QFrame::Raised);
-        dso_outer = new QFrame(frame_2);
-        dso_outer->setObjectName(QString::fromUtf8("dso_outer"));
-        dso_outer->setGeometry(QRect(25, 90, 41, 41));
-        dso_outer->setFont(font);
-        dso_outer->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
-"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
-        dso_outer->setFrameShape(QFrame::StyledPanel);
-        dso_outer->setFrameShadow(QFrame::Raised);
-        dso_inner = new QFrame(dso_outer);
-        dso_inner->setObjectName(QString::fromUtf8("dso_inner"));
-        dso_inner->setGeometry(QRect(15, 15, 10, 10));
-        dso_inner->setFont(font);
-        dso_inner->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
-""));
-        dso_inner->setFrameShape(QFrame::StyledPanel);
-        dso_inner->setFrameShadow(QFrame::Raised);
-        label_19 = new QLabel(frame_2);
-        label_19->setObjectName(QString::fromUtf8("label_19"));
-        label_19->setGeometry(QRect(6, 3, 80, 20));
-        label_19->setFont(font2);
-        label_19->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
-"color:white;\n"
-"border:1px solid black;\n"
-"border-radius:10px;"));
-        label_19->setAlignment(Qt::AlignCenter);
-        frame_3 = new QFrame(frontPanel);
-        frame_3->setObjectName(QString::fromUtf8("frame_3"));
-        frame_3->setGeometry(QRect(338, 7, 250, 146));
-        frame_3->setFont(font);
-        frame_3->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
-"QLabel{border:1px solid rgba(0,0,0,0);}\n"
-"\n"
-""));
-        frame_3->setFrameShape(QFrame::StyledPanel);
-        frame_3->setFrameShadow(QFrame::Raised);
-        label_21 = new QLabel(frame_3);
-        label_21->setObjectName(QString::fromUtf8("label_21"));
-        label_21->setGeometry(QRect(5, 3, 240, 20));
-        label_21->setFont(font2);
-        label_21->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
-"color:white;\n"
-"border:1px solid black;\n"
-"border-radius:10px;"));
-        label_21->setAlignment(Qt::AlignCenter);
-        frame_22 = new QFrame(frame_3);
-        frame_22->setObjectName(QString::fromUtf8("frame_22"));
-        frame_22->setEnabled(true);
-        frame_22->setGeometry(QRect(27, 30, 70, 30));
-        frame_22->setFont(font);
-        frame_22->setStyleSheet(QString::fromUtf8("QFrame\n"
-"{\n"
-"	image: url(:/res/icm.png);\n"
-"\n"
-"border:0px solid gray;\n"
-"}"));
-        frame_22->setFrameShape(QFrame::StyledPanel);
-        frame_22->setFrameShadow(QFrame::Raised);
-        frame_23 = new QFrame(frame_3);
-        frame_23->setObjectName(QString::fromUtf8("frame_23"));
-        frame_23->setGeometry(QRect(27, 85, 70, 30));
-        frame_23->setFont(font);
-        frame_23->setStyleSheet(QString::fromUtf8("QFrame\n"
-"{\n"
-"image:url(:/res/icm.png);\n"
-"border:0px solid gray;\n"
-"}"));
-        frame_23->setFrameShape(QFrame::StyledPanel);
-        frame_23->setFrameShadow(QFrame::Raised);
-        frame_21 = new QFrame(frame_3);
-        frame_21->setObjectName(QString::fromUtf8("frame_21"));
-        frame_21->setGeometry(QRect(130, 90, 80, 26));
-        frame_21->setFont(font);
-        frame_21->setStyleSheet(QString::fromUtf8(" border:1px solid gray;\n"
-" border-top-right-radius: 8px;\n"
-" border-top-left-radius: 8px;\n"
-" border-bottom-right-radius: 15px;\n"
-" border-bottom-left-radius: 15px;"));
-        frame_21->setFrameShape(QFrame::StyledPanel);
-        frame_21->setFrameShadow(QFrame::Raised);
-        label_16 = new QLabel(frame_3);
-        label_16->setObjectName(QString::fromUtf8("label_16"));
-        label_16->setGeometry(QRect(40, 113, 41, 17));
-        label_16->setFont(font1);
-        label_16->setStyleSheet(QString::fromUtf8("color:black;"));
-        label_14 = new QLabel(frame_3);
-        label_14->setObjectName(QString::fromUtf8("label_14"));
-        label_14->setGeometry(QRect(140, 120, 60, 17));
-        label_14->setFont(font1);
-        label_14->setStyleSheet(QString::fromUtf8("color:gray;"));
-        label_17 = new QLabel(frame_3);
-        label_17->setObjectName(QString::fromUtf8("label_17"));
-        label_17->setGeometry(QRect(42, 61, 30, 17));
-        label_17->setFont(font1);
-        label_17->setStyleSheet(QString::fromUtf8("color:black;"));
-        frame_20 = new QFrame(frame_3);
-        frame_20->setObjectName(QString::fromUtf8("frame_20"));
-        frame_20->setGeometry(QRect(119, 30, 110, 30));
-        frame_20->setFont(font);
-        frame_20->setStyleSheet(QString::fromUtf8("QFrame\n"
-"{\n"
-"image: url(:/res/25PinDIN.png);\n"
-"border:0px solid gray;\n"
-"}"));
-        frame_20->setFrameShape(QFrame::StyledPanel);
-        frame_20->setFrameShadow(QFrame::Raised);
-        label_15 = new QLabel(frame_3);
-        label_15->setObjectName(QString::fromUtf8("label_15"));
-        label_15->setGeometry(QRect(130, 60, 81, 17));
-        label_15->setFont(font1);
-        label_15->setStyleSheet(QString::fromUtf8("color:black;"));
-        frame_4 = new QFrame(frontPanel);
-        frame_4->setObjectName(QString::fromUtf8("frame_4"));
-        frame_4->setGeometry(QRect(590, 7, 90, 85));
-        frame_4->setFont(font);
-        frame_4->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
-"QLabel{border:1px solid rgba(0,0,0,0);}\n"
-"\n"
-""));
-        frame_4->setFrameShape(QFrame::StyledPanel);
-        frame_4->setFrameShadow(QFrame::Raised);
-        label_24 = new QLabel(frame_4);
-        label_24->setObjectName(QString::fromUtf8("label_24"));
-        label_24->setGeometry(QRect(6, 3, 80, 20));
-        label_24->setFont(font2);
-        label_24->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
-"color:white;\n"
-"border:1px solid black;\n"
-"border-radius:10px;"));
-        label_24->setAlignment(Qt::AlignCenter);
-        frame_17 = new QFrame(frame_4);
-        frame_17->setObjectName(QString::fromUtf8("frame_17"));
-        frame_17->setGeometry(QRect(20, 27, 41, 41));
-        frame_17->setFont(font);
-        frame_17->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
-""));
-        frame_17->setFrameShape(QFrame::StyledPanel);
-        frame_17->setFrameShadow(QFrame::Raised);
-        frame_19 = new QFrame(frame_17);
-        frame_19->setObjectName(QString::fromUtf8("frame_19"));
-        frame_19->setGeometry(QRect(16, 15, 10, 10));
-        frame_19->setFont(font);
-        frame_19->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
-""));
-        frame_19->setFrameShape(QFrame::StyledPanel);
-        frame_19->setFrameShadow(QFrame::Raised);
-        label_13 = new QLabel(frame_4);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
-        label_13->setGeometry(QRect(26, 68, 30, 17));
-        label_13->setFont(font1);
-        label_13->setStyleSheet(QString::fromUtf8("color:gray;"));
-        frame_7 = new QFrame(frontPanel);
-        frame_7->setObjectName(QString::fromUtf8("frame_7"));
-        frame_7->setGeometry(QRect(590, 96, 90, 57));
-        frame_7->setFont(font);
-        frame_7->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
-"QLabel{border:1px solid rgba(0,0,0,0);}\n"
-"\n"
-""));
-        frame_7->setFrameShape(QFrame::StyledPanel);
-        frame_7->setFrameShadow(QFrame::Raised);
-        label_26 = new QLabel(frame_7);
-        label_26->setObjectName(QString::fromUtf8("label_26"));
-        label_26->setGeometry(QRect(26, 71, 30, 17));
-        label_26->setFont(font1);
-        label_26->setStyleSheet(QString::fromUtf8("color:gray;"));
-        frame_8 = new QFrame(frame_7);
-        frame_8->setObjectName(QString::fromUtf8("frame_8"));
-        frame_8->setGeometry(QRect(24, 14, 10, 30));
-        frame_8->setFont(font);
-        frame_8->setFrameShape(QFrame::StyledPanel);
-        frame_8->setFrameShadow(QFrame::Raised);
-        frame_9 = new QFrame(frame_7);
-        frame_9->setObjectName(QString::fromUtf8("frame_9"));
-        frame_9->setGeometry(QRect(51, 14, 10, 30));
-        frame_9->setFont(font);
-        frame_9->setFrameShape(QFrame::StyledPanel);
-        frame_9->setFrameShadow(QFrame::Raised);
-        label_2w_2 = new QLabel(frame_7);
-        label_2w_2->setObjectName(QString::fromUtf8("label_2w_2"));
-        label_2w_2->setGeometry(QRect(19, 0, 50, 16));
-        QFont font3;
-        font3.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font3.setPointSize(8);
-        font3.setBold(false);
-        font3.setWeight(50);
-        label_2w_2->setFont(font3);
-        label_2w_2->setAlignment(Qt::AlignCenter);
-        label_2w_3 = new QLabel(frame_7);
-        label_2w_3->setObjectName(QString::fromUtf8("label_2w_3"));
-        label_2w_3->setGeometry(QRect(15, 43, 60, 16));
-        label_2w_3->setFont(font3);
-        label_2w_3->setAlignment(Qt::AlignCenter);
         PCBox = new QGroupBox(centralWidget);
         PCBox->setObjectName(QString::fromUtf8("PCBox"));
         PCBox->setEnabled(true);
@@ -706,12 +355,12 @@ public:
         palette1.setBrush(QPalette::Disabled, QPalette::Base, brush9);
         palette1.setBrush(QPalette::Disabled, QPalette::Window, brush9);
         butProClip->setPalette(palette1);
-        QFont font4;
-        font4.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font4.setPointSize(10);
-        font4.setBold(false);
-        font4.setWeight(50);
-        butProClip->setFont(font4);
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font1.setPointSize(10);
+        font1.setBold(false);
+        font1.setWeight(50);
+        butProClip->setFont(font1);
         butProClip->setFocusPolicy(Qt::NoFocus);
         butProClip->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "color:white;\n"
@@ -742,7 +391,7 @@ public:
         singleCap_7 = new QLabel(PCBox);
         singleCap_7->setObjectName(QString::fromUtf8("singleCap_7"));
         singleCap_7->setGeometry(QRect(10, 68, 71, 20));
-        singleCap_7->setFont(font4);
+        singleCap_7->setFont(font1);
         singleCap_7->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
         selectFrame = new QFrame(centralWidget);
         selectFrame->setObjectName(QString::fromUtf8("selectFrame"));
@@ -932,13 +581,13 @@ public:
         palette2.setBrush(QPalette::Disabled, QPalette::Base, brush11);
         palette2.setBrush(QPalette::Disabled, QPalette::Window, brush11);
         lblFrequency->setPalette(palette2);
-        QFont font5;
-        font5.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font5.setPointSize(14);
-        font5.setBold(true);
-        font5.setWeight(75);
-        font5.setStyleStrategy(QFont::PreferAntialias);
-        lblFrequency->setFont(font5);
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font2.setPointSize(14);
+        font2.setBold(true);
+        font2.setWeight(75);
+        font2.setStyleStrategy(QFont::PreferAntialias);
+        lblFrequency->setFont(font2);
         lblFrequency->setFocusPolicy(Qt::StrongFocus);
         lblFrequency->setStyleSheet(QString::fromUtf8("QLabel {color:black;border: rgba(0,0,0,0);background-color: #f2a400;}"));
         lblFrequency->setFrameShape(QFrame::WinPanel);
@@ -967,7 +616,7 @@ public:
         palette3.setBrush(QPalette::Disabled, QPalette::Base, brush11);
         palette3.setBrush(QPalette::Disabled, QPalette::Window, brush11);
         lblImpedance->setPalette(palette3);
-        lblImpedance->setFont(font5);
+        lblImpedance->setFont(font2);
         lblImpedance->setFocusPolicy(Qt::StrongFocus);
         lblImpedance->setLayoutDirection(Qt::LeftToRight);
         lblImpedance->setStyleSheet(QString::fromUtf8("QLabel {color:black;border: rgba(0,0,0,0);background-color: #f2a400;}"));
@@ -997,7 +646,7 @@ public:
         palette4.setBrush(QPalette::Disabled, QPalette::Base, brush11);
         palette4.setBrush(QPalette::Disabled, QPalette::Window, brush11);
         lblVoltage->setPalette(palette4);
-        lblVoltage->setFont(font5);
+        lblVoltage->setFont(font2);
         lblVoltage->setFocusPolicy(Qt::StrongFocus);
         lblVoltage->setStyleSheet(QString::fromUtf8("QLabel {color:black;border: rgba(0,0,0,0);background-color: #f2a400;}"));
         lblVoltage->setFrameShape(QFrame::WinPanel);
@@ -1068,13 +717,13 @@ public:
         palette5.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette5.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         lblnxtImpedance->setPalette(palette5);
-        QFont font6;
-        font6.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font6.setPointSize(14);
-        font6.setBold(false);
-        font6.setWeight(50);
-        font6.setStyleStrategy(QFont::PreferAntialias);
-        lblnxtImpedance->setFont(font6);
+        QFont font3;
+        font3.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font3.setPointSize(14);
+        font3.setBold(false);
+        font3.setWeight(50);
+        font3.setStyleStrategy(QFont::PreferAntialias);
+        lblnxtImpedance->setFont(font3);
         lblnxtImpedance->setCursor(QCursor(Qt::BlankCursor));
         lblnxtImpedance->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
@@ -1131,7 +780,7 @@ public:
         palette6.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette6.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         lblPrevFrequency->setPalette(palette6);
-        lblPrevFrequency->setFont(font6);
+        lblPrevFrequency->setFont(font3);
         lblPrevFrequency->setCursor(QCursor(Qt::BlankCursor));
         lblPrevFrequency->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
@@ -1190,7 +839,7 @@ public:
         palette7.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette7.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         lblPrevVoltage->setPalette(palette7);
-        lblPrevVoltage->setFont(font6);
+        lblPrevVoltage->setFont(font3);
         lblPrevVoltage->setCursor(QCursor(Qt::BlankCursor));
         lblPrevVoltage->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
@@ -1248,7 +897,7 @@ public:
         palette8.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette8.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         lblnxtVoltage->setPalette(palette8);
-        lblnxtVoltage->setFont(font6);
+        lblnxtVoltage->setFont(font3);
         lblnxtVoltage->setCursor(QCursor(Qt::BlankCursor));
         lblnxtVoltage->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
@@ -1305,7 +954,7 @@ public:
         palette9.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette9.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         lblPrevImpedance->setPalette(palette9);
-        lblPrevImpedance->setFont(font6);
+        lblPrevImpedance->setFont(font3);
         lblPrevImpedance->setCursor(QCursor(Qt::BlankCursor));
         lblPrevImpedance->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
@@ -1362,7 +1011,7 @@ public:
         palette10.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette10.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         lblnxtFrequecy->setPalette(palette10);
-        lblnxtFrequecy->setFont(font6);
+        lblnxtFrequecy->setFont(font3);
         lblnxtFrequecy->setCursor(QCursor(Qt::BlankCursor));
         lblnxtFrequecy->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
@@ -1382,10 +1031,10 @@ public:
         grpProbes->setObjectName(QString::fromUtf8("grpProbes"));
         grpProbes->setEnabled(true);
         grpProbes->setGeometry(QRect(370, 10, 318, 261));
-        QFont font7;
-        font7.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font7.setPointSize(12);
-        grpProbes->setFont(font7);
+        QFont font4;
+        font4.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font4.setPointSize(12);
+        grpProbes->setFont(font4);
         grpProbes->setFocusPolicy(Qt::NoFocus);
         grpProbes->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
 "color:white;\n"
@@ -1403,11 +1052,11 @@ public:
         butProbe = new QPushButton(grpProbes);
         butProbe->setObjectName(QString::fromUtf8("butProbe"));
         butProbe->setGeometry(QRect(10, 4, 64, 64));
-        QFont font8;
-        font8.setPointSize(12);
-        font8.setBold(true);
-        font8.setWeight(75);
-        butProbe->setFont(font8);
+        QFont font5;
+        font5.setPointSize(12);
+        font5.setBold(true);
+        font5.setWeight(75);
+        butProbe->setFont(font5);
         butProbe->setFocusPolicy(Qt::NoFocus);
         butProbe->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "color:white;\n"
@@ -1452,12 +1101,17 @@ public:
         singleCap_2 = new QLabel(grpProbes);
         singleCap_2->setObjectName(QString::fromUtf8("singleCap_2"));
         singleCap_2->setGeometry(QRect(310, 540, 51, 30));
-        singleCap_2->setFont(font1);
+        QFont font6;
+        font6.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font6.setPointSize(11);
+        font6.setBold(false);
+        font6.setWeight(50);
+        singleCap_2->setFont(font6);
         singleCap_2->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
         singleCap_6 = new QLabel(grpProbes);
         singleCap_6->setObjectName(QString::fromUtf8("singleCap_6"));
         singleCap_6->setGeometry(QRect(4, 163, 51, 30));
-        singleCap_6->setFont(font1);
+        singleCap_6->setFont(font6);
         singleCap_6->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
         line = new QFrame(grpProbes);
         line->setObjectName(QString::fromUtf8("line"));
@@ -1467,12 +1121,12 @@ public:
         lblProbeType = new QLabel(grpProbes);
         lblProbeType->setObjectName(QString::fromUtf8("lblProbeType"));
         lblProbeType->setGeometry(QRect(97, 27, 70, 23));
-        QFont font9;
-        font9.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font9.setPointSize(14);
-        font9.setBold(false);
-        font9.setWeight(50);
-        lblProbeType->setFont(font9);
+        QFont font7;
+        font7.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font7.setPointSize(14);
+        font7.setBold(false);
+        font7.setWeight(50);
+        lblProbeType->setFont(font7);
         lblProbeType->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
         groupBox_2 = new QGroupBox(grpProbes);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
@@ -1531,28 +1185,28 @@ public:
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         lblProbe1 = new QLabel(layoutWidget);
         lblProbe1->setObjectName(QString::fromUtf8("lblProbe1"));
-        lblProbe1->setFont(font1);
+        lblProbe1->setFont(font6);
         lblProbe1->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,255);}"));
 
         horizontalLayout->addWidget(lblProbe1);
 
         lblProbe2 = new QLabel(layoutWidget);
         lblProbe2->setObjectName(QString::fromUtf8("lblProbe2"));
-        lblProbe2->setFont(font1);
+        lblProbe2->setFont(font6);
         lblProbe2->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         horizontalLayout->addWidget(lblProbe2);
 
         lblExternal = new QLabel(layoutWidget);
         lblExternal->setObjectName(QString::fromUtf8("lblExternal"));
-        lblExternal->setFont(font1);
+        lblExternal->setFont(font6);
         lblExternal->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         horizontalLayout->addWidget(lblExternal);
 
         lblExternal_2 = new QLabel(layoutWidget);
         lblExternal_2->setObjectName(QString::fromUtf8("lblExternal_2"));
-        lblExternal_2->setFont(font1);
+        lblExternal_2->setFont(font6);
         lblExternal_2->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         horizontalLayout->addWidget(lblExternal_2);
@@ -1644,12 +1298,12 @@ public:
         palette11.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette11.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         lblPassFail->setPalette(palette11);
-        QFont font10;
-        font10.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font10.setPointSize(24);
-        font10.setBold(false);
-        font10.setWeight(50);
-        lblPassFail->setFont(font10);
+        QFont font8;
+        font8.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font8.setPointSize(24);
+        font8.setBold(false);
+        font8.setWeight(50);
+        lblPassFail->setFont(font8);
         lblPassFail->setStyleSheet(QString::fromUtf8("QLineEdit{\n"
 "border:1px solid gray;\n"
 "border-radius:10;\n"
@@ -1720,11 +1374,11 @@ public:
         palette12.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette12.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         redPallete->setPalette(palette12);
-        QFont font11;
-        font11.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font11.setBold(false);
-        font11.setWeight(50);
-        redPallete->setFont(font11);
+        QFont font9;
+        font9.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font9.setBold(false);
+        font9.setWeight(50);
+        redPallete->setFont(font9);
         redPallete->setStyleSheet(QString::fromUtf8(""));
         edtErrPercentage = new QLineEdit(grpError);
         edtErrPercentage->setObjectName(QString::fromUtf8("edtErrPercentage"));
@@ -1776,7 +1430,7 @@ public:
         palette13.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette13.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         edtErrPercentage->setPalette(palette13);
-        edtErrPercentage->setFont(font10);
+        edtErrPercentage->setFont(font8);
         edtErrPercentage->setStyleSheet(QString::fromUtf8("QLineEdit{\n"
 "border:1px solid gray;\n"
 "border-radius:10;\n"
@@ -1837,32 +1491,32 @@ public:
         palette14.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette14.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         errPallete->setPalette(palette14);
-        errPallete->setFont(font11);
+        errPallete->setFont(font9);
         errPallete->setStyleSheet(QString::fromUtf8(""));
         lblClip_7 = new QLabel(grpProbes);
         lblClip_7->setObjectName(QString::fromUtf8("lblClip_7"));
         lblClip_7->setGeometry(QRect(10, 190, 111, 19));
-        QFont font12;
-        font12.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font12.setPointSize(12);
-        font12.setBold(true);
-        font12.setWeight(75);
-        lblClip_7->setFont(font12);
+        QFont font10;
+        font10.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font10.setPointSize(12);
+        font10.setBold(true);
+        font10.setWeight(75);
+        lblClip_7->setFont(font10);
         lblClip_7->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
         lblProbeComparison_2 = new QLabel(grpProbes);
         lblProbeComparison_2->setObjectName(QString::fromUtf8("lblProbeComparison_2"));
         lblProbeComparison_2->setGeometry(QRect(130, 190, 129, 19));
-        QFont font13;
-        font13.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font13.setPointSize(12);
-        font13.setBold(false);
-        font13.setWeight(50);
-        lblProbeComparison_2->setFont(font13);
+        QFont font11;
+        font11.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font11.setPointSize(12);
+        font11.setBold(false);
+        font11.setWeight(50);
+        lblProbeComparison_2->setFont(font11);
         lblProbeComparison_2->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
         grpEmbedded = new QGroupBox(grpInteractive);
         grpEmbedded->setObjectName(QString::fromUtf8("grpEmbedded"));
         grpEmbedded->setGeometry(QRect(338, 280, 350, 104));
-        grpEmbedded->setFont(font7);
+        grpEmbedded->setFont(font4);
         grpEmbedded->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
 "color:white;\n"
 "\n"
@@ -1944,7 +1598,7 @@ public:
         palette15.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette15.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         lblLeft->setPalette(palette15);
-        lblLeft->setFont(font13);
+        lblLeft->setFont(font11);
         lblLeft->setStyleSheet(QString::fromUtf8("QLineEdit{\n"
 "border:1px solid blue;\n"
 "border-radius:10;\n"
@@ -2003,7 +1657,7 @@ public:
         palette16.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette16.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         lblMiddle->setPalette(palette16);
-        lblMiddle->setFont(font13);
+        lblMiddle->setFont(font11);
         lblMiddle->setStyleSheet(QString::fromUtf8("QLineEdit{\n"
 "border:1px solid blue;\n"
 "border-radius:10;\n"
@@ -2062,7 +1716,7 @@ public:
         palette17.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush17);
         palette17.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush10);
         lblRight->setPalette(palette17);
-        lblRight->setFont(font13);
+        lblRight->setFont(font11);
         lblRight->setStyleSheet(QString::fromUtf8("QLineEdit{\n"
 "border:1px solid blue;\n"
 "border-radius:10;\n"
@@ -2102,7 +1756,7 @@ public:
         butM = new QPushButton(grpEmbedded);
         butM->setObjectName(QString::fromUtf8("butM"));
         butM->setGeometry(QRect(138, 10, 60, 60));
-        butM->setFont(font7);
+        butM->setFont(font4);
         butM->setFocusPolicy(Qt::NoFocus);
         butM->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "background-color:rgba(0,0,0,0);\n"
@@ -2116,7 +1770,7 @@ public:
         butR = new QPushButton(grpEmbedded);
         butR->setObjectName(QString::fromUtf8("butR"));
         butR->setGeometry(QRect(250, 14, 60, 60));
-        butR->setFont(font7);
+        butR->setFont(font4);
         butR->setFocusPolicy(Qt::NoFocus);
         butR->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "\n"
@@ -2136,10 +1790,10 @@ public:
         tblVI = new QToolButton(grpInteractive);
         tblVI->setObjectName(QString::fromUtf8("tblVI"));
         tblVI->setGeometry(QRect(324, 7, 41, 41));
-        QFont font14;
-        font14.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font14.setPointSize(14);
-        tblVI->setFont(font14);
+        QFont font12;
+        font12.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font12.setPointSize(14);
+        tblVI->setFont(font12);
         tblVI->setStyleSheet(QString::fromUtf8("QToolButton {\n"
 "color:white;\n"
 "border: 2px solid #2D5059;\n"
@@ -2154,7 +1808,7 @@ public:
         tblVT = new QToolButton(grpInteractive);
         tblVT->setObjectName(QString::fromUtf8("tblVT"));
         tblVT->setGeometry(QRect(324, 46, 41, 41));
-        tblVT->setFont(font14);
+        tblVT->setFont(font12);
         tblVT->setStyleSheet(QString::fromUtf8("QToolButton {\n"
 "color:black;\n"
 "border: 2px solid #2D5059;\n"
@@ -2169,7 +1823,7 @@ public:
         grpClip = new QGroupBox(grpInteractive);
         grpClip->setObjectName(QString::fromUtf8("grpClip"));
         grpClip->setGeometry(QRect(0, 10, 318, 261));
-        grpClip->setFont(font7);
+        grpClip->setFont(font4);
         grpClip->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
 "color:white;\n"
 "\n"
@@ -2188,7 +1842,7 @@ public:
         butClip = new QPushButton(grpClip);
         butClip->setObjectName(QString::fromUtf8("butClip"));
         butClip->setGeometry(QRect(7, 3, 64, 64));
-        butClip->setFont(font8);
+        butClip->setFont(font5);
         butClip->setFocusPolicy(Qt::NoFocus);
         butClip->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "color:white;\n"
@@ -2279,7 +1933,7 @@ public:
         palette18.setBrush(QPalette::Disabled, QPalette::Base, brush9);
         palette18.setBrush(QPalette::Disabled, QPalette::Window, brush9);
         butLearn->setPalette(palette18);
-        butLearn->setFont(font9);
+        butLearn->setFont(font7);
         butLearn->setFocusPolicy(Qt::NoFocus);
         butLearn->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "color:white;\n"
@@ -2368,7 +2022,7 @@ public:
         palette19.setBrush(QPalette::Disabled, QPalette::Base, brush9);
         palette19.setBrush(QPalette::Disabled, QPalette::Window, brush9);
         butVerify->setPalette(palette19);
-        butVerify->setFont(font9);
+        butVerify->setFont(font7);
         butVerify->setFocusPolicy(Qt::NoFocus);
         butVerify->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "color:white;\n"
@@ -2456,7 +2110,7 @@ public:
         palette20.setBrush(QPalette::Disabled, QPalette::Base, brush9);
         palette20.setBrush(QPalette::Disabled, QPalette::Window, brush9);
         butViewTrace->setPalette(palette20);
-        butViewTrace->setFont(font13);
+        butViewTrace->setFont(font11);
         butViewTrace->setFocusPolicy(Qt::NoFocus);
         butViewTrace->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "color:white;\n"
@@ -2482,7 +2136,7 @@ public:
         singleCap_8 = new QLabel(grpClip);
         singleCap_8->setObjectName(QString::fromUtf8("singleCap_8"));
         singleCap_8->setGeometry(QRect(2, 110, 51, 30));
-        singleCap_8->setFont(font1);
+        singleCap_8->setFont(font6);
         singleCap_8->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
         line_2 = new QFrame(grpClip);
         line_2->setObjectName(QString::fromUtf8("line_2"));
@@ -2499,14 +2153,14 @@ public:
         gridLayout_3->setContentsMargins(0, 0, 0, 0);
         lblClip = new QLabel(layoutWidget1);
         lblClip->setObjectName(QString::fromUtf8("lblClip"));
-        lblClip->setFont(font9);
+        lblClip->setFont(font7);
         lblClip->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout_3->addWidget(lblClip, 0, 0, 1, 1);
 
         lblClip_2 = new QLabel(layoutWidget1);
         lblClip_2->setObjectName(QString::fromUtf8("lblClip_2"));
-        lblClip_2->setFont(font9);
+        lblClip_2->setFont(font7);
         lblClip_2->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout_3->addWidget(lblClip_2, 0, 1, 1, 1);
@@ -2521,35 +2175,35 @@ public:
         gridLayout->setContentsMargins(0, 0, 0, 0);
         lblClip_5 = new QLabel(layoutWidget2);
         lblClip_5->setObjectName(QString::fromUtf8("lblClip_5"));
-        lblClip_5->setFont(font12);
+        lblClip_5->setFont(font10);
         lblClip_5->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout->addWidget(lblClip_5, 0, 0, 1, 1);
 
         lblClip_3 = new QLabel(layoutWidget2);
         lblClip_3->setObjectName(QString::fromUtf8("lblClip_3"));
-        lblClip_3->setFont(font12);
+        lblClip_3->setFont(font10);
         lblClip_3->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout->addWidget(lblClip_3, 1, 0, 1, 1);
 
         lblClip_8 = new QLabel(layoutWidget2);
         lblClip_8->setObjectName(QString::fromUtf8("lblClip_8"));
-        lblClip_8->setFont(font12);
+        lblClip_8->setFont(font10);
         lblClip_8->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout->addWidget(lblClip_8, 2, 0, 1, 1);
 
         lblClip_6 = new QLabel(layoutWidget2);
         lblClip_6->setObjectName(QString::fromUtf8("lblClip_6"));
-        lblClip_6->setFont(font12);
+        lblClip_6->setFont(font10);
         lblClip_6->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout->addWidget(lblClip_6, 3, 0, 1, 1);
 
         lblClip_4 = new QLabel(layoutWidget2);
         lblClip_4->setObjectName(QString::fromUtf8("lblClip_4"));
-        lblClip_4->setFont(font12);
+        lblClip_4->setFont(font10);
         lblClip_4->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout->addWidget(lblClip_4, 4, 0, 1, 1);
@@ -2564,49 +2218,535 @@ public:
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
         lblRefereceType = new QLabel(layoutWidget3);
         lblRefereceType->setObjectName(QString::fromUtf8("lblRefereceType"));
-        lblRefereceType->setFont(font13);
+        lblRefereceType->setFont(font11);
         lblRefereceType->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout_2->addWidget(lblRefereceType, 0, 0, 1, 1);
 
         lblNC = new QLabel(layoutWidget3);
         lblNC->setObjectName(QString::fromUtf8("lblNC"));
-        lblNC->setFont(font13);
+        lblNC->setFont(font11);
         lblNC->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout_2->addWidget(lblNC, 1, 0, 1, 1);
 
         lblDriveSettings = new QLabel(layoutWidget3);
         lblDriveSettings->setObjectName(QString::fromUtf8("lblDriveSettings"));
-        lblDriveSettings->setFont(font13);
+        lblDriveSettings->setFont(font11);
         lblDriveSettings->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout_2->addWidget(lblDriveSettings, 2, 0, 1, 1);
 
         lblComparisonMode = new QLabel(layoutWidget3);
         lblComparisonMode->setObjectName(QString::fromUtf8("lblComparisonMode"));
-        lblComparisonMode->setFont(font13);
+        lblComparisonMode->setFont(font11);
         lblComparisonMode->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout_2->addWidget(lblComparisonMode, 3, 0, 1, 1);
 
         lblTestStatus = new QLabel(layoutWidget3);
         lblTestStatus->setObjectName(QString::fromUtf8("lblTestStatus"));
-        lblTestStatus->setFont(font13);
+        lblTestStatus->setFont(font11);
         lblTestStatus->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
 
         gridLayout_2->addWidget(lblTestStatus, 4, 0, 1, 1);
 
+        frontPanel = new QFrame(centralWidget);
+        frontPanel->setObjectName(QString::fromUtf8("frontPanel"));
+        frontPanel->setGeometry(QRect(10, 434, 692, 160));
+        frontPanel->setStyleSheet(QString::fromUtf8("QFrame{border:1px solid black; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #dadbff);border-radius:10px;}\n"
+"QLabel{border:1px solid rgba(0,0,0,0);}\n"
+""));
+        frontPanel->setFrameShape(QFrame::StyledPanel);
+        frontPanel->setFrameShadow(QFrame::Raised);
+        frame = new QFrame(frontPanel);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setGeometry(QRect(328, 81, 300, 76));
+        frame->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
+"QLabel{border:1px solid rgba(0,0,0,0);}\n"
+"\n"
+""));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        label_4w = new QLabel(frame);
+        label_4w->setObjectName(QString::fromUtf8("label_4w"));
+        label_4w->setGeometry(QRect(243, 60, 20, 15));
+        label_4w->setFont(font6);
+        label_4w->setStyleSheet(QString::fromUtf8("color:gray;"));
+        DMM2W_P2 = new QFrame(frame);
+        DMM2W_P2->setObjectName(QString::fromUtf8("DMM2W_P2"));
+        DMM2W_P2->setGeometry(QRect(80, 25, 31, 31));
+        DMM2W_P2->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:15px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
+""));
+        DMM2W_P2->setFrameShape(QFrame::StyledPanel);
+        DMM2W_P2->setFrameShadow(QFrame::Raised);
+        DMMI_P1 = new QFrame(frame);
+        DMMI_P1->setObjectName(QString::fromUtf8("DMMI_P1"));
+        DMMI_P1->setGeometry(QRect(130, 25, 31, 31));
+        DMMI_P1->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:15px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
+"\n"
+""));
+        DMMI_P1->setFrameShape(QFrame::StyledPanel);
+        DMMI_P1->setFrameShadow(QFrame::Raised);
+        DMM4W_P12 = new QFrame(frame);
+        DMM4W_P12->setObjectName(QString::fromUtf8("DMM4W_P12"));
+        DMM4W_P12->setGeometry(QRect(235, 20, 41, 41));
+        DMM4W_P12->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        DMM4W_P12->setFrameShape(QFrame::StyledPanel);
+        DMM4W_P12->setFrameShadow(QFrame::Raised);
+        DMM4W_P1 = new QFrame(frame);
+        DMM4W_P1->setObjectName(QString::fromUtf8("DMM4W_P1"));
+        DMM4W_P1->setGeometry(QRect(240, 25, 31, 31));
+        DMM4W_P1->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:15px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        DMM4W_P1->setFrameShape(QFrame::StyledPanel);
+        DMM4W_P1->setFrameShadow(QFrame::Raised);
+        DMMI_P12 = new QFrame(frame);
+        DMMI_P12->setObjectName(QString::fromUtf8("DMMI_P12"));
+        DMMI_P12->setGeometry(QRect(125, 20, 41, 41));
+        DMMI_P12->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
+""));
+        DMMI_P12->setFrameShape(QFrame::StyledPanel);
+        DMMI_P12->setFrameShadow(QFrame::Raised);
+        label_2w = new QLabel(frame);
+        label_2w->setObjectName(QString::fromUtf8("label_2w"));
+        label_2w->setGeometry(QRect(35, 60, 20, 17));
+        label_2w->setFont(font6);
+        label_2w->setStyleSheet(QString::fromUtf8("color:gray;"));
+        label_2w->setAlignment(Qt::AlignCenter);
+        DMM2W_P22 = new QFrame(frame);
+        DMM2W_P22->setObjectName(QString::fromUtf8("DMM2W_P22"));
+        DMM2W_P22->setGeometry(QRect(75, 20, 41, 41));
+        DMM2W_P22->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
+""));
+        DMM2W_P22->setFrameShape(QFrame::StyledPanel);
+        DMM2W_P22->setFrameShadow(QFrame::Raised);
+        DMM2W_P12 = new QFrame(frame);
+        DMM2W_P12->setObjectName(QString::fromUtf8("DMM2W_P12"));
+        DMM2W_P12->setGeometry(QRect(25, 20, 41, 41));
+        DMM2W_P12->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
+""));
+        DMM2W_P12->setFrameShape(QFrame::StyledPanel);
+        DMM2W_P12->setFrameShadow(QFrame::Raised);
+        label_Amp = new QLabel(frame);
+        label_Amp->setObjectName(QString::fromUtf8("label_Amp"));
+        label_Amp->setGeometry(QRect(83, 60, 20, 17));
+        label_Amp->setFont(font6);
+        label_Amp->setStyleSheet(QString::fromUtf8("color:gray;"));
+        DMM2W_P1 = new QFrame(frame);
+        DMM2W_P1->setObjectName(QString::fromUtf8("DMM2W_P1"));
+        DMM2W_P1->setGeometry(QRect(30, 25, 31, 31));
+        DMM2W_P1->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:15px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);\n"
+""));
+        DMM2W_P1->setFrameShape(QFrame::StyledPanel);
+        DMM2W_P1->setFrameShadow(QFrame::Raised);
+        label_27 = new QLabel(frame);
+        label_27->setObjectName(QString::fromUtf8("label_27"));
+        label_27->setGeometry(QRect(6, 3, 287, 16));
+        QFont font13;
+        font13.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font13.setBold(true);
+        font13.setWeight(75);
+        label_27->setFont(font13);
+        label_27->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
+"color:white;\n"
+"border:1px solid black;\n"
+"border-radius:8px;"));
+        label_27->setAlignment(Qt::AlignCenter);
+        label_Amp_2 = new QLabel(frame);
+        label_Amp_2->setObjectName(QString::fromUtf8("label_Amp_2"));
+        label_Amp_2->setGeometry(QRect(176, 60, 50, 17));
+        label_Amp_2->setFont(font6);
+        label_Amp_2->setStyleSheet(QString::fromUtf8("color:black;"));
+        DMMI_P12_2 = new QFrame(frame);
+        DMMI_P12_2->setObjectName(QString::fromUtf8("DMMI_P12_2"));
+        DMMI_P12_2->setGeometry(QRect(178, 16, 44, 50));
+        DMMI_P12_2->setStyleSheet(QString::fromUtf8("border:1px solid rgba(0,0,0,0);\n"
+"image: url(:/res/fuse.png);"));
+        DMMI_P12_2->setFrameShape(QFrame::StyledPanel);
+        DMMI_P12_2->setFrameShadow(QFrame::Raised);
+        label_Amp_5 = new QLabel(frame);
+        label_Amp_5->setObjectName(QString::fromUtf8("label_Amp_5"));
+        label_Amp_5->setGeometry(QRect(129, 60, 35, 17));
+        label_Amp_5->setFont(font6);
+        label_Amp_5->setStyleSheet(QString::fromUtf8("color:gray;"));
+        frame_2 = new QFrame(frontPanel);
+        frame_2->setObjectName(QString::fromUtf8("frame_2"));
+        frame_2->setGeometry(QRect(328, 3, 300, 76));
+        frame_2->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
+"QLabel{border:1px solid rgba(0,0,0,0);}\n"
+"\n"
+""));
+        frame_2->setFrameShape(QFrame::StyledPanel);
+        frame_2->setFrameShadow(QFrame::Raised);
+        label_28 = new QLabel(frame_2);
+        label_28->setObjectName(QString::fromUtf8("label_28"));
+        label_28->setGeometry(QRect(97, 59, 38, 17));
+        label_28->setFont(font6);
+        label_28->setStyleSheet(QString::fromUtf8("color:gray;"));
+        label_29 = new QLabel(frame_2);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+        label_29->setGeometry(QRect(23, 59, 38, 17));
+        label_29->setFont(font6);
+        label_29->setStyleSheet(QString::fromUtf8("color:gray;"));
+        dso1_outer = new QFrame(frame_2);
+        dso1_outer->setObjectName(QString::fromUtf8("dso1_outer"));
+        dso1_outer->setGeometry(QRect(22, 20, 41, 41));
+        dso1_outer->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        dso1_outer->setFrameShape(QFrame::StyledPanel);
+        dso1_outer->setFrameShadow(QFrame::Raised);
+        dso1_inner = new QFrame(dso1_outer);
+        dso1_inner->setObjectName(QString::fromUtf8("dso1_inner"));
+        dso1_inner->setGeometry(QRect(15, 15, 10, 10));
+        dso1_inner->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
+""));
+        dso1_inner->setFrameShape(QFrame::StyledPanel);
+        dso1_inner->setFrameShadow(QFrame::Raised);
+        dso_outer = new QFrame(frame_2);
+        dso_outer->setObjectName(QString::fromUtf8("dso_outer"));
+        dso_outer->setGeometry(QRect(96, 20, 41, 41));
+        dso_outer->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        dso_outer->setFrameShape(QFrame::StyledPanel);
+        dso_outer->setFrameShadow(QFrame::Raised);
+        dso_inner = new QFrame(dso_outer);
+        dso_inner->setObjectName(QString::fromUtf8("dso_inner"));
+        dso_inner->setGeometry(QRect(15, 15, 10, 10));
+        dso_inner->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
+""));
+        dso_inner->setFrameShape(QFrame::StyledPanel);
+        dso_inner->setFrameShadow(QFrame::Raised);
+        label_30 = new QLabel(frame_2);
+        label_30->setObjectName(QString::fromUtf8("label_30"));
+        label_30->setGeometry(QRect(7, 3, 287, 16));
+        label_30->setFont(font13);
+        label_30->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
+"color:white;\n"
+"border:1px solid black;\n"
+"border-radius:8px;"));
+        label_30->setAlignment(Qt::AlignCenter);
+        label_37 = new QLabel(frame_2);
+        label_37->setObjectName(QString::fromUtf8("label_37"));
+        label_37->setGeometry(QRect(238, 59, 43, 17));
+        label_37->setFont(font6);
+        label_37->setStyleSheet(QString::fromUtf8("color:gray;"));
+        frame_17 = new QFrame(frame_2);
+        frame_17->setObjectName(QString::fromUtf8("frame_17"));
+        frame_17->setGeometry(QRect(237, 20, 41, 41));
+        frame_17->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        frame_17->setFrameShape(QFrame::StyledPanel);
+        frame_17->setFrameShadow(QFrame::Raised);
+        frame_19 = new QFrame(frame_17);
+        frame_19->setObjectName(QString::fromUtf8("frame_19"));
+        frame_19->setGeometry(QRect(16, 15, 10, 10));
+        frame_19->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
+""));
+        frame_19->setFrameShape(QFrame::StyledPanel);
+        frame_19->setFrameShadow(QFrame::Raised);
+        label_53 = new QLabel(frame_2);
+        label_53->setObjectName(QString::fromUtf8("label_53"));
+        label_53->setGeometry(QRect(168, 59, 35, 17));
+        label_53->setFont(font6);
+        label_53->setStyleSheet(QString::fromUtf8("color:gray;"));
+        frame_29 = new QFrame(frame_2);
+        frame_29->setObjectName(QString::fromUtf8("frame_29"));
+        frame_29->setGeometry(QRect(167, 20, 41, 41));
+        frame_29->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        frame_29->setFrameShape(QFrame::StyledPanel);
+        frame_29->setFrameShadow(QFrame::Raised);
+        frame_30 = new QFrame(frame_29);
+        frame_30->setObjectName(QString::fromUtf8("frame_30"));
+        frame_30->setGeometry(QRect(16, 15, 10, 10));
+        frame_30->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
+""));
+        frame_30->setFrameShape(QFrame::StyledPanel);
+        frame_30->setFrameShadow(QFrame::Raised);
+        frame_3 = new QFrame(frontPanel);
+        frame_3->setObjectName(QString::fromUtf8("frame_3"));
+        frame_3->setGeometry(QRect(18, 80, 300, 76));
+        frame_3->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
+"QLabel{border:1px solid rgba(0,0,0,0);}\n"
+"\n"
+""));
+        frame_3->setFrameShape(QFrame::StyledPanel);
+        frame_3->setFrameShadow(QFrame::Raised);
+        label_31 = new QLabel(frame_3);
+        label_31->setObjectName(QString::fromUtf8("label_31"));
+        label_31->setGeometry(QRect(6, 3, 287, 16));
+        label_31->setFont(font13);
+        label_31->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
+"color:white;\n"
+"border:1px solid black;\n"
+"border-radius:8px;"));
+        label_31->setAlignment(Qt::AlignCenter);
+        label_33 = new QLabel(frame_3);
+        label_33->setObjectName(QString::fromUtf8("label_33"));
+        label_33->setGeometry(QRect(140, 119, 60, 17));
+        label_33->setFont(font6);
+        label_33->setStyleSheet(QString::fromUtf8("color:black;"));
+        vi2 = new QFrame(frame_3);
+        vi2->setObjectName(QString::fromUtf8("vi2"));
+        vi2->setGeometry(QRect(110, 20, 41, 41));
+        vi2->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        vi2->setFrameShape(QFrame::StyledPanel);
+        vi2->setFrameShadow(QFrame::Raised);
+        label_55 = new QLabel(frame_3);
+        label_55->setObjectName(QString::fromUtf8("label_55"));
+        label_55->setGeometry(QRect(0, 59, 84, 17));
+        label_55->setFont(font6);
+        label_55->setStyleSheet(QString::fromUtf8("color:gray;"));
+        label_58 = new QLabel(frame_3);
+        label_58->setObjectName(QString::fromUtf8("label_58"));
+        label_58->setGeometry(QRect(80, 59, 100, 17));
+        label_58->setFont(font6);
+        label_58->setStyleSheet(QString::fromUtf8("color:gray;"));
+        vi1 = new QFrame(frame_3);
+        vi1->setObjectName(QString::fromUtf8("vi1"));
+        vi1->setGeometry(QRect(24, 20, 41, 41));
+        vi1->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        vi1->setFrameShape(QFrame::StyledPanel);
+        vi1->setFrameShadow(QFrame::Raised);
+        label_59 = new QLabel(frame_3);
+        label_59->setObjectName(QString::fromUtf8("label_59"));
+        label_59->setGeometry(QRect(190, 58, 90, 17));
+        label_59->setFont(font6);
+        label_59->setStyleSheet(QString::fromUtf8("color:gray;"));
+        frame_21 = new QFrame(frame_3);
+        frame_21->setObjectName(QString::fromUtf8("frame_21"));
+        frame_21->setGeometry(QRect(193, 27, 80, 26));
+        frame_21->setFont(font);
+        frame_21->setStyleSheet(QString::fromUtf8(" border:1px solid gray;\n"
+" border-top-right-radius: 8px;\n"
+" border-top-left-radius: 8px;\n"
+" border-bottom-right-radius: 15px;\n"
+" border-bottom-left-radius: 15px;"));
+        frame_21->setFrameShape(QFrame::StyledPanel);
+        frame_21->setFrameShadow(QFrame::Raised);
+        frame_4 = new QFrame(frontPanel);
+        frame_4->setObjectName(QString::fromUtf8("frame_4"));
+        frame_4->setGeometry(QRect(18, 3, 300, 76));
+        frame_4->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
+"QLabel{border:1px solid rgba(0,0,0,0);}\n"
+"\n"
+""));
+        frame_4->setFrameShape(QFrame::StyledPanel);
+        frame_4->setFrameShadow(QFrame::Raised);
+        label_32 = new QLabel(frame_4);
+        label_32->setObjectName(QString::fromUtf8("label_32"));
+        label_32->setGeometry(QRect(97, 59, 38, 17));
+        label_32->setFont(font6);
+        label_32->setStyleSheet(QString::fromUtf8("color:gray;"));
+        label_34 = new QLabel(frame_4);
+        label_34->setObjectName(QString::fromUtf8("label_34"));
+        label_34->setGeometry(QRect(23, 59, 38, 17));
+        label_34->setFont(font6);
+        label_34->setStyleSheet(QString::fromUtf8("color:gray;"));
+        dso1_outer_3 = new QFrame(frame_4);
+        dso1_outer_3->setObjectName(QString::fromUtf8("dso1_outer_3"));
+        dso1_outer_3->setGeometry(QRect(22, 20, 41, 41));
+        dso1_outer_3->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        dso1_outer_3->setFrameShape(QFrame::StyledPanel);
+        dso1_outer_3->setFrameShadow(QFrame::Raised);
+        dso1_inner_3 = new QFrame(dso1_outer_3);
+        dso1_inner_3->setObjectName(QString::fromUtf8("dso1_inner_3"));
+        dso1_inner_3->setGeometry(QRect(15, 15, 10, 10));
+        dso1_inner_3->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
+""));
+        dso1_inner_3->setFrameShape(QFrame::StyledPanel);
+        dso1_inner_3->setFrameShadow(QFrame::Raised);
+        dso_outer_3 = new QFrame(frame_4);
+        dso_outer_3->setObjectName(QString::fromUtf8("dso_outer_3"));
+        dso_outer_3->setGeometry(QRect(96, 20, 41, 41));
+        dso_outer_3->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        dso_outer_3->setFrameShape(QFrame::StyledPanel);
+        dso_outer_3->setFrameShadow(QFrame::Raised);
+        dso_inner_3 = new QFrame(dso_outer_3);
+        dso_inner_3->setObjectName(QString::fromUtf8("dso_inner_3"));
+        dso_inner_3->setGeometry(QRect(15, 15, 10, 10));
+        dso_inner_3->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
+""));
+        dso_inner_3->setFrameShape(QFrame::StyledPanel);
+        dso_inner_3->setFrameShadow(QFrame::Raised);
+        label_35 = new QLabel(frame_4);
+        label_35->setObjectName(QString::fromUtf8("label_35"));
+        label_35->setGeometry(QRect(7, 3, 287, 16));
+        label_35->setFont(font13);
+        label_35->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
+"color:white;\n"
+"border:1px solid black;\n"
+"border-radius:8px;"));
+        label_35->setAlignment(Qt::AlignCenter);
+        label_38 = new QLabel(frame_4);
+        label_38->setObjectName(QString::fromUtf8("label_38"));
+        label_38->setGeometry(QRect(237, 59, 43, 17));
+        label_38->setFont(font6);
+        label_38->setStyleSheet(QString::fromUtf8("color:gray;"));
+        frame_20 = new QFrame(frame_4);
+        frame_20->setObjectName(QString::fromUtf8("frame_20"));
+        frame_20->setGeometry(QRect(237, 20, 41, 41));
+        frame_20->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        frame_20->setFrameShape(QFrame::StyledPanel);
+        frame_20->setFrameShadow(QFrame::Raised);
+        frame_22 = new QFrame(frame_20);
+        frame_22->setObjectName(QString::fromUtf8("frame_22"));
+        frame_22->setGeometry(QRect(16, 15, 10, 10));
+        frame_22->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
+""));
+        frame_22->setFrameShape(QFrame::StyledPanel);
+        frame_22->setFrameShadow(QFrame::Raised);
+        label_54 = new QLabel(frame_4);
+        label_54->setObjectName(QString::fromUtf8("label_54"));
+        label_54->setGeometry(QRect(167, 59, 35, 17));
+        label_54->setFont(font6);
+        label_54->setStyleSheet(QString::fromUtf8("color:gray;"));
+        frame_31 = new QFrame(frame_4);
+        frame_31->setObjectName(QString::fromUtf8("frame_31"));
+        frame_31->setGeometry(QRect(167, 20, 41, 41));
+        frame_31->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:20px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        frame_31->setFrameShape(QFrame::StyledPanel);
+        frame_31->setFrameShadow(QFrame::Raised);
+        frame_32 = new QFrame(frame_31);
+        frame_32->setObjectName(QString::fromUtf8("frame_32"));
+        frame_32->setGeometry(QRect(16, 15, 10, 10));
+        frame_32->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
+""));
+        frame_32->setFrameShape(QFrame::StyledPanel);
+        frame_32->setFrameShadow(QFrame::Raised);
+        frame_7 = new QFrame(frontPanel);
+        frame_7->setObjectName(QString::fromUtf8("frame_7"));
+        frame_7->setGeometry(QRect(638, 4, 40, 152));
+        frame_7->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
+"QLabel{border:1px solid rgba(0,0,0,0);}\n"
+"\n"
+""));
+        frame_7->setFrameShape(QFrame::StyledPanel);
+        frame_7->setFrameShadow(QFrame::Raised);
+        label_56 = new QLabel(frame_7);
+        label_56->setObjectName(QString::fromUtf8("label_56"));
+        label_56->setGeometry(QRect(140, 119, 60, 17));
+        label_56->setFont(font6);
+        label_56->setStyleSheet(QString::fromUtf8("color:black;"));
+        DMM4W_P1_4 = new QFrame(frame_7);
+        DMM4W_P1_4->setObjectName(QString::fromUtf8("DMM4W_P1_4"));
+        DMM4W_P1_4->setGeometry(QRect(7, 31, 27, 27));
+        DMM4W_P1_4->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:12px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        DMM4W_P1_4->setFrameShape(QFrame::StyledPanel);
+        DMM4W_P1_4->setFrameShadow(QFrame::Raised);
+        frame_23 = new QFrame(DMM4W_P1_4);
+        frame_23->setObjectName(QString::fromUtf8("frame_23"));
+        frame_23->setGeometry(QRect(8, 9, 10, 10));
+        frame_23->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
+""));
+        frame_23->setFrameShape(QFrame::StyledPanel);
+        frame_23->setFrameShadow(QFrame::Raised);
+        DMM4W_P1_3 = new QFrame(frame_7);
+        DMM4W_P1_3->setObjectName(QString::fromUtf8("DMM4W_P1_3"));
+        DMM4W_P1_3->setGeometry(QRect(5, 103, 31, 31));
+        DMM4W_P1_3->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:15px;\n"
+"image: url(:/new/prefix1/Button-Blank-Gray-icon.png);"));
+        DMM4W_P1_3->setFrameShape(QFrame::StyledPanel);
+        DMM4W_P1_3->setFrameShadow(QFrame::Raised);
+        frame_33 = new QFrame(DMM4W_P1_3);
+        frame_33->setObjectName(QString::fromUtf8("frame_33"));
+        frame_33->setGeometry(QRect(10, 10, 10, 10));
+        frame_33->setStyleSheet(QString::fromUtf8("border:1px solid gray;border-radius:4px;\n"
+""));
+        frame_33->setFrameShape(QFrame::StyledPanel);
+        frame_33->setFrameShadow(QFrame::Raised);
+        label_36 = new QLabel(frame_7);
+        label_36->setObjectName(QString::fromUtf8("label_36"));
+        label_36->setGeometry(QRect(4, 5, 34, 16));
+        label_36->setFont(font13);
+        label_36->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
+"color:white;\n"
+"border:1px solid black;\n"
+"border-radius:8px;"));
+        label_36->setAlignment(Qt::AlignCenter);
+        label_57 = new QLabel(frame_7);
+        label_57->setObjectName(QString::fromUtf8("label_57"));
+        label_57->setGeometry(QRect(3, 79, 34, 16));
+        label_57->setFont(font13);
+        label_57->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
+"color:white;\n"
+"border:1px solid black;\n"
+"border-radius:8px;"));
+        label_57->setAlignment(Qt::AlignCenter);
+        debugPanel = new QFrame(centralWidget);
+        debugPanel->setObjectName(QString::fromUtf8("debugPanel"));
+        debugPanel->setGeometry(QRect(10, 434, 692, 160));
+        debugPanel->setStyleSheet(QString::fromUtf8("QFrame{border:1px solid black; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #dadbff);border-radius:10px;}\n"
+"QLabel{border:1px solid rgba(0,0,0,0);}\n"
+""));
+        debugPanel->setFrameShape(QFrame::StyledPanel);
+        debugPanel->setFrameShadow(QFrame::Raised);
+        frame_5 = new QFrame(debugPanel);
+        frame_5->setObjectName(QString::fromUtf8("frame_5"));
+        frame_5->setGeometry(QRect(10, 10, 211, 111));
+        frame_5->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
+"QLabel{border:1px solid rgba(0,0,0,0);}\n"
+"\n"
+""));
+        frame_5->setFrameShape(QFrame::StyledPanel);
+        frame_5->setFrameShadow(QFrame::Raised);
+        label_41 = new QLabel(frame_5);
+        label_41->setObjectName(QString::fromUtf8("label_41"));
+        label_41->setGeometry(QRect(7, 3, 200, 16));
+        label_41->setFont(font13);
+        label_41->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
+"color:white;\n"
+"border:1px solid black;\n"
+"border-radius:8px;"));
+        label_41->setAlignment(Qt::AlignCenter);
+        yAxisBox = new QDoubleSpinBox(frame_5);
+        yAxisBox->setObjectName(QString::fromUtf8("yAxisBox"));
+        yAxisBox->setGeometry(QRect(90, 63, 111, 41));
+        yAxisBox->setFont(font4);
+        yAxisBox->setStyleSheet(QString::fromUtf8("QDoubleSpinBox::up-button {\n"
+"     width: 50px; \n"
+" }\n"
+"QDoubleSpinBox::down-button {\n"
+"     width: 50px;\n"
+" }"));
+        yAxisBox->setDecimals(1);
+        yAxisBox->setMinimum(-99);
+        yAxisBox->setSingleStep(0.1);
+        xAxis = new QLabel(frame_5);
+        xAxis->setObjectName(QString::fromUtf8("xAxis"));
+        xAxis->setGeometry(QRect(10, 33, 70, 23));
+        xAxis->setFont(font7);
+        xAxis->setStyleSheet(QString::fromUtf8("QLabel {color:black;border: rgba(0,0,0,0);}"));
+        YAxis = new QLabel(frame_5);
+        YAxis->setObjectName(QString::fromUtf8("YAxis"));
+        YAxis->setGeometry(QRect(10, 74, 70, 23));
+        YAxis->setFont(font7);
+        YAxis->setStyleSheet(QString::fromUtf8("QLabel {color:black;border: rgba(0,0,0,0);}"));
+        xAxisBox = new QDoubleSpinBox(frame_5);
+        xAxisBox->setObjectName(QString::fromUtf8("xAxisBox"));
+        xAxisBox->setGeometry(QRect(90, 23, 111, 41));
+        xAxisBox->setFont(font4);
+        xAxisBox->setStyleSheet(QString::fromUtf8("QDoubleSpinBox::up-button {\n"
+"     width: 50px; \n"
+" }\n"
+"QDoubleSpinBox::down-button {\n"
+"     width: 50px;\n"
+" }"));
+        xAxisBox->setDecimals(1);
+        xAxisBox->setMinimum(-99);
+        xAxisBox->setSingleStep(0.1);
         MainWindow->setCentralWidget(centralWidget);
-        deleteBox->raise();
-        ExitBox->raise();
-        frontPanel->raise();
-        PCBox->raise();
-        storeBox->raise();
-        CalibBox->raise();
-        startBox->raise();
-        grpInteractive->raise();
-        selectFrame->raise();
 
         retranslateUi(MainWindow);
 
@@ -2620,31 +2760,6 @@ public:
         deleteButton->setText(QString());
         ExitBox->setTitle(QString());
         exit->setText(QString());
-        label_4w->setText(QApplication::translate("MainWindow", "4 WIRE", 0, QApplication::UnicodeUTF8));
-        label_2w->setText(QApplication::translate("MainWindow", "VOLT", 0, QApplication::UnicodeUTF8));
-        label_Amp->setText(QApplication::translate("MainWindow", "AMP", 0, QApplication::UnicodeUTF8));
-        label_20->setText(QApplication::translate("MainWindow", "DIGITAL MULTI METER", 0, QApplication::UnicodeUTF8));
-        label_Amp_2->setText(QApplication::translate("MainWindow", "FUSE", 0, QApplication::UnicodeUTF8));
-        label_10->setText(QApplication::translate("MainWindow", "CH2", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("MainWindow", "CH1", 0, QApplication::UnicodeUTF8));
-        label_19->setText(QApplication::translate("MainWindow", "DSO", 0, QApplication::UnicodeUTF8));
-        label_21->setText(QApplication::translate("MainWindow", "QSM-VI/ICM/SHORT LOCATOR", 0, QApplication::UnicodeUTF8));
-        label_16->setText(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<table style=\"-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;\">\n"
-"<tr>\n"
-"<td style=\"border: none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">VI2</p></td></tr></table></body></html>", 0, QApplication::UnicodeUTF8));
-        label_14->setText(QApplication::translate("MainWindow", "GUARD", 0, QApplication::UnicodeUTF8));
-        label_17->setText(QApplication::translate("MainWindow", "VI1", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("MainWindow", "EXTERNAL", 0, QApplication::UnicodeUTF8));
-        label_24->setText(QApplication::translate("MainWindow", "AWG", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("MainWindow", "FG", 0, QApplication::UnicodeUTF8));
-        label_26->setText(QApplication::translate("MainWindow", "FG", 0, QApplication::UnicodeUTF8));
-        label_2w_2->setText(QApplication::translate("MainWindow", "5V 1KHz", 0, QApplication::UnicodeUTF8));
-        label_2w_3->setText(QApplication::translate("MainWindow", "REF GND", 0, QApplication::UnicodeUTF8));
         PCBox->setTitle(QString());
         butProClip->setText(QString());
         singleCap_7->setText(QApplication::translate("MainWindow", "Probe/Clip", 0, QApplication::UnicodeUTF8));
@@ -2800,6 +2915,33 @@ public:
 "<tr>\n"
 "<td style=\"border: none;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"> </p></td></tr></table></body></html>", 0, QApplication::UnicodeUTF8));
+        label_4w->setText(QApplication::translate("MainWindow", "A", 0, QApplication::UnicodeUTF8));
+        label_2w->setText(QApplication::translate("MainWindow", "V", 0, QApplication::UnicodeUTF8));
+        label_Amp->setText(QApplication::translate("MainWindow", "C", 0, QApplication::UnicodeUTF8));
+        label_27->setText(QApplication::translate("MainWindow", "DIGITAL MULTI METER", 0, QApplication::UnicodeUTF8));
+        label_Amp_2->setText(QApplication::translate("MainWindow", "FUSE", 0, QApplication::UnicodeUTF8));
+        label_Amp_5->setText(QApplication::translate("MainWindow", "mA", 0, QApplication::UnicodeUTF8));
+        label_28->setText(QApplication::translate("MainWindow", "CH2", 0, QApplication::UnicodeUTF8));
+        label_29->setText(QApplication::translate("MainWindow", "CH1", 0, QApplication::UnicodeUTF8));
+        label_30->setText(QApplication::translate("MainWindow", "DSO / AWG", 0, QApplication::UnicodeUTF8));
+        label_37->setText(QApplication::translate("MainWindow", "AWG", 0, QApplication::UnicodeUTF8));
+        label_53->setText(QApplication::translate("MainWindow", "EXT", 0, QApplication::UnicodeUTF8));
+        label_31->setText(QApplication::translate("MainWindow", "QSM-VI/ICM/SHORT LOCATOR", 0, QApplication::UnicodeUTF8));
+        label_33->setText(QApplication::translate("MainWindow", "GUARD", 0, QApplication::UnicodeUTF8));
+        label_55->setText(QApplication::translate("MainWindow", "VI1/SL/ICM", 0, QApplication::UnicodeUTF8));
+        label_58->setText(QApplication::translate("MainWindow", "VI2/EXT MUX", 0, QApplication::UnicodeUTF8));
+        label_59->setText(QApplication::translate("MainWindow", "GUARDING", 0, QApplication::UnicodeUTF8));
+        label_32->setText(QApplication::translate("MainWindow", "AH3", 0, QApplication::UnicodeUTF8));
+        label_34->setText(QApplication::translate("MainWindow", "AH1", 0, QApplication::UnicodeUTF8));
+        label_35->setText(QApplication::translate("MainWindow", "AH EXTERNAL CHANNEL", 0, QApplication::UnicodeUTF8));
+        label_38->setText(QApplication::translate("MainWindow", "AH0", 0, QApplication::UnicodeUTF8));
+        label_54->setText(QApplication::translate("MainWindow", "AH2", 0, QApplication::UnicodeUTF8));
+        label_56->setText(QApplication::translate("MainWindow", "GUARD", 0, QApplication::UnicodeUTF8));
+        label_36->setText(QApplication::translate("MainWindow", "REF", 0, QApplication::UnicodeUTF8));
+        label_57->setText(QApplication::translate("MainWindow", "GND", 0, QApplication::UnicodeUTF8));
+        label_41->setText(QApplication::translate("MainWindow", "Adjust X-Y Axis of Graph", 0, QApplication::UnicodeUTF8));
+        xAxis->setText(QApplication::translate("MainWindow", "X-Axis :", 0, QApplication::UnicodeUTF8));
+        YAxis->setText(QApplication::translate("MainWindow", "Y-Axis :", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

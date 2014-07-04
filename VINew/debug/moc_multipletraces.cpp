@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'multipletraces.h'
 **
-** Created: Sat Jun 28 15:41:16 2014
+** Created: Thu Jul 3 16:22:28 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
