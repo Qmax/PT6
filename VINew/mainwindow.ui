@@ -11284,7 +11284,7 @@ QDoubleSpinBox::down-button {
        <rect>
         <x>10</x>
         <y>33</y>
-        <width>70</width>
+        <width>81</width>
         <height>23</height>
        </rect>
       </property>
@@ -11300,7 +11300,7 @@ QDoubleSpinBox::down-button {
        <string notr="true">QLabel {color:black;border: rgba(0,0,0,0);}</string>
       </property>
       <property name="text">
-       <string>X-Axis :</string>
+       <string>X-AXIS :</string>
       </property>
      </widget>
      <widget class="QLabel" name="YAxis">
@@ -11324,7 +11324,7 @@ QDoubleSpinBox::down-button {
        <string notr="true">QLabel {color:black;border: rgba(0,0,0,0);}</string>
       </property>
       <property name="text">
-       <string>Y-Axis :</string>
+       <string>Y-AXIS :</string>
       </property>
      </widget>
      <widget class="QDoubleSpinBox" name="xAxisBox">
