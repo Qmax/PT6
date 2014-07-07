@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>svgbutton/Beryl/hovered.svg</file>
+        <file>svgbutton/Beryl/pressed.svg</file>
+        <file>svgbutton/Beryl/normal.svg</file>
+        <file>svgbutton/BerylSquare/hovered.svg</file>
+        <file>svgbutton/BerylSquare/pressed.svg</file>
+        <file>svgbutton/BerylSquare/normal.svg</file>
+        <file>svgbutton/Beryl/background_hover.svg</file>
+        <file>svgbutton/Beryl/background.svg</file>
+        <file>svgbutton/Beryl/knob_off.svg</file>
+        <file>svgbutton/Beryl/knob_on.svg</file>
+    </qresource>
+</RCC>
