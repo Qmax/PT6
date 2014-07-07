@@ -1665,12 +1665,6 @@ void MainWindow::on_butProbe1_clicked()
 //        ui->errPallete->setPalette(Qt::green);
     	return;
     }
-/*    ui->frame_22->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/icm.png)");
-    ui->frame_22->setGeometry(17,30,90,40);
-    ui->frame_23->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;	");
-    ui->frame_23->setGeometry(30,90,60,15);
-    ui->frame_20->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;");
-    ui->frame_20->setGeometry(120,38,100,15);02072014*/
     ui->vi1->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
     ui->vi2->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
     ui->frame_31->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
@@ -1709,12 +1703,6 @@ void MainWindow::on_butProbe2_clicked()
 
     	return;
     }
-/*    ui->frame_23->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/icm.png)");
-    ui->frame_23->setGeometry(17,80,90,40);
-    ui->frame_22->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
-    ui->frame_22->setGeometry(28,38,60,15);
-    ui->frame_20->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;");
-    ui->frame_20->setGeometry(120,38,100,15);02072014*/
     ui->vi1->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
     ui->vi2->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
     ui->frame_31->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
@@ -1734,12 +1722,6 @@ void MainWindow::on_butExternal_clicked()
 
 	if(m_objVISubject->getProbeDialog(0)==1) return;
     m_nSelectedProbe=2;
-/*    ui->frame_20->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/res/25PinDIN.png)");
-    ui->frame_20->setGeometry(121,20,110,50);
-    ui->frame_22->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
-    ui->frame_23->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
-    ui->frame_22->setGeometry(28,38,60,15);
-    ui->frame_23->setGeometry(30,90,60,15);02072014*/
     ui->vi1->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
     ui->vi2->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
     ui->frame_31->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");

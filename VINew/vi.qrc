@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>res/graph.jpg</file>
         <file>res/down-icon.png</file>
         <file>res/knob_off.svg</file>
         <file>res/knob_on.svg</file>
@@ -27,15 +26,8 @@
         <file>res/Start.png</file>
         <file>res/Store.png</file>
         <file>res/Stores.png</file>
-        <file>res/embeddedProbe.png</file>
-        <file>res/rightKey.png</file>
-        <file>res/middleKey.png</file>
-        <file>res/leftKey.png</file>
         <file>res/logout-icon.png</file>
-        <file>res/icm.png</file>
-        <file>res/PT6-1.jpg</file>
         <file>res/image.png</file>
-        <file>res/25PinDIN.png</file>
         <file>res/fuse.png</file>
         <file>res/settings.png</file>
         <file>res/Stop.png</file>
