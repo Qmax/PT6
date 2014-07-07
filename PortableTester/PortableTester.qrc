@@ -1,0 +1,75 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/dmm/Manual.png</file>
+        <file>images/dmm/Auto.png</file>
+        <file>images/dmm/2 wire.png</file>
+        <file>images/dmm/4 wire.png</file>
+        <file>images/icons/dmm/Autos.png</file>
+        <file>images/icons/dmm/manauls.png</file>
+        <file>images/icons/dmm/diodes.png</file>
+        <file>images/icons/dmm/Stopg.png</file>
+        <file>images/icons/dmm/start1.png</file>
+        <file>images/icons/dmm/Continuityg.png</file>
+        <file>images/icons/dmm/vdcg.png</file>
+        <file>images/icons/dmm/idcg.png</file>
+        <file>images/icons/dmm/Exit.png</file>
+        <file>images/icons/dmm/Null.png</file>
+        <file>images/icons/dmm/Start.png</file>
+        <file>images/icons/dmm/Stop.png</file>
+        <file>images/icons/dmm/Continuity.png</file>
+        <file>images/icons/dmm/idc1.png</file>
+        <file>images/icons/dmm/vdc1.png</file>
+        <file>images/icons/dmm/idc.png</file>
+        <file>images/icons/dmm/Diode.png</file>
+        <file>images/icons/dmm/vdc.png</file>
+        <file>images/icons/dmm/Manual.png</file>
+        <file>images/icons/dmm/Auto.png</file>
+        <file>Symbols/bg.png</file>
+        <file>Symbols/PTFront.PNG</file>
+        <file>images/dmm/dc2.png</file>
+        <file>images/dmm/dc1.png</file>
+        <file>images/dmm/ac2.png</file>
+        <file>images/dmm/ac1.png</file>
+        <file>images/dmm/Diode.png</file>
+        <file>images/dmm/stop.png</file>
+        <file>images/dmm/start.png</file>
+        <file>images/dmm/_dc1.png</file>
+        <file>images/dmm/_dc2.png</file>
+        <file>images/dmm/_Diode.png</file>
+        <file>images/dmm/_4 wire.png</file>
+        <file>images/dmm/_ac1.png</file>
+        <file>images/dmm/_ac2.png</file>
+        <file>images/dmm/_2 wire.png</file>
+        <file>Symbols/SLBG.png</file>
+        <file>Symbols/power_off.png</file>
+        <file>Symbols/PT6-1.jpg</file>
+        <file>Symbols/image93.png</file>
+        <file>shut_down.png</file>
+        <file>imageIdle.png</file>
+        <file>images/front/scopeV.png</file>
+        <file>images/front/Toolsb.png</file>
+        <file>images/Tamil_ohm.png</file>
+        <file>images/Tamil_ohm2.png</file>
+        <file>Desktop/app0.png</file>
+        <file>Desktop/app1.png</file>
+        <file>Desktop/app2.png</file>
+        <file>Desktop/app3.png</file>
+        <file>Desktop/app4.png</file>
+        <file>Desktop/app5.png</file>
+        <file>Desktop/Power.png</file>
+        <file>Desktop/Testjig.png</file>
+        <file>Desktop/arrow-down.png</file>
+        <file>Desktop/arrow-up.png</file>
+        <file>Desktop/app6.png</file>
+        <file>images/icons/dmm/_Continuity.png</file>
+        <file>images/icons/dmm/_Null.png</file>
+        <file>images/dmm/Autos.png</file>
+        <file>images/dmm/manauls.png</file>
+        <file>Desktop/app7.png</file>
+        <file>Desktop/app8.png</file>
+        <file>Desktop/app9.png</file>
+        <file>Symbols/ivory_texture1.png</file>
+        <file>gradient_oval1.png</file>
+        <file>Symbols/simple_gray.png</file>
+    </qresource>
+</RCC>
