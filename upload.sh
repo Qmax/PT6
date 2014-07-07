@@ -1,3 +1,5 @@
 #!/bin/bash
 git status
-git pull https://raviqmax:qmax123@github.com/Qmax/PT6.git master
+git add *
+git commit -m "commit all"
+git push https://raviqmax:qmax123@github.com/Qmax/PT6.git master
