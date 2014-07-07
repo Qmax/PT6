@@ -1,25 +1,28 @@
 #ifndef PORTABLETESTER_H
 #define PORTABLETESTER_H
 
-#include <QMainWindow>
 #include "mainwindowview.h"
+
+#include <QMainWindow>
 #include <QtGui/QMainWindow>
 #include <QtGui>
-#include <QPixmap>
 #include <StdAPI.h>
-#include <QEvent>
-#include <qpushbutton.h>
-#include "qmaxbutton.h"
-#include "qevent.h"
+#include <QPainter>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QStylePainter>
+#include <QPushButton>
 #include <QMessageBox>
 #include <QGraphicsBlurEffect>
-#include <qgraphicseffect.h>
+#include <QGraphicsEffect>
 #include <QPropertyAnimation>
-#include<QStylePainter>
 #include <QPixmap>
-#include <qprocess.h>
-#include <QtGui/QWSServer>
+#include <QSplashScreen>
+#include <QProcess>
+#include <QWSServer>
+#include <QEvent>
 //#include <Qmax/hwid/HardwareClient.h>
+#include "qmaxbutton.h"
 #include "BackPlaneInterface.h"
 #include "ApplicationCardInterface.h"
 #include "IPSOCCommunication.h"
@@ -123,7 +126,7 @@ public:
     QProcess process;
     QDigitalClock *clock;
 protected:
-	IntefaceBackPlane *IBackPlane;	////BackPlaneInterfacePlugin
+    IntefaceBackPlane *IBackPlane;	////BackPlaneInterfacePlugin
     IPSOCCOMMUNICATION *IPsoc;				//PSOC Interface Plugin
     IApplicationCardInterface	*IAppCard;
     PTEventInterface	*IPTKeyEvent;

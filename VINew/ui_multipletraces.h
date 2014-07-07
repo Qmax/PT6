@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'multipletraces.ui'
 **
-** Created: Thu Jul 3 15:19:11 2014
+** Created: Mon Jul 7 11:53:19 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

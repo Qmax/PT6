@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Thu Jul 3 17:26:51 2014
+** Created: Mon Jul 7 11:53:19 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -2725,7 +2725,7 @@ public:
         yAxisBox->setSingleStep(0.1);
         xAxis = new QLabel(frame_5);
         xAxis->setObjectName(QString::fromUtf8("xAxis"));
-        xAxis->setGeometry(QRect(10, 33, 70, 23));
+        xAxis->setGeometry(QRect(10, 33, 81, 23));
         xAxis->setFont(font7);
         xAxis->setStyleSheet(QString::fromUtf8("QLabel {color:black;border: rgba(0,0,0,0);}"));
         YAxis = new QLabel(frame_5);
@@ -2940,8 +2940,8 @@ public:
         label_36->setText(QApplication::translate("MainWindow", "REF", 0, QApplication::UnicodeUTF8));
         label_57->setText(QApplication::translate("MainWindow", "GND", 0, QApplication::UnicodeUTF8));
         label_41->setText(QApplication::translate("MainWindow", "Adjust X-Y Axis of Graph", 0, QApplication::UnicodeUTF8));
-        xAxis->setText(QApplication::translate("MainWindow", "X-Axis :", 0, QApplication::UnicodeUTF8));
-        YAxis->setText(QApplication::translate("MainWindow", "Y-Axis :", 0, QApplication::UnicodeUTF8));
+        xAxis->setText(QApplication::translate("MainWindow", "X-AXIS :", 0, QApplication::UnicodeUTF8));
+        YAxis->setText(QApplication::translate("MainWindow", "Y-AXIS :", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

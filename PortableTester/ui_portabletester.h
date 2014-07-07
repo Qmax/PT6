@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'portabletester.ui'
 **
-** Created: Mon Jul 7 11:40:50 2014
+** Created: Mon Jul 7 12:57:21 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

@@ -27,10 +27,8 @@ HEADERS += serialdevice.h \
     portabletester.h \
     mainwindowview.h \
     probestatus.h \
-    StdAPI.h \
     qmaxbutton.h \
     colors.h
-FORMS += portabletester.ui \
-    probestatus.ui
+FORMS += portabletester.ui
 RESOURCES += PortableTester.qrc
 DESTDIR = /exports/nfsroot-ccwmx51js/home/

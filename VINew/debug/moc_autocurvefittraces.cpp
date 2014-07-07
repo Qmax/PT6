@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'autocurvefittraces.h'
 **
-** Created: Thu Jul 3 16:22:26 2014
+** Created: Mon Jul 7 11:55:02 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

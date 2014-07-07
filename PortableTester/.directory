@@ -1,4 +1,7 @@
 [Dolphin]
-AdditionalInfo=8960
-CategorizedSorting=true
-Timestamp=2013,3,16,9,24,49
+AdditionalInfo=0
+CategorizedSorting=false
+ShowPreview=true
+Sorting=1
+Timestamp=2014,7,7,12,31,49
+ViewMode=0
