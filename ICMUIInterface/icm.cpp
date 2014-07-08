@@ -615,7 +615,7 @@ void ICM::readADC() {
 	for (int i = 0; i < noOFsamples; i++) {
 		//if(i==0)
 		m_nADC1Voltage = m_objAD7190Component->readADCDataRegister(1)
-								& 0xFFFFFF;
+										& 0xFFFFFF;
 		//qDebug()<<"Hex ADC1 Code:"<<hex<<m_nADC1Voltage;
 		l_nFactor1 = (m_nADC1Voltage / pow(2, l_nResoulution)) - 1;
 		l_nFactor2 = (l_nGain / l_nVREF);
@@ -624,7 +624,7 @@ void ICM::readADC() {
 		ui->label_2->setText(QString::number(l_nAIN1, 'f', 8));
 		//if(i==0)
 		m_nADC2Voltage = m_objAD7190Component->readADCDataRegister(2)
-								& 0xFFFFFF;
+										& 0xFFFFFF;
 		//qDebug()<<"Hex ADC2 Code:"<<hex<<m_nADC2Voltage;
 		l_nFactor1 = (m_nADC2Voltage / pow(2, l_nResoulution)) - 1;
 		l_nFactor2 = (l_nGain / l_nVREF);
@@ -708,71 +708,6 @@ void ICM::readADC() {
 	}
 }
 void ICM::AutoRange() {
-	//qDebug()<<"AutoRange";
-	/*	 if(ui->ResistanceRanges->isVisible()){
-	 if(m_nResistance<=11){
-	 ui->R10E->setChecked(true);
-	 on_R10E_clicked();
-	 if(l_nAIN1>=2.047||l_nAIN2>=2.047){
-	 //				 ui->R100E->setChecked(true);
-	 //				 on_R100E_clicked();
-	 ui->R10E->setChecked(true);
-	 on_R10E_clicked();
-	 }
-	 }
-	 else if(m_nResistance>11&&m_nResistance<=110){
-	 ui->R100E->setChecked(true);
-	 on_R100E_clicked();
-	 if(l_nAIN1>=2.047||l_nAIN2>=2.047){
-	 //				 ui->R1KE->setChecked(true);
-	 //				 on_R1KE_clicked();
-	 ui->R10E->setChecked(true);
-	 on_R10E_clicked();
-	 }
-	 }
-	 else if(m_nResistance>110&&m_nResistance<=1100){
-	 ui->R1KE->setChecked(true);
-	 on_R1KE_clicked();
-	 if(l_nAIN1>=2.047||l_nAIN2>=2.047){
-	 //				 ui->R10KE->setChecked(true);
-	 //				 on_R10KE_clicked();
-	 ui->R10E->setChecked(true);
-	 on_R10E_clicked();
-	 }
-	 }
-	 else if(m_nResistance>1100&&m_nResistance<=11000){
-	 ui->R10KE->setChecked(true);
-	 on_R10KE_clicked();
-	 if(l_nAIN1>=2.047||l_nAIN2>=2.047){
-	 //				 ui->R100KE->setChecked(true);
-	 //				 on_R100KE_clicked();
-	 ui->R10E->setChecked(true);
-	 on_R10E_clicked();
-	 }
-	 }
-	 else if(m_nResistance>11000&&m_nResistance<=110000){
-	 ui->R100KE->setChecked(true);
-	 on_R100KE_clicked();
-	 if(l_nAIN1>=2.047||l_nAIN2>=2.047){
-	 //				 ui->R1ME->setChecked(true);
-	 //				 on_R1ME_clicked();
-	 ui->R10E->setChecked(true);
-	 on_R10E_clicked();
-	 }
-	 }
-	 else if(m_nResistance>110000&&m_nResistance<=1100000){
-	 ui->R1ME->setChecked(true);
-	 on_R1ME_clicked();
-	 if(l_nAIN1>=2.048||l_nAIN2>=2.048){
-	 //				 ui->display->setText("OL");
-	 ui->R10E->setChecked(true);
-	 on_R10E_clicked();
-	 }
-	 }
-	 else if(m_nResistance>1200000){
-	 ui->display->setText("OL");
-	 }
-	 }*/
 	if (ui->ResistanceRanges->isVisible()) {
 		if (m_nResistance_2 > 1100000) {
 			qDebug()<<"greater than 1.1M";
@@ -833,65 +768,6 @@ void ICM::AutoRange() {
 				on_R10E_clicked();
 			}
 		}
-/*		if (m_nResistance_2 <= 1) {
-			qDebug()<<"less than 1E";
-			ui->R100E->setChecked(true);
-			on_R10E_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		if (m_nResistance_2 > 1 && m_nResistance_2 <= 310) {
-			qDebug()<<"greater than 1E & less than 31E";
-			ui->R100E->setChecked(true);
-			on_R100E_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		if (m_nResistance_2 > 290 && m_nResistance_2 <= 3100) {
-			qDebug()<<"greater than 29E & less than 3.1K";
-			ui->R1KE->setChecked(true);
-			on_R1KE_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		if (m_nResistance_2 > 2900 && m_nResistance_2 <= 31000) {
-			qDebug()<<"greater than 2.9K & less than 31K";
-			ui->R10KE->setChecked(true);
-			on_R10KE_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		if (m_nResistance_2 > 29000 && m_nResistance_2 <= 310000) {
-			qDebug()<<"greater than 29K & less than 3.1K";
-			ui->R100KE->setChecked(true);
-			on_R100KE_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		if (m_nResistance_2 > 290000 && m_nResistance_2 <= 1100000) {
-			qDebug()<<"greater than 290K & less than 1.1M";
-			ui->R1ME->setChecked(true);
-			on_R1ME_clicked();
-			if (l_nAIN1 >= 2.048 || l_nAIN2 >= 2.048) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		if (m_nResistance_2 > 1100000) {
-			qDebug()<<"greater than 1.1M";
-			dis->setValue("OL");
-			ui->Unit->setText("");
-		}*/
 
 	} else if (ui->Inductorranges->isVisible()) {
 		if (m_nInductance_2 <= 0.000027) {
