@@ -10,20 +10,20 @@ QMainWindow(parent), ui(new Ui::ICM) {
 	initialiseHWLibraries();
 	Intialize();
 	initialiseFeedBackResistance();
-//	ui->calibrateDisplay->setChecked(true);
+	//	ui->calibrateDisplay->setChecked(true);
 	msgBoxLive=false;
 	ui->holdCap->setVisible(false);
-        ui->R10E->setVisible(false);
+	ui->R10E->setVisible(false);
 	ui->ONOFF->animateClick(1);
 	m_bRacRdc=true;
-//	IPsoc->switchFly();
-//	m_bExternal = true;
-        IPsoc->icmMeasurement();
-        m_bExternal = false;
+	//	IPsoc->switchFly();
+	//	m_bExternal = true;
+	IPsoc->icmMeasurement();
+	m_bExternal = false;
 
-    ui->label_X->setVisible(false);
-    ui->label_LC->setVisible(false);
-    ui->value_XLXC->setVisible(false);
+	ui->label_X->setVisible(false);
+	ui->label_LC->setVisible(false);
+	ui->value_XLXC->setVisible(false);
 }
 void ICM::ToolBox(bool hide) {
 	ui->calibrateDisplay->setVisible(hide);
@@ -168,10 +168,10 @@ void ICM::initialiseHWLibraries() {
 	QPluginLoader loaderGeneral("libGCalib.so", this);
 	GCALIB = qobject_cast<IGCALIBTestJigInterface*> (loaderGeneral.instance());
 
-/*
+	/*
 	QPluginLoader testing("libAppBckPsoc.so", this);
 	test = qobject_cast<IPTAppBckPsocInterface*> (testing.instance());
-*/
+	 */
 
 	//~~~~~~~~Check for debug panel~~~~~~~~~~~~~~~~~~~~~~~~
 	QStringList debugPanel;
@@ -596,6 +596,8 @@ void ICM::callFeedBackChange(int index) {
 
 void ICM::readADC() {
 
+	usleep(10000);
+
 	short int l_nResoulution = 23;
 	double l_nGain = 1.0, l_nVREF = 2.048;
 	double l_nFactor1 = 0.0, l_nFactor2 = 0.0;
@@ -613,7 +615,7 @@ void ICM::readADC() {
 	for (int i = 0; i < noOFsamples; i++) {
 		//if(i==0)
 		m_nADC1Voltage = m_objAD7190Component->readADCDataRegister(1)
-						& 0xFFFFFF;
+								& 0xFFFFFF;
 		//qDebug()<<"Hex ADC1 Code:"<<hex<<m_nADC1Voltage;
 		l_nFactor1 = (m_nADC1Voltage / pow(2, l_nResoulution)) - 1;
 		l_nFactor2 = (l_nGain / l_nVREF);
@@ -622,7 +624,7 @@ void ICM::readADC() {
 		ui->label_2->setText(QString::number(l_nAIN1, 'f', 8));
 		//if(i==0)
 		m_nADC2Voltage = m_objAD7190Component->readADCDataRegister(2)
-						& 0xFFFFFF;
+								& 0xFFFFFF;
 		//qDebug()<<"Hex ADC2 Code:"<<hex<<m_nADC2Voltage;
 		l_nFactor1 = (m_nADC2Voltage / pow(2, l_nResoulution)) - 1;
 		l_nFactor2 = (l_nGain / l_nVREF);
@@ -670,35 +672,36 @@ void ICM::readADC() {
 	ui->lblfrequency->setText(QString::number(m_nFrequency, 'f', 0));
 
 
-	if(autoFlag==true)
+	if(autoFlag==true){
 		AutoRange();
+	}
 
 	if (ui->ResistanceRanges->isVisible()) {
-                ui->label_X->setVisible(false);
-                ui->label_LC->setVisible(false);
-                ui->value_XLXC->setVisible(false);
+		ui->label_X->setVisible(false);
+		ui->label_LC->setVisible(false);
+		ui->value_XLXC->setVisible(false);
 		GetDisplayResistance(m_nResistance, m_lstRFResistance.value(R_Index));
 		ui->rangeLabel->setText(m_mapResistance.value(R_Index));
 		emit ICM2GCalib(m_nResistance, "ICM-R");
 	}
 
 	else if (ui->CapacitanceRanges->isVisible()) {
-                ui->label_X->setVisible(true);
-                ui->label_LC->setVisible(true);
-                ui->value_XLXC->setVisible(true);
-                ui->label_LC->setText("C:");
-                ui->value_XLXC->setText(QString::number(m_nResistance,'f',6));
+		ui->label_X->setVisible(true);
+		ui->label_LC->setVisible(true);
+		ui->value_XLXC->setVisible(true);
+		ui->label_LC->setText("C:");
+		ui->value_XLXC->setText(QString::number(m_nResistance,'f',6));
 		GetDisplayCapcitance(m_nCapacitance, C_Index);
 		ui->rangeLabel->setText(m_mapCapacitance.value(C_Index));
 		emit ICM2GCalib(m_nCapacitance, "ICM-C");
 	}
 
 	else if (ui->Inductorranges->isVisible()) {
-                ui->label_X->setVisible(true);
-                ui->label_LC->setVisible(true);
-                ui->value_XLXC->setVisible(true);
-                ui->label_LC->setText("L:");
-                ui->value_XLXC->setText(QString::number(m_nResistance,'f',6));
+		ui->label_X->setVisible(true);
+		ui->label_LC->setVisible(true);
+		ui->value_XLXC->setVisible(true);
+		ui->label_LC->setText("L:");
+		ui->value_XLXC->setText(QString::number(m_nResistance,'f',6));
 		GetDisplayInductance(m_nInductance, L_Index);
 		ui->rangeLabel->setText(m_mapInductance.value(L_Index));
 		emit ICM2GCalib(m_nInductance, "ICM-L");
@@ -771,12 +774,13 @@ void ICM::AutoRange() {
 	 }
 	 }*/
 	if (ui->ResistanceRanges->isVisible()) {
-
-                if (m_nResistance_2 > 1100000) {
+		if (m_nResistance_2 > 1100000) {
+			qDebug()<<"greater than 1.1M";
 			dis->setValue("OL");
 			ui->Unit->setText("");
 		}
-                else if (m_nResistance_2 > 290000 && m_nResistance_2 <= 1100000) {
+		if (m_nResistance_2 > 290000 && m_nResistance_2 <= 1100000) {
+			qDebug()<<"greater than 290K & less than 1.1M";
 			ui->R1ME->setChecked(true);
 			on_R1ME_clicked();
 			if (l_nAIN1 >= 2.048 || l_nAIN2 >= 2.048) {
@@ -784,7 +788,8 @@ void ICM::AutoRange() {
 				on_R10E_clicked();
 			}
 		}
-                else if (m_nResistance_2 > 29000 && m_nResistance_2 <= 310000) {
+		if (m_nResistance_2 > 29000 && m_nResistance_2 <= 310000) {
+			qDebug()<<"greater than 29K & less than 3.1K";
 			ui->R100KE->setChecked(true);
 			on_R100KE_clicked();
 			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
@@ -792,7 +797,8 @@ void ICM::AutoRange() {
 				on_R10E_clicked();
 			}
 		}
-                else if (m_nResistance_2 > 2900 && m_nResistance_2 <= 31000) {
+		if (m_nResistance_2 > 2900 && m_nResistance_2 <= 31000) {
+			qDebug()<<"greater than 2.9K & less than 31K";
 			ui->R10KE->setChecked(true);
 			on_R10KE_clicked();
 			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
@@ -800,7 +806,8 @@ void ICM::AutoRange() {
 				on_R10E_clicked();
 			}
 		}
-                else if (m_nResistance_2 > 290 && m_nResistance_2 <= 3100) {
+		if (m_nResistance_2 > 290 && m_nResistance_2 <= 3100) {
+			qDebug()<<"greater than 29E & less than 3.1K";
 			ui->R1KE->setChecked(true);
 			on_R1KE_clicked();
 			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
@@ -808,22 +815,83 @@ void ICM::AutoRange() {
 				on_R10E_clicked();
 			}
 		}
-                else if (m_nResistance_2 > 1 && m_nResistance_2 <= 310) {
+		if (m_nResistance_2 > 1 && m_nResistance_2 <= 310) {
+			qDebug()<<"greater than 1E & less than 31E";
 			ui->R100E->setChecked(true);
 			on_R100E_clicked();
 			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-                                ui->R10E->setChecked(true);
-                                on_R10E_clicked();
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
 			}
 		}
-                else if (m_nResistance_2 <= 1) {
-                        ui->R100E->setChecked(true);
-                        on_R10E_clicked();
-                        if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-                                ui->R10E->setChecked(true);
-                                on_R10E_clicked();
-                        }
-                }
+		if (m_nResistance_2 <= 1) {
+			qDebug()<<"less than 1E";
+			ui->R100E->setChecked(true);
+			on_R10E_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+/*		if (m_nResistance_2 <= 1) {
+			qDebug()<<"less than 1E";
+			ui->R100E->setChecked(true);
+			on_R10E_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		if (m_nResistance_2 > 1 && m_nResistance_2 <= 310) {
+			qDebug()<<"greater than 1E & less than 31E";
+			ui->R100E->setChecked(true);
+			on_R100E_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		if (m_nResistance_2 > 290 && m_nResistance_2 <= 3100) {
+			qDebug()<<"greater than 29E & less than 3.1K";
+			ui->R1KE->setChecked(true);
+			on_R1KE_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		if (m_nResistance_2 > 2900 && m_nResistance_2 <= 31000) {
+			qDebug()<<"greater than 2.9K & less than 31K";
+			ui->R10KE->setChecked(true);
+			on_R10KE_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		if (m_nResistance_2 > 29000 && m_nResistance_2 <= 310000) {
+			qDebug()<<"greater than 29K & less than 3.1K";
+			ui->R100KE->setChecked(true);
+			on_R100KE_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		if (m_nResistance_2 > 290000 && m_nResistance_2 <= 1100000) {
+			qDebug()<<"greater than 290K & less than 1.1M";
+			ui->R1ME->setChecked(true);
+			on_R1ME_clicked();
+			if (l_nAIN1 >= 2.048 || l_nAIN2 >= 2.048) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		if (m_nResistance_2 > 1100000) {
+			qDebug()<<"greater than 1.1M";
+			dis->setValue("OL");
+			ui->Unit->setText("");
+		}*/
 
 	} else if (ui->Inductorranges->isVisible()) {
 		if (m_nInductance_2 <= 0.000027) {
@@ -1093,7 +1161,7 @@ void ICM::Intialize() {
 	//	ui->R->setChecked(true);
 	ui->rBut->animateClick(1);
 	on_R_clicked();
-        ui->ACDC->setEnabled(true);
+	ui->ACDC->setEnabled(true);
 	R_Index = 0;
 	C_Index = 0;
 	L_Index = 0;
@@ -1110,11 +1178,11 @@ void ICM::Intialize() {
 	calibedConstant = 0.0;
 
 	m_mapResistance.insert(0, "5E");
-        m_mapResistance.insert(1, "300E");
-        m_mapResistance.insert(2, "3KE");
-        m_mapResistance.insert(3, "30KE");
-        m_mapResistance.insert(4, "300KE");
-        m_mapResistance.insert(5, "1ME");
+	m_mapResistance.insert(1, "300E");
+	m_mapResistance.insert(2, "3KE");
+	m_mapResistance.insert(3, "30KE");
+	m_mapResistance.insert(4, "300KE");
+	m_mapResistance.insert(5, "1ME");
 
 	m_mapCapacitance.insert(0, "100pF");
 	m_mapCapacitance.insert(1, "1nF");
@@ -1187,7 +1255,7 @@ void ICM::on_R_clicked() {
 	}
 	rFlag=true;lFlag=false;cFlag=false;
 	on_R10E_clicked();
-        ui->ACDC->setEnabled(true);
+	ui->ACDC->setEnabled(true);
 }
 
 void ICM::on_L_clicked() {
@@ -1375,9 +1443,9 @@ void ICM::on_R10E_clicked() {
 	hwInterface->setFrequency(1000);
 	m_nFrequency = 1000;
 	IAppCard->writeRegister(0x1, 0x16);
-//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_20E);
-//	//qDebug()<<"Range:"<<m_mapResistance.value(R_Index)<<"m_nICMMGR:"<<m_nICMMGR<<"Frequency:"<<m_nFrequency<<"Feedback:"<<m_lstRFResistance.value(R_Index);
+	//	//qDebug()<<"Range:"<<m_mapResistance.value(R_Index)<<"m_nICMMGR:"<<m_nICMMGR<<"Frequency:"<<m_nFrequency<<"Feedback:"<<m_lstRFResistance.value(R_Index);
 }
 void ICM::on_R100E_clicked() {
 	R_Index = 1;
@@ -1387,9 +1455,9 @@ void ICM::on_R100E_clicked() {
 	usleep(1000);
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x1 on 12062014
 	usleep(1000);
-//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_20E);
-//	//qDebug()<<"Range:"<<m_mapResistance.value(R_Index)<<"m_nICMMGR:"<<m_nICMMGR<<"Frequency:"<<m_nFrequency<<"Feedback:"<<m_lstRFResistance.value(R_Index);
+	//	//qDebug()<<"Range:"<<m_mapResistance.value(R_Index)<<"m_nICMMGR:"<<m_nICMMGR<<"Frequency:"<<m_nFrequency<<"Feedback:"<<m_lstRFResistance.value(R_Index);
 
 }
 void ICM::on_R1KE_clicked() {
@@ -1399,7 +1467,7 @@ void ICM::on_R1KE_clicked() {
 	IAppCard->writeRegister(m_nICMMGR, 0x3A);
 
 	IAppCard->writeRegister(0x1, 0x16); //changed to 0x1 on 12062014
-//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_20E);
 	//qDebug()<<"Range:"<<m_mapResistance.value(R_Index)<<"m_nICMMGR:"<<m_nICMMGR<<"Frequency:"<<m_nFrequency<<"Feedback:"<<m_lstRFResistance.value(R_Index);
 }
@@ -1410,7 +1478,7 @@ void ICM::on_R10KE_clicked() {
 	IAppCard->writeRegister(m_nICMMGR, 0x3A);
 
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x1 on 12062014
-//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_20E);
 	//qDebug()<<"Range:"<<m_mapResistance.value(R_Index)<<"m_nICMMGR:"<<m_nICMMGR<<"Frequency:"<<m_nFrequency<<"Feedback:"<<m_lstRFResistance.value(R_Index);
 }
@@ -1421,7 +1489,7 @@ void ICM::on_R100KE_clicked() {
 	IAppCard->writeRegister(m_nICMMGR, 0x3A);
 
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x01 on 12062014
-//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_20E);
 	//qDebug()<<"Range:"<<m_mapResistance.value(R_Index)<<"m_nICMMGR:"<<m_nICMMGR<<"Frequency:"<<m_nFrequency<<"Feedback:"<<m_lstRFResistance.value(R_Index);
 }
@@ -1432,7 +1500,7 @@ void ICM::on_R1ME_clicked() {
 	IAppCard->writeRegister(m_nICMMGR, 0x3A);
 
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x1 on 12062014
-//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_20E);
 	//qDebug()<<"Range:"<<m_mapResistance.value(R_Index)<<"m_nICMMGR:"<<m_nICMMGR<<"Frequency:"<<m_nFrequency<<"Feedback:"<<m_lstRFResistance.value(R_Index);
 }
@@ -1446,7 +1514,7 @@ void ICM::on_L30uH_clicked() {
 	m_nFrequency = 200000;//50000
 
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x1 on 12062014
-//	IBackPlane->writeBackPlaneRegister(0x3, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x3, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_100E);
 
 }
@@ -1468,7 +1536,7 @@ void ICM::on_L300uH_clicked() {
 	m_nFrequency = 200000;//50000
 
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x1 on 12062014
-//	IBackPlane->writeBackPlaneRegister(0x3, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x3, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_100E);
 }
 void ICM::on_L3mH_clicked() {
@@ -1492,7 +1560,7 @@ void ICM::on_L30mH_clicked() {
 	m_nFrequency = 1200;
 
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x1 on 12062014
-//	IBackPlane->writeBackPlaneRegister(0x4, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x4, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_200E);
 }
 void ICM::on_L300mH_clicked() {
@@ -1504,7 +1572,7 @@ void ICM::on_L300mH_clicked() {
 	m_nFrequency = 120; // Prev.Value : 1000
 	//changed D.Elangovan 1-sep-2013 as per Anbu feedback
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x1 on 12062014
-//	IBackPlane->writeBackPlaneRegister(0x4, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x4, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_200E);
 }
 void ICM::on_L3H_clicked() {
@@ -1516,7 +1584,7 @@ void ICM::on_L3H_clicked() {
 	m_nFrequency = 120;
 
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x1 on 12062014
-//	IBackPlane->writeBackPlaneRegister(0x6, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x6, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_1KE);
 }
 void ICM::on_L30H_clicked() {
@@ -1528,7 +1596,7 @@ void ICM::on_L30H_clicked() {
 	m_nFrequency = 120;
 
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x1 on 12062014
-//	IBackPlane->writeBackPlaneRegister(0x6, 0x26);
+	//	IBackPlane->writeBackPlaneRegister(0x6, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_1KE);
 }
 
@@ -1647,8 +1715,9 @@ void ICM::GetDisplayResistance(double pResistanceValue, double pRangeValue) {
 	}
 	m_nResistance_2 = pResistanceValue;
 
-	if (autoFlag == true)
+	if (autoFlag == true){
 		AutoRange();
+	}
 
 	if (ui->checkBox->isChecked()) {
 		if (ui->chkLoad->isChecked())
@@ -2072,14 +2141,14 @@ void ICM::on_pushButton_clicked() {
 
 	if (m_bExternal == false) {
 		//qDebug()<<"External Measurement";
-/*		IPsoc->resetRelays();
+		/*		IPsoc->resetRelays();
 		usleep(1000);
 		IPsoc->onBottomRelay(0x9);
 		usleep(1000);
 		IPsoc->onBottomRelay(0x15);
 		usleep(1000);
 		IPsoc->onBottomRelay(0x13);*///commnted on 12062014 by RRV
-//		IPsoc->resetRelays();
+		//		IPsoc->resetRelays();
 		IPsoc->switchFly();
 		m_bExternal = true;
 		ui->pushButton->setIcon(QIcon(QPixmap(":/Symbols/Letter-E-icon.png")));
@@ -2094,7 +2163,7 @@ void ICM::on_pushButton_clicked() {
 
 	} else {
 		//qDebug()<<"Internal Measurement";
-//		IPsoc->resetRelays();
+		//		IPsoc->resetRelays();
 		IPsoc->icmMeasurement();
 		m_bExternal = false;
 		ui->pushButton->setIcon(QIcon(QPixmap(":/Symbols/Letter-I-icon.png")));
@@ -2322,7 +2391,7 @@ void ICM::on_hideSettings_clicked() {
 }
 
 void ICM::on_pushButton_3_clicked() {
-/*	QWidget *newWidget = test->getPTAppBckPsoc();
+	/*	QWidget *newWidget = test->getPTAppBckPsoc();
 	newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
 	newWidget->show();*/
 }
@@ -2420,7 +2489,7 @@ void ICM::on_RacRdc_clicked() {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void ICM::on_exit_clicked()
 {
-on_Exit_clicked();
+	on_Exit_clicked();
 }
 
 void ICM::on_rBut_clicked()
@@ -2455,5 +2524,5 @@ void ICM::on_cBut_clicked()
 
 void ICM::on_ACDC_clicked()
 {
-    on_RacRdc_clicked();
+	on_RacRdc_clicked();
 }
