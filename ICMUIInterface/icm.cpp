@@ -672,8 +672,10 @@ void ICM::readADC() {
 	ui->lblfrequency->setText(QString::number(m_nFrequency, 'f', 0));
 
 
+        m_nActualGain = m_nImpedanceValue / m_nResistance;
+	qDebug()<<"Actual Gain :"<<m_nActualGain;
 	if(autoFlag==true){
-		AutoRange();
+		AutoRangeGain();
 	}
 
 	if (ui->ResistanceRanges->isVisible()) {
@@ -705,6 +707,107 @@ void ICM::readADC() {
 		GetDisplayInductance(m_nInductance, L_Index);
 		ui->rangeLabel->setText(m_mapInductance.value(L_Index));
 		emit ICM2GCalib(m_nInductance, "ICM-L");
+	}
+}
+void ICM::AutoRangeGain(){
+
+	if((m_nActualGain >=10 && m_nActualGain<100) && m_nImpedanceValue==10){
+		ui->R100E->setChecked(true);
+		on_R10E_clicked();
+		if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+			ui->R10E->setChecked(true);
+			on_R10E_clicked();
+		}
+	}
+	else if ((m_nActualGain >=0.333 && m_nActualGain <100) && m_nImpedanceValue==100) {
+		ui->R100E->setChecked(true);
+		on_R100E_clicked();
+		if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+			ui->R10E->setChecked(true);
+			on_R10E_clicked();
+		}
+	}
+	else if ((m_nActualGain >=0.333 && m_nActualGain <3.333) && m_nImpedanceValue==1000) {
+		ui->R1KE->setChecked(true);
+		on_R1KE_clicked();
+		if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+			ui->R10E->setChecked(true);
+			on_R10E_clicked();
+		}
+	}
+	else if ((m_nActualGain >=0.333 && m_nActualGain <3.333) && m_nImpedanceValue==10000) {
+			ui->R10KE->setChecked(true);
+			on_R10KE_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+	else if ((m_nActualGain >=0.333 && m_nActualGain <3.333) && m_nImpedanceValue==100000) {
+			ui->R100KE->setChecked(true);
+			on_R100KE_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+	else if ((m_nActualGain >=0.4 && m_nActualGain <1.333) && m_nImpedanceValue==400000) {
+			ui->R1ME->setChecked(true);
+			on_R1ME_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+	else{
+		if(m_nImpedanceValue == 10){
+			ui->R100E->setChecked(true);
+			on_R100E_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		else if(m_nImpedanceValue==100){
+			ui->R1KE->setChecked(true);
+			on_R1KE_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		else if(m_nImpedanceValue==1000){
+			ui->R10KE->setChecked(true);
+			on_R10KE_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		else if(m_nImpedanceValue==10000){
+			ui->R100KE->setChecked(true);
+			on_R100KE_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		else if(m_nImpedanceValue==100000){
+			ui->R1ME->setChecked(true);
+			on_R1ME_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		else if(m_nImpedanceValue==400000){
+			ui->R10E->setChecked(true);
+			on_R10E_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
 	}
 }
 void ICM::AutoRange() {
@@ -1592,7 +1695,7 @@ void ICM::GetDisplayResistance(double pResistanceValue, double pRangeValue) {
 	m_nResistance_2 = pResistanceValue;
 
 	if (autoFlag == true){
-		AutoRange();
+		AutoRangeGain();
 	}
 
 	if (ui->checkBox->isChecked()) {

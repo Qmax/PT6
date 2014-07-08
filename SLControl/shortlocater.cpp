@@ -41,8 +41,8 @@ ShortLocater::ShortLocater(QWidget *parent)
     QPluginLoader loader8("libPTGPIOPinInterface.so",this);
     IGPIOPin = qobject_cast<InterfaceGPIOPins*>(loader8.instance());
 
-    QPluginLoader testing("libAppBckPsoc.so",this);
-    test = qobject_cast<IPTAppBckPsocInterface*>(testing.instance());
+//    QPluginLoader testing("libAppBckPsoc.so",this);
+//    test = qobject_cast<IPTAppBckPsocInterface*>(testing.instance());
 
     QPluginLoader loaderhaadc("libADCHighAccuracy.so", this);
     HAADC = qobject_cast<IHACADCTestJigInterface*> (loaderhaadc.instance());

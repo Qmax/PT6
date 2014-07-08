@@ -5489,7 +5489,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
    <widget class="QFrame" name="frontPanel">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>800</x>
       <y>434</y>
       <width>693</width>
       <height>160</height>

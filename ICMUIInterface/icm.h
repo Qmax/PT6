@@ -70,6 +70,8 @@ public:
     IQmaxNumberPanel *INumberPanel;
     IQmaxMessageBox *IPTMessageBox;
     DISPLAY *dis;
+
+    double m_nActualGain;
 protected:
 
     PTGPIOEventInterface *IGPIOEvent;
@@ -117,6 +119,7 @@ protected:
     void initialiseHWLibraries();
     void initialiseFeedBackResistance();
     void AutoRange();
+    void AutoRangeGain();
     QString convertToUnits(double l_nvalue);
 //    void resetDAC(AD5318_DACSELECT DAC);
 //    void updateDAC(double);
@@ -156,6 +159,7 @@ protected:
         bool m_bRacRdc;
 
         bool rFlag,lFlag,cFlag,autoFlag,runFlag;
+
 private:
     Ui::ICM *ui;
 

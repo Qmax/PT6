@@ -1,15 +1,15 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'pticminterface.h'
+** Meta object code from reading C++ file 'ptdmmlibinterface.h'
 **
-** Created: Tue Jul 8 17:53:29 2014
+** Created: Thu Jun 12 17:06:10 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../pticminterface.h"
+#include "../ptdmmlibinterface.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'pticminterface.h' doesn't include <QObject>."
+#error "The header file 'ptdmmlibinterface.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
 #error "This file was generated using the moc from 4.7.1. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -17,7 +17,7 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_PTICMInterface[] = {
+static const uint qt_meta_data_PTDMMLibInterface[] = {
 
  // content:
        5,       // revision
@@ -33,37 +33,37 @@ static const uint qt_meta_data_PTICMInterface[] = {
        0        // eod
 };
 
-static const char qt_meta_stringdata_PTICMInterface[] = {
-    "PTICMInterface\0"
+static const char qt_meta_stringdata_PTDMMLibInterface[] = {
+    "PTDMMLibInterface\0"
 };
 
-const QMetaObject PTICMInterface::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_PTICMInterface,
-      qt_meta_data_PTICMInterface, 0 }
+const QMetaObject PTDMMLibInterface::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_PTDMMLibInterface,
+      qt_meta_data_PTDMMLibInterface, 0 }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &PTICMInterface::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &PTDMMLibInterface::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *PTICMInterface::metaObject() const
+const QMetaObject *PTDMMLibInterface::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *PTICMInterface::qt_metacast(const char *_clname)
+void *PTDMMLibInterface::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_PTICMInterface))
-        return static_cast<void*>(const_cast< PTICMInterface*>(this));
-    if (!strcmp(_clname, "IPTICMInterface"))
-        return static_cast< IPTICMInterface*>(const_cast< PTICMInterface*>(this));
-    if (!strcmp(_clname, "pt.ICMInterfaces/1.0.0.1"))
-        return static_cast< IPTICMInterface*>(const_cast< PTICMInterface*>(this));
+    if (!strcmp(_clname, qt_meta_stringdata_PTDMMLibInterface))
+        return static_cast<void*>(const_cast< PTDMMLibInterface*>(this));
+    if (!strcmp(_clname, "IDMMLibInterface"))
+        return static_cast< IDMMLibInterface*>(const_cast< PTDMMLibInterface*>(this));
+    if (!strcmp(_clname, "pt.DMMLibInterface/1.0.0.1"))
+        return static_cast< IDMMLibInterface*>(const_cast< PTDMMLibInterface*>(this));
     return QObject::qt_metacast(_clname);
 }
 
-int PTICMInterface::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int PTDMMLibInterface::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
