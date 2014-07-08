@@ -2388,8 +2388,6 @@ font:bold 25px;
        </item>
       </layout>
      </widget>
-     <zorder>gridLayoutWidget</zorder>
-     <zorder>R1KE</zorder>
     </widget>
     <widget class="QGroupBox" name="Inductorranges">
      <property name="geometry">
@@ -4421,25 +4419,7 @@ font:bold 25px;
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <zorder>AutoManual</zorder>
-     <zorder>NULL_2</zorder>
-     <zorder>pushButton</zorder>
-     <zorder>settings</zorder>
-     <zorder>ONOFF</zorder>
-     <zorder>label_22</zorder>
-     <zorder>label_23</zorder>
-     <zorder>label_24</zorder>
-     <zorder>label_25</zorder>
-     <zorder>label_26</zorder>
-     <zorder>ACDC</zorder>
-     <zorder>label_40</zorder>
-     <zorder>frame_2</zorder>
     </widget>
-    <zorder>ResistanceRanges</zorder>
-    <zorder>Inductorranges</zorder>
-    <zorder>CapacitanceRanges</zorder>
-    <zorder>functionsPanel</zorder>
-    <zorder>frame_2</zorder>
    </widget>
    <widget class="QGroupBox" name="debugPanel">
     <property name="geometry">
@@ -6904,10 +6884,6 @@ border-radius:8px;</string>
    <zorder>t1Box</zorder>
    <zorder>lBox</zorder>
    <zorder>selectFrame</zorder>
-   <zorder>horizontalLayoutWidget</zorder>
-   <zorder>dso_outer_3</zorder>
-   <zorder>frame_31</zorder>
-   <zorder>frame_20</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

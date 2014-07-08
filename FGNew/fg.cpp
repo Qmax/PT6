@@ -37,8 +37,8 @@ void FG::PluginsInitialisation(){
 	QPluginLoader loader8("libPTGPIOPinInterface.so",this);
 	IGPIOPin = qobject_cast<InterfaceGPIOPins*>(loader8.instance());
 
-	QPluginLoader testing("libAppBckPsoc.so", this);
-	test = qobject_cast<IPTAppBckPsocInterface*> (testing.instance());
+/*	QPluginLoader testing("libAppBckPsoc.so", this);
+	test = qobject_cast<IPTAppBckPsocInterface*> (testing.instance());*/
 
 	QPluginLoader loaderREF("libRefCalib.so",this);
 	REFCalib = qobject_cast<IRefCALIBTestJigInterface*>(loaderREF.instance());
@@ -2004,9 +2004,9 @@ bool FG::showMessageBox(bool ok, bool cancel, QString text, QString okText ="Ok"
 
 void FG::on_appBckPSoC_clicked()
 {
-	QWidget *newWidget = test->getPTAppBckPsoc();
+/*	QWidget *newWidget = test->getPTAppBckPsoc();
 	newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
-	newWidget->show();
+	newWidget->show();*/
 }
 
 void FG::on_calibrate_clicked()

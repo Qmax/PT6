@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'icm.ui'
 **
-** Created: Mon Jul 7 11:57:56 2014
+** Created: Tue Jul 8 12:05:26 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -823,8 +823,6 @@ public:
 
         gridLayout->addWidget(R1ME, 1, 1, 1, 1);
 
-        gridLayoutWidget->raise();
-        R1KE->raise();
         Inductorranges = new QGroupBox(Components);
         Inductorranges->setObjectName(QString::fromUtf8("Inductorranges"));
         Inductorranges->setGeometry(QRect(30, 110, 630, 112));
@@ -1770,22 +1768,6 @@ public:
         label_40->setFont(font6);
         label_40->setStyleSheet(QString::fromUtf8("color:white;"));
         label_40->setAlignment(Qt::AlignCenter);
-        AutoManual->raise();
-        NULL_2->raise();
-        pushButton->raise();
-        settings->raise();
-        ONOFF->raise();
-        label_22->raise();
-        label_23->raise();
-        label_24->raise();
-        label_25->raise();
-        label_26->raise();
-        ACDC->raise();
-        label_40->raise();
-        ResistanceRanges->raise();
-        Inductorranges->raise();
-        CapacitanceRanges->raise();
-        functionsPanel->raise();
         debugPanel = new QGroupBox(centralWidget);
         debugPanel->setObjectName(QString::fromUtf8("debugPanel"));
         debugPanel->setGeometry(QRect(10, 434, 692, 160));
@@ -2636,9 +2618,6 @@ public:
         t1Box->raise();
         lBox->raise();
         selectFrame->raise();
-        dso_outer_3->raise();
-        frame_31->raise();
-        frame_20->raise();
 
         retranslateUi(ICM);
 

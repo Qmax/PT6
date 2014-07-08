@@ -16,5 +16,6 @@
         <file>Desktop/app8.png</file>
         <file>Desktop/app9.png</file>
         <file>Desktop/Power.png</file>
+        <file>images/simple_gray.png</file>
     </qresource>
 </RCC>

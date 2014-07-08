@@ -1499,7 +1499,7 @@ void ICM::on_settings_clicked() {
 void ICM::on_ONOFF_clicked() {
 	//	if (ui->OnOffSlider->value() == 1) {
 	if(runFlag==false){
-		ui->ONOFF->setIcon(QIcon(QPixmap(":/Symbols/Button-Play-icon.png")));
+                ui->ONOFF->setIcon(QIcon(QPixmap(":/Symbols/Button-Play-icon.png")));
 		ui->holdCap->setVisible(false);
 		//		ui->OnOffSlider->setValue(0);
 		on_OnOffSlider_valueChanged(1);
@@ -2028,10 +2028,10 @@ void ICM::on_pushButton_clicked() {
 		IPsoc->switchFly();
 		m_bExternal = true;
 		ui->pushButton->setIcon(QIcon(QPixmap(":/Symbols/Letter-E-icon.png")));
-		ui->frame_20->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/Symbols/25PinDIN.png)");
-		ui->frame_20->setGeometry(121,20,110,50);
-		ui->frame_23->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
-		ui->frame_23->setGeometry(28,90,60,15);
+                ui->frame_20->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/Symbols/25PinDIN.png)");
+                ui->frame_20->setGeometry(121,20,110,50);
+                ui->frame_23->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
+                ui->frame_23->setGeometry(28,90,60,15);
 		ui->label_35->setStyleSheet("color:black");
 		ui->label_32->setStyleSheet("color:gray");
 		ui->label_32->setText("SL/ICM/VI2");

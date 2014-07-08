@@ -174,14 +174,14 @@ protected:
     QPushButton *glowButton[6];
 	void CreateButton();
 
+	void on_shutDownButton_clicked();
+	void on_testjigButton_clicked();
 
 private:
 	Ui::PortableTester *ui;
 
 public slots:
 	void buttonPressed(int);
-	void on_shutDownButton_clicked();
-	void on_testjigButton_clicked();
 	void poweroff();
 	void houseKeeping();
 	void UnHide();

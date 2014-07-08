@@ -131,8 +131,8 @@ DMM::DMM(QWidget *parent) :
 
 	ui->r4w->setVisible(false);
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	QPluginLoader testing("libAppBckPsoc.so", this);
-	test = qobject_cast<IPTAppBckPsocInterface*> (testing.instance());
+/*	QPluginLoader testing("libAppBckPsoc.so", this);
+	test = qobject_cast<IPTAppBckPsocInterface*> (testing.instance());*/
 
 	//	QTimer *timerb1 = new QTimer(this);
 	//	connect(timerb1, SIGNAL(timeout()), this, SLOT(blink1()));
@@ -1860,9 +1860,9 @@ void DMM::on_Null_clicked() {
 }
 
 void DMM::on_pushButton_clicked() {
-	QWidget *newWidget = test->getPTAppBckPsoc();
+/*	QWidget *newWidget = test->getPTAppBckPsoc();
 	newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
-	newWidget->show();
+	newWidget->show();*/
 }
 
 void DMM::on_pushButton_14_clicked() {

@@ -47,8 +47,4 @@ FORMS += daccalibration.ui \
     icm.ui \
     settings.ui
 DESTDIR = /exports/nfsroot-ccwmx51js/home/
-RESOURCES += svgResource.qrc \
-    icm.qrc
-#QMAKE_POST_LINK += cp \
- #   /exports/nfsroot-ccwmx51js/home/libICMUIInterface.so \
-  #  /mnt/ElangovanPC/nfsroot-ccwmx51js/home/libICMUIInterface.so
+RESOURCES += icm.qrc

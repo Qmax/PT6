@@ -238,6 +238,7 @@
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="libxml2" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="cryptopp" kind="inc" path="" system="true"/>
 			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
 		</cconfiguration>
 	</storageModule>
 </cproject>

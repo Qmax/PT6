@@ -104,7 +104,7 @@ void MainWindowView::InitHeaderView(int value,QString pTitle)
 
 void MainWindowView::InitBasePane()
 {
-    basepaneScene = new QGraphicsScene(0,500,700,200);
+/*    basepaneScene = new QGraphicsScene(0,500,700,200);
     //basepaneScene->setBackgroundBrush(QBrush(QColor(188,190,192,255)));
     QPixmap obj1 = QPixmap(":/Symbols/simple_gray.png");
         QBrush obj2 = QBrush(obj1);
@@ -112,22 +112,21 @@ void MainWindowView::InitBasePane()
         obj2.setTexture(obj1);
     basepaneScene->setBackgroundBrush(obj2);
     basepaneView = new QGraphicsView(m_objWidget);
+
     QPixmap obj3 = QPixmap(":/Symbols/ivory_texture1.png");
     QBrush obj4 = QBrush(obj1);
     obj4.setStyle(Qt::TexturePattern);
     obj4.setTexture(obj3);
 
     QPolygonF myPolygon;
-//    myPolygon << QPointF(20.0,550.0)<<QPointF(0.0,598.0)<<QPointF(690.0,598.0)<<QPointF(670.0,550.0);
     myPolygon << QPointF(130.0,530.0)<<QPointF(100.0,580.0)<<QPointF(700.0,580.0)<<QPointF(670.0,530.0);
     basepaneScene->addPolygon(myPolygon,QPen(Qt::transparent,20),QBrush(obj4));//QColor(255,255,255,55)));
 
-   // basepaneScene->addRect(150,500,400,100,QPen(Qt::lightGray),QBrush(Qt::lightGray));
     basepaneView->setGeometry(0,500,700,200);
     basepaneView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     basepaneView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     basepaneView->setFrameShape(QFrame::NoFrame);
-    basepaneView->setScene(basepaneScene);
+    basepaneView->setScene(basepaneScene);*/
 }
 
 MainWindowView::~MainWindowView()
@@ -150,7 +149,7 @@ void MainWindowView::InitPrimaryView()
 {
     entireScene = new QGraphicsScene(0,0,800,600);
     entireView = new QGraphicsView(m_objWidget);
-    QPixmap obj1 = QPixmap(":/Symbols/simple_gray.png");
+    QPixmap obj1 = QPixmap(":/images/simple_gray.png");
     QBrush obj2 = QBrush(obj1);
     obj2.setStyle(Qt::TexturePattern);
     obj2.setTexture(obj1);

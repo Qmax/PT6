@@ -58,12 +58,12 @@ PortableTester::PortableTester(QWidget *parent) :
     //Backplane Interface Library
     QPluginLoader loader2("libBackPlaneInterface.so", this);
     IBackPlane = qobject_cast<IntefaceBackPlane*> (loader2.instance());
+    IBackPlane->InitializeBpObject();
     
     //PSOC Interface Library
     QPluginLoader loader3("libPTPsocInterface2.so", this);
     IPsoc = qobject_cast<IPSOCCOMMUNICATION*> (loader3.instance());
     IPsoc->openSerial();
-    
     objTimer = new QTimer(this);
     connect(objTimer, SIGNAL(timeout()), this, SLOT(checkButton()));
     
@@ -75,33 +75,27 @@ PortableTester::PortableTester(QWidget *parent) :
     //QMax PT Interface Library
     QPluginLoader loader4("libQmaxPTInterface.so", this);
     IptLib = qobject_cast<IQmaxPTLibrary*> (loader4.instance());
-    
     //GPIO Event Interface Library
     QPluginLoader loader5("libGPIOEventInterface.so", this);
     IGPIOEvent = qobject_cast<PTGPIOEventInterface*> (loader5.instance());
-    
     //PT Keypad Interface Library
     QPluginLoader loader6("libPTKeyEventInterfaces.so", this);
     IPTKeyEvent = qobject_cast<PTEventInterface*> (loader6.instance());
-    
     //GPIO PIN Interface Library for toggle touch and kill
     QPluginLoader loader7("libPTGPIOPinInterface.so", this);
     IGPIOPin = qobject_cast<InterfaceGPIOPins*> (loader7.instance());
+//    //Hardware Identification Library
+//    QPluginLoader loader8("libPTHWIDInterface.so", this);
+//    IHWID = qobject_cast<IHWIDInterface*> (loader8.instance());
+//
+//    //Utility Panel Interface Library
+//    QPluginLoader loader9("libUtilityPanel.so", this);
+//    IUtility = qobject_cast<UtilityInterface*> (loader9.instance());
     
-    //Hardware Identification Library
-    QPluginLoader loader8("libPTHWIDInterface.so", this);
-    IHWID = qobject_cast<IHWIDInterface*> (loader8.instance());
-    
-    //Utility Panel Interface Library
-    QPluginLoader loader9("libUtilityPanel.so", this);
-    IUtility = qobject_cast<UtilityInterface*> (loader9.instance());
-    
-    IBackPlane->InitializeBpObject();
+
     IBackPlane->writeBackPlaneRegister(0x03, 0x14); // Initialize LCD Control
-    
-    IptLib->InitPTLibrary("./PTUI.xml", "MainWindow");
+//    IptLib->InitPTLibrary("./PTUI.xml", "MainWindow");
     initialitation();
-    
     IPTKeyEvent->InvokeGPIOEvent(this, "/dev/input/event2", "pt_kpp",&m_nPTKeyCode);
     //IGPIOEvent->InvokeGPIOEvent(this, "/dev/input/event3", "gpioshutdown", &m_nPTShutDown);
     
