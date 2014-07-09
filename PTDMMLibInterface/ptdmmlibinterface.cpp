@@ -2,6 +2,7 @@
 // Project by Ravivarman.R , Created 04-02-2013
 
 #include "ptdmmlibinterface.h"
+#include "math.h"
 
 struct calib{
         double gain,constant;
@@ -321,8 +322,13 @@ double PTDMMLibInterface::displayResistance(unsigned int rValue)
     values.ConvertedData=c_nAIN;
     //qDebug()<<"Calibrated Value :"<<c_nAIN;
     }
-    else if(calib_value.flag==false)
-        c_nAIN=l_nAIN;
+    else if(calib_value.flag==false){
+    	qDebug()<<"##################### :"<<l_nAIN;
+    	int rem = l_nAIN * 10000000;
+    	qDebug()<<"##################### :"<<rem;
+        c_nAIN = (double)rem     / 10000000;
+        qDebug()<<"##################### :"<<c_nAIN;
+    }
 
     ADCRxVoltage=l_nAIN;
 
@@ -351,7 +357,7 @@ double PTDMMLibInterface::displayResistance(unsigned int rValue)
 *///commented on 12062014
 
     //-------------------------------------------------------------------------------------
-    qDebug()<<"Resistance :"<<qSetRealNumberPrecision(10)<<Resistance;
+    qDebug()<<"Resistance :"<<qSetRealNumberPrecision(7)<<Resistance;
 
 /*    double value = Resistance;
     static const double FACTOR = 32.0;

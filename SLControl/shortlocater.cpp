@@ -459,7 +459,7 @@ void ShortLocater::Measure(){
     ui.displayOffset->setText(QString::number(nullify));
     retval=retval-nullify;
     retval=retval-nullit;
-    ui.displayInput->setText(QString::number(retval,'f',15));
+    ui.displayInput->setText(QString::number(retval,'f',7));
     Beep(retval);
     if(retval>220.00){
         dis->setValue("OL");
@@ -543,7 +543,7 @@ void ShortLocater::Measure(){
 
     ADC data=IDMMLib->getAdcDatas();
     ui.adcRawData->setText(QString::number((data.Data),'f',0));
-    ui.adcConvData->setText(QString::number((data.ConvertedData),'f',15));
+    ui.adcConvData->setText(QString::number((data.ConvertedData),'f',7));
 
 }
 void ShortLocater::Beep(double value){
