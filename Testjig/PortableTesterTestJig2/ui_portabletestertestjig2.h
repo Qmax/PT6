@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'portabletestertestjig2.ui'
 **
-** Created: Mon Jul 7 11:59:16 2014
+** Created: Wed Jul 9 11:18:15 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

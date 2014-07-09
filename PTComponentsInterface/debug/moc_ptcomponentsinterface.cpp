@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'ptcomponentsinterface.h'
 **
-** Created: Fri Nov 8 12:23:21 2013
+** Created: Wed Jul 9 11:24:43 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

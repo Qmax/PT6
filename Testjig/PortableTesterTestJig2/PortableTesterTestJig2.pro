@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = PortableTesterTestJig
+TARGET = PortableTesterTestJig2
 QT += core \
     gui
 HEADERS += IPSOCCommunication.h \

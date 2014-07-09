@@ -1,5 +1,5 @@
 # -------------------------------------------------
-# Project created by QtCreator 2013-02-04T17:24:45
+# Project by Ravivarman.R , Created 04-02-2013
 # -------------------------------------------------
 QT += core
 TARGET = PTDMMLibInterface

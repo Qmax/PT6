@@ -24,26 +24,19 @@ ShortLocater::ShortLocater(QWidget *parent)
     QPluginLoader loader2("libBackPlaneInterface.so",this);
     IBackPlane = qobject_cast<IntefaceBackPlane*>(loader2.instance());
     IBackPlane->InitializeBpObject();
-
     QPluginLoader loader3("libPTPsocInterface2.so",this);
     IPsoc = qobject_cast<IPSOCCOMMUNICATION*>(loader3.instance());
     IPsoc->openSerial();
-
     QPluginLoader loader4("libPTDMMLibInterface.so",this);
     IDMMLib = qobject_cast<IDMMLibInterface*>(loader4.instance());
-
     QPluginLoader loader5("libGPIOEventInterface.so",this);
     IGPIOEvent = qobject_cast<PTGPIOEventInterface*>(loader5.instance());
-
     QPluginLoader loader6("libPTKeyEventInterfaces.so",this);
     IPTKeyEvent = qobject_cast<PTEventInterface*>(loader6.instance());
-
     QPluginLoader loader8("libPTGPIOPinInterface.so",this);
     IGPIOPin = qobject_cast<InterfaceGPIOPins*>(loader8.instance());
-
 //    QPluginLoader testing("libAppBckPsoc.so",this);
 //    test = qobject_cast<IPTAppBckPsocInterface*>(testing.instance());
-
     QPluginLoader loaderhaadc("libADCHighAccuracy.so", this);
     HAADC = qobject_cast<IHACADCTestJigInterface*> (loaderhaadc.instance());
     HAADC->setHACADC(ui.HAADC_WIDGET);

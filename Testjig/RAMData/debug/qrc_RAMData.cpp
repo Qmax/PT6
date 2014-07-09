@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Resource object code
 **
-** Created: Wed Sep 25 16:59:22 2013
+** Created: Wed Jul 9 11:23:33 2014
 **      by: The Resource Compiler for Qt version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost!
@@ -10,7 +10,7 @@
 #include <QtCore/qglobal.h>
 
 static const unsigned char qt_resource_data[] = {
-  // /mnt/ElangovanPC/Share/PTProjects/RAMData/bg.png
+  // /home/ravivarman/Dropbox/PT6/Testjig/RAMData/bg.png
   0x0,0x0,0x70,0xfb,
   0x89,
   0x50,0x4e,0x47,0xd,0xa,0x1a,0xa,0x0,0x0,0x0,0xd,0x49,0x48,0x44,0x52,0x0,

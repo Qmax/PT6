@@ -1,3 +1,6 @@
+
+// Project by Ravivarman.R , Created 04-02-2013
+
 #include "ptdmmlibinterface.h"
 
 struct calib{
@@ -330,9 +333,9 @@ double PTDMMLibInterface::displayResistance(unsigned int rValue)
     //qDebug()<<"Inside MeasureResistance Display";
     double Resistance=0.0;
     //R=V/I		Resistance=ADC Voltage/Forced Current
-    if (rValue==R200mE)     Resistance = (c_nAIN /10e-3 );
-    else if (rValue==R2E)  		 Resistance = c_nAIN /10e-3 ;
-	else if (rValue==SLR200E)	 Resistance = c_nAIN /1e-3;
+    if (rValue==R200mE)     Resistance = (c_nAIN /10.026e-3 );
+    else if (rValue==R2E)  		 Resistance = c_nAIN /10.026e-3 ;
+	else if (rValue==SLR200E)	 Resistance = c_nAIN /1.015e-3;
 
 /*
     else if (rValue==R200E)      Resistance = c_nAIN / 0.001;
@@ -682,8 +685,8 @@ double PTDMMLibInterface::MeasureResistance(unsigned int rValue,unsigned int rTy
 
     //qDebug()<<"Inside MeasureResistance Display";
         double Resistance=0.0;
-                 if (rValue==R200mE)     Resistance = (l_dbAIN /10e-3 );
-        else if (rValue==R2E)  		 Resistance = l_dbAIN /5e-3 ;
+             if (rValue==R200mE)     Resistance = (l_dbAIN /10e-3 );
+        else if (rValue==R2E)  		 Resistance = l_dbAIN /10e-3 ;
         else if (rValue==SLR200E)	 Resistance = l_dbAIN /1e-3;
 
 /*        else if (rValue==R200E)      Resistance = l_dbAIN / 0.001;

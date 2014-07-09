@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'spimemoryinterface.h'
 **
-** Created: Mon Jul 7 12:00:21 2014
+** Created: Wed Jul 9 11:24:24 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

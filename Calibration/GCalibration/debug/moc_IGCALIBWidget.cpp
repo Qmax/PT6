@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'IGCALIBWidget.h'
 **
-** Created: Mon Nov 11 16:59:01 2013
+** Created: Wed Jul 9 11:17:48 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

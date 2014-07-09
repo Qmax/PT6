@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'IAWGWidget.h'
 **
-** Created: Tue Jul 8 15:36:52 2014
+** Created: Wed Jul 9 11:20:56 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

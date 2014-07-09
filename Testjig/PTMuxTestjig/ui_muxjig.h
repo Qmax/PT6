@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'muxjig.ui'
 **
-** Created: Wed Jul 31 12:08:47 2013
+** Created: Wed Jul 9 11:23:07 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'ad9102ui.h'
 **
-** Created: Tue Jan 7 17:54:50 2014
+** Created: Wed Jul 9 11:19:12 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

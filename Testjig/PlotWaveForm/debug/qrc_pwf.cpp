@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Resource object code
 **
-** Created: Thu Sep 12 15:45:00 2013
+** Created: Wed Jul 9 11:22:43 2014
 **      by: The Resource Compiler for Qt version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost!
@@ -10,7 +10,7 @@
 #include <QtCore/qglobal.h>
 
 static const unsigned char qt_resource_data[] = {
-  // /exports/Share/PTProjects/PlotWaveForm/bg.png
+  // /home/ravivarman/Dropbox/PT6/Testjig/PlotWaveForm/bg.png
   0x0,0x0,0x70,0xfb,
   0x89,
   0x50,0x4e,0x47,0xd,0xa,0x1a,0xa,0x0,0x0,0x0,0xd,0x49,0x48,0x44,0x52,0x0,
