@@ -14,7 +14,7 @@
 #include "IPSOCCommunication.h"
 #include "hardwareinterface.h"
 #include "GCALIBTestJigInterface.h"
-//#include "PTAppBckPsocInterface.h"
+#include "PTAppBckPsocInterface.h"
 #include "BackPlaneInterface.h"
 #include <qelapsedtimer.h>
 #include <QMessageBox>
@@ -79,7 +79,7 @@ protected:
     InterfaceGPIOPins *IGPIOPin;
 
     IntefaceBackPlane *IBackPlane;
-//    IPTAppBckPsocInterface *test;
+    IPTAppBckPsocInterface *test;
     IGCALIBTestJigInterface *GCALIB;
     HardwareInterface *hwInterface;
     IPSOCCOMMUNICATION *IPsoc;

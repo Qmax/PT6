@@ -168,10 +168,10 @@ void ICM::initialiseHWLibraries() {
 	QPluginLoader loaderGeneral("libGCalib.so", this);
 	GCALIB = qobject_cast<IGCALIBTestJigInterface*> (loaderGeneral.instance());
 
-	/*
+
 	QPluginLoader testing("libAppBckPsoc.so", this);
 	test = qobject_cast<IPTAppBckPsocInterface*> (testing.instance());
-	 */
+
 
 	//~~~~~~~~Check for debug panel~~~~~~~~~~~~~~~~~~~~~~~~
 	QStringList debugPanel;
@@ -2114,9 +2114,9 @@ void ICM::on_calibrate_clicked() {
 }
 
 void ICM::on_pushButton_clicked() {
-	//    QWidget *newWidget=test->getPTAppBckPsoc();
-	//                    newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
-	//                    newWidget->show();
+/*	    QWidget *newWidget=test->getPTAppBckPsoc();
+	                    newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
+	                    newWidget->show();*/
 
 	if (m_bExternal == false) {
 		//qDebug()<<"External Measurement";
@@ -2370,9 +2370,9 @@ void ICM::on_hideSettings_clicked() {
 }
 
 void ICM::on_pushButton_3_clicked() {
-	/*	QWidget *newWidget = test->getPTAppBckPsoc();
+		QWidget *newWidget = test->getPTAppBckPsoc();
 	newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
-	newWidget->show();*/
+	newWidget->show();
 }
 
 void ICM::on_RacRdc_clicked() {

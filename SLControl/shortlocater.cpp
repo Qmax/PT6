@@ -35,8 +35,8 @@ ShortLocater::ShortLocater(QWidget *parent)
     IPTKeyEvent = qobject_cast<PTEventInterface*>(loader6.instance());
     QPluginLoader loader8("libPTGPIOPinInterface.so",this);
     IGPIOPin = qobject_cast<InterfaceGPIOPins*>(loader8.instance());
-//    QPluginLoader testing("libAppBckPsoc.so",this);
-//    test = qobject_cast<IPTAppBckPsocInterface*>(testing.instance());
+    QPluginLoader testing("libAppBckPsoc.so",this);
+    test = qobject_cast<IPTAppBckPsocInterface*>(testing.instance());
     QPluginLoader loaderhaadc("libADCHighAccuracy.so", this);
     HAADC = qobject_cast<IHACADCTestJigInterface*> (loaderhaadc.instance());
     HAADC->setHACADC(ui.HAADC_WIDGET);
@@ -151,6 +151,8 @@ void ShortLocater::Initializations(){
     ui.holdCap->setVisible(false);
     runFlag=true;
     startStop();
+
+	ui.openShortEnable->setChecked(true);
 }
 
 void ShortLocater::customEvent(QEvent *e){
@@ -390,11 +392,12 @@ void ShortLocater::Configure(int x){
 }
 void ShortLocater::Measure(){
 
+/*
 	if(OffsetFlag==true)
 		ui.openShortEnable->setChecked(false);
 	else
 		ui.openShortEnable->setChecked(true);
-
+*///commented on 9th july 2014
     if(rangeFlag=="200mE"){
         retval2=IDMMLib->displayResistance(R200mE);
         if(ui.openShortEnable->isChecked())
@@ -476,8 +479,11 @@ void ShortLocater::Measure(){
                 ui.progressBar_2->setMaximum(200);
                 ui.progressBar_2->setValue(200);
             }
-            else
-                dis->setValue(convertToUnits(retval));
+            else{
+            	QString tempRetval=convertToUnits(retval);
+            	qDebug()<<"output from convertToUnits:"<<tempRetval;
+                dis->setValue(tempRetval);
+            }
 
             ui.progressBar_2->setMinimum(0);
             ui.progressBar_2->setMaximum(200);
@@ -494,8 +500,11 @@ void ShortLocater::Measure(){
                 ui.progressBar_2->setMaximum(200);
                 ui.progressBar_2->setValue(200);
             }
-            else
-                dis->setValue(convertToUnits(retval));
+            else{
+            	QString tempRetval=convertToUnits(retval);
+            	qDebug()<<"output from convertToUnits:"<<tempRetval;
+                dis->setValue(tempRetval);
+            }
 
             ui.progressBar_2->setMinimum(0);
             ui.progressBar_2->setMaximum(2000);
@@ -513,8 +522,11 @@ void ShortLocater::Measure(){
                 ui.progressBar_2->setMaximum(200);
                 ui.progressBar_2->setValue(200);
             }
-            else
-                dis->setValue(convertToUnits(retval));//'f',1
+            else{
+            	QString tempRetval=convertToUnits(retval);
+            	qDebug()<<"output from convertToUnits:"<<tempRetval;
+                dis->setValue(tempRetval);
+            }
 
             ui.progressBar_2->setMinimum(0);
             ui.progressBar_2->setMaximum(200);
@@ -575,11 +587,12 @@ void ShortLocater::on_printImage_clicked()
 
 void ShortLocater::on_pushButton_5_clicked()
 {
-/*    QWidget *newWidget=test->getPTAppBckPsoc();
+    QWidget *newWidget=test->getPTAppBckPsoc();
     newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
-    newWidget->show();*/
+    newWidget->show();
 }
 QString ShortLocater::convertToUnits(double l_nvalue){
+	qDebug()<<"input to convertToUnits : "<<l_nvalue;
     QString unit;
     double value;
     if(rangeFlag=="200mE"){
@@ -716,7 +729,6 @@ QString ShortLocater::convertToUnits(double l_nvalue){
             }
         }
     }
-
 }
 
 void ShortLocater::shortCalibration(){

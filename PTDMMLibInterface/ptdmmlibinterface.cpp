@@ -248,7 +248,6 @@ double PTDMMLibInterface::displayResistance(unsigned int rValue)
 
     	    avgRetval[avg]=l_nAIN;
     	    retval=retval+avgRetval[avg];
-//    	    qDebug()<<"avgRetval of "<<avg<<" Samples :"<<avgRetval[avg];
     	}
     	avg=0;
     	l_nAIN=retval/noOfSamples;
@@ -333,9 +332,9 @@ double PTDMMLibInterface::displayResistance(unsigned int rValue)
     //qDebug()<<"Inside MeasureResistance Display";
     double Resistance=0.0;
     //R=V/I		Resistance=ADC Voltage/Forced Current
-    if (rValue==R200mE)     Resistance = (c_nAIN /10.026e-3 );
-    else if (rValue==R2E)  		 Resistance = c_nAIN /10.026e-3 ;
-	else if (rValue==SLR200E)	 Resistance = c_nAIN /1.015e-3;
+    if (rValue==R200mE)     Resistance = (c_nAIN /10.005e-3 );
+    else if (rValue==R2E)  		 Resistance = c_nAIN /10.005e-3 ;
+	else if (rValue==SLR200E)	 Resistance = c_nAIN /0.992e-3;
 
 /*
     else if (rValue==R200E)      Resistance = c_nAIN / 0.001;
@@ -387,7 +386,7 @@ double PTDMMLibInterface::displayDiode(unsigned int rValue){
 
     qDebug("Converted Data : %f",l_nAIN);
     values.Data=AIN;
-       values.ConvertedData=l_nAIN;
+    values.ConvertedData=l_nAIN;
 
     if(calib_value.flag==true){
     calibrateDMM();
@@ -535,7 +534,7 @@ double PTDMMLibInterface::MeasureResistance(unsigned int rValue,unsigned int rTy
 
 	if(rValue==R200mE||rValue==R2E||rValue==SLR200E){
 		iamDMM=false;
-		IAppCard->writeRegister(0x0000,0x0036);//testing
+		IAppCard->writeRegister(0x0016,0x0036);//testing//changed to 6 from 0 for via rms2dc
 	    IAppCard->writeRegister(0x0010,0x0048);
 	}/*else if(rValue==R200E||rValue==R2K||rValue==R20K||rValue==R200K||rValue==R2M||rValue==R20M){
 		//qDebug()<<"DMM-MeasureResistance";
@@ -636,20 +635,20 @@ double PTDMMLibInterface::MeasureResistance(unsigned int rValue,unsigned int rTy
     if(rValue==SLR200E){
     	IAppCard->writeRegister(0x000F,0x0016);
         test=ICALIB->SerialDACCalibration(SLR200E);
-//        ForceCurrent(1,test);
-        ForceCurrent(1,DACDriveVoltage[0]);
+        ForceCurrent(1,test);
+//        ForceCurrent(1,DACDriveVoltage[0]);
     }
     else if(rValue==R2E){
         IAppCard->writeRegister(0x000F,0x0016);
         test=ICALIB->SerialDACCalibration(R2E);
-//        ForceCurrent(1,test);
-        ForceCurrent(1,DACDriveVoltage[1]);
+        ForceCurrent(1,test);
+//        ForceCurrent(1,DACDriveVoltage[1]);
     }
     else if(rValue==R200mE){
     	IAppCard->writeRegister(0x000F,0x0016);
         test=ICALIB->SerialDACCalibration(R200mE);
-//        ForceCurrent(1,test);
-    	ForceCurrent(1,DACDriveVoltage[2]);
+        ForceCurrent(1,test);
+//    	ForceCurrent(1,DACDriveVoltage[2]);
     }
 //    qDebug()<<"vout value sent to force current :"<<test;
     //----------------------------------------------------------------------------------
