@@ -160,7 +160,7 @@ void ShortLocater::Initializations(){
     startStop();
 
 	ui.openShortEnable->setChecked(true);
-//	ui.splashWidget->setVisible(false);
+	ui.splashWidget->setGeometry(800,600,210,40);
 }
 
 void ShortLocater::customEvent(QEvent *e){
@@ -185,9 +185,10 @@ void ShortLocater::ProbeFunction(){
     qDebug()<<"data read at 1E"<<l_nRegisterValue;
     IBackPlane->writeBackPlaneRegister(0x0100,0x001E);
 
-    IPsoc->writeSerial(0x01);
-    usleep(1000);
-    reads=IPsoc->readSerial();
+//    IPsoc->writeSerial(0x01);
+//    usleep(1000);
+//    reads=IPsoc->readSerial();
+    reads = IPsoc->embeddedProbeStatus();
 
     qDebug()<<"Embedded Probe reads:"<<hex<<reads;
     changeByProbe(reads);
@@ -197,13 +198,13 @@ void ShortLocater::ProbeFunction(){
 
 }
 void ShortLocater::changeByProbe(unsigned int key){
-    if(key==0x90||key==0x98){
+    if(key==0xc){//0x90||key==0x98){
         ui.offset->animateClick(1);
     }
-    else if(key==0xA0||key==0xA8){
+    else if(key==0xa){//0xA0||key==0xA8){
         ui.Auto->animateClick(1);
     }
-    else if(key==0xC0||key==0xC8){
+    else if(key==0x9){//0xC0||key==0xC8){
         if(AutoFlag==false){
             if(rangeFlag=="200E")
                 ui.r2EBut->animateClick(1);
@@ -885,7 +886,7 @@ void ShortLocater::on_Auto_clicked()
 
 void ShortLocater::on_offset_clicked()
 {
-	ui.splashWidget->setVisible(true);
+	ui.splashWidget->setGeometry(250,310,210,40);
 	qDebug()<<"Offset Applied";
 //    if(AutoFlag==true){
 	if(OffsetFlag==false){
@@ -927,8 +928,7 @@ void ShortLocater::on_offset_clicked()
 //    }else{
 //        showMessageBox(true,false,"Offset works only in Auto Mode","OK","");
 //    }
-
-	ui.splashWidget->setVisible(false);
+	ui.splashWidget->setGeometry(800,600,210,40);
 }
 
 void ShortLocater::on_Null_clicked()
