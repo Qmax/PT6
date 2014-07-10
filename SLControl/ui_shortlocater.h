@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'shortlocater.ui'
 **
-** Created: Wed Jul 9 11:15:19 2014
+** Created: Thu Jul 10 15:26:20 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -134,6 +134,8 @@ public:
     QCheckBox *openShortEnable;
     QLineEdit *displayOffset;
     QWidget *HAADC_WIDGET;
+    QWidget *splashWidget;
+    QLabel *splashLabel;
 
     void setupUi(QWidget *ShortLocaterClass)
     {
@@ -761,6 +763,13 @@ public:
 "background-color:grey\n"
 "}"));
         Internal->setIconSize(QSize(64, 64));
+        Null->raise();
+        offset->raise();
+        Auto->raise();
+        buzzer->raise();
+        hold->raise();
+        External->raise();
+        Internal->raise();
         Ranges = new QGroupBox(inputPanel);
         Ranges->setObjectName(QString::fromUtf8("Ranges"));
         Ranges->setGeometry(QRect(30, 120, 630, 100));
@@ -1527,18 +1536,27 @@ public:
         HAADC_WIDGET->setObjectName(QString::fromUtf8("HAADC_WIDGET"));
         HAADC_WIDGET->setGeometry(QRect(633, 525, 50, 2));
         HAADC_WIDGET->setStyleSheet(QString::fromUtf8(""));
-        frontPanel->raise();
-        debugPanel->raise();
-        displayPanel->raise();
-        ohmBox->raise();
-        selectFrame->raise();
-        inputPanel->raise();
-        temp4->raise();
-        temp2->raise();
-        ExitBox->raise();
-        temp1->raise();
-        temp3->raise();
-        HAADC_WIDGET->raise();
+        splashWidget = new QWidget(ShortLocaterClass);
+        splashWidget->setObjectName(QString::fromUtf8("splashWidget"));
+        splashWidget->setGeometry(QRect(250, 310, 210, 40));
+        splashWidget->setStyleSheet(QString::fromUtf8("border-radius:20px;\n"
+"background-color: qradialgradient(spread:repeat, cx:0.5, cy:0.5, radius:0.077, fx:0.5, fy:0.5, stop:0 rgba(0, 169, 255, 200), stop:0.497326 rgba(0, 0, 0, 200), stop:1 rgba(0, 169, 255, 200));\n"
+"border:2px solid white;"));
+        splashLabel = new QLabel(splashWidget);
+        splashLabel->setObjectName(QString::fromUtf8("splashLabel"));
+        splashLabel->setGeometry(QRect(10, 10, 190, 20));
+        QFont font15;
+        font15.setPointSize(12);
+        font15.setBold(true);
+        font15.setItalic(false);
+        font15.setWeight(75);
+        splashLabel->setFont(font15);
+        splashLabel->setStyleSheet(QString::fromUtf8("color:white;\n"
+"border: 1px solid #2D5059;\n"
+"border-radius: 20px;\n"
+"font:bold;\n"
+"background-color: rgb(0, 0, 0,0);\n"
+"border-color: rgb(0, 0, 0,0);"));
 
         retranslateUi(ShortLocaterClass);
 
@@ -1615,6 +1633,7 @@ public:
         pushButton_2->setText(QApplication::translate("ShortLocaterClass", "NULL ON", 0, QApplication::UnicodeUTF8));
         pushButton_3->setText(QApplication::translate("ShortLocaterClass", "NULL OFF", 0, QApplication::UnicodeUTF8));
         openShortEnable->setText(QApplication::translate("ShortLocaterClass", "OpenShort Values", 0, QApplication::UnicodeUTF8));
+        splashLabel->setText(QApplication::translate("ShortLocaterClass", "OFFSET APPLYING.....", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

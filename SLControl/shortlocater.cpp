@@ -7,6 +7,9 @@
 
 #include <QtDebug>
 #include <QFile>
+/*Created by Ravivarman,Qmax
+ * 11th Jan 2013
+ */
 #include <QTextStream>
 
 ShortLocater::ShortLocater(QWidget *parent)
@@ -66,6 +69,7 @@ void ShortLocater::ToolBox(bool flag){
 void ShortLocater::Initializations(){
 
 	IPsoc->resetRelays();
+	IPsoc->srcImpedanceSelection(SRC_IMP_0E);
 //	IPsoc->shLocatorDetection();
     m_nADCtimer = new QTimer(this);
 
@@ -94,8 +98,11 @@ void ShortLocater::Initializations(){
             stringList.append(textStream.readLine());
         }
         r200EShortValue=stringList.value(0).toDouble(&ok);
+        qDebug()<<"200E Short Value:"<<r200EShortValue;
         r2EShortValue=stringList.value(1).toDouble(&ok);
-        r200mEShortValue2=stringList.value(2).toDouble(&ok);
+        qDebug()<<"2E Short Value:"<<r2EShortValue;
+       	r200mEShortValue=stringList.value(2).toDouble(&ok);
+        qDebug()<<"200mE Short Value:"<<r200mEShortValue;
     }else{
         r200EShortValue=r200mEShortValue=r2EShortValue=0.0;
     }
@@ -122,7 +129,7 @@ void ShortLocater::Initializations(){
     IDMMLib->ApplyDACOffset(false);
 
     dis->setValue("OL");
-    IBackPlane->writeBackPlaneRegister(0x0,0x32);
+    IBackPlane->writeBackPlaneRegister(0x0,0x16);
     //	Beep(false);
 
     AutoFlag=false;
@@ -153,6 +160,7 @@ void ShortLocater::Initializations(){
     startStop();
 
 	ui.openShortEnable->setChecked(true);
+//	ui.splashWidget->setVisible(false);
 }
 
 void ShortLocater::customEvent(QEvent *e){
@@ -433,7 +441,7 @@ void ShortLocater::Measure(){
             }
             else if(rangeFlag=="200E"&&retval>220){
                 dis->setValue("OL");
-                IBackPlane->writeBackPlaneRegister(0x0,0x32);
+                IBackPlane->writeBackPlaneRegister(0x0,0x16);
             }
             else if(rangeFlag=="200E"&&retval<=2.2){
                 rangeFlag="2E";
@@ -450,7 +458,7 @@ void ShortLocater::Measure(){
     }
     if(retval>220){
         dis->setValue("OL");
-        IBackPlane->writeBackPlaneRegister(0x0,0x32);
+        IBackPlane->writeBackPlaneRegister(0x0,0x16);
         ui.progressBar_2->setMinimum(0);
         ui.progressBar_2->setMaximum(200);
         ui.progressBar_2->setValue(200);
@@ -459,12 +467,12 @@ void ShortLocater::Measure(){
     ui.displayOffset->setText(QString::number(nullify));
     retval=retval-nullify;
     retval=retval-nullit;
-    ui.displayInput->setText(QString::number(retval,'f',7));
+    ui.displayInput->setText(QString::number(retval,'f',10));
     Beep(retval);
     if(retval>220.00){
         dis->setValue("OL");
 //    	dis->setValue(retval);
-        IBackPlane->writeBackPlaneRegister(0x0,0x32);
+        IBackPlane->writeBackPlaneRegister(0x0,0x16);
         ui.progressBar_2->setMinimum(0);
         ui.progressBar_2->setMaximum(200);
         ui.progressBar_2->setValue(200);
@@ -474,7 +482,7 @@ void ShortLocater::Measure(){
             if(retval>220){
                 dis->setValue("OL");
 //            	dis->setValue(retval);
-                IBackPlane->writeBackPlaneRegister(0x0,0x32);
+                IBackPlane->writeBackPlaneRegister(0x0,0x16);
                 ui.progressBar_2->setMinimum(0);
                 ui.progressBar_2->setMaximum(200);
                 ui.progressBar_2->setValue(200);
@@ -495,7 +503,7 @@ void ShortLocater::Measure(){
             if(retval>2.2){
                 dis->setValue("OL");
 //            	dis->setValue(retval);
-                IBackPlane->writeBackPlaneRegister(0x0,0x32);
+                IBackPlane->writeBackPlaneRegister(0x0,0x16);
                 ui.progressBar_2->setMinimum(0);
                 ui.progressBar_2->setMaximum(200);
                 ui.progressBar_2->setValue(200);
@@ -517,7 +525,7 @@ void ShortLocater::Measure(){
             else if(retval>0.22){
                 dis->setValue("OL");
 //            	dis->setValue(retval);
-                IBackPlane->writeBackPlaneRegister(0x0,0x32);
+                IBackPlane->writeBackPlaneRegister(0x0,0x16);
                 ui.progressBar_2->setMinimum(0);
                 ui.progressBar_2->setMaximum(200);
                 ui.progressBar_2->setValue(200);
@@ -543,7 +551,7 @@ void ShortLocater::Measure(){
 
     ADC data=IDMMLib->getAdcDatas();
     ui.adcRawData->setText(QString::number((data.Data),'f',0));
-    ui.adcConvData->setText(QString::number((data.ConvertedData),'f',7));
+    ui.adcConvData->setText(QString::number((data.ConvertedData),'f',10));
 
 }
 void ShortLocater::Beep(double value){
@@ -572,9 +580,9 @@ void ShortLocater::Beep(double value){
     IBackPlane->setBuzzerVolume(l_dFreq, 1, 50);
 
     if(BuzzerFlag==true)
-        IBackPlane->writeBackPlaneRegister(0x4, 0x32);
+        IBackPlane->writeBackPlaneRegister(0x4, 0x16);
     else
-        IBackPlane->writeBackPlaneRegister(0x0,0x32);
+        IBackPlane->writeBackPlaneRegister(0x0,0x16);
 
 }
 
@@ -609,7 +617,7 @@ QString ShortLocater::convertToUnits(double l_nvalue){
         if(l_nvalue>0.22||l_nvalue<-0.22){
             value=l_nvalue;unit=unit=ohms;
             ui.units->setText(unit);
-            IBackPlane->writeBackPlaneRegister(0x0,0x32);
+            IBackPlane->writeBackPlaneRegister(0x0,0x16);
             return ("OL");
         }
     }
@@ -627,7 +635,7 @@ QString ShortLocater::convertToUnits(double l_nvalue){
         if(l_nvalue>2.2||l_nvalue<-2.2){
             value=l_nvalue;unit=unit=ohms;
             ui.units->setText(unit);
-            IBackPlane->writeBackPlaneRegister(0x0,0x32);
+            IBackPlane->writeBackPlaneRegister(0x0,0x16);
             return ("OL");
         }
     }
@@ -645,7 +653,7 @@ QString ShortLocater::convertToUnits(double l_nvalue){
         if(l_nvalue>220||l_nvalue<-220){
             value=l_nvalue;unit=unit=ohms;
             ui.units->setText(unit);
-            IBackPlane->writeBackPlaneRegister(0x0,0x32);
+            IBackPlane->writeBackPlaneRegister(0x0,0x16);
             return ("OL");
         }
     }
@@ -741,7 +749,8 @@ void ShortLocater::shortCalibration(){
             sleep(1);
             showMessageBox(true,false,"200E Short Calibration Done\n Press OK for next range.","OK","");
             for(int i=0;i<5;i++)
-            	 r200EShortValue=IDMMLib->displayResistance(SLR200E);;
+            	 r200EShortValue=IDMMLib->displayResistance(SLR200E);
+            r200EShortValue = static_cast<double>(static_cast<int>(r200EShortValue*10000000+0.5))/10000000.0;
             qDebug()<<"r200EShortValue in ohms"<<convertToUnits(r200EShortValue);
         }
         {
@@ -749,7 +758,8 @@ void ShortLocater::shortCalibration(){
             sleep(1);
             showMessageBox(true,false,"2E Short Calibration Done\n Press OK for next range.","OK","");
             for(int i=0;i<5;i++)
-            	r2EShortValue=IDMMLib->displayResistance(R2E);;
+            	r2EShortValue=IDMMLib->displayResistance(R2E);
+            r2EShortValue = static_cast<double>(static_cast<int>(r2EShortValue*10000000+0.5))/10000000.0;
             qDebug()<<"r2EShortValue in ohms"<<convertToUnits(r2EShortValue);
 
         }
@@ -758,7 +768,8 @@ void ShortLocater::shortCalibration(){
             sleep(1);
             showMessageBox(true,false,"200mE Short Calibration Done\n Press OK to Exit.","OK","");
             for(int i=0;i<5;i++)
-            	r200mEShortValue=IDMMLib->displayResistance(R200mE);;
+            	r200mEShortValue=IDMMLib->displayResistance(R200mE);
+            r200mEShortValue = static_cast<double>(static_cast<int>(r200mEShortValue*10000000+0.5))/10000000.0;
             qDebug()<<"r200mEShortValue in ohms"<<convertToUnits(r200mEShortValue);
         }
         Configure(99);
@@ -841,11 +852,11 @@ void ShortLocater::on_buzzer_clicked()
     if(BuzzerFlag==true){
         ui.buzzer->setStyleSheet("QPushButton{color:white;border: 1px solid #2D5059;border-radius: 20px;background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1A74DB, stop: 0.6 #5293DE, stop:1 #FFFFFF);font:bold; }");
         BuzzerFlag=false;
-        IBackPlane->writeBackPlaneRegister(0x0, 0x32);
+        IBackPlane->writeBackPlaneRegister(0x0, 0x16);
     }else{
         ui.buzzer->setStyleSheet("QPushButton {color:white;border: 1px solid #2D5059;border-radius: 20px;background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #e59244, stop: 0.6 #ffa500 , stop:1 #FFFFFF);font:bold;}");
         BuzzerFlag=true;
-        IBackPlane->writeBackPlaneRegister(0x4, 0x32);
+        IBackPlane->writeBackPlaneRegister(0x4, 0x16);
     }
 }
 
@@ -874,6 +885,7 @@ void ShortLocater::on_Auto_clicked()
 
 void ShortLocater::on_offset_clicked()
 {
+	ui.splashWidget->setVisible(true);
 	qDebug()<<"Offset Applied";
 //    if(AutoFlag==true){
 	if(OffsetFlag==false){
@@ -888,10 +900,11 @@ void ShortLocater::on_offset_clicked()
                 rangePrevValue=33;
 
             on_r200mEBut_clicked();
-
-            usleep(50000);
-            for(int i=0;i<5;i++)
+            sleep(1);
+            for(int i=0;i<10;i++){
             	retval=IDMMLib->displayResistance(R200mE);
+            	usleep(100);
+            }
 
             if(ui.openShortEnable->isChecked())
             	nullify=retval-r200mEShortValue;
@@ -915,7 +928,7 @@ void ShortLocater::on_offset_clicked()
 //        showMessageBox(true,false,"Offset works only in Auto Mode","OK","");
 //    }
 
-
+	ui.splashWidget->setVisible(false);
 }
 
 void ShortLocater::on_Null_clicked()
@@ -934,7 +947,7 @@ void ShortLocater::on_hold_clicked()
         runFlag=false;
         ui.hold->setStyleSheet("QPushButton {color:white;border: 1px solid #2D5059;border-radius: 20px;background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #e59244, stop: 0.6 #ffa500 , stop:1 #FFFFFF);font:bold;}");
         startStop();
-        IBackPlane->writeBackPlaneRegister(0x0,0x32);
+        IBackPlane->writeBackPlaneRegister(0x0,0x16);
         ui.holdCap->setVisible(true);
     }else{
         runFlag=true;

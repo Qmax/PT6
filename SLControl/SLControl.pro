@@ -39,6 +39,3 @@ FORMS = offset.ui \
 DESTDIR = /exports/nfsroot-ccwmx51js/home/
 RESOURCES += svgResource.qrc \
     svgbutton.qrc
-#QMAKE_POST_LINK += cp \
-    #/exports/nfsroot-ccwmx51js/home/libSLInterface.so \
-   # /mnt/ElangovanPC/nfsroot-ccwmx51js/home/libSLInterface.so

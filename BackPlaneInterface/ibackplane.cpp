@@ -52,8 +52,7 @@ unsigned int IBackPlane::readScratchPAD() {
 	return readBackPlaneRegister(BP_SPR);
 }
 
-unsigned short IBackPlane::setBuzzerVolume(unsigned int pFrequency,
-		unsigned short pPWMFlag, unsigned int pPercentage) {
+unsigned short IBackPlane::setBuzzerVolume(unsigned int pFrequency,	unsigned short pPWMFlag, unsigned int pPercentage) {
 	/* The value in this register can be used to specify the duty cycle of PWM Signal. the count value can be calculated by below sequence.*/
 
 	double l_nTime = 0.0;
@@ -76,8 +75,7 @@ unsigned short IBackPlane::setBuzzerVolume(unsigned int pFrequency,
 	return 1;
 }
 
-unsigned short IBackPlane::setBuzzerTone(unsigned int pFrequency,
-		unsigned short pPWMFlag, unsigned int pPercentage) {
+unsigned short IBackPlane::setBuzzerTone(unsigned int pFrequency,unsigned short pPWMFlag, unsigned int pPercentage) {
 	/* The value in this register can be used to specify the duty cycle of PWM Signal. the count value can be calculated by below sequence.*/
 
 	double l_nTime = 0.0;

@@ -1,3 +1,6 @@
+/*Created by Ravivarman,Qmax
+ * 11th Jan 2013
+ */
 #ifndef SHORTLOCATER_H
 #define SHORTLOCATER_H
 
@@ -24,6 +27,8 @@
 #include "interfaceHeader.h"
 #include "InterfacePTLibrary.h"
 #include "display.h"
+#include "serialdevice.h"
+
 
 const unsigned int guid = 0x534C4D;
 

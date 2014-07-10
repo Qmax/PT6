@@ -323,11 +323,12 @@ double PTDMMLibInterface::displayResistance(unsigned int rValue)
     //qDebug()<<"Calibrated Value :"<<c_nAIN;
     }
     else if(calib_value.flag==false){
-    	qDebug()<<"##################### :"<<l_nAIN;
+/*    	qDebug()<<"##################### :"<<l_nAIN;
     	int rem = l_nAIN * 10000000;
     	qDebug()<<"##################### :"<<rem;
         c_nAIN = (double)rem     / 10000000;
-        qDebug()<<"##################### :"<<c_nAIN;
+        qDebug()<<"##################### :"<<c_nAIN;*/
+    	c_nAIN = l_nAIN;
     }
 
     ADCRxVoltage=l_nAIN;
@@ -365,7 +366,7 @@ double PTDMMLibInterface::displayResistance(unsigned int rValue)
     double temp = double(round(frexp(value, &exponent) * FACTOR));
     value = ldexp(temp / FACTOR, exponent);
     qDebug()<<"~~~~~~~~~~~~~~~~~"<<"exponent"<<exponent<<"temp"<<temp<<"value"<<value;*/
-
+    Resistance=static_cast<double>(static_cast<int>(Resistance*10000000+0.5))/10000000.0;
     return Resistance;
 
 }
