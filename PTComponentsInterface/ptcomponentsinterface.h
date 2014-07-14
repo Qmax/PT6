@@ -22,17 +22,19 @@ public:
     void LoadFGPlugins();
     void LoadSLPlugins();
     void LoadVIPlugins();
+    void LoadSHLPlugins();
     void LoadICMPlugins();
     void LoadDSOPlugins();
     void removePlugin(unsigned int);
     virtual QWidget* InvokeApplication(unsigned int);
 
-    QPluginLoader *pluginDMM,*pluginFG,*pluginVI,*pluginSL,*pluginICM,*pluginDSO;
-    QObject *ptDMM,*ptFG,*ptVI,*ptSL,*ptICM,*ptDSO;
+    QPluginLoader *pluginDMM,*pluginFG,*pluginVI,*pluginSL,*pluginICM,*pluginDSO,*pluginSHL;
+    QObject *ptDMM,*ptFG,*ptVI,*ptSL,*ptICM,*ptDSO,*ptSHL;
     QMap<int,QWidget*> m_PTFactories;
     IPTDMMInterface *IDMM;
     IPTFGInterface *IFG;
     IPTSLInterface *ISL;
+    IPTSHLInterface *ISHL;
     IPTVIInterface *IVI;
     IPTICMInterface *IICM;
     IPTDSOInterface *IDSO;

@@ -399,8 +399,14 @@ void ShortLocater::Configure(int x){
         qDebug()<<"200E Configured......";
     }
 }
-void ShortLocater::Measure(){
+void ShortLocater::checkProbeConnect(){
+	if((IPsoc->embeddedProbeStatus() & 0x08)!=0x08){
+		showMessageBox(true,false,"Probe Disconnected!","OK","");
+	}
 
+}
+void ShortLocater::Measure(){
+	checkProbeConnect();
 /*
 	if(OffsetFlag==true)
 		ui.openShortEnable->setChecked(false);

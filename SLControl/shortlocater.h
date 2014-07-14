@@ -68,7 +68,6 @@ public:
     	short ResistancePrev,ResistanceCur,ResistanceNext;
         QTimer *m_nADCtimer;
 
-
     //Functions
     	void Initializations();
         void ToolBox(bool flag);
@@ -78,7 +77,7 @@ public:
     	void changeByProbe(unsigned int);
     	bool CustomMessageBox();
         void Beep(double value);
-
+        void checkProbeConnect();
         QString convertToUnits(double l_nvalue);
 
         double output;
@@ -146,13 +145,13 @@ private slots:
     void on_ShortCalib_2_clicked();
     void on_ShortCalib_clicked();
     void on_pushButton_5_clicked();
-    void on_spinBox_3_valueChanged(int );
-    void on_pushButton_4_clicked();
+//    void on_spinBox_3_valueChanged(int );
+//    void on_pushButton_4_clicked();
     void on_pushButton_3_clicked();
     void on_printImage_clicked();
-    void on_horizontalSlider_4_sliderMoved(int position);
-    void on_spinBox_2_valueChanged(int );
-    void on_spinBox_valueChanged(int );
+//    void on_horizontalSlider_4_sliderMoved(int position);
+//    void on_spinBox_2_valueChanged(int );
+//    void on_spinBox_valueChanged(int );
     void startStop();
     void Exit();
 };

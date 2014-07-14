@@ -90,7 +90,7 @@ public:
 		setXYWH();
 	}
 	void setValue(double l_nValue) {
-		qDebug() << "Inside display.h-Data:" << l_nValue;
+		qDebug() << "display.h-Data:" << l_nValue;
 
 		QString l_strDecimelValue;
 		QString Inf=QChar(0x221E);
@@ -121,6 +121,8 @@ public:
 
 			if (l_nValue != 0)
 				l_intValue = floor(l_nValue);
+			else if(l_nValue==0)
+				l_intValue=0;
 
 			if ((m_intRange) >= 1 && (m_intRange) < 10) {
 				if (l_intValue >= 10)
@@ -130,7 +132,7 @@ public:
 					digits[1]->setText(".");
 					l_nDecimelValue = l_nValue - l_intValue;
 					l_strDecimelValue = QString::number(l_nDecimelValue);
-					//qDebug() << "l_strDecimelValue->" << l_strDecimelValue;
+//					qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[2]->setText(l_strDecimelValue.at(2));
@@ -164,7 +166,7 @@ public:
 					digits[2]->setText(".");
 					l_nDecimelValue = l_nValue - l_intValue;
 					l_strDecimelValue = QString::number(l_nDecimelValue);
-					//qDebug() << "l_strDecimelValue->" << l_strDecimelValue;
+//					qDebug() << "2-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[3]->setText(l_strDecimelValue.at(2));
@@ -196,7 +198,7 @@ public:
 					digits[3]->setText(".");
 					l_nDecimelValue = l_nValue - l_intValue;
 					l_strDecimelValue = QString::number(l_nDecimelValue);
-					//qDebug() << "l_strDecimelValue->" << l_strDecimelValue;
+//					qDebug() << "3-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[4]->setText(l_strDecimelValue.at(2));
@@ -226,7 +228,7 @@ public:
 					digits[4]->setText(".");
 					l_nDecimelValue = l_nValue - l_intValue;
 					l_strDecimelValue = QString::number(l_nDecimelValue);
-					//qDebug() << "l_strDecimelValue->" << l_strDecimelValue;
+//					qDebug() << "4-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[5]->setText(l_strDecimelValue.at(2));
@@ -277,6 +279,7 @@ public:
 
 	}
 	void setValue(QString strValue) {
+		qDebug() << "display.h(str)-Data:" << strValue;
 		int signIndex = strValue.indexOf("-");
 		if (signIndex != -1) {
 			strValue = strValue.remove("-");

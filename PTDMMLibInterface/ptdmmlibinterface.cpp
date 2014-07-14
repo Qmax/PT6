@@ -366,7 +366,7 @@ double PTDMMLibInterface::displayResistance(unsigned int rValue)
     double temp = double(round(frexp(value, &exponent) * FACTOR));
     value = ldexp(temp / FACTOR, exponent);
     qDebug()<<"~~~~~~~~~~~~~~~~~"<<"exponent"<<exponent<<"temp"<<temp<<"value"<<value;*/
-    Resistance=static_cast<double>(static_cast<int>(Resistance*10000000+0.5))/10000000.0;
+//    Resistance=static_cast<double>(static_cast<int>(Resistance*10000000))/10000000.0;
     return Resistance;
 
 }
@@ -538,47 +538,16 @@ double PTDMMLibInterface::displayCurrent(unsigned int iValue)
 }
 
 double PTDMMLibInterface::MeasureResistance(unsigned int rValue,unsigned int rType){
+	Q_UNUSED(rType);
 
 	if(rValue==R200mE||rValue==R2E||rValue==SLR200E){
 		iamDMM=false;
 		IAppCard->writeRegister(0x0016,0x0036);//testing//changed to 6 from 0 for via rms2dc
 	    IAppCard->writeRegister(0x0010,0x0048);
-	}/*else if(rValue==R200E||rValue==R2K||rValue==R20K||rValue==R200K||rValue==R2M||rValue==R20M){
-		//qDebug()<<"DMM-MeasureResistance";
-		iamDMM=true;
-		IAppCard->writeRegister(0x0000,0x0036);
-	    IAppCard->writeRegister(0x0000,0x0048);
-	}else if(rValue==DIODE){
-		//qDebug()<<"DMM-MeasureDiode";
-		IAppCard->writeRegister(0x0000,0x0036);
 	}
-
-    if(rType==2){
-    	if(rValue==DIODE)			IPsoc->dmm2Wire(1);
-        if(rValue==R200E)			IPsoc->dmm2Wire(1);
-        else if(rValue==R2K)        IPsoc->dmm2Wire(2);
-        else if(rValue==R20K)       IPsoc->dmm2Wire(3);
-        else if(rValue==R200K)      IPsoc->dmm2Wire(4);
-        else if(rValue==R2M)        IPsoc->dmm2Wire(5);
-        else if(rValue==R20M)    	IPsoc->dmm2Wire(6);
-    }
-
-    if(rType==4){
-    	if(rValue==DIODE)			IPsoc->dmm2Wire(1);
-        if(rValue==R200E)           IPsoc->dmm4Wire(1);
-        else if(rValue==R2K)        IPsoc->dmm4Wire(2);
-        else if(rValue==R20K)       IPsoc->dmm4Wire(3);
-        else if(rValue==R200K)      IPsoc->dmm4Wire(4);
-        else if(rValue==R2M)        IPsoc->dmm4Wire(5);
-        else if(rValue==R20M)       IPsoc->dmm4Wire(6);
-    }*///commented on 12062014
-    //-----------------------------------------------------------------------------------
-    //DAC Drive--------------------------------------------------------------------------
-    IAppCard->setSPIAppendBit(0x0c000);
+	IAppCard->setSPIAppendBit(0x0c000);
     double test=0.0;
-
     m_eSelect = DACG;
-
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     double DACDriveVoltage[7];
     QFile *xmlFile= new QFile("DACDriveVoltage.xml");
@@ -602,76 +571,25 @@ double PTDMMLibInterface::MeasureResistance(unsigned int rValue,unsigned int rTy
     if(xml.hasError())        qDebug()<<"xmlFile.xml Parse Error";
     xml.clear();    xmlFile->close();
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-/*    if(rValue==DIODE){
-            IAppCard->writeRegister(0x000F,0x0016);
-            ForceCurrent(0,ICALIB->SerialDACCalibration(R200E));
-//            ForceCurrent(0,DACDriveVoltage[0]);
-        }
-    else if(rValue==R200E){
-        IAppCard->writeRegister(0x000F,0x0016);
-        ForceCurrent(0,ICALIB->SerialDACCalibration(R200E));
-//        ForceCurrent(0,DACDriveVoltage[0]);
-    }
-    else if(rValue==R20K){
-        IAppCard->writeRegister(0x000D,0x0016);
-        ForceCurrent(0,ICALIB->SerialDACCalibration(R20K));
-//        ForceCurrent(0,DACDriveVoltage[2]);
-
-    }
-    else if(rValue==R2K){
-        IAppCard->writeRegister(0x000D,0x0016);
-        ForceCurrent(0,ICALIB->SerialDACCalibration(R2K));
-//        ForceCurrent(0,DACDriveVoltage[1]);
-    }
-    else if(rValue==R200K){
-        IAppCard->writeRegister(0x000B,0x0016);
-        ForceCurrent(0,ICALIB->SerialDACCalibration(R200K));
-//        ForceCurrent(0,DACDriveVoltage[3]);
-    }
-    else if(rValue==R2M){
-        IAppCard->writeRegister(0x000B,0x0016);
-        ForceCurrent(0,ICALIB->SerialDACCalibration(R2M));
-//        ForceCurrent(0,DACDriveVoltage[4]);
-    }
-    else if(rValue==R20M){
-        IAppCard->writeRegister(0x000B,0x0016);
-        ForceCurrent(0,ICALIB->SerialDACCalibration(R20M));
-//        ForceCurrent(0,DACDriveVoltage[5]);
-    }*///commented on 12062014
     if(rValue==SLR200E){
     	IAppCard->writeRegister(0x000F,0x0016);
         test=ICALIB->SerialDACCalibration(SLR200E);
         ForceCurrent(1,test);
-//        ForceCurrent(1,DACDriveVoltage[0]);
     }
     else if(rValue==R2E){
         IAppCard->writeRegister(0x000F,0x0016);
         test=ICALIB->SerialDACCalibration(R2E);
         ForceCurrent(1,test);
-//        ForceCurrent(1,DACDriveVoltage[1]);
     }
     else if(rValue==R200mE){
     	IAppCard->writeRegister(0x000F,0x0016);
         test=ICALIB->SerialDACCalibration(R200mE);
         ForceCurrent(1,test);
-//    	ForceCurrent(1,DACDriveVoltage[2]);
+        usleep(500000);
+        ForceCurrent(1,0);
     }
-//    qDebug()<<"vout value sent to force current :"<<test;
     //----------------------------------------------------------------------------------
-
-
-    //Mode, Configure ------------------------------------------------------
     double l_dbAIN;
-
-/*    if(rValue==DIODE){
-    	l_dbAIN=GetADCVoltage(typeDC,1);
-    	return l_dbAIN*1000;
-    }
-    else if(rValue==R200E||rValue==R2K||rValue==R20K||rValue==R200K)
-    	l_dbAIN=GetADCVoltage(typeDC,8);
-    else if(rValue==R2M||rValue==R20M)
-    	l_dbAIN=GetADCVoltage(typeDC,1);*///commented on 12062014
 
     if(rValue==SLR200E){
     	l_dbAIN=GetADCVoltage(typeDC,1);
@@ -685,27 +603,11 @@ double PTDMMLibInterface::MeasureResistance(unsigned int rValue,unsigned int rTy
     	l_dbAIN=GetADCVoltage(typeDC,1);
     	m_objAD7190->writeADCGPConRegister(1,0x34);//a);
     }
-
-
-    //qDebug()<<"Inside MeasureResistance ADC Raw Value : "<<AIN;
-
-    //qDebug()<<"Inside MeasureResistance Display";
-        double Resistance=0.0;
+    double Resistance=0.0;
              if (rValue==R200mE)     Resistance = (l_dbAIN /10e-3 );
         else if (rValue==R2E)  		 Resistance = l_dbAIN /10e-3 ;
         else if (rValue==SLR200E)	 Resistance = l_dbAIN /1e-3;
 
-/*        else if (rValue==R200E)      Resistance = l_dbAIN / 0.001;
-        else if (rValue==R2K)        Resistance = l_dbAIN / 0.0001;
-        else if (rValue==R20K)       Resistance = l_dbAIN / 0.00001;
-        else if (rValue==R200K)      Resistance = l_dbAIN / 0.000001;
-        else if (rValue==R2M)        Resistance = l_dbAIN / 0.0000005;
-
-        else if (rValue==R20M){
-            Resistance = (l_dbAIN*10000000)
-                         /
-                         ((0.00000025*10000000)-l_dbAIN);
-        }*///commented on 12062014
     //-------------------------------------------------------------------------------------
     return Resistance;
 

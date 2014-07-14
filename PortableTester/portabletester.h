@@ -169,6 +169,7 @@ protected:
 	QLabel m_TimeLabel;
 
     QmaxPushButton *shutDownButton,*testjigButton;
+    QmaxPushButton *shlocButton;
     QmaxPushButton *AppButton[APPLICATIONS],*FunctionalButton[FUNCTIONS];
     QmaxPushButton *prevButton,*nextButton;
     QPushButton *glowButton[6];

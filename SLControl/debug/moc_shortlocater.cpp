@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'shortlocater.h'
 **
-** Created: Thu Jul 10 15:28:22 2014
+** Created: Fri Jul 11 12:18:15 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_ShortLocater[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      31,   14, // methods
+      26,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -54,14 +54,9 @@ static const uint qt_meta_data_ShortLocater[] = {
      442,   13,   13,   13, 0x08,
      466,   13,   13,   13, 0x08,
      492,   13,   13,   13, 0x08,
-     523,   13,   13,   13, 0x08,
-     549,   13,   13,   13, 0x08,
-     575,   13,   13,   13, 0x08,
-     608,  599,   13,   13, 0x08,
-     647,   13,   13,   13, 0x08,
-     678,   13,   13,   13, 0x08,
-     707,   13,   13,   13, 0x08,
-     719,   13,   13,   13, 0x08,
+     518,   13,   13,   13, 0x08,
+     542,   13,   13,   13, 0x08,
+     554,   13,   13,   13, 0x08,
 
        0        // eod
 };
@@ -80,13 +75,8 @@ static const char qt_meta_stringdata_ShortLocater[] = {
     "on_ShortCalib_2_clicked()\0"
     "on_ShortCalib_clicked()\0"
     "on_pushButton_5_clicked()\0"
-    "on_spinBox_3_valueChanged(int)\0"
-    "on_pushButton_4_clicked()\0"
     "on_pushButton_3_clicked()\0"
-    "on_printImage_clicked()\0position\0"
-    "on_horizontalSlider_4_sliderMoved(int)\0"
-    "on_spinBox_2_valueChanged(int)\0"
-    "on_spinBox_valueChanged(int)\0startStop()\0"
+    "on_printImage_clicked()\0startStop()\0"
     "Exit()\0"
 };
 
@@ -141,18 +131,13 @@ int ShortLocater::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 19: on_ShortCalib_2_clicked(); break;
         case 20: on_ShortCalib_clicked(); break;
         case 21: on_pushButton_5_clicked(); break;
-        case 22: on_spinBox_3_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 23: on_pushButton_4_clicked(); break;
-        case 24: on_pushButton_3_clicked(); break;
-        case 25: on_printImage_clicked(); break;
-        case 26: on_horizontalSlider_4_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 27: on_spinBox_2_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 28: on_spinBox_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 29: startStop(); break;
-        case 30: Exit(); break;
+        case 22: on_pushButton_3_clicked(); break;
+        case 23: on_printImage_clicked(); break;
+        case 24: startStop(); break;
+        case 25: Exit(); break;
         default: ;
         }
-        _id -= 31;
+        _id -= 26;
     }
     return _id;
 }

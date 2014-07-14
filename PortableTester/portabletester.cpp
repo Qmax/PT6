@@ -291,6 +291,11 @@ void PortableTester::CreateButton() {
     shutDownButton->setIcon(QIcon(QPixmap(":/Desktop/Power.png")));
     connect(shutDownButton,SIGNAL(CClicked(int)),this,SLOT(buttonPressed(int)));
     
+    shlocButton = new QmaxPushButton(16, this);
+    shlocButton->setGeometry(50*((6-3)*3), 250, 80, 80);
+    shlocButton->setIcon(QIcon(QPixmap(":/Desktop/app3.png")));
+    connect(shlocButton,SIGNAL(CClicked(int)),this,SLOT(buttonPressed(int)));
+
 }
 
 void PortableTester::CreateButtons(QWidget *pWidget, QString strPanel) {
@@ -433,6 +438,8 @@ void PortableTester::closeButtons() {
     //	nextButton->setVisible(false);
     
     shutDownButton->setVisible(false);
+    shlocButton->setVisible(false);
+
     //	testjigButton->setVisible(false);
     
     
@@ -468,6 +475,7 @@ void PortableTester::showButtons() {
     
     
     shutDownButton->setVisible(true);
+    shlocButton->setVisible(true);
     //	testjigButton->setVisible(true);
 }
 
@@ -701,7 +709,7 @@ void PortableTester::Functions(int pValue){
         IPT->LoadDMMPlugins();
         myID = 0x444D4D;
         QWidget *DMM = IPT->InvokeApplication(myID);
-        l_objMainView->InitHeaderView(0, "Digital Multi Meter");
+        l_objMainView->InitHeaderView(0, "DIGITAL MULTIMETER");
         connect(DMM, SIGNAL(destroyed()), this, SLOT(UnHide()));
         ui->mdiArea->addSubWindow(DMM, Qt::FramelessWindowHint);
         DMM->show();
@@ -732,7 +740,7 @@ void PortableTester::Functions(int pValue){
         IPT->LoadFGPlugins();
         myID = 0x46474D;
         QWidget *FG = IPT->InvokeApplication(myID);
-        l_objMainView->InitHeaderView(0, "Arbitrary Waveform Generator");
+        l_objMainView->InitHeaderView(0, "ARBITARY WAVEFORM GENERATOR");
         connect(FG, SIGNAL(destroyed()), this, SLOT(UnHide()));
         ui->mdiArea->addSubWindow(FG, Qt::FramelessWindowHint);
         FG->show();
@@ -747,7 +755,7 @@ void PortableTester::Functions(int pValue){
         IPT->LoadSLPlugins();
         myID = 0x534C4D;
         QWidget *SL = IPT->InvokeApplication(myID);
-        l_objMainView->InitHeaderView(0, "Short Locater");
+        l_objMainView->InitHeaderView(0, "SHORT LOCATOR");
         connect(SL, SIGNAL(destroyed()), this, SLOT(UnHide()));
         ui->mdiArea->addSubWindow(SL, Qt::FramelessWindowHint);
         SL->show();
@@ -779,7 +787,7 @@ void PortableTester::Functions(int pValue){
         IPT->LoadDSOPlugins();
         myID=0x44534F;
         QWidget *DSO = IPT->InvokeApplication(myID);
-        l_objMainView->InitHeaderView(0, "Digital Storage Oscilloscope");
+        l_objMainView->InitHeaderView(0, "DIGITAL STORAGE OSCILLOSCOPE");
         connect(DSO, SIGNAL(destroyed()), this, SLOT(UnHide()));
         ui->mdiArea->addSubWindow(DSO, Qt::FramelessWindowHint);
         DSO->show();
@@ -793,6 +801,16 @@ void PortableTester::Functions(int pValue){
         //		else if(connectStatus=='N'){
         //			msgBox->close();
         //		}
+    }
+    else if(pValue == 16){
+        qDebug()<<"SHORT LOCATOR TESTJIG";
+        IPT->LoadSHLPlugins();
+        myID = 0x999999;
+        QWidget *SHL = IPT->InvokeApplication(myID);
+        l_objMainView->InitHeaderView(0, "SHORT LOCATOR TEST UI");
+        connect(SHL, SIGNAL(destroyed()), this, SLOT(UnHide()));
+        ui->mdiArea->addSubWindow(SHL, Qt::FramelessWindowHint);
+        SHL->show();
     }
     
 }
@@ -834,7 +852,9 @@ void PortableTester::buttonPressed(int pValue) {
     else if (pValue == 15) {
         on_shutDownButton_clicked();
     }
-    
+    else if(pValue == 16){
+    	Functions(16);
+    }
     else if(pValue == 18){
         //		UpDownButton(_DOWN_);
     }

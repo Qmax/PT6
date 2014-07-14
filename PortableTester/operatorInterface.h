@@ -29,6 +29,7 @@ class IPTComponentsInterface
         virtual void LoadFGPlugins()=0;
         virtual void LoadSLPlugins()=0;
         virtual void LoadVIPlugins()=0;
+        virtual void LoadSHLPlugins()=0;
         virtual void LoadICMPlugins()=0;
         virtual void LoadDSOPlugins()=0;
         virtual void removePlugin(unsigned int)=0;
