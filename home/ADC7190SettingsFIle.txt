@@ -1,0 +1,5 @@
+[General]
+Configuration=279
+GPConfiguration=0
+GainFactor=128
+Mode=524384

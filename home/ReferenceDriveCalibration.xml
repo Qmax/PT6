@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RefCalibration>
+    <VoltageRange Value="0.6" Slope="1.07528" Constant="0.00457">
+        <Voltage XVoltage="0.48000" YVoltage="0.52070"/>
+        <Voltage XVoltage="0.12000" YVoltage="0.13360"/>
+    </VoltageRange>
+    <VoltageRange Value="2" Slope="0.98995" Constant="0.00258">
+        <Voltage XVoltage="1.60000" YVoltage="1.58650"/>
+        <Voltage XVoltage="0.40000" YVoltage="0.39856"/>
+    </VoltageRange>
+    <VoltageRange Value="4" Slope="1.07002" Constant="-0.00037">
+        <Voltage XVoltage="3.20000" YVoltage="3.42370"/>
+        <Voltage XVoltage="0.80000" YVoltage="0.85565"/>
+    </VoltageRange>
+    <VoltageRange Value="8" Slope="1.04454" Constant="-0.00687">
+        <Voltage XVoltage="6.40000" YVoltage="6.67820"/>
+        <Voltage XVoltage="1.60000" YVoltage="1.66440"/>
+    </VoltageRange>
+    <VoltageRange Value="14" Slope="1.03982" Constant="-0.01700">
+        <Voltage XVoltage="11.20000" YVoltage="11.62900"/>
+        <Voltage XVoltage="2.80000" YVoltage="2.89450"/>
+    </VoltageRange>
+</RefCalibration>
