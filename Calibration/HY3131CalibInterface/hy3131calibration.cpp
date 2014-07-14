@@ -60,7 +60,7 @@ HY3131Calibration::HY3131Calibration(QWidget *parent) :
     bool ok=true;
     int index=0;
 
-    QFile file("/home/HY3131/GainOffset2.dat");
+    QFile file("/home/HY3131/GainOffset.dat");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
     while (!file.atEnd()) {
@@ -590,7 +590,7 @@ void HY3131Calibration::on_saveBut_clicked()
     m_nOffset[m_nMacroValue]=m_dCalculatedOffset;
 
     //Write Gain & Offset to file~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    QFile outFile("/home/HY3131/GainOffset2.dat");
+    QFile outFile("/home/HY3131/GainOffset.dat");
     outFile.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream ts(&outFile);
     for(int i=0;i<27;i++)

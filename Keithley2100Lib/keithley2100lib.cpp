@@ -166,7 +166,8 @@ void Keithley2100Lib::ConfigureACVoltage(int range){
                 writeKeithley((char*)"CONF:VOLT:AC 1000");
                 break;
         }
-        usleep(200000);
+        sleep(1);
+//        usleep(200000);
 }
 double Keithley2100Lib::MeasureACVoltage(int range){
 	qDebug()<<"MeasureACVoltage-index:"<<range;
@@ -190,6 +191,8 @@ double Keithley2100Lib::MeasureACVoltage(int range){
                 writeKeithley((char*)"MEAS:VOLT:AC? 1000");
                 break;
         }
+//        usleep(500000);
+        sleep(1);
                 double retData=QString(readKeithley()).toDouble(&ok);
                 return retData;
 }
