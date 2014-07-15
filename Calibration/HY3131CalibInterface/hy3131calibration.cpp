@@ -82,6 +82,38 @@ HY3131Calibration::HY3131Calibration(QWidget *parent) :
     }
     file.close();
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //Read Reference & Measured from file~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    bool ok2=true;
+    int index2=0;
+
+    QFile file2("/home/HY3131/calib.dat");
+    if (!file2.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    while (!file2.atEnd()) {
+
+        QByteArray line2 = file2.readLine();
+        QList<QByteArray> data2 = line2.split('\t');
+
+        if (data2[0].endsWith('\n'))
+            data2[0].chop(1);
+        if (data2[1].endsWith('\n'))
+            data2[1].chop(1);
+        if (data2[2].endsWith('\n'))
+            data2[2].chop(1);
+        if (data2[3].endsWith('\n'))
+            data2[3].chop(1);
+        if (data2[4].endsWith('\n'))
+            data2[4].chop(1);
+
+        m_strRange2[index2]=data2[0];
+        KRefMinData[index2]=data2[1].toDouble(&ok2);
+        KRefMaxData[index2]=data2[2].toDouble(&ok2);
+        HYMinRead[index2]=data2[3].toDouble(&ok2);
+        HYMaxRead[index2]=data2[4].toDouble(&ok2);
+        index2++;
+    }
+    file2.close();
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //enableDisable(0,false);
     //enableDisable(1,false);
     //enableDisable(2,false);
@@ -410,12 +442,14 @@ void HY3131Calibration::on_pbMeasureMin_clicked()
 {
     
     if(ui->selectKeithley->isChecked()==true){
-        msgBox.setText("Connect your Probes to Keithley2100 Digital Multimeter");
+/*        msgBox.setText("Connect your Probes to Keithley2100 Digital Multimeter");
         msgBox.setInformativeText("After connecting press ok");
         msgBox.setStandardButtons(QMessageBox::Ok);
         msgBox.exec();
 
     	m_dOffsetInput=KRead();
+    	ui->leOffsetValue->setText(QString::number(m_dOffsetInput,'g',10));*/
+    	m_dOffsetInput=0;
     	ui->leOffsetValue->setText(QString::number(m_dOffsetInput,'g',10));
 
         msgBox.setText("Connect your Probes to PT6 Multimeter Module");
@@ -431,18 +465,17 @@ void HY3131Calibration::on_pbMeasureMin_clicked()
 void HY3131Calibration::on_pbMeasureMax_clicked()
 {
     if(ui->selectKeithley->isChecked()==true){
-        msgBox.setText("Connect your Probes to Keithley2100 Digital Multimeter");
-        msgBox.setInformativeText("After connecting press ok");
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.exec();
-
-        m_dMaxInput=KRead();
-        ui->leMaxValue->setText(QString::number(m_dMaxInput,'g',10));
-
         msgBox.setText("Connect your Probes to PT6 Multimeter Module");
         msgBox.setInformativeText("After connecting press ok");
         msgBox.setStandardButtons(QMessageBox::Ok);
         msgBox.exec();
+
+        msgBox.setText("Connect your Probes to Keithley2100 Digital Multimeter");
+        msgBox.setInformativeText("After connecting press ok");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
+        m_dMaxInput=KRead();
+        ui->leMaxValue->setText(QString::number(m_dMaxInput,'g',10));
     }
 
     stopADC();
@@ -483,7 +516,7 @@ double HY3131Calibration::KRead(){
 void HY3131Calibration::on_calibrateBut_clicked()
 {
     stopADC();
-    if((m_nMacroValue>=9 && m_nMacroValue<=14)||(m_nMacroValue>=9 && m_nMacroValue<=14)||(m_nMacroValue==28)||(m_nMacroValue==30))
+    if((m_nMacroValue>=9 && m_nMacroValue<=14)||(m_nMacroValue>=26 && m_nMacroValue<=31))
         m_dCalculatedGain=sqrt((m_dMaxMeasured-m_dOffsetMeasured))/m_dMaxInput;
     else
         m_dCalculatedGain=(m_dMaxMeasured-m_dOffsetMeasured)/m_dMaxInput;
@@ -491,6 +524,9 @@ void HY3131Calibration::on_calibrateBut_clicked()
 
     ui->leGain->setText(QString::number(m_dCalculatedGain,'g',10));
     ui->leOffset->setText(QString::number(m_dCalculatedOffset,'g',10));
+
+    m_nGain[m_nMacroValue]=m_dCalculatedGain;
+    m_nOffset[m_nMacroValue]=m_dCalculatedOffset;
 
     //enableDisable(4,true);
 }
@@ -586,17 +622,40 @@ void HY3131Calibration::on_pbMeasureCalibrated_clicked()
 
 void HY3131Calibration::on_saveBut_clicked()
 {
-    m_nGain[m_nMacroValue]=m_dCalculatedGain;
-    m_nOffset[m_nMacroValue]=m_dCalculatedOffset;
+//    m_nGain[m_nMacroValue]=m_dCalculatedGain;
+//    m_nOffset[m_nMacroValue]=m_dCalculatedOffset;
+
+	for(int j=0;j<ui->cmbRange->count();j++){
+		if((j>=9 && j<=14)||(j>=26 && j<=31))
+			m_dCalculatedGain=sqrt((HYMaxRead[j]-HYMinRead[j]))/KRefMaxData[j];
+		else
+			m_dCalculatedGain=(HYMaxRead[j]-HYMinRead[j])/KRefMaxData[j];
+
+		m_dCalculatedOffset=HYMinRead[j];
+
+		ui->leGain->setText(QString::number(m_dCalculatedGain,'g',10));
+		ui->leOffset->setText(QString::number(m_dCalculatedOffset,'g',10));
+
+		m_nGain[j]=m_dCalculatedGain;
+		m_nOffset[j]=m_dCalculatedOffset;
+	}
 
     //Write Gain & Offset to file~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     QFile outFile("/home/HY3131/GainOffset.dat");
     outFile.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream ts(&outFile);
-    for(int i=0;i<27;i++)
+    for(int i=0;i<31;i++)
         ts <<m_strRange[i]<<"\t"<<fixed<<m_nGain[i]<<"\t"<<m_nOffset[i]<<endl;
     outFile.close();
 
+}
+void HY3131Calibration::updateCalibFile(){
+    QFile outFile2("/home/HY3131/calib.dat");
+    outFile2.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream ts2(&outFile2);
+    for(int i=0;i<31;i++)
+        ts2 <<m_strRange2[i]<<"\t"<<fixed<<KRefMinData[i]<<"\t"<<KRefMaxData[i]<<"\t"<<HYMinRead[i]<<"\t"<<HYMaxRead[i]<<endl;
+    outFile2.close();
 }
 void HY3131Calibration::stopADC(){
     if(ADCTimer->isActive()){
@@ -667,6 +726,7 @@ void HY3131Calibration::on_CompCalibration_clicked(bool checked)
 
     retryButton=msgBox.addButton("Retry",QMessageBox::AcceptRole);
     clearKButton=msgBox.addButton("Clear",QMessageBox::ApplyRole);
+    skipButton=msgBox.addButton("Skip",QMessageBox::ApplyRole);
 
     clearKButton->setEnabled(true);
 
@@ -685,24 +745,33 @@ void HY3131Calibration::on_CompCalibration_clicked(bool checked)
 
             ui->cmbRange->setCurrentIndex(i);
 
-            do{
+/*            do{
             msgBox.setText("For "+ui->cmbRange->currentText()+" Range Offset Value\nConnect your Probes to Keithley2100 Digital Multimeter");
             msgBox.setInformativeText("After connecting press ok");
             msgBox.setStandardButtons(QMessageBox::Ok|QMessageBox::Cancel);
             ret=msgBox.exec();
             if(ret==QMessageBox::Cancel)
                 break;
+            if(msgBox.clickedButton()==skipButton)
+            	break;
             if(msgBox.clickedButton()==clearKButton)
                 KDmm->clearKeithley();
-            }while(msgBox.clickedButton()==retryButton | msgBox.clickedButton()==clearKButton);
+            }while((msgBox.clickedButton()==retryButton) | (msgBox.clickedButton()==clearKButton));
 
             if(ret==QMessageBox::Cancel)
                 break;
 
-            KRefMinData[m_nMacroValue]=KRead();
-            qDebug()<<"KRefMinData"<<KRefMinData[m_nMacroValue];
-            ui->leOffsetValue->setText(QString::number(KRefMinData[m_nMacroValue],'g',10));
-
+            if(msgBox.clickedButton()!=skipButton){
+				KRefMinData[m_nMacroValue]=KRead();
+				qDebug()<<"KRefMinData"<<KRefMinData[m_nMacroValue];
+				ui->leOffsetValue->setText(QString::number(KRefMinData[m_nMacroValue],'g',10));
+				updateCalibFile();
+            }*/
+			KRefMinData[m_nMacroValue]=0;;
+			qDebug()<<"KRefMinData"<<KRefMinData[m_nMacroValue];
+			ui->leOffsetValue->setText(QString::number(KRefMinData[m_nMacroValue],'g',10));
+			updateCalibFile();
+		//----------------------------------------------------------------------------------------------------------------------------
             do{
             msgBox.setText("For "+ui->cmbRange->currentText()+" Range Max Value\nConnect your Probes to Keithley2100 Digital Multimeter");
             msgBox.setInformativeText("After connecting press ok");
@@ -710,16 +779,22 @@ void HY3131Calibration::on_CompCalibration_clicked(bool checked)
             ret=msgBox.exec();
             if(ret==QMessageBox::Cancel)
                 break;
+            if(msgBox.clickedButton()==skipButton)
+            	break;
             if(msgBox.clickedButton()==clearKButton)
                 KDmm->clearKeithley();
-            }while(msgBox.clickedButton()==retryButton | msgBox.clickedButton()==clearKButton);
+            }while((msgBox.clickedButton()==retryButton) | (msgBox.clickedButton()==clearKButton));
 
             if(ret==QMessageBox::Cancel)
                 break;
 
-            KRefMaxData[m_nMacroValue]=KRead();
-            qDebug()<<"KRefMaxData"<<KRefMaxData[m_nMacroValue];
-            ui->leMaxValue->setText(QString::number(KRefMaxData[m_nMacroValue],'g',10));
+            if(msgBox.clickedButton()!=skipButton){
+				KRefMaxData[m_nMacroValue]=KRead();
+				qDebug()<<"KRefMaxData"<<KRefMaxData[m_nMacroValue];
+				ui->leMaxValue->setText(QString::number(KRefMaxData[m_nMacroValue],'g',10));
+				updateCalibFile();
+            }
+       //----------------------------------------------------------------------------------------------------------------------------
         }
 
         clearKButton->setEnabled(false);
@@ -737,14 +812,19 @@ void HY3131Calibration::on_CompCalibration_clicked(bool checked)
             ret=msgBox.exec();
             if(ret==QMessageBox::Cancel)
                 break;
+            if(msgBox.clickedButton()==skipButton)
+            	break;
             }while(msgBox.clickedButton()==retryButton);
 
             if(ret==QMessageBox::Cancel)
                 break;
 
-            HYMinRead[m_nMacroValue]=hy3131dmm->Measure2(m_nMacroValue);
-            qDebug()<<"HYMinRead"<<HYMinRead[m_nMacroValue];
-            ui->leOffsetMeasured->setText(QString::number(HYMinRead[m_nMacroValue],'g',10));
+            if(msgBox.clickedButton()!=skipButton){
+				HYMinRead[m_nMacroValue]=hy3131dmm->Measure2(m_nMacroValue);
+				qDebug()<<"HYMinRead"<<HYMinRead[m_nMacroValue];
+				ui->leOffsetMeasured->setText(QString::number(HYMinRead[m_nMacroValue],'g',10));
+				updateCalibFile();
+            }
 
             do{
             msgBox.setText("For "+ui->cmbRange->currentText()+" Range Max Value\nConnect your Probes to PT6 HY3131 Module");
@@ -753,27 +833,37 @@ void HY3131Calibration::on_CompCalibration_clicked(bool checked)
             ret=msgBox.exec();
             if(ret==QMessageBox::Cancel)
                 break;
+            if(msgBox.clickedButton()==skipButton)
+            	break;
             }while(msgBox.clickedButton()==retryButton);
 
             if(ret==QMessageBox::Cancel)
                 break;
 
-            HYMaxRead[m_nMacroValue]=hy3131dmm->Measure2(m_nMacroValue);
-            qDebug()<<"HYMaxRead"<<HYMaxRead[m_nMacroValue];
-            ui->leMaxMeasured->setText(QString::number(HYMaxRead[m_nMacroValue],'g',10));
+            if(msgBox.clickedButton()!=skipButton){
+				HYMaxRead[m_nMacroValue]=hy3131dmm->Measure2(m_nMacroValue);
+				qDebug()<<"HYMaxRead"<<HYMaxRead[m_nMacroValue];
+				ui->leMaxMeasured->setText(QString::number(HYMaxRead[m_nMacroValue],'g',10));
+				updateCalibFile();
+            }
 
-            if((m_nMacroValue>=9 && m_nMacroValue<=14)||(m_nMacroValue>=9 && m_nMacroValue<=14)||(m_nMacroValue==28)||(m_nMacroValue==30))
-                m_dCalculatedGain=sqrt((HYMaxRead[m_nMacroValue]-HYMinRead[m_nMacroValue]))/KRefMaxData[m_nMacroValue];
-            else
-                m_dCalculatedGain=(HYMaxRead[m_nMacroValue]-HYMinRead[m_nMacroValue])/KRefMaxData[m_nMacroValue];
+            if(msgBox.clickedButton()!=skipButton){
+				if((m_nMacroValue>=9 && m_nMacroValue<=14)||(m_nMacroValue>=26 && m_nMacroValue<=31))
+					m_dCalculatedGain=sqrt((HYMaxRead[m_nMacroValue]-HYMinRead[m_nMacroValue]))/KRefMaxData[m_nMacroValue];
+				else
+					m_dCalculatedGain=(HYMaxRead[m_nMacroValue]-HYMinRead[m_nMacroValue])/KRefMaxData[m_nMacroValue];
 
-            m_dCalculatedOffset=HYMinRead[m_nMacroValue];
+				m_dCalculatedOffset=HYMinRead[m_nMacroValue];
 
-            ui->leGain->setText(QString::number(m_dCalculatedGain,'g',10));
-            ui->leOffset->setText(QString::number(m_dCalculatedOffset,'g',10));
+				ui->leGain->setText(QString::number(m_dCalculatedGain,'g',10));
+				ui->leOffset->setText(QString::number(m_dCalculatedOffset,'g',10));
 
-            m_nGain[m_nMacroValue]=m_dCalculatedGain;
-            m_nOffset[m_nMacroValue]=m_dCalculatedOffset;
+				m_nGain[m_nMacroValue]=m_dCalculatedGain;
+				m_nOffset[m_nMacroValue]=m_dCalculatedOffset;
+            }
         }
     }
+    msgBox.removeButton(retryButton);
+    msgBox.removeButton(clearKButton);
+    msgBox.removeButton(skipButton);
 }

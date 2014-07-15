@@ -41,7 +41,7 @@ protected:
     IKeithley2100Interface *KDmm;
 
     QLineEdit *objOffsetValue,*objMaxValue;
-    QAbstractButton *retryButton,*clearKButton;
+    QAbstractButton *retryButton,*clearKButton,*skipButton;
 
     short int m_nLineEditIndex;
 
@@ -55,6 +55,10 @@ protected:
 
     QString m_strRange[31];
     double m_nGain[31],m_nOffset[31];
+
+    QString m_strRange2[31];
+    void updateCalibFile();
+
     double KRefMinData[31],KRefMaxData[31];
     double HYMinRead[31],HYMaxRead[31];
 

@@ -256,13 +256,20 @@ void DMM::clickedPRSCR() {
 
 //Value Mapping----------------------------------------------------
 void DMM::InitialiseValues() {
-	//set Voltage
-	mapVoltage.insert(0, "50mV");
-	mapVoltage.insert(1, "500mV");
-	mapVoltage.insert(2, "5V");
-	mapVoltage.insert(3, "50V");
-	mapVoltage.insert(4, "500V");
-	mapVoltage.insert(5, "750V");
+	//set DC Voltage
+	mapDCVoltage.insert(0, "50mV");
+	mapDCVoltage.insert(1, "500mV");
+	mapDCVoltage.insert(2, "5V");
+	mapDCVoltage.insert(3, "50V");
+	mapDCVoltage.insert(4, "500V");
+	mapDCVoltage.insert(5, "1000V");
+	//set AC Voltage
+	mapACVoltage.insert(0, "50mV");
+	mapACVoltage.insert(1, "500mV");
+	mapACVoltage.insert(2, "5V");
+	mapACVoltage.insert(3, "50V");
+	mapACVoltage.insert(4, "500V");
+	mapACVoltage.insert(5, "750V");
 	// set Current
 	mapCurrent.insert(0, "500uA");
 	mapCurrent.insert(1, "5mA");
@@ -295,7 +302,7 @@ void DMM::InitialiseValues() {
 	ui->label_4->setDisabled(true);
 
 	//set default range
-	ui->label->setText(mapVoltage.value(nVoltageCur));
+	ui->label->setText(mapACVoltage.value(nVoltageCur));
 	QString str28 = "font-size:36pt;";
 	QString str36 = "font-size:36pt;";
 	ui->textEdit->setStyleSheet(str36);
@@ -420,53 +427,53 @@ void DMM::onMeasure() {
 		//***********************Voltage*************************************
 		if (Flag.vFlag == 1) {
 			if (Flag.dcFlag == 1) {
-				if (ui->label_5->text() == mapVoltage.value(0)) {
+				if (ui->label_5->text() == mapDCVoltage.value(0)) {
 					display.retvalHY3131 = hy3131DMM->Measure(DC50mV);
 					display.retval = display.retvalHY3131;
 					dis->setRange(50);
-				} else if (ui->label_5->text() == mapVoltage.value(1)) {
+				} else if (ui->label_5->text() == mapDCVoltage.value(1)) {
 					display.retvalHY3131 = hy3131DMM->Measure(DC500mV);
 					display.retval = display.retvalHY3131;
 					dis->setRange(500);
-				} else if (ui->label_5->text() == mapVoltage.value(2)) {
+				} else if (ui->label_5->text() == mapDCVoltage.value(2)) {
 					display.retvalHY3131 = hy3131DMM->Measure(DC5V);
 					display.retval = display.retvalHY3131 * 1000;
 					dis->setRange(5);
-				} else if (ui->label_5->text() == mapVoltage.value(3)) {
+				} else if (ui->label_5->text() == mapDCVoltage.value(3)) {
 					display.retvalHY3131 = hy3131DMM->Measure(DC50V);
 					display.retval = display.retvalHY3131 * 1000;
 					dis->setRange(50);
-				} else if (ui->label_5->text() == mapVoltage.value(4)) {
+				} else if (ui->label_5->text() == mapDCVoltage.value(4)) {
 					display.retvalHY3131 = hy3131DMM->Measure(DC500V);
 					display.retval = display.retvalHY3131 * 1000;
 					dis->setRange(500);
-				} else if (ui->label_5->text() == mapVoltage.value(5)) {
+				} else if (ui->label_5->text() == mapDCVoltage.value(5)) {
 					display.retvalHY3131 = hy3131DMM->Measure(DC1000V);
 					display.retval = display.retvalHY3131 * 1000;
 					dis->setRange(1000);
 				}
 			} else if (Flag.acFlag == 1) {
-				if (ui->label_5->text() == mapVoltage.value(0)) {
+				if (ui->label_5->text() == mapACVoltage.value(0)) {
 					display.retvalHY3131 = hy3131DMM->Measure(AC50mV);
 					display.retval = display.retvalHY3131;
 					dis->setRange(50);
-				} else if (ui->label_5->text() == mapVoltage.value(1)) {
+				} else if (ui->label_5->text() == mapACVoltage.value(1)) {
 					display.retvalHY3131 = hy3131DMM->Measure(AC500mV);
 					display.retval = display.retvalHY3131;
 					dis->setRange(500);
-				} else if (ui->label_5->text() == mapVoltage.value(2)) {
+				} else if (ui->label_5->text() == mapACVoltage.value(2)) {
 					display.retvalHY3131 = hy3131DMM->Measure(AC5V);
 					display.retval = display.retvalHY3131 * 1000;
 					dis->setRange(5);
-				} else if (ui->label_5->text() == mapVoltage.value(3)) {
+				} else if (ui->label_5->text() == mapACVoltage.value(3)) {
 					display.retvalHY3131 = hy3131DMM->Measure(AC50V);
 					display.retval = display.retvalHY3131 * 1000;
 					dis->setRange(50);
-				} else if (ui->label_5->text() == mapVoltage.value(4)) {
+				} else if (ui->label_5->text() == mapACVoltage.value(4)) {
 					display.retvalHY3131 = hy3131DMM->Measure(AC500V);
 					display.retval = display.retvalHY3131 * 1000;
 					dis->setRange(500);
-				} else if (ui->label_5->text() == mapVoltage.value(5)) {
+				} else if (ui->label_5->text() == mapACVoltage.value(5)) {
 					display.retvalHY3131 = hy3131DMM->Measure(AC1000V);
 					display.retval = display.retvalHY3131 * 1000;
 					dis->setRange(1000);
@@ -591,13 +598,21 @@ void DMM::onMeasure() {
 					|| ui->label_5->text() == mapResistance.value(6))
 				showSymbol(5);
 
-			if (ui->label_5->text() == mapVoltage.value(0)
-					|| ui->label_5->text() == mapVoltage.value(1))
+			if (ui->label_5->text() == mapDCVoltage.value(0)
+					|| ui->label_5->text() == mapDCVoltage.value(1))
 				ui->lineEdit_4->setText("mV");
-			else if (ui->label_5->text() == mapVoltage.value(2)
-					|| ui->label_5->text() == mapVoltage.value(3)
-					|| ui->label_5->text() == mapVoltage.value(4)
-					|| ui->label_5->text() == mapVoltage.value(5))
+			else if (ui->label_5->text() == mapDCVoltage.value(2)
+					|| ui->label_5->text() == mapDCVoltage.value(3)
+					|| ui->label_5->text() == mapDCVoltage.value(4)
+					|| ui->label_5->text() == mapDCVoltage.value(5))
+				ui->lineEdit_4->setText("V");
+			if (ui->label_5->text() == mapACVoltage.value(0)
+					|| ui->label_5->text() == mapACVoltage.value(1))
+				ui->lineEdit_4->setText("mV");
+			else if (ui->label_5->text() == mapACVoltage.value(2)
+					|| ui->label_5->text() == mapACVoltage.value(3)
+					|| ui->label_5->text() == mapACVoltage.value(4)
+					|| ui->label_5->text() == mapACVoltage.value(5))
 				ui->lineEdit_4->setText("V");
 
 			if (ui->label_5->text() == mapCurrent.value(0))
@@ -829,50 +844,35 @@ void DMM::callMeasure(void) {
 				hy3131DMM->Configure(R50M);
 			}
 		}
-		//***********************Voltage*************************************
+		//***********************DC Voltage*************************************
 		if (Flag.vFlag == 1) {
-			if (ui->label_5->text() == mapVoltage.value(0)) {
-				if (Flag.acFlag == 1) {
-					hy3131DMM->Configure(AC50mV);
-				} else if (Flag.dcFlag == 1) {
+			if (ui->label_5->text() == mapDCVoltage.value(0))
 					hy3131DMM->Configure(DC50mV);
-				}
-			} else if (ui->label_5->text() == mapVoltage.value(1)) {
-
-				if (Flag.acFlag == 1) {
-					hy3131DMM->Configure(AC500mV);
-				} else if (Flag.dcFlag == 1) {
+			else if (ui->label_5->text() == mapDCVoltage.value(1))
 					hy3131DMM->Configure(DC500mV);
-				}
-			} else if (ui->label_5->text() == mapVoltage.value(2)) {
-
-				if (Flag.acFlag == 1) {
-					hy3131DMM->Configure(AC5V);
-				} else if (Flag.dcFlag == 1) {
+			else if (ui->label_5->text() == mapDCVoltage.value(2))
 					hy3131DMM->Configure(DC5V);
-				}
-			} else if (ui->label_5->text() == mapVoltage.value(3)) {
-
-				if (Flag.acFlag == 1) {
-					hy3131DMM->Configure(AC50V);
-				} else if (Flag.dcFlag == 1) {
+			else if (ui->label_5->text() == mapDCVoltage.value(3))
 					hy3131DMM->Configure(DC50V);
-				}
-			} else if (ui->label_5->text() == mapVoltage.value(4)) {
-
-				if (Flag.acFlag == 1) {
-					hy3131DMM->Configure(AC500V);
-				} else if (Flag.dcFlag == 1) {
+			else if (ui->label_5->text() == mapDCVoltage.value(4))
 					hy3131DMM->Configure(DC500V);
-				}
-			} else if (ui->label_5->text() == mapVoltage.value(5)) {
-
-				if (Flag.acFlag == 1) {
-					hy3131DMM->Configure(AC1000V);
-				} else if (Flag.dcFlag == 1) {
+			else if (ui->label_5->text() == mapDCVoltage.value(5))
 					hy3131DMM->Configure(DC1000V);
-				}
-			}
+		}
+		//***********************AC Voltage*************************************
+		if (Flag.vFlag == 1) {
+			if (ui->label_5->text() == mapACVoltage.value(0))
+					hy3131DMM->Configure(AC50mV);
+			else if (ui->label_5->text() == mapACVoltage.value(1))
+					hy3131DMM->Configure(AC500mV);
+			else if (ui->label_5->text() == mapACVoltage.value(2))
+					hy3131DMM->Configure(AC5V);
+			else if (ui->label_5->text() == mapACVoltage.value(3))
+					hy3131DMM->Configure(AC50V);
+			else if (ui->label_5->text() == mapACVoltage.value(4))
+					hy3131DMM->Configure(AC500V);
+			else if (ui->label_5->text() == mapACVoltage.value(5))
+					hy3131DMM->Configure(AC1000V);
 		}
 		//***********************Current*************************************
 		if (Flag.iFlag == 1) {
@@ -938,11 +938,18 @@ void DMM::case_v() {
 	Flag.vFlag = 1;
 	Flag.iFlag = Flag.r2wFlag = Flag.diodeFlag = Flag.continuityFlag
 			= Flag.buzzerFlag = 0;
-
-	ui->label_6->setText(mapVoltage.value(nVoltagePrev));
-	ui->label_5->setText(mapVoltage.value(nVoltageCur));
-	ui->label_4->setText(mapVoltage.value(nVoltageNext));
-	ui->label->setText(mapVoltage.value(nVoltageCur));
+	if (Flag.dcFlag == 1){
+		ui->label_6->setText(mapDCVoltage.value(nVoltagePrev));
+		ui->label_5->setText(mapDCVoltage.value(nVoltageCur));
+		ui->label_4->setText(mapDCVoltage.value(nVoltageNext));
+		ui->label->setText(mapDCVoltage.value(nVoltageCur));
+	}
+	if (Flag.acFlag == 1){
+		ui->label_6->setText(mapACVoltage.value(nVoltagePrev));
+		ui->label_5->setText(mapACVoltage.value(nVoltageCur));
+		ui->label_4->setText(mapACVoltage.value(nVoltageNext));
+		ui->label->setText(mapACVoltage.value(nVoltageCur));
+	}
 
 	//---------------------------------------------------------
 	if (nVoltageCur > 0)
@@ -980,7 +987,12 @@ void DMM::case_i() {
 }
 void DMM::case_ac() {
 	qDebug()<<"case AC";
-
+	if(Flag.vFlag==1){
+			ui->label_6->setText(mapACVoltage.value(nVoltagePrev));
+			ui->label_5->setText(mapACVoltage.value(nVoltageCur));
+			ui->label_4->setText(mapACVoltage.value(nVoltageNext));
+			ui->label->setText(mapACVoltage.value(nVoltageCur));
+		}
 	Flag.acFlag = 1;
 	Flag.dcFlag = 0;
 	Flag.diodeFlag = Flag.continuityFlag = Flag.buzzerFlag = 0;
@@ -989,7 +1001,12 @@ void DMM::case_ac() {
 }
 void DMM::case_dc() {
 	////qDebug()<<"case DC";
-
+	if(Flag.vFlag==1){
+		ui->label_6->setText(mapDCVoltage.value(nVoltagePrev));
+		ui->label_5->setText(mapDCVoltage.value(nVoltageCur));
+		ui->label_4->setText(mapDCVoltage.value(nVoltageNext));
+		ui->label->setText(mapDCVoltage.value(nVoltageCur));
+	}
 	Flag.dcFlag = 1;
 	Flag.acFlag = 0;
 	Flag.diodeFlag = Flag.continuityFlag = Flag.buzzerFlag = 0;
@@ -1184,10 +1201,18 @@ void DMM::buttonPressed(int pPressed) {
 			else
 				nVoltageNext = 5;
 
-			ui->label_6->setText(mapVoltage.value(nVoltagePrev));
-			ui->label_5->setText(mapVoltage.value(nVoltageCur));
-			ui->label_4->setText(mapVoltage.value(nVoltageNext));
-			ui->label->setText(mapVoltage.value(nVoltageCur));
+			if(Flag.dcFlag==1){
+				ui->label_6->setText(mapDCVoltage.value(nVoltagePrev));
+				ui->label_5->setText(mapDCVoltage.value(nVoltageCur));
+				ui->label_4->setText(mapDCVoltage.value(nVoltageNext));
+				ui->label->setText(mapDCVoltage.value(nVoltageCur));
+			}
+			if(Flag.acFlag==1){
+				ui->label_6->setText(mapACVoltage.value(nVoltagePrev));
+				ui->label_5->setText(mapACVoltage.value(nVoltageCur));
+				ui->label_4->setText(mapACVoltage.value(nVoltageNext));
+				ui->label->setText(mapACVoltage.value(nVoltageCur));
+			}
 
 			if (nVoltageCur > 0)
 				ui->lineEdit_4->setText("V");
@@ -1279,10 +1304,18 @@ void DMM::buttonPressed(int pPressed) {
 			else
 				nVoltageNext = 1;
 
-			ui->label_6->setText(mapVoltage.value(nVoltagePrev));
-			ui->label_5->setText(mapVoltage.value(nVoltageCur));
-			ui->label_4->setText(mapVoltage.value(nVoltageNext));
-			ui->label->setText(mapVoltage.value(nVoltageCur));
+			if(Flag.dcFlag==1){
+				ui->label_6->setText(mapDCVoltage.value(nVoltagePrev));
+				ui->label_5->setText(mapDCVoltage.value(nVoltageCur));
+				ui->label_4->setText(mapDCVoltage.value(nVoltageNext));
+				ui->label->setText(mapDCVoltage.value(nVoltageCur));
+			}
+			if(Flag.acFlag==1){
+				ui->label_6->setText(mapACVoltage.value(nVoltagePrev));
+				ui->label_5->setText(mapACVoltage.value(nVoltageCur));
+				ui->label_4->setText(mapACVoltage.value(nVoltageNext));
+				ui->label->setText(mapACVoltage.value(nVoltageCur));
+			}
 
 			if (nVoltageCur > 0)
 				ui->lineEdit_4->setText("V");

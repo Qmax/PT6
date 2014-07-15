@@ -171,7 +171,7 @@ protected:
 
     unsigned int initialCurrentDrive;
     //Value Mapping------------------------------------------
-    QMap <short,QString> mapVoltage;
+    QMap <short,QString> mapDCVoltage;QMap <short,QString> mapACVoltage;
     QMap <short,QString> mapCurrent;
     QMap <short,QString> mapResistance;
     short nVoltagePrev,nVoltageCur,nVoltageNext;

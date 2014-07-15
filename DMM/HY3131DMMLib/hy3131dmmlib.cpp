@@ -24,7 +24,7 @@ HY3131DMMLib::HY3131DMMLib(QObject *parent):QObject(parent){
 	if(selAppCard)
 			IAppCard->writeRegister(0x20, DMM_CLK_DIV);//DMM SPI Clock Settings 1MHz
 	else
-			IBackPlane->writeBackPlaneRegister(0x20,DMM_CLK_DIV_BP);
+			IBackPlane->writeBackPlaneRegister(0x25,DMM_CLK_DIV_BP);
 
 	reg0 = reg1 = reg2 = 0;
 	ADCDigital = 0;
@@ -251,6 +251,7 @@ double HY3131DMMLib::Measure2(int8_t index){
 	if(minus==true)
 		RawData=RawData*-1;
 
+	qDebug()<<"ADC Digital:"<<hex<<ADCDigital;
 //	qDebug()<<"rawData:"<<RawData;
 	busyState=false;
 	return RawData;
@@ -405,7 +406,8 @@ u_int32_t HY3131DMMLib::readADC1(u_int8_t r0,u_int8_t r1,u_int8_t r2){
 		temp+=t2;
 	}
 	temp=temp/m_nSampleCount;
-//		qDebug()<<"ADC1 Read Data:"<<hex<<temp;
+	qDebug()<<"_______________________________________________________________";
+	qDebug()<<"ADC1 Read Data:"<<hex<<temp;
 	busyState=false;
 
 	return temp;

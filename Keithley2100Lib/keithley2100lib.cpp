@@ -63,7 +63,7 @@ void Keithley2100Lib::ConfigureResistance(int range){
 		writeKeithley((char*)"CONF:RES 100E6");
 		break;
 	}
-	usleep(200000);
+	sleep(1);
 }
 double Keithley2100Lib::MeasureResistance(int range){
 	qDebug()<<"MeasureResistance-index:"<<range;
@@ -117,7 +117,7 @@ void Keithley2100Lib::ConfigureDCVoltage(int range){
                 writeKeithley((char*)"CONF:VOLT:DC 1000");
                 break;
         }
-        usleep(200000);
+        sleep(1);
 }
 double Keithley2100Lib::MeasureDCVoltage(int range){
 	qDebug()<<"MeasureDCVoltage-index:"<<range;
@@ -167,7 +167,6 @@ void Keithley2100Lib::ConfigureACVoltage(int range){
                 break;
         }
         sleep(1);
-//        usleep(200000);
 }
 double Keithley2100Lib::MeasureACVoltage(int range){
 	qDebug()<<"MeasureACVoltage-index:"<<range;
@@ -204,16 +203,18 @@ void Keithley2100Lib::ConfigureDCCurrent(int range){
                 writeKeithley((char*)"CONF:CURR:DC 0.01");
                 break;
         case 21:
+        case 22:
+        case 23:
                 writeKeithley((char*)"CONF:CURR:DC 0.1");
                 break;
-        case 22:
+        case 24:
                 writeKeithley((char*)"CONF:CURR:DC 1");
                 break;
-        case 23:
+        case 25:
                 writeKeithley((char*)"CONF:CURR:DC 3");
                 break;
         }
-        usleep(200000);
+        sleep(1);
 }
 double Keithley2100Lib::MeasureDCCurrent(int range){
 	qDebug()<<"MeasureDCCurrent-index:"<<range;
@@ -224,12 +225,14 @@ double Keithley2100Lib::MeasureDCCurrent(int range){
                 writeKeithley((char*)"MEAS:CURR:DC? 0.01");
                 break;
         case 21:
+        case 22:
+        case 23:
                 writeKeithley((char*)"MEAS:CURR:DC? 0.1");
                 break;
-        case 22:
+        case 24:
                 writeKeithley((char*)"MEAS:CURR:DC? 1");
                 break;
-        case 23:
+        case 25:
                 writeKeithley((char*)"MEAS:CURR:DC? 3");
                 break;
 
@@ -241,26 +244,30 @@ void Keithley2100Lib::ConfigureACCurrent(int range){
 	qDebug()<<"ConfigureACCurrent-index:"<<range;
 
         switch(range){
-        case 24:
-        case 25:
+        case 26:
+        case 27:
+        case 28:
+        case 29:
                 writeKeithley((char*)"CONF:CURR:AC 1");
                 break;
-        case 26:
+        case 30:
                 writeKeithley((char*)"CONF:CURR:AC 3");
                 break;
         }
-        usleep(200000);
+        sleep(1);
 }
 double Keithley2100Lib::MeasureACCurrent(int range){
 	qDebug()<<"MeasureACCurrent-index:"<<range;
 
         bool ok=true;
         switch(range){
-        case 24:
-        case 25:
+        case 26:
+        case 27:
+        case 28:
+        case 29:
                 writeKeithley((char*)"MEAS:CURR:AC? 1");
                 break;
-        case 26:
+        case 30:
                 writeKeithley((char*)"MEAS:CURR:AC? 3");
                 break;
         }
@@ -275,7 +282,7 @@ void Keithley2100Lib::ConfigureDiode(int range){
        writeKeithley((char*)"CONF:DIOD");
        break;
    }
-        usleep(200000);
+        sleep(1);
 }
 
 double Keithley2100Lib::MeasureDiode(int range){
@@ -299,7 +306,7 @@ void Keithley2100Lib::ConfigureContinuity(int range){
         writeKeithley((char*)"CONF:CONT");
         break;
     }
-      usleep(200000);
+      sleep(1);
 }
 
 double Keithley2100Lib::MeasureContinuity(int range){
