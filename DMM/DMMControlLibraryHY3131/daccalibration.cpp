@@ -446,6 +446,8 @@ void DACCalibration::on_comboBox_currentIndexChanged(int index)
         break;
     case 3:
     	ui.ICM->clear();
+        ui.ICM->insertItem(0,"500uA");
+        ui.ICM->insertItem(1,"5mA");
         ui.ICM->insertItem(0,"50mA");
         ui.ICM->insertItem(1,"500mA");
         ui.ICM->insertItem(2,"3A");
@@ -463,6 +465,8 @@ void DACCalibration::on_comboBox_currentIndexChanged(int index)
         break;
     case 5:
     	ui.ICM->clear();
+        ui.ICM->insertItem(0,"500uA");
+        ui.ICM->insertItem(1,"5mA");
         ui.ICM->insertItem(0,"50mA");
         ui.ICM->insertItem(1,"500mA");
         ui.ICM->insertItem(2,"3A");

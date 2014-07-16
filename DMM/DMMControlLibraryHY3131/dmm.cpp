@@ -42,10 +42,10 @@ void customMessageHandler(QtMsgType type, const char *msg) {
 
 	QFile outFile("DMMLogFile.log");
 
-        if(outFile.size()>1298368)
-            outFile.open(QIODevice::WriteOnly);
-        else
-            outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+	if (outFile.size() > 1298368)
+		outFile.open(QIODevice::WriteOnly);
+	else
+		outFile.open(QIODevice::WriteOnly | QIODevice::Append);
 
 	QTextStream textStream(&outFile);
 	textStream << txt << endl;
@@ -85,11 +85,13 @@ DMM::DMM(QWidget *parent) :
 	m_nADCtimer = new QTimer(0);
 	connect(m_nADCtimer, SIGNAL(timeout()), this, SLOT(onMeasure()));
 
-    objDMMAcc=new DMMAccuracy();
-    connect(this, SIGNAL(DMM2AccuCalc(double,QString)), objDMMAcc, SLOT(getData(double,QString)));
+	objDMMAcc = new DMMAccuracy();
+	connect(this, SIGNAL(DMM2AccuCalc(double,QString)), objDMMAcc,
+			SLOT(getData(double,QString)));
 
-    QPluginLoader loaderDMMTESTJIG("libtestSPI.so",this);
-    DMMTestjig = qobject_cast<DMMSPITestJigInterface*>(loaderDMMTESTJIG.instance());
+	QPluginLoader loaderDMMTESTJIG("libtestSPI.so", this);
+	DMMTestjig = qobject_cast<DMMSPITestJigInterface*> (
+			loaderDMMTESTJIG.instance());
 
 	//~~~~~~~~Check for debug panel~~~~~~~~~~~~~~~~~~~~~~~~
 	QStringList debugPanel;
@@ -131,8 +133,8 @@ DMM::DMM(QWidget *parent) :
 
 	ui->r4w->setVisible(false);
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/*	QPluginLoader testing("libAppBckPsoc.so", this);
-	test = qobject_cast<IPTAppBckPsocInterface*> (testing.instance());*/
+	/*	QPluginLoader testing("libAppBckPsoc.so", this);
+	 test = qobject_cast<IPTAppBckPsocInterface*> (testing.instance());*/
 
 	//	QTimer *timerb1 = new QTimer(this);
 	//	connect(timerb1, SIGNAL(timeout()), this, SLOT(blink1()));
@@ -146,7 +148,7 @@ DMM::DMM(QWidget *parent) :
 
 	ui->calibrateDisplay->setChecked(false);
 
-//  qInstallMsgHandler(customMessageHandler);
+	//  qInstallMsgHandler(customMessageHandler);
 	loopOut = 0;
 }
 
@@ -484,12 +486,12 @@ void DMM::onMeasure() {
 		if (Flag.iFlag == 1) {
 			if (Flag.dcFlag == 1) {
 				if (ui->label_5->text() == mapCurrent.value(0)) {
-					display.retvalHY3131 = hy3131DMM->Measure(DC500uA)*100;
-					display.retval = display.retvalHY3131 / 10;
+					display.retvalHY3131 = hy3131DMM->Measure(DC500uA);
+					display.retval = display.retvalHY3131;
 					dis->setRange(500);
 				} else if (ui->label_5->text() == mapCurrent.value(1)) {
-					display.retvalHY3131 = hy3131DMM->Measure(DC5mA)*100;
-					display.retval = display.retvalHY3131 / 10000;
+					display.retvalHY3131 = hy3131DMM->Measure(DC5mA);
+					display.retval = display.retvalHY3131;
 					dis->setRange(5);
 				} else if (ui->label_5->text() == mapCurrent.value(2)) {
 					display.retvalHY3131 = hy3131DMM->Measure(DC50mA);
@@ -501,7 +503,7 @@ void DMM::onMeasure() {
 					dis->setRange(500);
 				} else if (ui->label_5->text() == mapCurrent.value(4)) {
 					display.retvalHY3131 = hy3131DMM->Measure(DC3A);
-					display.retval = display.retvalHY3131 * 1000;
+					display.retval = display.retvalHY3131;
 					dis->setRange(3);
 				}
 			} else if (Flag.acFlag == 1) {
@@ -523,7 +525,7 @@ void DMM::onMeasure() {
 					dis->setRange(500);
 				} else if (ui->label_5->text() == mapCurrent.value(4)) {
 					display.retvalHY3131 = hy3131DMM->Measure(AC3A);
-					display.retval = display.retvalHY3131 * 1000;
+					display.retval = display.retvalHY3131;
 					dis->setRange(3);
 				}
 			}
@@ -669,8 +671,8 @@ void DMM::onMeasure() {
 			}
 
 			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                        dis->setValue(digitsLimiter(display.retvalHY3131));
-                        emit DMM2AccuCalc(display.retvalHY3131,ui->label_5->text());
+			dis->setValue(digitsLimiter(display.retvalHY3131));
+			emit DMM2AccuCalc(display.retvalHY3131, ui->label_5->text());
 		}
 		////qDebug()<<"Display.retavl:"<<display.retval;
 		/*ADC values = IDMMLib->getAdcDatas();
@@ -678,14 +680,14 @@ void DMM::onMeasure() {
 		 ui->adcRawData->setText(QString::number(values.Data, 10));
 		 ui->adcConvData->setText(QString::number(values.ConvertedData, 'f', 16));*/
 	}
-//<-------For Enabling graph plot-------
+	//<-------For Enabling graph plot-------
 	//	plotSimpleDemo(ui->customPlot);
 	//	ui->customPlot->replot();//------------->
 }
-void DMM::setupSimpleDemo(QCustomPlot *customPlot){
+void DMM::setupSimpleDemo(QCustomPlot *customPlot) {
 	customPlot->addGraph();
 	QPen pen;
-	int minRange,maxRange;
+	int minRange, maxRange;
 
 	pen.setColor(QColor(0, 0, 255, 200));
 	customPlot->graph()->setLineStyle(QCPGraph::lsLine);
@@ -705,49 +707,53 @@ void DMM::setupSimpleDemo(QCustomPlot *customPlot){
 
 	bool ok = true;
 
-	if(Flag.r2wFlag==1||Flag.continuityFlag==1){
-		minRange=0;maxRange=str2.toInt(&ok, 10);
-	}
-	else{
-		minRange=(str2.toInt(&ok, 10) * -1);maxRange=str2.toInt(&ok, 10);
+	if (Flag.r2wFlag == 1 || Flag.continuityFlag == 1) {
+		minRange = 0;
+		maxRange = str2.toInt(&ok, 10);
+	} else {
+		minRange = (str2.toInt(&ok, 10) * -1);
+		maxRange = str2.toInt(&ok, 10);
 	}
 
-	customPlot->yAxis->setRange(minRange,maxRange);
-//	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
-	customPlot->setInteractions(QCP::iRangeZoom|QCP::iMultiSelect|QCP::iSelectPlottables|QCP::iSelectAxes|QCP::iSelectLegend|QCP::iSelectItems|QCP::iSelectOther);
+	customPlot->yAxis->setRange(minRange, maxRange);
+	//	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+	customPlot->setInteractions(QCP::iRangeZoom | QCP::iMultiSelect
+			| QCP::iSelectPlottables | QCP::iSelectAxes | QCP::iSelectLegend
+			| QCP::iSelectItems | QCP::iSelectOther);
 }
 void DMM::plotSimpleDemo(QCustomPlot *customPlot) {
 	//Save to File START ~~~~~~~~~~~~~~~~~~~~~~~
-    QFile outFile("DMMGraph.log");
-    if(outFile.size()>1298368)
-        outFile.open(QIODevice::WriteOnly | QIODevice::Text);
-    else
-        outFile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append);
-    QTextStream ts(&outFile);
-    //Save to File END ~~~~~~~~~~~~~~~~~~~~~~~
+	QFile outFile("DMMGraph.log");
+	if (outFile.size() > 1298368)
+		outFile.open(QIODevice::WriteOnly | QIODevice::Text);
+	else
+		outFile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append);
+	QTextStream ts(&outFile);
+	//Save to File END ~~~~~~~~~~~~~~~~~~~~~~~
 
 	if (loopOut != 250) {
-		if(loopOut>60){
-			customPlot->xAxis->setRange(loopOut-60,loopOut);
+		if (loopOut > 60) {
+			customPlot->xAxis->setRange(loopOut - 60, loopOut);
 		}
 		x[loopOut] = loopOut;
 		y[loopOut] = display.retvalHY3131;
 
 		QDateTime dateTime = QDateTime::currentDateTime();
 		QString dateTimeString = dateTime.toString();
-	    ts <<QString("time")<<"\t"<<dateTimeString<<"\t"<<ui->textEdit_5->toPlainText()<<"\t"<<display.retvalHY3131<<endl;
+		ts << QString("time") << "\t" << dateTimeString << "\t"
+				<< ui->textEdit_5->toPlainText() << "\t"
+				<< display.retvalHY3131 << endl;
 		loopOut++;
-        }
-        else{
-        	for(int k=0;k<60;k++){
-        		x[k] = x[190+k];
-        		y[k] = y[190+k];
-        	}
+	} else {
+		for (int k = 0; k < 60; k++) {
+			x[k] = x[190 + k];
+			y[k] = y[190 + k];
+		}
 
-        	loopOut=59;
-        }
+		loopOut = 59;
+	}
 
-		customPlot->graph(0)->setData(x, y);
+	customPlot->graph(0)->setData(x, y);
 }
 void DMM::CalibrateDisplay(QString value) {
 	QString l_strFileName;
@@ -845,38 +851,38 @@ void DMM::callMeasure(void) {
 			}
 		}
 		//***********************DC Voltage*************************************
-		if (Flag.vFlag == 1) {
+		if (Flag.vFlag == 1 && Flag.dcFlag == 1) {
 			if (ui->label_5->text() == mapDCVoltage.value(0))
-					hy3131DMM->Configure(DC50mV);
+				hy3131DMM->Configure(DC50mV);
 			else if (ui->label_5->text() == mapDCVoltage.value(1))
-					hy3131DMM->Configure(DC500mV);
+				hy3131DMM->Configure(DC500mV);
 			else if (ui->label_5->text() == mapDCVoltage.value(2))
-					hy3131DMM->Configure(DC5V);
+				hy3131DMM->Configure(DC5V);
 			else if (ui->label_5->text() == mapDCVoltage.value(3))
-					hy3131DMM->Configure(DC50V);
+				hy3131DMM->Configure(DC50V);
 			else if (ui->label_5->text() == mapDCVoltage.value(4))
-					hy3131DMM->Configure(DC500V);
+				hy3131DMM->Configure(DC500V);
 			else if (ui->label_5->text() == mapDCVoltage.value(5))
-					hy3131DMM->Configure(DC1000V);
+				hy3131DMM->Configure(DC1000V);
 		}
 		//***********************AC Voltage*************************************
-		if (Flag.vFlag == 1) {
+		if (Flag.vFlag == 1 && Flag.acFlag == 1) {
 			if (ui->label_5->text() == mapACVoltage.value(0))
-					hy3131DMM->Configure(AC50mV);
+				hy3131DMM->Configure(AC50mV);
 			else if (ui->label_5->text() == mapACVoltage.value(1))
-					hy3131DMM->Configure(AC500mV);
+				hy3131DMM->Configure(AC500mV);
 			else if (ui->label_5->text() == mapACVoltage.value(2))
-					hy3131DMM->Configure(AC5V);
+				hy3131DMM->Configure(AC5V);
 			else if (ui->label_5->text() == mapACVoltage.value(3))
-					hy3131DMM->Configure(AC50V);
+				hy3131DMM->Configure(AC50V);
 			else if (ui->label_5->text() == mapACVoltage.value(4))
-					hy3131DMM->Configure(AC500V);
+				hy3131DMM->Configure(AC500V);
 			else if (ui->label_5->text() == mapACVoltage.value(5))
-					hy3131DMM->Configure(AC1000V);
+				hy3131DMM->Configure(AC1000V);
 		}
 		//***********************Current*************************************
 		if (Flag.iFlag == 1) {
-			qDebug()<<"Inside Curent Measure";
+			qDebug() << "Inside Curent Measure";
 			if (ui->label_5->text() == mapCurrent.value(0)) {
 				if (Flag.acFlag == 1) {
 					hy3131DMM->Configure(AC500uA);
@@ -921,7 +927,7 @@ void DMM::callMeasure(void) {
 				hy3131DMM->Configure(CNTY);
 			}
 		}
-//		usleep(10000);//commented on Apr 28 5PM
+		//		usleep(10000);//commented on Apr 28 5PM
 		if (Flag.runFlag == 1)
 			m_nADCtimer->start(500);
 	}
@@ -938,13 +944,13 @@ void DMM::case_v() {
 	Flag.vFlag = 1;
 	Flag.iFlag = Flag.r2wFlag = Flag.diodeFlag = Flag.continuityFlag
 			= Flag.buzzerFlag = 0;
-	if (Flag.dcFlag == 1){
+	if (Flag.dcFlag == 1) {
 		ui->label_6->setText(mapDCVoltage.value(nVoltagePrev));
 		ui->label_5->setText(mapDCVoltage.value(nVoltageCur));
 		ui->label_4->setText(mapDCVoltage.value(nVoltageNext));
 		ui->label->setText(mapDCVoltage.value(nVoltageCur));
 	}
-	if (Flag.acFlag == 1){
+	if (Flag.acFlag == 1) {
 		ui->label_6->setText(mapACVoltage.value(nVoltagePrev));
 		ui->label_5->setText(mapACVoltage.value(nVoltageCur));
 		ui->label_4->setText(mapACVoltage.value(nVoltageNext));
@@ -959,7 +965,7 @@ void DMM::case_v() {
 
 }
 void DMM::case_i() {
-	qDebug()<<"case I";
+	qDebug() << "case I";
 
 	if (Flag.dcFlag != 1)
 		ui->textEdit_5->setText("AC ~");
@@ -986,13 +992,13 @@ void DMM::case_i() {
 		ui->lineEdit_4->setText(micro + "A");
 }
 void DMM::case_ac() {
-	qDebug()<<"case AC";
-	if(Flag.vFlag==1){
-			ui->label_6->setText(mapACVoltage.value(nVoltagePrev));
-			ui->label_5->setText(mapACVoltage.value(nVoltageCur));
-			ui->label_4->setText(mapACVoltage.value(nVoltageNext));
-			ui->label->setText(mapACVoltage.value(nVoltageCur));
-		}
+	qDebug() << "case AC";
+	if (Flag.vFlag == 1) {
+		ui->label_6->setText(mapACVoltage.value(nVoltagePrev));
+		ui->label_5->setText(mapACVoltage.value(nVoltageCur));
+		ui->label_4->setText(mapACVoltage.value(nVoltageNext));
+		ui->label->setText(mapACVoltage.value(nVoltageCur));
+	}
 	Flag.acFlag = 1;
 	Flag.dcFlag = 0;
 	Flag.diodeFlag = Flag.continuityFlag = Flag.buzzerFlag = 0;
@@ -1001,7 +1007,7 @@ void DMM::case_ac() {
 }
 void DMM::case_dc() {
 	////qDebug()<<"case DC";
-	if(Flag.vFlag==1){
+	if (Flag.vFlag == 1) {
 		ui->label_6->setText(mapDCVoltage.value(nVoltagePrev));
 		ui->label_5->setText(mapDCVoltage.value(nVoltageCur));
 		ui->label_4->setText(mapDCVoltage.value(nVoltageNext));
@@ -1201,13 +1207,13 @@ void DMM::buttonPressed(int pPressed) {
 			else
 				nVoltageNext = 5;
 
-			if(Flag.dcFlag==1){
+			if (Flag.dcFlag == 1) {
 				ui->label_6->setText(mapDCVoltage.value(nVoltagePrev));
 				ui->label_5->setText(mapDCVoltage.value(nVoltageCur));
 				ui->label_4->setText(mapDCVoltage.value(nVoltageNext));
 				ui->label->setText(mapDCVoltage.value(nVoltageCur));
 			}
-			if(Flag.acFlag==1){
+			if (Flag.acFlag == 1) {
 				ui->label_6->setText(mapACVoltage.value(nVoltagePrev));
 				ui->label_5->setText(mapACVoltage.value(nVoltageCur));
 				ui->label_4->setText(mapACVoltage.value(nVoltageNext));
@@ -1304,13 +1310,13 @@ void DMM::buttonPressed(int pPressed) {
 			else
 				nVoltageNext = 1;
 
-			if(Flag.dcFlag==1){
+			if (Flag.dcFlag == 1) {
 				ui->label_6->setText(mapDCVoltage.value(nVoltagePrev));
 				ui->label_5->setText(mapDCVoltage.value(nVoltageCur));
 				ui->label_4->setText(mapDCVoltage.value(nVoltageNext));
 				ui->label->setText(mapDCVoltage.value(nVoltageCur));
 			}
-			if(Flag.acFlag==1){
+			if (Flag.acFlag == 1) {
 				ui->label_6->setText(mapACVoltage.value(nVoltagePrev));
 				ui->label_5->setText(mapACVoltage.value(nVoltageCur));
 				ui->label_4->setText(mapACVoltage.value(nVoltageNext));
@@ -1463,7 +1469,7 @@ void DMM::setHighlight(int fn) {
 	ui->DMM2W_P1->setVisible(true);
 	ui->DMM2W_P2->setVisible(true);
 	ui->DMM4W_P1->setVisible(true);
-//	ui->DMM4W_P2->setVisible(true);
+	//	ui->DMM4W_P2->setVisible(true);
 	ui->DMMI_P1->setVisible(true);
 
 	ui->label_2w->setStyleSheet("QLabel{color:gray;}");
@@ -1474,8 +1480,8 @@ void DMM::setHighlight(int fn) {
 
 	ui->DMM4W_P1->setStyleSheet(Gray15);
 	ui->DMM4W_P12->setStyleSheet(Gray20);
-//	ui->DMM4W_P2->setStyleSheet(Gray15);
-//	ui->DMM4W_P22->setStyleSheet(Gray20);
+	//	ui->DMM4W_P2->setStyleSheet(Gray15);
+	//	ui->DMM4W_P22->setStyleSheet(Gray20);
 
 	ui->label_Amp->setStyleSheet("QLabel{color:gray;}");
 	ui->DMMI_P1->setStyleSheet(Gray15);
@@ -1554,8 +1560,8 @@ void DMM::setHighlight(int fn) {
 		ui->label_2w->setText("4 WIRE");
 		ui->DMM4W_P1->setVisible(false);
 		ui->DMM4W_P12->setStyleSheet(RedProbe);
-//		ui->DMM4W_P2->setVisible(false);
-//		ui->DMM4W_P22->setStyleSheet(BlackProbe);
+		//		ui->DMM4W_P2->setVisible(false);
+		//		ui->DMM4W_P22->setStyleSheet(BlackProbe);
 	}
 }
 
@@ -1893,9 +1899,9 @@ void DMM::on_Null_clicked() {
 }
 
 void DMM::on_pushButton_clicked() {
-/*	QWidget *newWidget = test->getPTAppBckPsoc();
-	newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
-	newWidget->show();*/
+	/*	QWidget *newWidget = test->getPTAppBckPsoc();
+	 newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
+	 newWidget->show();*/
 }
 
 void DMM::on_pushButton_14_clicked() {
@@ -1906,9 +1912,9 @@ void DMM::on_pushButton_14_clicked() {
 }
 
 void DMM::on_pushButton_16_clicked() {
-//    hy3131DMM->on_ReadAll();
-    QWidget *newWidget=DMMTestjig->getDMMSPI();
-                    newWidget->show();
+	//    hy3131DMM->on_ReadAll();
+	QWidget *newWidget = DMMTestjig->getDMMSPI();
+	newWidget->show();
 }
 
 void DMM::on_pushButton_13_clicked() {
@@ -1929,7 +1935,7 @@ void DMM::on_haadcClose_clicked() {
 }
 
 void DMM::on_pushButton_15_clicked() {
-   objDMMAcc->show();
+	objDMMAcc->show();
 
 }
 
@@ -1952,22 +1958,25 @@ void DMM::on_calibrateDisplay_clicked() {
 
 }
 
-void DMM::on_ohmMeter_2_clicked()
-{
-    if(ui->plottingWindow->isVisible())
-        ui->plottingWindow->setVisible(false);
-    else
-        ui->plottingWindow->setVisible(true);
+void DMM::on_ohmMeter_2_clicked() {
+	if (ui->plottingWindow->isVisible())
+		ui->plottingWindow->setVisible(false);
+	else
+		ui->plottingWindow->setVisible(true);
 }
 
-void DMM::on_ohmMeter_3_clicked()
-{
-//    clickedPRSCR();
+void DMM::on_ohmMeter_3_clicked() {
+	//    clickedPRSCR();
 }
 
-void DMM::on_pushButton_2_clicked()
-{
-    unsigned short addr,data;
-    addr=0x29;	data=0x80;	hy3131DMM->writeDMMSPI(addr, data);	usleep(100);
-    addr=0x29;	data=0x84;	hy3131DMM->writeDMMSPI(addr, data);	usleep(100);
+void DMM::on_pushButton_2_clicked() {
+	unsigned short addr, data;
+	addr = 0x29;
+	data = 0x80;
+	hy3131DMM->writeDMMSPI(addr, data);
+	usleep(100);
+	addr = 0x29;
+	data = 0x84;
+	hy3131DMM->writeDMMSPI(addr, data);
+	usleep(100);
 }

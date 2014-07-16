@@ -24,7 +24,7 @@ HY3131DMMLib::HY3131DMMLib(QObject *parent):QObject(parent){
 	if(selAppCard)
 			IAppCard->writeRegister(0x20, DMM_CLK_DIV);//DMM SPI Clock Settings 1MHz
 	else
-			IBackPlane->writeBackPlaneRegister(0x25,DMM_CLK_DIV_BP);
+			IBackPlane->writeBackPlaneRegister(0x20,DMM_CLK_DIV_BP);
 
 	reg0 = reg1 = reg2 = 0;
 	ADCDigital = 0;
@@ -133,13 +133,13 @@ void HY3131DMMLib::Configure(int8_t index){
 		else
 			IBackPlane->writeBackPlaneRegister(0x02, DMM_RLY_SEL_BP);
 	}
-	else if(index==AC5mA||index==AC50mA||index==AC500mA||index==DC5mA||index==DC50mA||index==DC500mA){
+	else if(index==AC50mA||index==AC500mA||index==DC50mA||index==DC500mA){
 		if(selAppCard)
 			IAppCard->writeRegister(0x03, DMM_RLY_SEL);
 		else
 			IBackPlane->writeBackPlaneRegister(0x03, DMM_RLY_SEL_BP);
 	}
-	else if(index==AC500uA||index==DC500uA){
+	else if(index==AC500uA||index==DC500uA||index==AC5mA||index==DC5mA){
 		if(selAppCard)
 			IAppCard->writeRegister(0x04, DMM_RLY_SEL);
 		else

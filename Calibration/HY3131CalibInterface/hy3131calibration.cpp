@@ -644,8 +644,14 @@ void HY3131Calibration::on_saveBut_clicked()
     QFile outFile("/home/HY3131/GainOffset.dat");
     outFile.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream ts(&outFile);
-    for(int i=0;i<31;i++)
-        ts <<m_strRange[i]<<"\t"<<fixed<<m_nGain[i]<<"\t"<<m_nOffset[i]<<endl;
+    for(int i=0;i<31;i++){
+    	if(i==21 ||i==26)
+    		ts <<m_strRange[i]<<"\t"<<fixed<<(m_nGain[i]/1000000)<<"\t"<<m_nOffset[i]<<endl;
+    	else if((i>=22 && i<=30)&& (i!=26) )
+    		ts <<m_strRange[i]<<"\t"<<fixed<<(m_nGain[i]/1000)<<"\t"<<m_nOffset[i]<<endl;
+    	else
+    		ts <<m_strRange[i]<<"\t"<<fixed<<m_nGain[i]<<"\t"<<m_nOffset[i]<<endl;
+    }
     outFile.close();
 
 }
