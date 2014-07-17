@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'DMMSPIWidget.h'
 **
-** Created: Wed Jul 9 11:26:58 2014
+** Created: Thu Jul 17 11:02:25 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

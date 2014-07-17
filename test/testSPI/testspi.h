@@ -59,7 +59,7 @@ protected:
     u_int32_t readADC1(u_int8_t r0,u_int8_t r1,u_int8_t r2);
     u_int32_t readADC2();
     u_int32_t readLPF();
-    u_int64_t readRMS();
+    u_int32_t readRMS();
     u_int32_t readPKHMIN();
     u_int32_t readPKHMAX();
     void writeDMMSPI2(u_int16_t _Address, u_int16_t _Data);
@@ -72,7 +72,7 @@ protected:
     QTimer *ADCTimer;
     u_int8_t reg0,reg1,reg2,reg3,reg4;
     u_int32_t ADCDigital;
-    u_int64_t RMSData;
+    u_int32_t RMSData;
     double ADCAnalog;
     long double RMSAnalog;
 

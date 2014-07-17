@@ -536,7 +536,7 @@ void DMM::onMeasure() {
 			display.retval = display.retvalHY3131;
 			dis->setRange(500);
 		}
-		//*******************Continuity*************************************
+		//*******************Continuity***********************************
 		if (Flag.continuityFlag == 1) {
 			display.retvalHY3131 = hy3131DMM->Measure(CNTY);
 			display.retval = display.retvalHY3131;

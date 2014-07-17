@@ -447,9 +447,9 @@ u_int32_t testSPI::readADC2(){
 u_int32_t testSPI::readLPF(){
 	return (readADC1(0x06,0x07,0x08));
 }
-u_int64_t testSPI::readRMS(){
+u_int32_t testSPI::readRMS(){
 	busyState=true;
-	u_int64_t _reg_t1, _reg_t2, _reg_t3, _reg_t4, _reg_t5, _rms;
+	u_int32_t _reg_t1, _reg_t2, _reg_t3, _reg_t4, _reg_t5, _rms;
 	RMSData = 0;
 
 	//Read Registers
@@ -457,24 +457,24 @@ u_int64_t testSPI::readRMS(){
 	reg1 = (u_int8_t) readDMMSPI2(0x0A) & 0x000000FF;
 	reg2 = (u_int8_t) readDMMSPI2(0x0B) & 0x000000FF;
 	reg3 = (u_int8_t) readDMMSPI2(0x0C) & 0x000000FF;
-	reg4 = (u_int8_t) readDMMSPI2(0x0D) & 0x000000FF;
+//	reg4 = (u_int8_t) readDMMSPI2(0x0D) & 0x000000FF;
 
 	//Shift & Combine Registers
 	_reg_t1 = reg0;
 	_reg_t2 = (reg1 << 8);
 	_reg_t3 = (reg2 << 16);
 	_reg_t4 = (reg3 << 24);
-	_reg_t5 = (reg4 << 32);
+//	_reg_t5 = (reg4 << 32);
 
 
 	_rms = _reg_t1;
 	_rms = _rms | _reg_t2;
 	_rms = _rms | _reg_t3;
 	_rms = _rms | _reg_t4;
-	_rms = _rms | _reg_t5;
+//	_rms = _rms | _reg_t5;
 
 	//Mask 0:37 Registers
-	_rms =_rms & 0x3FFFFFFFFFLL;
+//	_rms =_rms & 0x3FFFFFFFFFLL;
 	busyState=false;
 	qDebug()<<"RMS ADC Read Data:"<<hex<<_rms;
 
