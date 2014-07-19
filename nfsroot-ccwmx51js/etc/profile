@@ -1,0 +1,12 @@
+source /etc/functions.sh
+export $(grep '^DEL_PLATFORM' /etc/version)
+
+export TSLIB_TSDEVICE="/dev/input/ts0"
+#export QWS_MOUSE_PROTO="tslib:/dev/input/ts0 intellimouse:/dev/input/mouseX"
+#export QWS_KEYBOARD="linuxinput:/dev/input/eventX"
+
+# Dual touch (i.MX51 specific)
+_touch_select="$(imx51_touch_selection)"
+[ "${_touch_select}" = "0" ] && export TSLIB_CONFFILE="/etc/ts.conf.ads"
+[ "${_touch_select}" = "1" ] && export TSLIB_CONFFILE="/etc/ts.conf.mxc"
+

@@ -406,7 +406,7 @@ void ShortLocater::checkProbeConnect(){
 
 }
 void ShortLocater::Measure(){
-	checkProbeConnect();
+//	checkProbeConnect();
 /*
 	if(OffsetFlag==true)
 		ui.openShortEnable->setChecked(false);

@@ -134,6 +134,12 @@ void GPIOEvent::create(QString driver, QString device)
                 ::close(kbdFD);
                 break;
             }
+/*            if(strcmp(name,DEV_NAME1) == 0)
+            {
+
+                ::close(kbdFD);
+                break;
+            }*/
             if(strcmp(name,DEV_MOUSE) == 0)
             {
             	mouseFD = kbdFD;
@@ -154,8 +160,8 @@ void GPIOEvent::create(QString driver, QString device)
         printf("Event Name:\n",name);
         if(strcmp(name,DEV_NAME) == 0)
                 connect( m_notify, SIGNAL(activated(int)), this, SLOT(readKbdData()));
-//        else if(strcmp(name,DEV_NAME1) == 0)
-//                connect( m_notify, SIGNAL(activated(int)), this, SLOT(readKbdData()));
+/*        else if(strcmp(name,DEV_NAME1) == 0)
+                connect( m_notify, SIGNAL(activated(int)), this, SLOT(readKbdData()));*/
     } else {
         qWarning("Cannot open '%s' for keypad (%s)",device.toLocal8Bit().constData(), strerror(errno));
         return;
@@ -168,10 +174,10 @@ void GPIOEvent::create(QString driver, QString device)
         ioctl (mouseFD, EVIOCGNAME (sizeof (name)), name);
         if(strcmp(name,DEV_MOUSE) == 0)
             connect( m_notify, SIGNAL(activated(int)), this, SLOT(readMouseData()));
-//        else if(strcmp(name,DEV_NAME1) == 0)
-//                connect( m_notify, SIGNAL(activated(int)), this, SLOT(readKbdData()));
+/*        else if(strcmp(name,DEV_NAME1) == 0)
+                connect( m_notify, SIGNAL(activated(int)), this, SLOT(readKbdData()));*/
     } else {
-        qWarning("Cannot open '%s' for keypad (%s)",device.toLocal8Bit().constData(), strerror(errno));
+        qWarning("Cannot open '%s' for mouse (%s)",device.toLocal8Bit().constData(), strerror(errno));
         return;
     }
 
@@ -237,7 +243,7 @@ void GPIOEvent::readKbdData()
         //qDebug()<<"GPIO Event Interface (0x1E) Status:"<<hex<<l_nRegisterValue;
 
 
-        if(ie->type==9)
+        if(ie->type==0x9)
         	QApplication::postEvent(m_TW,new QEvent(ShutDownEvent));
 
         if(l_nRegisterValue==0x900){

@@ -1,0 +1,9 @@
+# Device nodes for ccmx51js
+# led2 and button2
+/dev/gpio     d    755    0    0
+/dev/gpio/1   c    644    0    0    240   1
+/dev/gpio/73  c    644    0    0    240   73
+/dev/gpio/69  c    644    0    0    240   69
+
+# some apps (OPENGL ES test apps) need /dev/shm
+/dev/shm      d

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VICalibration>
+    <VoltageRange Value="0.6" Slope="1.14471" Constant="0.00626">
+        <Voltage XVoltage="0.33333" YVoltage="0.38777"/>
+        <Voltage XVoltage="0.00000" YVoltage="0.00638"/>
+        <Voltage XVoltage="-0.33333" YVoltage="-0.37536"/>
+    </VoltageRange>
+    <VoltageRange Value="2" Slope="0.98067" Constant="0.00295">
+        <Voltage XVoltage="0.30000" YVoltage="0.29722"/>
+        <Voltage XVoltage="0.00000" YVoltage="0.00282"/>
+        <Voltage XVoltage="-0.30000" YVoltage="-0.29118"/>
+    </VoltageRange>
+    <VoltageRange Value="4" Slope="1.01981" Constant="0.00257">
+        <Voltage XVoltage="0.35000" YVoltage="0.35942"/>
+        <Voltage XVoltage="0.00000" YVoltage="0.00275"/>
+        <Voltage XVoltage="-0.35000" YVoltage="-0.35445"/>
+    </VoltageRange>
+    <VoltageRange Value="8" Slope="0.98561" Constant="0.00235">
+        <Voltage XVoltage="0.37500" YVoltage="0.37207"/>
+        <Voltage XVoltage="0.00000" YVoltage="0.00211"/>
+        <Voltage XVoltage="-0.35000" YVoltage="-0.34249"/>
+    </VoltageRange>
+    <VoltageRange Value="14" Slope="1.00661" Constant="0.00407">
+        <Voltage XVoltage="0.37143" YVoltage="0.37864"/>
+        <Voltage XVoltage="0.00000" YVoltage="0.00269"/>
+        <Voltage XVoltage="-0.37143" YVoltage="-0.36912"/>
+    </VoltageRange>
+</VICalibration>

@@ -1,0 +1,23 @@
+#!/bin/sh
+#===============================================================================
+#
+#  wpasupplicant_post-down
+#
+#  Copyright (C) 2009 by Digi International Inc.
+#  All rights reserved.
+#
+#  This program is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU General Public License version 2 as published by
+#  the Free Software Foundation.
+#
+#  !Description: Shutdown wpa_supplicant
+#
+#===============================================================================
+
+set -e
+
+[ "${IFACE}" != "wlan0" ] && exit 0
+
+pidfile="/var/run/wpa_supplicant.pid"
+[ -e "${pidfile}" ] && start-stop-daemon -K -q -p ${pidfile}
+rm -f ${pidfile}

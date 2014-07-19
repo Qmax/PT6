@@ -172,7 +172,7 @@ protected:
     QmaxPushButton *shlocButton;
     QmaxPushButton *AppButton[APPLICATIONS],*FunctionalButton[FUNCTIONS];
     QmaxPushButton *prevButton,*nextButton;
-    QPushButton *glowButton[6];
+    QPushButton *glowButton[APPLICATIONS];
 	void CreateButton();
 
 	void on_shutDownButton_clicked();

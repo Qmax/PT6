@@ -1,0 +1,11 @@
+export TSLIB_TSDEVICE="/dev/event0"
+export QWS_MOUSE_PROTO="tslib:/dev/event0 Auto"
+export TSLIB_TSDEVICE="/dev/input/ts0"
+export QWS_MOUSE_PROTO="tslib:/dev/input/ts0 Auto"
+export QWS_DISPLAY="/dev/fb0"
+
+export TSLIB_TSDEVICE="/dev/event0"
+export QWS_MOUSE_PROTO="tslib:/dev/event0"
+export TSLIB_TSDEVICE="/dev/input/ts0"
+export QWS_MOUSE_PROTO="tslib:/dev/input/ts0"
+

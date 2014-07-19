@@ -138,6 +138,7 @@ protected:
         	void postAPP(QList<unsigned char>,QList<unsigned char>);
 private:
     QSocketNotifier *m_notify;
+    int shutDownFD;
     int  kbdFD;
     int mouseFD;
     bool shift;

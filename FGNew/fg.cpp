@@ -182,15 +182,18 @@ void FG::doPTKeyFunction() {
 	else if(m_nPTKeyCode==18){qDebug()<<("\nSCALE");
 	if (fineCoarse == true) {
 		fineCoarse = false;
-//		qDebug() << "Coarse Activated";
+		qDebug() << "Coarse Activated";
 		IGPIOPin->illuminateScaleButton(1);
+		ui->fineCoarse->setStyleSheet("QPushButton{background-color:rgba(0,0,0,0);border:1px solid rgba(0,0,0,0);image: url(:/res/coarse.png);}");
 	} else {
 		fineCoarse = true;
-//		qDebug() << "Fine Activated";
+		qDebug() << "Fine Activated";
 		IGPIOPin->illuminateScaleButton(0);
+		ui->fineCoarse->setStyleSheet("QPushButton{background-color:rgba(0,0,0,0);border:1px solid rgba(0,0,0,0);image: url(:/res/fine.png);}");
 	}
 	}
 	else if(m_nPTKeyCode==19){qDebug()<<("\nRUN/STOP");
+		ui->RUNBut->animateClick(1);
 	}
 }
 void FG::InitialiseUIData(){

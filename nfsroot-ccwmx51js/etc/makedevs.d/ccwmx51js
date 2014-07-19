@@ -1,0 +1,22 @@
+# Device nodes for ccwmx51js
+# led2 and button2
+/dev/gpio     d    755    0    0
+/dev/gpio/1   c    644    0    0    240   1
+/dev/gpio/73  c    644    0    0    240   73
+/dev/gpio/74  c    644    0    0    240   74
+/dev/gpio/121 c    644    0    0    240   121
+/dev/gpio/124 c    644    0    0    240   124
+/dev/gpio/125 c    644    0    0    240   125
+/dev/gpio/123 c    644    0    0    240   123
+/dev/gpio/76  c    644    0    0    240   76
+/dev/gpio/93  c    644    0    0    240   93
+/dev/gpio/94  c    644    0    0    240   94
+/dev/gpio/84  c    644    0    0    240   84
+/dev/gpio/95  c    644    0    0    240   95
+/dev/gpio/97  c    644    0    0    240   97   
+/dev/gpio/85  c    644    0    0    240   85
+/dev/gpio/65  c    644    0    0    240   65
+/dev/gpio/66  c    644    0    0    240   66
+	
+# some apps (OPENGL ES test apps) need /dev/shm
+/dev/shm      d

@@ -97,7 +97,7 @@ PortableTester::PortableTester(QWidget *parent) :
 //    IptLib->InitPTLibrary("./PTUI.xml", "MainWindow");
     initialitation();
     IPTKeyEvent->InvokeGPIOEvent(this, "/dev/input/event2", "pt_kpp",&m_nPTKeyCode);
-    //IGPIOEvent->InvokeGPIOEvent(this, "/dev/input/event3", "gpioshutdown", &m_nPTShutDown);
+    IGPIOEvent->InvokeGPIOEvent(this, "/dev/input/event3", "gpioshutdown", &m_nPTShutDown);
     
     qDebug() << "PT win Id" << this->winId();
     isWindowOpen = false;
@@ -234,40 +234,39 @@ void PortableTester::checkButton() {
 }
 void PortableTester::poweroff() {
     qDebug()<<"poweroff";
-    //	IGPIOPin->killSystem();
-    QProcess::execute("poweroff");
+    IGPIOPin->killSystem();
+//    QProcess::execute("poweroff");
     
 }
 void PortableTester::houseKeeping() {
     qDebug()<<"houseKeeping";
-    IPsoc->resetRelays();
     IBackPlane->closeObject();
     IPsoc->closeSerial();
     objTimer->stop();
     
-    delete *AppButtons;
-    delete *FunctionalButtons;
-    delete l_objMainView;
+//    delete *AppButtons;
+//    delete *FunctionalButtons;
+//    delete l_objMainView;
 }
 void PortableTester::CreateButton() {
     
     QString icon = ":/Desktop/app";
     for (int i = 0; i < APPLICATIONS; i++) {
         if(i<APPLICATIONS){
-            //			glowButton[i] = new QPushButton(this);
+//            			glowButton[i] = new QPushButton(this);//~~~~~~~~~~~~~
             AppButton[i] = new QmaxPushButton(i, this);
             
-            //			glowButton[i]->setStyleSheet("border:0.2px rgba(0,0,0,20);border-radius:10px;border-style: outset;background-color: rgba(255,255,255,150);");
-            //			glowButton[i]->setFocusPolicy(Qt::NoFocus);
+//            			glowButton[i]->setStyleSheet("border:0.2px rgba(0,0,0,20);border-radius:10px;border-style: outset;background-color: rgba(255,255,255,150);");//~~~~~~~~~~~~~
+//            			glowButton[i]->setFocusPolicy(Qt::NoFocus);//~~~~~~~~~~~~~
             
-            /*			if (i == 0 || i == 1 || i == 2){
+            			/*if (i == 0 || i == 1 || i == 2){///*~~~~~~~~~~~~~
 				glowButton[i]->setGeometry(172 + (125 * i), 142, 57, 57);
 				AppButton[i]->setGeometry(165 + (125 * i), 135, 70, 70);
 			}
 			if (i == 3 || i == 4 || i == 5){
 				glowButton[i]->setGeometry(172 + (125 * (i - 3)), 237, 57, 57);
 				AppButton[i]->setGeometry(165 + (125 * (i - 3)), 230, 70, 70);
-			}*/
+			}*///*/~~~~~~~~~~~~~
             if (i == 0 || i == 1 || i == 2 || i== 3){
                 
                 AppButton[i]->setGeometry(50*((i+1)*3), 100, 80, 80);
@@ -383,8 +382,8 @@ void PortableTester::on_shutDownButton_clicked() {
         QSplashScreen *splash = new QSplashScreen;
         splash->setPixmap(QPixmap(":/images/image93.png").scaled(790, 590));
         splash->show();
-        QTimer::singleShot(5000, this, SLOT(poweroff()));
         QTimer::singleShot(2000, this, SLOT(houseKeeping()));
+        QTimer::singleShot(5000, this, SLOT(poweroff()));
         
     }
     else if(ret=='N') {
@@ -431,8 +430,8 @@ void PortableTester::closeButtons() {
     //	for (int i = 0; i < FUNCTIONS; i++)
     //		FunctionalButton[i]->setVisible(false);
     
-    //	for(int i=0;i<6;i++)
-    //		glowButton[i]->setVisible(false);
+//    	for(int i=0;i<6;i++)//~~~~~~~~~~~~~~
+//    		glowButton[i]->setVisible(false);//~~~~~~~~~~~~~~
     
     //	prevButton->setVisible(false);
     //	nextButton->setVisible(false);
@@ -461,8 +460,8 @@ void PortableTester::showButtons() {
     //			FunctionalButton[i]->setVisible(true);
     //	}
     
-    //	for(int i=0;i<6;i++)
-    //		glowButton[i]->setVisible(true);
+//    	for(int i=0;i<6;i++)//~~~~~~~~~~~~~~~
+//    		glowButton[i]->setVisible(true);//~~~~~~~~~~~~~
     
     //	if(FunctionalButton[0]->geometry().y()==70){
     //		nextButton->setVisible(true);
@@ -484,11 +483,12 @@ void PortableTester::customEvent(QEvent* e) {
     if(myID==0){
 	if (e->type() == ShutDownEvent) {
             qDebug() << "GPIO Shutdown Application Layer";
-            houseKeeping();
+/*            houseKeeping();
             QSplashScreen *splash = new QSplashScreen;
             splash->setPixmap(QPixmap(":/images/image93.png").scaled(790, 590));
             splash->show();
-            poweroff();
+            poweroff();*/
+            on_shutDownButton_clicked();
 	}
 	if (e->type() == ((QEvent::Type) 5678)) {
             qDebug() << "Portable Tester-PT-Key Event";
@@ -636,9 +636,9 @@ void PortableTester::customEvent(QEvent* e) {
                     m_bTouchFlag == false;
                 }
             } else if (m_nPTKeyCode == 17) {
-                //			clickedPRSCR();
+                			clickedPRSCR();
                 this->close();
-            } else if (m_nPTKeyCode == 18){}
+            } else if (m_nPTKeyCode == 18){this->close();}
             
 	}
 	QEvent(e->type());

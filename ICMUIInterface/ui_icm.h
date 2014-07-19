@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'icm.ui'
 **
-** Created: Wed Jul 9 11:15:53 2014
+** Created: Sat Jul 19 10:51:08 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -2170,7 +2170,7 @@ public:
         label_20->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         frontPanel = new QFrame(centralWidget);
         frontPanel->setObjectName(QString::fromUtf8("frontPanel"));
-        frontPanel->setGeometry(QRect(800, 434, 693, 160));
+        frontPanel->setGeometry(QRect(10, 434, 693, 160));
         frontPanel->setStyleSheet(QString::fromUtf8("QFrame{border:1px solid black; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #dadbff);border-radius:10px;}\n"
 "QLabel{border:1px solid rgba(0,0,0,0);}\n"
 ""));

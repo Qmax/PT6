@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ICalibration>
+    <CurrentRange Value="50" Slope="0.9999500000" Constant="0.0000233333">
+        <Current XCurrent="-0.0100000000" YCurrent="-0.0099720000"/>
+        <Current XCurrent="0.0000000000" YCurrent="0.0000150000"/>
+        <Current XCurrent="0.0100000000" YCurrent="0.0100270000"/>
+    </CurrentRange>
+    <CurrentRange Value="500" Slope="1.0000000000" Constant="0.0000000000">
+        <Current XCurrent="0.0000000000" YCurrent="0.0000000000"/>
+        <Current XCurrent="0.0000000000" YCurrent="0.0000000000"/>
+        <Current XCurrent="0.0000000000" YCurrent="0.0000000000"/>
+    </CurrentRange>
+    <CurrentRange Value="5" Slope="1.0000000000" Constant="0.0000000000">
+        <Current XCurrent="0.0000000000" YCurrent="0.0000000000"/>
+        <Current XCurrent="0.0000000000" YCurrent="0.0000000000"/>
+        <Current XCurrent="0.0000000000" YCurrent="0.0000000000"/>
+    </CurrentRange>
+</ICalibration>

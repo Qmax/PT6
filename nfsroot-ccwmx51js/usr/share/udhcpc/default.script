@@ -1,0 +1,42 @@
+#!/bin/sh
+
+[ -z "$1" ] && echo "Error: should be called from udhcpc" && exit 1
+
+RESOLV_CONF="$(readlink -f /etc/resolv.conf)"
+[ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
+[ -n "$subnet" ] && NETMASK="netmask $subnet"
+
+case "$1" in
+	deconfig)
+		/sbin/ifconfig $interface 0.0.0.0
+		;;
+
+	renew|bound)
+		/sbin/ifconfig $interface $ip $BROADCAST $NETMASK
+
+		if [ -n "$router" ]; then
+			echo "Resetting default routes"
+			while route -n | grep -qs "^0.0.0.0.*${interface}"; do
+				route del default gw 0.0.0.0 dev $interface
+			done
+			for i in $router; do
+				route add default gw $i dev $interface
+			done
+		fi
+
+		new_resolv_conf="$(mktemp)"
+		if [ -n "${dns}" ]; then
+			for i in $dns ; do
+				echo adding dns $i
+				echo nameserver $i >> ${new_resolv_conf}
+			done
+		else	# keep the old nameservers
+			grep '^nameserver' ${RESOLV_CONF} >> ${new_resolv_conf}
+		fi
+		[ -n "$domain" ] && echo search $domain >> ${new_resolv_conf}
+		chmod +r ${new_resolv_conf}
+		mv -f ${new_resolv_conf} ${RESOLV_CONF}
+		;;
+esac
+
+exit 0
