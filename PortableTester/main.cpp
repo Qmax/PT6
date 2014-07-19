@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
 
 	#ifdef Q_WS_QWS
-    QWSServer::setCursorVisible( true );
+    QWSServer::setCursorVisible( false );
     #endif
     PortableTester w;
     w.show();

@@ -849,6 +849,7 @@ void ShortLocater::on_exit_clicked()
 		parentWidget()->close();
 	else
 		msgBox->close();*/
+	BuzzerFlag=false;
 	IBackPlane->closeObject();
 	IPsoc->closeSerial();
 	parentWidget()->close();

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'icm.ui'
 **
-** Created: Sat Jul 19 10:51:08 2014
+** Created: Sat Jul 19 11:04:57 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -1768,6 +1768,10 @@ public:
         label_40->setFont(font6);
         label_40->setStyleSheet(QString::fromUtf8("color:white;"));
         label_40->setAlignment(Qt::AlignCenter);
+        ResistanceRanges->raise();
+        Inductorranges->raise();
+        functionsPanel->raise();
+        CapacitanceRanges->raise();
         debugPanel = new QGroupBox(centralWidget);
         debugPanel->setObjectName(QString::fromUtf8("debugPanel"));
         debugPanel->setGeometry(QRect(10, 434, 692, 160));

@@ -97,7 +97,7 @@ PortableTester::PortableTester(QWidget *parent) :
 //    IptLib->InitPTLibrary("./PTUI.xml", "MainWindow");
     initialitation();
     IPTKeyEvent->InvokeGPIOEvent(this, "/dev/input/event2", "pt_kpp",&m_nPTKeyCode);
-    IGPIOEvent->InvokeGPIOEvent(this, "/dev/input/event3", "gpioshutdown", &m_nPTShutDown);
+//    IGPIOEvent->InvokeGPIOEvent(this, "/dev/input/event3", "gpioshutdown", &m_nPTShutDown);//do not uncomment VI will not work properly
     
     qDebug() << "PT win Id" << this->winId();
     isWindowOpen = false;
