@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed Jul 9 11:12:29 2014
+** Created: Sat Jul 19 14:02:07 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -273,7 +273,7 @@ public:
         PCBox = new QGroupBox(centralWidget);
         PCBox->setObjectName(QString::fromUtf8("PCBox"));
         PCBox->setEnabled(true);
-        PCBox->setGeometry(QRect(710, 32, 80, 89));
+        PCBox->setGeometry(QRect(710, 32, 80, 90));
         PCBox->setFont(font);
         PCBox->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
 "border:1px solid white; \n"

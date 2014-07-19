@@ -731,6 +731,7 @@ void MainWindow::doPTKeyFunction()
         else if (m_nPTKeyCode == 2) {
                         if (/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive != true) {
                                 //buttonPressed(5);
+                        	on_exit_clicked();
                 }
                         //qDebug() << ("\nF5");
                         else if(/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive==true){

@@ -47,6 +47,7 @@ FORMS += dmmaccuracy.ui \
     hy3131calibration.ui \
     daccalibration.ui \
     dmm.ui
-RESOURCES = testSPI.qrc \
+RESOURCES = fp_res.qrc \
+    testSPI.qrc \
     pic.qrc
 DESTDIR = /exports/nfsroot-ccwmx51js/home/

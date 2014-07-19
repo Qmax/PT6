@@ -1442,17 +1442,11 @@ void DMM::buttonPressed(int pPressed) {
 		Beep(false);
 }
 void DMM::setHighlight(int fn) {
-	QString
-			no =
-					"QPushButton{color:white;border: 1px solid #2D5059;border-radius: 20px;background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1A74DB, stop: 0.6 #5293DE, stop:1 #FFFFFF);font:bold; }";
-	QString
-			yes =
-					"QPushButton {color:white;border: 1px solid #2D5059;border-radius: 20px;background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #e59244, stop: 0.6 #ffa500 , stop:1 #FFFFFF);font:bold;}";
+        QString	no ="QPushButton{color:white;border: 1px solid #2D5059;border-radius: 20px;background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1A74DB, stop: 0.6 #5293DE, stop:1 #FFFFFF);font:bold; }";
+        QString	yes ="QPushButton {color:white;border: 1px solid #2D5059;border-radius: 20px;background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #e59244, stop: 0.6 #ffa500 , stop:1 #FFFFFF);font:bold;}";
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	QString RedProbe =
-			"border:1px solid black;border-radius:20px;image: url(:/new/prefix1/red)";
-	QString BlackProbe =
-			"border:1px solid black;border-radius:20px;image: url(:/new/prefix1/black.png)";
+        QString RedProbe ="border:1px solid black;border-radius:20px;image: url(:/new/prefix1/red)";
+        QString BlackProbe ="border:1px solid black;border-radius:20px;image: url(:/new/prefix1/black.png)";
 
 	QString Gray20 = "border:1px solid gray;border-radius:20px;";
 	QString Gray15 = "border:1px solid gray;border-radius:15px;";
