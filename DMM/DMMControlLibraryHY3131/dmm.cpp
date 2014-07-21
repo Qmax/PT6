@@ -199,7 +199,7 @@ void DMM::doPTKeyFunction() {
 }
 void DMM::ToolBox(bool flag) {
 	ui->debugPanel->setVisible(flag);
-	ui->frontPanel->setVisible(!flag);
+	ui->frontPanel_DMM->setVisible(!flag);
 	ui->calibrateDisplay->setVisible(flag);
 	//	ui->HAADC_WIDGET->setVisible(flag);
 	ui->pushButton->setVisible(flag);
@@ -559,9 +559,10 @@ void DMM::onMeasure() {
 		}
 		ui->displayInput->setText(QString::number(display.retval, 'f', 15));
 
-		display.retval2 = display.retval;
+//		display.retval2 = display.retval;
+		display.retval2 = display.retvalHY3131;
 
-		display.retval2 = display.retval2 - nullit;
+		display.retvalHY3131 = display.retval2 - nullit;
 
 		if (ui->calibrateDisplay->isChecked()) {
 			CalibrateDisplay(ui->label_5->text());
@@ -671,7 +672,27 @@ void DMM::onMeasure() {
 			}
 
 			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			dis->setValue(digitsLimiter(display.retvalHY3131));
+			if((ui->label_5->text()==mapResistance.value(2)||ui->label_5->text()==mapResistance.value(5)||ui->label_5->text()==mapCurrent.value(1)||ui->label_5->text()==mapDCVoltage.value(2)||ui->label_5->text()==mapACVoltage.value(2))&&(digitsLimiter(display.retvalHY3131)>5)){
+							dis->setValue("OL");
+			}
+			else if((ui->label_5->text()==mapResistance.value(0)||ui->label_5->text()==mapResistance.value(3)||ui->label_5->text()==mapResistance.value(6)||ui->label_5->text()==mapCurrent.value(2)||ui->label_5->text()==mapDCVoltage.value(0)||ui->label_5->text()==mapDCVoltage.value(3)||ui->label_5->text()==mapACVoltage.value(0)||ui->label_5->text()==mapACVoltage.value(3))&&(digitsLimiter(display.retvalHY3131)>50)){
+				dis->setValue("OL");
+			}
+			else if((ui->label_5->text()==mapResistance.value(1)||ui->label_5->text()==mapResistance.value(4)||ui->label_5->text()==mapCurrent.value(0)||ui->label_5->text()==mapCurrent.value(3)||ui->label_5->text()==mapDCVoltage.value(1)||ui->label_5->text()==mapDCVoltage.value(4)||ui->label_5->text()==mapACVoltage.value(1)||ui->label_5->text()==mapACVoltage.value(4))&&(digitsLimiter(display.retvalHY3131)>500)){
+				dis->setValue("OL");
+			}
+			else if((ui->label_5->text()==mapCurrent.value(4))&&(digitsLimiter(display.retvalHY3131)>3)){
+				dis->setValue("OL");
+			}
+			else if((ui->label_5->text()==mapACVoltage.value(5))&&(digitsLimiter(display.retvalHY3131)>750)){
+				dis->setValue("OL");
+			}
+			else if((ui->label_5->text()==mapDCVoltage.value(4))&&(digitsLimiter(display.retvalHY3131)>1000)){
+				dis->setValue("OL");
+			}
+			else{
+				dis->setValue(digitsLimiter(display.retvalHY3131));
+			}
 			emit DMM2AccuCalc(display.retvalHY3131, ui->label_5->text());
 		}
 		////qDebug()<<"Display.retavl:"<<display.retval;
@@ -916,6 +937,11 @@ void DMM::callMeasure(void) {
 					hy3131DMM->Configure(DC3A);
 				}
 			}
+			if (Flag.acFlag == 1) {
+				setHighlight(2);
+			} else if (Flag.dcFlag == 1) {
+				setHighlight(3);
+			}
 		}
 		//***********************Diode*************************************
 		if (Flag.diodeFlag == 1) {
@@ -1056,10 +1082,12 @@ void DMM::buttonPressed(int pPressed) {
 		} else if (Flag.nullFlag == 0) {
 			Flag.nullFlag = 1;
 			nullit = display.retval2;
+//			nullit = display.retvalHY3131;
 			ui->label_11->setText("NULL");
 		}
 		//qDebug() << "Null Value:" << nullit;
-		display.retval2 = display.retval - nullit;
+//		display.retval2 = display.retval - nullit;
+		display.retvalHY3131 = display.retvalHY3131 - nullit;
 
 		if (Flag.diodeFlag == 1)
 			ui->textEdit_5->setText("Diode");
@@ -1182,6 +1210,8 @@ void DMM::buttonPressed(int pPressed) {
 	case 11: {
 		////qDebug()<<"case Exit";
 		//		if (!m_nADCtimer->isActive()) {
+		IGPIOPin->illuminateRunStopButton(1);
+		Beep(false);
 		IBackPlane->closeObject();
 		parentWidget()->close();
 		//		} else {
@@ -1228,10 +1258,10 @@ void DMM::buttonPressed(int pPressed) {
 
 			if (nCurrentPrev == nCurrentCur)
 				nCurrentPrev--;
-			if (nCurrentPrev < 1)
+			if (nCurrentPrev < 3)
 				nCurrentPrev++;
 			else
-				nCurrentPrev = 1;
+				nCurrentPrev = 3;
 			if (nCurrentCur < 4)
 				nCurrentCur++;
 			else
@@ -1459,29 +1489,6 @@ void DMM::setHighlight(int fn) {
 	ui->Diode->setStyleSheet(no);
 	ui->r2w->setStyleSheet(no);
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	ui->DMM2W_P1->setVisible(true);
-	ui->DMM2W_P2->setVisible(true);
-	ui->DMM4W_P1->setVisible(true);
-	//	ui->DMM4W_P2->setVisible(true);
-	ui->DMMI_P1->setVisible(true);
-
-	ui->label_2w->setStyleSheet("QLabel{color:gray;}");
-	ui->DMM2W_P1->setStyleSheet(Gray15);
-	ui->DMM2W_P12->setStyleSheet(Gray20);
-	ui->DMM2W_P2->setStyleSheet(Gray15);
-	ui->DMM2W_P22->setStyleSheet(Gray20);
-
-	ui->DMM4W_P1->setStyleSheet(Gray15);
-	ui->DMM4W_P12->setStyleSheet(Gray20);
-	//	ui->DMM4W_P2->setStyleSheet(Gray15);
-	//	ui->DMM4W_P22->setStyleSheet(Gray20);
-
-	ui->label_Amp->setStyleSheet("QLabel{color:gray;}");
-	ui->DMMI_P1->setStyleSheet(Gray15);
-	ui->DMMI_P12->setStyleSheet(Gray20);
-
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	switch (fn) {
 	case 0:
 		ui->vac->setStyleSheet(yes);
@@ -1524,38 +1531,42 @@ void DMM::setHighlight(int fn) {
 	case 14:
 		break;
 	}
-	if (fn == 0 || fn == 1) {
-		ui->label_2w->setStyleSheet("QLabel{color:black;}");
-		ui->DMM2W_P1->setVisible(false);
-		ui->DMM2W_P12->setStyleSheet(RedProbe);
-		ui->DMM2W_P2->setVisible(false);
-		ui->DMM2W_P22->setStyleSheet(BlackProbe);
+	{
+		ui->fp_HI_inner->setVisible(true);
+		ui->fp_HI_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+		ui->fp_HI_outer->setGeometry(25,27,41,41);
+		ui->fp_LO_inner->setVisible(true);
+		ui->fp_LO_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+		ui->fp_LO_outer->setGeometry(75,27,41,41);
+		ui->fp_mA_inner->setVisible(true);
+		ui->fp_mA_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+		ui->fp_mA_outer->setGeometry(125,27,41,41);
+		ui->fp_A_inner->setVisible(true);
+		ui->fp_A_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+		ui->fp_A_outer->setGeometry(235,27,41,41);
+
+	}
+	if (fn == 0 || fn == 1 || fn == 5 || fn == 6 || fn == 7) {
+		ui->fp_HI_inner->setVisible(false);
+		ui->fp_HI_outer->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/red.png);");
+		ui->fp_HI_outer->setGeometry(25,27,42,41);
+		ui->fp_LO_inner->setVisible(false);
+		ui->fp_LO_outer->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/black.png);");
+		ui->fp_LO_outer->setGeometry(74,23,46,50);
+
 	} else if (fn == 2 || fn == 3) {
-		ui->label_Amp->setStyleSheet("QLabel{color:black;}");
-		ui->DMMI_P1->setVisible(false);
-		ui->DMMI_P12->setStyleSheet(RedProbe);
-		ui->DMM2W_P2->setVisible(false);
-		ui->DMM2W_P22->setStyleSheet(BlackProbe);
-	} else if (fn == 7 || fn == 5 || fn == 6) {
-		ui->label_2w->setStyleSheet("QLabel{color:black;}");
-		ui->DMM2W_P1->setVisible(false);
-		ui->DMM2W_P12->setStyleSheet(RedProbe);
-		ui->DMM2W_P2->setVisible(false);
-		ui->DMM2W_P22->setStyleSheet(BlackProbe);
-
-		ui->label_2w->setText("R");
-	} else if (fn == 8) {
-		ui->label_2w->setStyleSheet("QLabel{color:black;}");
-		ui->DMM2W_P1->setVisible(false);
-		ui->DMM2W_P12->setStyleSheet(RedProbe);
-		ui->DMM2W_P2->setVisible(false);
-		ui->DMM2W_P22->setStyleSheet(BlackProbe);
-
-		ui->label_2w->setText("4 WIRE");
-		ui->DMM4W_P1->setVisible(false);
-		ui->DMM4W_P12->setStyleSheet(RedProbe);
-		//		ui->DMM4W_P2->setVisible(false);
-		//		ui->DMM4W_P22->setStyleSheet(BlackProbe);
+		if(ui->label_5->text()=="3A"){
+			ui->fp_A_inner->setVisible(false);
+			ui->fp_A_outer->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/red.png);");
+			ui->fp_A_outer->setGeometry(235,27,42,41);
+		}else{
+			ui->fp_mA_inner->setVisible(false);
+			ui->fp_mA_outer->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/red.png);");
+			ui->fp_mA_outer->setGeometry(125,27,42,41);
+		}
+		ui->fp_LO_inner->setVisible(false);
+		ui->fp_LO_outer->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/black.png);");
+		ui->fp_LO_outer->setGeometry(74,23,46,50);
 	}
 }
 
@@ -1816,9 +1827,7 @@ void DMM::on_voltMeter_clicked() {
 	ui->r2w->setVisible(false);
 	ui->Diode->setVisible(false);
 	ui->Continuity->setVisible(false);
-	ui->selectFrame->setGeometry(701, 50, 10, 60);
-
-	ui->label_2w->setText("VOLT");
+	ui->selectFrame->setGeometry(701, 54, 10, 60);
 
 	ui->voltBox->setStyleSheet(
 			"QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}");
@@ -1840,9 +1849,7 @@ void DMM::on_ampMeter_clicked() {
 	ui->r2w->setVisible(false);
 	ui->Diode->setVisible(false);
 	ui->Continuity->setVisible(false);
-	ui->selectFrame->setGeometry(701, 140, 10, 60);
-
-	ui->label_2w->setText("VOLT");
+	ui->selectFrame->setGeometry(701, 154, 10, 60);
 
 	ui->voltBox->setStyleSheet(
 			"QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}");
@@ -1864,9 +1871,7 @@ void DMM::on_ohmMeter_clicked() {
 	ui->r2w->setVisible(true);
 	ui->Diode->setVisible(true);
 	ui->Continuity->setVisible(true);
-	ui->selectFrame->setGeometry(701, 230, 10, 60);
-
-	ui->label_2w->setText("R");
+	ui->selectFrame->setGeometry(701, 254, 10, 60);
 
 	ui->voltBox->setStyleSheet(
 			"QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}");

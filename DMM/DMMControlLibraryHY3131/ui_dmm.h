@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dmm.ui'
 **
-** Created: Sat Jul 19 17:02:56 2014
+** Created: Mon Jul 21 15:49:34 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -23,6 +23,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QTextEdit>
 #include <QtGui/QWidget>
+#include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -164,6 +165,8 @@ public:
     QLabel *fp_REF_label;
     QLabel *fp_GND_label;
     QFrame *fp_GND;
+    QFrame *plottingWindow;
+    QCustomPlot *customPlot;
 
     void setupUi(QWidget *DMM)
     {
@@ -1212,22 +1215,12 @@ public:
         lineEdit->setGeometry(QRect(932, 160, 41, 21));
         voltBox = new QGroupBox(DMM);
         voltBox->setObjectName(QString::fromUtf8("voltBox"));
-        voltBox->setGeometry(QRect(710, 32, 80, 90));
+        voltBox->setGeometry(QRect(710, 33, 80, 100));
         voltBox->setFont(font1);
-        voltBox->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
-"border:1px solid white; \n"
-"/*background-color: qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);*/\n"
-"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"                                       stop: 0 #3a5976, stop: 1 #000000);\n"
-"border-radius:10px;\n"
-"border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); \n"
-"border-bottom-right-radius: 0px;\n"
-"border-bottom-left-radius: 0px;\n"
-"}\n"
-""));
+        voltBox->setStyleSheet(QString::fromUtf8("QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}"));
         voltMeter = new QPushButton(voltBox);
         voltMeter->setObjectName(QString::fromUtf8("voltMeter"));
-        voltMeter->setGeometry(QRect(8, 18, 64, 64));
+        voltMeter->setGeometry(QRect(8, 20, 64, 64));
         voltMeter->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
         QIcon icon2;
@@ -1236,7 +1229,7 @@ public:
         voltMeter->setIconSize(QSize(55, 55));
         selectFrame = new QFrame(DMM);
         selectFrame->setObjectName(QString::fromUtf8("selectFrame"));
-        selectFrame->setGeometry(QRect(701, 50, 10, 60));
+        selectFrame->setGeometry(QRect(701, 54, 10, 60));
         selectFrame->setStyleSheet(QString::fromUtf8("/*background-color: qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);*/\n"
 "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "                                       stop: 0 #3a5976, stop: 1 #000000);\n"
@@ -1246,10 +1239,12 @@ public:
         selectFrame->setFrameShadow(QFrame::Raised);
         AmpBox = new QGroupBox(DMM);
         AmpBox->setObjectName(QString::fromUtf8("AmpBox"));
-        AmpBox->setGeometry(QRect(710, 121, 80, 90));
+        AmpBox->setGeometry(QRect(710, 132, 80, 100));
         AmpBox->setFont(font1);
         AmpBox->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
-"border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);border-bottom-right-radius: 0px;\n"
+"border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);border- border-top-left-radius: 0px;\n"
+"border-top:1px solid gray;\n"
+";border-bottom-right-radius: 0px;\n"
 " border-bottom-left-radius: 0px;\n"
 "border-top:1px solid gray; border-top-right-radius: 0px;\n"
 " border-top-left-radius: 0px;\n"
@@ -1257,7 +1252,7 @@ public:
 ""));
         ampMeter = new QPushButton(AmpBox);
         ampMeter->setObjectName(QString::fromUtf8("ampMeter"));
-        ampMeter->setGeometry(QRect(8, 17, 64, 64));
+        ampMeter->setGeometry(QRect(8, 19, 64, 64));
         ampMeter->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
         QIcon icon3;
@@ -1266,7 +1261,7 @@ public:
         ampMeter->setIconSize(QSize(55, 55));
         OhmBox = new QGroupBox(DMM);
         OhmBox->setObjectName(QString::fromUtf8("OhmBox"));
-        OhmBox->setGeometry(QRect(710, 211, 80, 90));
+        OhmBox->setGeometry(QRect(710, 232, 80, 100));
         OhmBox->setFont(font1);
         OhmBox->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
 "border:1px solid white; background-color: #dadbde;border-radius:10px;\n"
@@ -1281,7 +1276,7 @@ public:
 ""));
         ohmMeter = new QPushButton(OhmBox);
         ohmMeter->setObjectName(QString::fromUtf8("ohmMeter"));
-        ohmMeter->setGeometry(QRect(8, 15, 64, 64));
+        ohmMeter->setGeometry(QRect(8, 20, 64, 64));
         ohmMeter->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
         QIcon icon4;
@@ -1290,7 +1285,7 @@ public:
         ohmMeter->setIconSize(QSize(55, 55));
         ExitBox = new QGroupBox(DMM);
         ExitBox->setObjectName(QString::fromUtf8("ExitBox"));
-        ExitBox->setGeometry(QRect(710, 480, 80, 112));
+        ExitBox->setGeometry(QRect(710, 532, 80, 61));
         ExitBox->setFont(font1);
         ExitBox->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
 "border:1px solid white; background-color: #dadbde;border-radius:10px;\n"
@@ -1301,17 +1296,16 @@ public:
 ""));
         exit = new QPushButton(ExitBox);
         exit->setObjectName(QString::fromUtf8("exit"));
-        exit->setGeometry(QRect(2, 14, 64, 80));
+        exit->setGeometry(QRect(5, 0, 64, 70));
         exit->setFocusPolicy(Qt::NoFocus);
-        exit->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0);color:blue;}\n"
+        exit->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0);color:blue;\n"
+"	image: url(:/logout-icon.png);\n"
+"}\n"
 ""));
-        QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/logout-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        exit->setIcon(icon5);
         exit->setIconSize(QSize(70, 70));
         OhmBox_2 = new QGroupBox(DMM);
         OhmBox_2->setObjectName(QString::fromUtf8("OhmBox_2"));
-        OhmBox_2->setGeometry(QRect(710, 300, 80, 90));
+        OhmBox_2->setGeometry(QRect(710, 332, 80, 100));
         OhmBox_2->setFont(font1);
         OhmBox_2->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
 "border:1px solid white; background-color: #dadbde;border-radius:10px;\n"
@@ -1326,16 +1320,16 @@ public:
 ""));
         ohmMeter_2 = new QPushButton(OhmBox_2);
         ohmMeter_2->setObjectName(QString::fromUtf8("ohmMeter_2"));
-        ohmMeter_2->setGeometry(QRect(8, 15, 64, 64));
+        ohmMeter_2->setGeometry(QRect(8, 20, 64, 64));
         ohmMeter_2->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/new/prefix1/graph.png"), QSize(), QIcon::Normal, QIcon::Off);
-        ohmMeter_2->setIcon(icon6);
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8(":/new/prefix1/graph.png"), QSize(), QIcon::Normal, QIcon::Off);
+        ohmMeter_2->setIcon(icon5);
         ohmMeter_2->setIconSize(QSize(85, 85));
         OhmBox_3 = new QGroupBox(DMM);
         OhmBox_3->setObjectName(QString::fromUtf8("OhmBox_3"));
-        OhmBox_3->setGeometry(QRect(710, 390, 80, 90));
+        OhmBox_3->setGeometry(QRect(710, 432, 80, 100));
         OhmBox_3->setFont(font1);
         OhmBox_3->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
 "border:1px solid white; background-color: #dadbde;border-radius:10px;\n"
@@ -1350,7 +1344,7 @@ public:
 ""));
         ohmMeter_3 = new QPushButton(OhmBox_3);
         ohmMeter_3->setObjectName(QString::fromUtf8("ohmMeter_3"));
-        ohmMeter_3->setGeometry(QRect(8, 15, 64, 64));
+        ohmMeter_3->setGeometry(QRect(8, 20, 64, 64));
         ohmMeter_3->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
         ohmMeter_3->setIconSize(QSize(55, 55));
@@ -1373,45 +1367,45 @@ public:
         pushButton_16->setGeometry(QRect(250, 40, 50, 50));
         pushButton_16->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon7;
-        icon7.addFile(QString::fromUtf8(":/Letter-R-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_16->setIcon(icon7);
+        QIcon icon6;
+        icon6.addFile(QString::fromUtf8(":/Letter-R-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_16->setIcon(icon6);
         pushButton_16->setIconSize(QSize(48, 48));
         pushButton_14 = new QPushButton(debugPanel);
         pushButton_14->setObjectName(QString::fromUtf8("pushButton_14"));
         pushButton_14->setGeometry(QRect(90, 40, 50, 50));
         pushButton_14->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon8;
-        icon8.addFile(QString::fromUtf8(":/Letter-C-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_14->setIcon(icon8);
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8(":/Letter-C-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_14->setIcon(icon7);
         pushButton_14->setIconSize(QSize(48, 48));
         pushButton = new QPushButton(debugPanel);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(330, 40, 50, 50));
         pushButton->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon9;
-        icon9.addFile(QString::fromUtf8(":/Control-Panel-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton->setIcon(icon9);
+        QIcon icon8;
+        icon8.addFile(QString::fromUtf8(":/Control-Panel-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton->setIcon(icon8);
         pushButton->setIconSize(QSize(48, 48));
         pushButton_13 = new QPushButton(debugPanel);
         pushButton_13->setObjectName(QString::fromUtf8("pushButton_13"));
         pushButton_13->setGeometry(QRect(170, 40, 50, 50));
         pushButton_13->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon10;
-        icon10.addFile(QString::fromUtf8(":/Letter-G-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_13->setIcon(icon10);
+        QIcon icon9;
+        icon9.addFile(QString::fromUtf8(":/Letter-G-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_13->setIcon(icon9);
         pushButton_13->setIconSize(QSize(48, 48));
         pushButton_15 = new QPushButton(debugPanel);
         pushButton_15->setObjectName(QString::fromUtf8("pushButton_15"));
         pushButton_15->setGeometry(QRect(10, 40, 50, 50));
         pushButton_15->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon11;
-        icon11.addFile(QString::fromUtf8(":/Letter-A-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_15->setIcon(icon11);
+        QIcon icon10;
+        icon10.addFile(QString::fromUtf8(":/Letter-A-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_15->setIcon(icon10);
         pushButton_15->setIconSize(QSize(48, 48));
         calibrateDisplay = new QCheckBox(debugPanel);
         calibrateDisplay->setObjectName(QString::fromUtf8("calibrateDisplay"));
@@ -2010,6 +2004,31 @@ public:
 "}"));
         fp_GND->setFrameShape(QFrame::StyledPanel);
         fp_GND->setFrameShadow(QFrame::Raised);
+        plottingWindow = new QFrame(DMM);
+        plottingWindow->setObjectName(QString::fromUtf8("plottingWindow"));
+        plottingWindow->setGeometry(QRect(10, 434, 693, 160));
+        plottingWindow->setStyleSheet(QString::fromUtf8("QFrame{border:1px solid black; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #dadbff);border-radius:10px;}\n"
+"QLabel{border:1px solid rgba(0,0,0,0);}\n"
+""));
+        plottingWindow->setFrameShape(QFrame::StyledPanel);
+        plottingWindow->setFrameShadow(QFrame::Raised);
+        customPlot = new QCustomPlot(plottingWindow);
+        customPlot->setObjectName(QString::fromUtf8("customPlot"));
+        customPlot->setGeometry(QRect(6, 10, 690, 147));
+        plottingWindow->raise();
+        inputPanel->raise();
+        displayPanel->raise();
+        textEdit->raise();
+        lineEdit->raise();
+        voltBox->raise();
+        AmpBox->raise();
+        OhmBox->raise();
+        ExitBox->raise();
+        OhmBox_2->raise();
+        OhmBox_3->raise();
+        debugPanel->raise();
+        frontPanel_DMM->raise();
+        selectFrame->raise();
 
         retranslateUi(DMM);
 

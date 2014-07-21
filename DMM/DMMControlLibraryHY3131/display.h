@@ -5,7 +5,6 @@
 #include <QFrame>
 #include <QLabel>
 #include <QWidget>
-
 #include <math.h>
 #include <limits.h>
 #include <assert.h>
@@ -94,7 +93,7 @@ public:
 
 		QString l_strDecimelValue;
 		QString Inf=QChar(0x221E);
-		int l_intValue, Q, R;
+		int l_intValue=0, Q=0, R=0;
 		double l_nDecimelValue = 0;
 
 	    if (l_nValue !=l_nValue){
@@ -109,30 +108,35 @@ public:
 		else
 		{
 			if (l_nValue < 0){
-				l_nValue = l_nValue * -1;
+				l_nValue = fabs(l_nValue);
 				sign->setVisible(true);
 			}else{
 				sign->setVisible(false);
 			}
-
+			qDebug()<<"after fabs:"<<l_intValue<<"\t"<<l_nValue;;
 			for (int i = 0; i < 6; i++) {
 				digits[i]->setText("0");
 			}
 
-			if (l_nValue != 0)
+/*			if (l_nValue != 0)
 				l_intValue = floor(l_nValue);
 			else if(l_nValue==0)
-				l_intValue=0;
-
-			if ((m_intRange) >= 1 && (m_intRange) < 10) {
-				if (l_intValue >= 10)
+				l_intValue=0;*/
+//			l_intValue  = ((l_nValue >= 0) ? (int)(l_nValue + 0.5) : (int)(l_nValue - 0.5));
+			l_intValue = qRound(l_nValue);
+			qDebug()<<"after qRound:"<<l_intValue<<"\t"<<l_nValue;
+//_________________________________________________________________________________________
+			if (m_intRange == 3) {
+				if (l_intValue > 3)
 					setValue("OL");
 				else {
 					digits[0]->setText(QString::number(l_intValue, 10));
 					digits[1]->setText(".");
-					l_nDecimelValue = l_nValue - l_intValue;
-					l_strDecimelValue = QString::number(l_nDecimelValue);
-//					qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
+
+					l_nDecimelValue = l_nValue - (double)l_intValue;
+					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
+
+					qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[2]->setText(l_strDecimelValue.at(2));
@@ -155,8 +159,43 @@ public:
 						digits[5]->setText("0");
 
 				}
-			} else if ((m_intRange / 10) >= 1 && (m_intRange / 10) < 10) {
-				if (l_intValue >= 100)
+			}
+//_________________________________________________________________________________________
+			else if (m_intRange == 5) {
+				if (l_intValue >5)
+					setValue("OL");
+				else {
+					digits[0]->setText(QString::number(l_intValue, 10));
+					digits[1]->setText(".");
+					l_nDecimelValue = l_nValue - (double)l_intValue;
+					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
+					qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
+
+					if (l_strDecimelValue.length() >= 3)
+						digits[2]->setText(l_strDecimelValue.at(2));
+					else
+						digits[2]->setText("0");
+
+					if (l_strDecimelValue.length() >= 4)
+						digits[3]->setText(l_strDecimelValue.at(3));
+					else
+						digits[3]->setText("0");
+
+					if (l_strDecimelValue.length() >= 5)
+						digits[4]->setText(l_strDecimelValue.at(4));
+					else
+						digits[4]->setText("0");
+
+					if (l_strDecimelValue.length() >= 6)
+						digits[5]->setText(l_strDecimelValue.at(5));
+					else
+						digits[5]->setText("0");
+
+				}
+			}
+//_________________________________________________________________________________________
+			else if (m_intRange == 50) {
+				if (l_intValue >50)
 					setValue("OL");
 				else {
 					Q = l_intValue / 10;
@@ -164,9 +203,10 @@ public:
 					digits[0]->setText(QString::number(Q, 10));
 					digits[1]->setText(QString::number(R, 10));
 					digits[2]->setText(".");
-					l_nDecimelValue = l_nValue - l_intValue;
-					l_strDecimelValue = QString::number(l_nDecimelValue);
-//					qDebug() << "2-l_strDecimelValue->" << l_strDecimelValue;
+
+					l_nDecimelValue = l_nValue - (double)l_intValue;
+					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
+					qDebug() << "2-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[3]->setText(l_strDecimelValue.at(2));
@@ -184,21 +224,26 @@ public:
 						digits[5]->setText("0");
 
 				}
-			} else if ((m_intRange / 100) >= 1 && (m_intRange / 100) < 10) {
-				if (l_intValue >= 1000)
+			}
+//_________________________________________________________________________________________
+			else if (m_intRange == 500) {
+				if (l_intValue >500)
 					setValue("OL");
 				else {
 					Q = l_intValue / 100;
 					R = l_intValue % 100;
 					digits[0]->setText(QString::number(Q, 10));
+
 					Q = R / 10;
 					R = R % 10;
 					digits[1]->setText(QString::number(Q, 10));
+
 					digits[2]->setText(QString::number(R, 10));
 					digits[3]->setText(".");
-					l_nDecimelValue = l_nValue - l_intValue;
-					l_strDecimelValue = QString::number(l_nDecimelValue);
-//					qDebug() << "3-l_strDecimelValue->" << l_strDecimelValue;
+
+					l_nDecimelValue = l_nValue - (double)l_intValue;
+					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
+					qDebug() << "3-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[4]->setText(l_strDecimelValue.at(2));
@@ -211,48 +256,68 @@ public:
 						digits[5]->setText("0");
 
 				}
-			} else if ((m_intRange / 1000) >= 1 && (m_intRange / 1000) < 10) {
-				if (l_intValue >= 10000)
+			}
+//_________________________________________________________________________________________
+			else if (m_intRange == 750) {
+				if (l_intValue >750)
+					setValue("OL");
+				else {
+					Q = l_intValue / 100;
+					R = l_intValue % 100;
+					digits[0]->setText(QString::number(Q, 10));
+
+					Q = R / 10;
+					R = R % 10;
+					digits[1]->setText(QString::number(Q, 10));
+
+					digits[2]->setText(QString::number(R, 10));
+					digits[3]->setText(".");
+
+					l_nDecimelValue = l_nValue - (double)l_intValue;
+					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
+					qDebug() << "3-l_strDecimelValue->" << l_strDecimelValue;
+
+					if (l_strDecimelValue.length() >= 3)
+						digits[4]->setText(l_strDecimelValue.at(2));
+					else
+						digits[4]->setText("0");
+
+					if (l_strDecimelValue.length() >= 4)
+						digits[5]->setText(l_strDecimelValue.at(3));
+					else
+						digits[5]->setText("0");
+
+				}
+			}
+//_________________________________________________________________________________________
+			else if (m_intRange ==1000) {
+				if (l_intValue > 10000)
 					setValue("OL");
 				else {
 					Q = l_intValue / 1000;
 					R = l_intValue % 1000;
 					digits[0]->setText(QString::number(Q, 10));
+
 					Q = R / 100;
 					R = R % 100;
 					digits[1]->setText(QString::number(Q, 10));
+
 					Q = R / 10;
 					R = R % 10;
 					digits[2]->setText(QString::number(Q, 10));
+
 					digits[3]->setText(QString::number(R, 10));
 					digits[4]->setText(".");
-					l_nDecimelValue = l_nValue - l_intValue;
-					l_strDecimelValue = QString::number(l_nDecimelValue);
-//					qDebug() << "4-l_strDecimelValue->" << l_strDecimelValue;
+
+					l_nDecimelValue = l_nValue - (double)l_intValue;
+					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
+					qDebug() << "4-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[5]->setText(l_strDecimelValue.at(2));
 					else
 						digits[5]->setText("0");
 
-				}
-			} else if ((m_intRange / 10000) >= 1 && (m_intRange / 10000) < 10) {
-				if (l_intValue >= 100000)
-					setValue("OL");
-				else {
-					Q = l_intValue / 10000;
-					R = l_intValue % 10000;
-					digits[0]->setText(QString::number(Q, 10));
-					Q = R / 1000;
-					R = R % 1000;
-					digits[1]->setText(QString::number(Q, 10));
-					Q = R / 100;
-					R = R % 100;
-					digits[2]->setText(QString::number(Q, 10));
-					Q = R / 10;
-					R = R % 10;
-					digits[3]->setText(QString::number(Q, 10));
-					digits[4]->setText(QString::number(R, 10));
 				}
 			}
 		}

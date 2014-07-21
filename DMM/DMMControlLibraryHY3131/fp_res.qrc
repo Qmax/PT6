@@ -10,5 +10,6 @@
         <file>fp_images/gnd.png</file>
         <file>fp_images/usb.png</file>
         <file>fp_images/fuse.png</file>
+        <file>fp_images/bnc.png</file>
     </qresource>
 </RCC>

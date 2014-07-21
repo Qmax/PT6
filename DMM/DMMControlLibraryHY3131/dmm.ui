@@ -4206,9 +4206,9 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>710</x>
-     <y>32</y>
+     <y>33</y>
      <width>80</width>
-     <height>90</height>
+     <height>100</height>
     </rect>
    </property>
    <property name="font">
@@ -4217,17 +4217,7 @@ p, li { white-space: pre-wrap; }
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QGroupBox{
-border:1px solid white; 
-/*background-color: qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);*/
-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                       stop: 0 #3a5976, stop: 1 #000000);
-border-radius:10px;
-border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); 
-border-bottom-right-radius: 0px;
-border-bottom-left-radius: 0px;
-}
-</string>
+    <string notr="true">QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}</string>
    </property>
    <property name="title">
     <string/>
@@ -4236,7 +4226,7 @@ border-bottom-left-radius: 0px;
     <property name="geometry">
      <rect>
       <x>8</x>
-      <y>18</y>
+      <y>20</y>
       <width>64</width>
       <height>64</height>
      </rect>
@@ -4264,7 +4254,7 @@ border-bottom-left-radius: 0px;
    <property name="geometry">
     <rect>
      <x>701</x>
-     <y>50</y>
+     <y>54</y>
      <width>10</width>
      <height>60</height>
     </rect>
@@ -4287,9 +4277,9 @@ border-bottom:1px solid white;</string>
    <property name="geometry">
     <rect>
      <x>710</x>
-     <y>121</y>
+     <y>132</y>
      <width>80</width>
-     <height>90</height>
+     <height>100</height>
     </rect>
    </property>
    <property name="font">
@@ -4299,7 +4289,9 @@ border-bottom:1px solid white;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">QGroupBox{
-border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);border-bottom-right-radius: 0px;
+border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);border- border-top-left-radius: 0px;
+border-top:1px solid gray;
+;border-bottom-right-radius: 0px;
  border-bottom-left-radius: 0px;
 border-top:1px solid gray; border-top-right-radius: 0px;
  border-top-left-radius: 0px;
@@ -4313,7 +4305,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
     <property name="geometry">
      <rect>
       <x>8</x>
-      <y>17</y>
+      <y>19</y>
       <width>64</width>
       <height>64</height>
      </rect>
@@ -4341,9 +4333,9 @@ border-top:1px solid gray; border-top-right-radius: 0px;
    <property name="geometry">
     <rect>
      <x>710</x>
-     <y>211</y>
+     <y>232</y>
      <width>80</width>
-     <height>90</height>
+     <height>100</height>
     </rect>
    </property>
    <property name="font">
@@ -4371,7 +4363,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
     <property name="geometry">
      <rect>
       <x>8</x>
-      <y>15</y>
+      <y>20</y>
       <width>64</width>
       <height>64</height>
      </rect>
@@ -4399,9 +4391,9 @@ border-top:1px solid gray; border-top-right-radius: 0px;
    <property name="geometry">
     <rect>
      <x>710</x>
-     <y>480</y>
+     <y>532</y>
      <width>80</width>
-     <height>112</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="font">
@@ -4424,25 +4416,23 @@ border-top:1px solid gray;
    <widget class="QPushButton" name="exit">
     <property name="geometry">
      <rect>
-      <x>2</x>
-      <y>14</y>
+      <x>5</x>
+      <y>0</y>
       <width>64</width>
-      <height>80</height>
+      <height>70</height>
      </rect>
     </property>
     <property name="focusPolicy">
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0);color:blue;}
+     <string notr="true">QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0);color:blue;
+	image: url(:/logout-icon.png);
+}
 </string>
     </property>
     <property name="text">
      <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="pic.qrc">
-      <normaloff>:/logout-icon.png</normaloff>:/logout-icon.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -4456,9 +4446,9 @@ border-top:1px solid gray;
    <property name="geometry">
     <rect>
      <x>710</x>
-     <y>300</y>
+     <y>332</y>
      <width>80</width>
-     <height>90</height>
+     <height>100</height>
     </rect>
    </property>
    <property name="font">
@@ -4486,7 +4476,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
     <property name="geometry">
      <rect>
       <x>8</x>
-      <y>15</y>
+      <y>20</y>
       <width>64</width>
       <height>64</height>
      </rect>
@@ -4514,9 +4504,9 @@ border-top:1px solid gray; border-top-right-radius: 0px;
    <property name="geometry">
     <rect>
      <x>710</x>
-     <y>390</y>
+     <y>432</y>
      <width>80</width>
-     <height>90</height>
+     <height>100</height>
     </rect>
    </property>
    <property name="font">
@@ -4544,7 +4534,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
     <property name="geometry">
      <rect>
       <x>8</x>
-      <y>15</y>
+      <y>20</y>
       <width>64</width>
       <height>64</height>
      </rect>
@@ -6386,9 +6376,63 @@ background-color: rgb(0, 0, 0,0);
     </property>
    </widget>
   </widget>
+  <widget class="QFrame" name="plottingWindow">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>434</y>
+     <width>693</width>
+     <height>160</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QFrame{border:1px solid black; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #dadbff);border-radius:10px;}
+QLabel{border:1px solid rgba(0,0,0,0);}
+</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QCustomPlot" name="customPlot" native="true">
+    <property name="geometry">
+     <rect>
+      <x>6</x>
+      <y>10</y>
+      <width>690</width>
+      <height>147</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <zorder>plottingWindow</zorder>
+  <zorder>inputPanel</zorder>
+  <zorder>displayPanel</zorder>
+  <zorder>textEdit</zorder>
+  <zorder>lineEdit</zorder>
+  <zorder>voltBox</zorder>
+  <zorder>AmpBox</zorder>
+  <zorder>OhmBox</zorder>
+  <zorder>ExitBox</zorder>
+  <zorder>OhmBox_2</zorder>
+  <zorder>OhmBox_3</zorder>
+  <zorder>debugPanel</zorder>
+  <zorder>frontPanel_DMM</zorder>
+  <zorder>selectFrame</zorder>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="pic.qrc"/>
+  <include location="fp_res.qrc"/>
  </resources>
  <connections/>
 </ui>

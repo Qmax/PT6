@@ -6,6 +6,8 @@
         <file>Letter-G-icon.png</file>
         <file>Letter-A-icon.png</file>
         <file>logout-icon.png</file>
+        <file>Images/home.png</file>
+        <file>Images/home2.png</file>
     </qresource>
     <qresource prefix="/new/prefix1">
         <file>Ammeter.jpg</file>
