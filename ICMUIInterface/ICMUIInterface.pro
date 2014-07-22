@@ -47,4 +47,5 @@ FORMS += daccalibration.ui \
     icm.ui \
     settings.ui
 DESTDIR = /exports/nfsroot-ccwmx51js/home/
-RESOURCES += icm.qrc
+RESOURCES += fp_res.qrc \
+    icm.qrc

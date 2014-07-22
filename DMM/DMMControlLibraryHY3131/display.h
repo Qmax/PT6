@@ -113,7 +113,7 @@ public:
 			}else{
 				sign->setVisible(false);
 			}
-			qDebug()<<"after fabs:"<<l_intValue<<"\t"<<l_nValue;;
+//			qDebug()<<"after fabs:"<<l_intValue<<"\t"<<l_nValue;;
 			for (int i = 0; i < 6; i++) {
 				digits[i]->setText("0");
 			}
@@ -124,7 +124,7 @@ public:
 				l_intValue=0;*/
 //			l_intValue  = ((l_nValue >= 0) ? (int)(l_nValue + 0.5) : (int)(l_nValue - 0.5));
 			l_intValue = qRound(l_nValue);
-			qDebug()<<"after qRound:"<<l_intValue<<"\t"<<l_nValue;
+//			qDebug()<<"after qRound:"<<l_intValue<<"\t"<<l_nValue;
 //_________________________________________________________________________________________
 			if (m_intRange == 3) {
 				if (l_intValue > 3)

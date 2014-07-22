@@ -539,5 +539,5 @@ void DACCalibration::on_nextBut_clicked()
 
 void DACCalibration::on_comboBox_2_currentIndexChanged(int index)
 {
-
+	Q_UNUSED(index)
 }

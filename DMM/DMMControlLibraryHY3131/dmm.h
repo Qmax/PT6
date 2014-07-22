@@ -49,7 +49,7 @@
 
 const unsigned int guid = 0x444D4D;
 
-#define overRange	0xffffff
+//#define overRange	0xffffff
 
 
 const QEvent::Type GpioEvent = (QEvent::Type) 1234;//embedded probe

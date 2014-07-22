@@ -246,7 +246,7 @@ debug/moc_dmm.cpp: BackPlaneInterface.h \
 
 debug/moc_display.cpp: display.h \
 		/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/bin/moc
-	/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/bin/moc $(DEFINES) $(INCPATH) display.h -o debug/moc_display.cpp
+#	/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/bin/moc $(DEFINES) $(INCPATH) display.h -o debug/moc_display.cpp
 
 debug/moc_qcustomplot.cpp: qcustomplot.h \
 		/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/bin/moc
