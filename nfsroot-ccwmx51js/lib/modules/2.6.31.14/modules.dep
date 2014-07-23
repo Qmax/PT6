@@ -1,14 +1,14 @@
-kernel/drivers/video/backlight/lcd.ko:
-kernel/drivers/video/backlight/backlight.ko:
-kernel/drivers/video/backlight/generic_bl.ko: kernel/drivers/video/backlight/backlight.ko
 kernel/drivers/usb/gadget/g_ether.ko:
 kernel/drivers/usb/gadget/g_file_storage.ko:
 kernel/drivers/usb/gadget/g_serial.ko:
-kernel/drivers/w1/masters/mxc_w1.ko:
-kernel/drivers/w1/slaves/w1_ds2431.ko:
+kernel/drivers/w1/masters/mxc_w1.ko: kernel/drivers/w1/wire.ko
+kernel/drivers/w1/slaves/w1_ds2431.ko: kernel/drivers/w1/wire.ko
+kernel/drivers/w1/wire.ko:
+extra/usbtmc.ko:
+extra/rwlpsdio.ko:
 extra/ptkpp.ko:
+extra/kdriver.ko:
+extra/gpioshutdown.ko:
+extra/gpio.ko:
 extra/gpioevent.ko:
 extra/evbug.ko:
-extra/gpio.ko:
-extra/rwlpsdio.ko:
-extra/gpioshutdown.ko:

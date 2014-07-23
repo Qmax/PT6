@@ -1,6 +1,14 @@
 # Aliases for symbols, used by symbol_request().
-alias symbol:corgibl_limit_intensity generic_bl
-alias symbol:lcd_device_unregister lcd
-alias symbol:backlight_device_register backlight
-alias symbol:lcd_device_register lcd
-alias symbol:backlight_device_unregister backlight
+alias symbol:w1_unregister_family wire
+alias symbol:w1_add_master_device wire
+alias symbol:w1_read_8 wire
+alias symbol:w1_register_family wire
+alias symbol:w1_calc_crc8 wire
+alias symbol:w1_remove_master_device wire
+alias symbol:w1_reset_select_slave wire
+alias symbol:w1_touch_block wire
+alias symbol:w1_reset_bus wire
+alias symbol:w1_write_block wire
+alias symbol:w1_next_pullup wire
+alias symbol:w1_read_block wire
+alias symbol:w1_write_8 wire
