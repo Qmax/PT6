@@ -182,7 +182,7 @@ private slots:
     void on_butVerify_clicked();
     void on_butLearn_clicked();
     void on_butAM_clicked();
-    void on_butExternal_clicked();
+    /*void on_butExternal_clicked();//commented by rravivarman 24th july 2014*/
     void on_butProbe2_clicked();
     void on_butProbe1_clicked();
     void shrinkSize(int);

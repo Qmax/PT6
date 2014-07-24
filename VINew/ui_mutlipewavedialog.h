@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mutlipewavedialog.ui'
 **
-** Created: Wed Jul 23 14:23:20 2014
+** Created: Thu Jul 24 12:58:07 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

@@ -174,7 +174,7 @@ void PTKeyEvent::readKbdData()
             // We should handle only key events
             return;
         }
-       // qDebug()<<"event code :"<<event.code;
+        qDebug()<<"PTKeyEventInterface : event code :"<<event.code;
         TranslatedKeyEvent translatedEvent(event);
         *m_nKey = translatedEvent.keyCode_;
         //emit pressed(translatedEvent.keyCode_);

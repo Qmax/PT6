@@ -19,7 +19,6 @@ unsigned int SPIMemoryInterface::getSPICodeID() {
 	unsigned int l_nData=0;
 		if(m_MemorySelect == BACKPLANE)
 		{
-			qDebug()<<"SPIMemoryInterface::getSPICodeID-Backplane";
 			IBackPlane->writeBackPlaneRegister(0x9F00, BP_SPIFLASH_TXMSW);
 			IBackPlane->writeBackPlaneRegister(0x0000, BP_SPIFLASH_TXLSW);
 			IBackPlane->writeBackPlaneRegister(0xC007, BP_SPIFLASH_CMD);

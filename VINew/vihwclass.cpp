@@ -102,7 +102,7 @@ unsigned short VIHWClass::checkProbeStatus()
 {
     // this checks if probes are not connected.
     unsigned short l_nPrStatus = IPsoc->embeddedProbeStatus();
-//    qDebug()<< "VIHWClass::Probe Status:"<<hex<<l_nPrStatus;
+    qDebug()<< "VIHWClass::Probe Status:"<<hex<<l_nPrStatus;
     return l_nPrStatus;
     /*if( (l_nPrStatus & 0x01) == 0x01)
     {
@@ -368,7 +368,7 @@ void VIHWClass::switchVoltageRegister(unsigned int pIndex)
 	//qDebug()<<"Gain:"<<m_nVGain<<"Constant:"<<m_nVConst;
 	m_nDDSVoltage = (m_nVoltRangeArray1[pIndex]-m_nVConst)/m_nVGain;
 	m_nDDSVoltage = 1600/(m_nDDSVoltage/m_nVoltRangeArray[index]);
-	qDebug() << "DDS Voltage:"<<m_nDDSVoltage<<"Gain:"<<m_nVGain<<"Const:"<<m_nVConst;
+//	qDebug() << "DDS Voltage:"<<m_nDDSVoltage<<"Gain:"<<m_nVGain<<"Const:"<<m_nVConst;
 	IAppCard->setSPIAppendBit(0x8000);
 	m_objAD5293Component->setAD5293Voltage(m_nDDSVoltage);
     m_objAD5293Component->writeAD5293(SPI1);
@@ -391,7 +391,7 @@ void VIHWClass::switchFrequencyRegister(unsigned int pValue)
 	double l_nFrequenceArray[13] = {10.0,20.0,50.0,100.0,200.0,500.0,1000.0,2000.0,5000.0,10000.0,20000.0,50000.0,100000.0};
 	unsigned short int l_nBTUARR[13]={1000,1000,1000,1000,1000,1000,100,100,100,100,50,20,10};
 	unsigned short int l_nBDARR[13]= {100,50,20,10,5,2,10,5,2,1,1,1,1};
-	qDebug()<<"Frequency:"<<l_nFrequenceArray[pValue];//<<"Frequency Index:"<<pValue;
+//	qDebug()<<"Frequency:"<<l_nFrequenceArray[pValue];//<<"Frequency Index:"<<pValue;
     double l_nTime = 1.0 / l_nFrequenceArray[pValue];
     double l_nTimeperSample = l_nTime / 100.0;
     unsigned short l_nCount = (unsigned short) (l_nTimeperSample / (1.0/ 100000000.0));

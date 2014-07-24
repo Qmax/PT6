@@ -99,7 +99,16 @@ public:
     short int getProbeDialog(short int);
     void setProbeDialog(short int,short int);
 //----------------------------------------------------------------------
+//------------------------------ Calibration,Learn & Verify Status--------------------------------
+    bool getCalibrationStatus();
+    void setCalibrationStatus(bool);
 
+    bool getLearnStatus();
+    void setLearnStatus(bool);
+
+    bool getVerifyStatus();
+    void setVerifyStatus(bool);
+//----------------------------------------------------------------------
 //-----------------------WaveForm Type----------------------------------
     void setWaveType(WAVETYPE pWaveType)
     {
@@ -349,6 +358,7 @@ protected:
     QMap<short int,short int> m_mapPin2Channel;
     QMap<short int,QList<short>* > m_mapPinCombinations;
 
+    bool m_bCalibStatus,m_bLearnStatus,m_bVerifyStatus;
 
     WAVETYPE m_eWaveType;
     double m_nThresholdValue;

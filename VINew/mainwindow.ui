@@ -4624,7 +4624,7 @@ border:0px solid white;
       <widget class="QPushButton" name="butProbe1">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>38</x>
          <y>20</y>
          <width>50</width>
          <height>60</height>
@@ -4657,40 +4657,7 @@ image:url(:/res/knob_on.svg)
       <widget class="QPushButton" name="butProbe2">
        <property name="geometry">
         <rect>
-         <x>90</x>
-         <y>18</y>
-         <width>50</width>
-         <height>60</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>DejaVu Sans</family>
-        </font>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:0px rgba(0,0,0,0);
-image: url(:/res/knob_off.svg);
-background-color:rgba(0,0,0,0);
-</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>48</width>
-         <height>48</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="butExternal">
-       <property name="geometry">
-        <rect>
-         <x>160</x>
+         <x>131</x>
          <y>20</y>
          <width>50</width>
          <height>60</height>
@@ -4746,6 +4713,9 @@ background-color:rgba(0,0,0,0);
           <property name="text">
            <string>Probe 1</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
         </item>
         <item>
@@ -4764,23 +4734,8 @@ background-color:rgba(0,0,0,0);
           <property name="text">
            <string>Probe 2</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="lblExternal">
-          <property name="font">
-           <font>
-            <family>DejaVu Sans</family>
-            <pointsize>11</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {color:white;border: rgba(0,0,0,0);}</string>
-          </property>
-          <property name="text">
-           <string>EXT-MUX</string>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
@@ -4798,7 +4753,10 @@ background-color:rgba(0,0,0,0);
            <string notr="true">QLabel {color:white;border: rgba(0,0,0,0);}</string>
           </property>
           <property name="text">
-           <string>EXT-CH</string>
+           <string>A-HW</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
@@ -4807,7 +4765,7 @@ background-color:rgba(0,0,0,0);
       <widget class="QPushButton" name="butExternal_2">
        <property name="geometry">
         <rect>
-         <x>230</x>
+         <x>223</x>
          <y>20</y>
          <width>50</width>
          <height>60</height>
@@ -9536,7 +9494,7 @@ p, li { white-space: pre-wrap; }
         <x>11</x>
         <y>136</y>
         <width>147</width>
-        <height>117</height>
+        <height>121</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -9652,7 +9610,7 @@ p, li { white-space: pre-wrap; }
         <x>158</x>
         <y>136</y>
         <width>141</width>
-        <height>117</height>
+        <height>121</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">

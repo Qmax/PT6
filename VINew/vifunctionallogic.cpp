@@ -173,6 +173,8 @@ void VIFunctionalLogic::doMemoryCalibration()
 		qDebug() << "CodeID not done";
 		return;
 	}
+
+	m_objVISubject->setCalibrationStatus(true);
 	DISABLEINT();
     InteractiveData objInteractiveData;
     objInteractiveData.InitialiseMap();
@@ -204,6 +206,7 @@ void VIFunctionalLogic::doMemoryCalibration()
     }
     m_obVIHWInstance.stopDrive();
     ENINT();
+    m_objVISubject->setCalibrationStatus(false);
 
     m_objVISubject->setIndexTemplate(0,temp_Voltage);
     m_objVISubject->setIndexTemplate(1,temp_Frequency);
@@ -701,7 +704,7 @@ void VIFunctionalLogic::switchVoltage()
 //   }
     int index=0;
     double l_nVoltValue = m_objVISubject->getVoltageValue();
-    qDebug()<<"Voltage:"<<l_nVoltValue;
+//    qDebug()<<"Voltage:"<<l_nVoltValue;
 	if(l_nVoltValue>0.5&&l_nVoltValue<=1.5){
 		index=1;
 	}else if(l_nVoltValue>1.5&&l_nVoltValue<=3.5){

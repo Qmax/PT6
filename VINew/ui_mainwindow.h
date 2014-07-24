@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed Jul 23 14:23:21 2014
+** Created: Thu Jul 24 12:58:08 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -73,12 +73,10 @@ public:
     QGroupBox *groupBox_2;
     QPushButton *butProbe1;
     QPushButton *butProbe2;
-    QPushButton *butExternal;
     QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *lblProbe1;
     QLabel *lblProbe2;
-    QLabel *lblExternal;
     QLabel *lblExternal_2;
     QPushButton *butExternal_2;
     QGroupBox *grpError;
@@ -1147,7 +1145,7 @@ public:
 " }"));
         butProbe1 = new QPushButton(groupBox_2);
         butProbe1->setObjectName(QString::fromUtf8("butProbe1"));
-        butProbe1->setGeometry(QRect(20, 20, 50, 60));
+        butProbe1->setGeometry(QRect(38, 20, 50, 60));
         butProbe1->setFont(font);
         butProbe1->setFocusPolicy(Qt::NoFocus);
         butProbe1->setStyleSheet(QString::fromUtf8("border:0px rgba(0,0,0,0);\n"
@@ -1157,7 +1155,7 @@ public:
         butProbe1->setIconSize(QSize(48, 48));
         butProbe2 = new QPushButton(groupBox_2);
         butProbe2->setObjectName(QString::fromUtf8("butProbe2"));
-        butProbe2->setGeometry(QRect(90, 18, 50, 60));
+        butProbe2->setGeometry(QRect(131, 20, 50, 60));
         butProbe2->setFont(font);
         butProbe2->setFocusPolicy(Qt::NoFocus);
         butProbe2->setStyleSheet(QString::fromUtf8("border:0px rgba(0,0,0,0);\n"
@@ -1165,16 +1163,6 @@ public:
 "background-color:rgba(0,0,0,0);\n"
 ""));
         butProbe2->setIconSize(QSize(48, 48));
-        butExternal = new QPushButton(groupBox_2);
-        butExternal->setObjectName(QString::fromUtf8("butExternal"));
-        butExternal->setGeometry(QRect(160, 20, 50, 60));
-        butExternal->setFont(font);
-        butExternal->setFocusPolicy(Qt::NoFocus);
-        butExternal->setStyleSheet(QString::fromUtf8("border:0px rgba(0,0,0,0);\n"
-"image: url(:/res/knob_off.svg);\n"
-"background-color:rgba(0,0,0,0);\n"
-""));
-        butExternal->setIconSize(QSize(48, 48));
         layoutWidget = new QWidget(groupBox_2);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
         layoutWidget->setGeometry(QRect(20, 76, 271, 20));
@@ -1187,6 +1175,7 @@ public:
         lblProbe1->setObjectName(QString::fromUtf8("lblProbe1"));
         lblProbe1->setFont(font6);
         lblProbe1->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,255);}"));
+        lblProbe1->setAlignment(Qt::AlignCenter);
 
         horizontalLayout->addWidget(lblProbe1);
 
@@ -1194,26 +1183,21 @@ public:
         lblProbe2->setObjectName(QString::fromUtf8("lblProbe2"));
         lblProbe2->setFont(font6);
         lblProbe2->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
+        lblProbe2->setAlignment(Qt::AlignCenter);
 
         horizontalLayout->addWidget(lblProbe2);
-
-        lblExternal = new QLabel(layoutWidget);
-        lblExternal->setObjectName(QString::fromUtf8("lblExternal"));
-        lblExternal->setFont(font6);
-        lblExternal->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
-
-        horizontalLayout->addWidget(lblExternal);
 
         lblExternal_2 = new QLabel(layoutWidget);
         lblExternal_2->setObjectName(QString::fromUtf8("lblExternal_2"));
         lblExternal_2->setFont(font6);
         lblExternal_2->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
+        lblExternal_2->setAlignment(Qt::AlignCenter);
 
         horizontalLayout->addWidget(lblExternal_2);
 
         butExternal_2 = new QPushButton(groupBox_2);
         butExternal_2->setObjectName(QString::fromUtf8("butExternal_2"));
-        butExternal_2->setGeometry(QRect(230, 20, 50, 60));
+        butExternal_2->setGeometry(QRect(223, 20, 50, 60));
         butExternal_2->setFont(font);
         butExternal_2->setFocusPolicy(Qt::NoFocus);
         butExternal_2->setStyleSheet(QString::fromUtf8("border:0px rgba(0,0,0,0);\n"
@@ -2167,7 +2151,7 @@ public:
 
         layoutWidget2 = new QWidget(grpClip);
         layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(11, 136, 147, 117));
+        layoutWidget2->setGeometry(QRect(11, 136, 147, 121));
         gridLayout = new QGridLayout(layoutWidget2);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -2210,7 +2194,7 @@ public:
 
         layoutWidget3 = new QWidget(grpClip);
         layoutWidget3->setObjectName(QString::fromUtf8("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(158, 136, 141, 117));
+        layoutWidget3->setGeometry(QRect(158, 136, 141, 121));
         gridLayout_2 = new QGridLayout(layoutWidget3);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -2798,11 +2782,9 @@ public:
         groupBox_2->setTitle(QApplication::translate("MainWindow", "ProbeSelection", 0, QApplication::UnicodeUTF8));
         butProbe1->setText(QString());
         butProbe2->setText(QString());
-        butExternal->setText(QString());
         lblProbe1->setText(QApplication::translate("MainWindow", "Probe 1", 0, QApplication::UnicodeUTF8));
         lblProbe2->setText(QApplication::translate("MainWindow", "Probe 2", 0, QApplication::UnicodeUTF8));
-        lblExternal->setText(QApplication::translate("MainWindow", "EXT-MUX", 0, QApplication::UnicodeUTF8));
-        lblExternal_2->setText(QApplication::translate("MainWindow", "EXT-CH", 0, QApplication::UnicodeUTF8));
+        lblExternal_2->setText(QApplication::translate("MainWindow", "A-HW", 0, QApplication::UnicodeUTF8));
         butExternal_2->setText(QString());
         grpError->setTitle(QString());
         redPallete->setText(QString());

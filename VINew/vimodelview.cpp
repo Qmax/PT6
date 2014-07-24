@@ -129,6 +129,27 @@ short int VIModel::getProbeDialog(short pIndex)
 	m_objProbeDialogClass->getIndex(pIndex);
 }
 
+bool  VIModel::getCalibrationStatus(){
+	return m_bCalibStatus;
+}
+void  VIModel::setCalibrationStatus(bool state){
+	m_bCalibStatus = state;
+}
+
+bool  VIModel::getLearnStatus(){
+	return m_bLearnStatus;
+}
+void  VIModel::setLearnStatus(bool state){
+	m_bLearnStatus = state;
+}
+
+bool  VIModel::getVerifyStatus(){
+	return m_bVerifyStatus;
+}
+void  VIModel::setVerifyStatus(bool state){
+	m_bVerifyStatus = state;
+}
+
 void VIModel::setAutoCurvePattern(short int pIndex,QString pStrName,QStringList pData)
 {
 	if(m_lstAutoCurveFitPatterns.contains(pStrName) == false)
