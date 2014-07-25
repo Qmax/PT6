@@ -53,9 +53,9 @@ class InterfaceClass:public QObject,public PTSplashScreen{
         }
         void ShowSplash(){
             spla->movie->setSpeed(200);
-            spla->movie->start();
+//            spla->movie->start();
             spla->processLabel->show();
-            spla->show();
+//            spla->show();
         }
         void setSplashSpan(int timerValue){
             QTimer::singleShot(timerValue, spla, SLOT(close()));
@@ -68,6 +68,7 @@ class InterfaceClass:public QObject,public PTSplashScreen{
         	switch(no){
         	case 0:
         		spla->processLabel->setText(spla->LoadingText);
+        		spla->processLabel->setAlignment(Qt::AlignCenter);
         		break;
         	case 1:
         		spla->movie=new QMovie(":/splashImages/splashImage1.gif");

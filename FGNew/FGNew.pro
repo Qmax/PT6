@@ -42,5 +42,6 @@ HEADERS += serialdevice.h \
     fg.h \
     RefCALIBTestJigInterface.h
 FORMS += fg.ui
-RESOURCES += fg.qrc
+RESOURCES += fp_res.qrc \
+    fg.qrc
 DESTDIR = /exports/nfsroot-ccwmx51js/home

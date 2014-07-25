@@ -30,5 +30,6 @@
         <file>fuse.png</file>
         <file>conn.png</file>
         <file>conn2.png</file>
+        <file>graph.png</file>
     </qresource>
 </RCC>

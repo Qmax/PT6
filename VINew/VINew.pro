@@ -68,5 +68,6 @@ FORMS += mutlipewavedialog.ui \
     selectprobe.ui \
     embeddedkeys.ui \
     mainwindow.ui
-RESOURCES += vi.qrc
+RESOURCES += fp_res.qrc \
+    vi.qrc
 DESTDIR = /exports/nfsroot-ccwmx51js/home/

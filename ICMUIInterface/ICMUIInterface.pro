@@ -8,7 +8,8 @@
 CONFIG += plugin
 TARGET = ICMUIInterface
 TEMPLATE = lib
-SOURCES += ad5318components.cpp \
+SOURCES += qcustomplot.cpp \
+    ad5318components.cpp \
     daccalibration.cpp \
     ad5293.cpp \
     ad7190component.cpp \
@@ -16,7 +17,8 @@ SOURCES += ad5318components.cpp \
     icm.cpp \
     pticminterface.cpp \
     settings.cpp
-HEADERS += serialdevice.h \
+HEADERS += qcustomplot.h \
+    serialdevice.h \
     display.h \
     GPIOInterfaces.h \
     PTEventInterfaces.h \

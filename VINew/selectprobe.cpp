@@ -35,7 +35,7 @@ SelectProbe::SelectProbe(QWidget *parent, VIModel *pObjSubject) :
     connect(ui->lstProbes,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(selectPacakage(QListWidgetItem*)));
     m_objThresholdEdit = ILineEdit->QmaxLineEdit(0,this);
     m_objThresholdEdit->setGeometry(250,92,80,40);
-    m_objThresholdEdit->setText("5");
+    m_objThresholdEdit->setText("5 %");
     //m_obVImodel->setThreshold(5.0);
     m_objProbeSubject->setProbeThreshold(5.0);
     m_objProbeSubject->setProbeDialog(1,0);
@@ -187,7 +187,7 @@ void SelectProbe::receiveValue(double pValue)
 
 void SelectProbe::receiveValue(unsigned int pValue)
 {
-	m_objThresholdEdit->setText(QString::number(pValue, 10));
+	m_objThresholdEdit->setText(QString::number(pValue, 10)+" %");
 	m_objThresholdEdit->setFocusPolicy(Qt::NoFocus);
 	m_objProbeSubject->setProbeThreshold((double)pValue);
 }

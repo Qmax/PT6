@@ -17,7 +17,7 @@ const	QString knobOFF="QPushButton{background-color:rgba(0,0,0,0);border:1px sol
 
 QString highlightON="QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:0px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}";
 QString PCBoxON="QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}";
-QString highlightOFF="QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:0px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}";
+QString highlightOFF="QGroupBox{border:1px rgba(0,0,0,0); background-color: rgba(0,0,0,0); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}";
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -239,10 +239,14 @@ void MainWindow::InitializeUILibraries()
 		while (!textStream.atEnd())
 		{
 			l_strdebugPanel.append(textStream.readLine());
-			if(l_strdebugPanel.value(0)=="1")
+			if(l_strdebugPanel.value(0)=="1"){
 				ui->debugPanel->setVisible(true);
-			else
+				ui->frontPanel_VI->setVisible(false);
+			}
+			else{
 				ui->debugPanel->setVisible(false);
+				ui->frontPanel_VI->setVisible(true);
+			}
 		}
 	}else{
 		ui->debugPanel->setVisible(false);
@@ -400,6 +404,28 @@ void MainWindow::notifyProbeObserver()
 		IGPIOEvent->setProbeFlag(1);
 		m_nStoreWaveIndex=2;
 		ui->lblProbeType->setText("DUAL");
+
+		ui->ah1_inner->setVisible(true);
+		ui->ah1_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+		ui->ah1_outer->setGeometry(22,26,41,41);
+
+		ui->ah2_inner->setVisible(true);
+		ui->ah2_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+		ui->ah2_outer->setGeometry(96,26,41,41);
+
+		ui->ah3_inner->setVisible(true);
+		ui->ah3_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+		ui->ah3_outer->setGeometry(167,26,41,41);
+
+		ui->ah0_inner->setVisible(true);
+		ui->ah0_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+		ui->ah0_outer->setGeometry(237,26,41,41);
+
+		ui->fp_VI1_ICM_SL->setGeometry(24,20,53,49);
+		ui->fp_VI1_ICM_SL->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/VI_SL_ICM.png);");
+
+		ui->fp_VI2_EXT->setGeometry(105,20,53,49);
+		ui->fp_VI2_EXT->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/VI_SL_ICM.png);");
 	}
 	m_isProbesOnly=true;
 	//enableInteractiveGrp();
@@ -509,7 +535,7 @@ bool MainWindow::checkProbeStatus()
 		}
 		else if( m_nSelectedProbe==3)/*2 && m_bAutoCurveFit == false)//by rravivarman 24thjuly204*/
 		{
-			if(/*IPTMessageBox->QMsgBox*/showMessageBox(true, true, "Ensure Analog Highway Cables are connected or Not.")==true)
+			if(/*IPTMessageBox->QMsgBox*/showMessageBox(true, true, "Ensure Analog Highway Cables are connected.")==true)
 				return true;
 			else
 				return false;//commented on 18062014 RRV
@@ -747,8 +773,9 @@ void MainWindow::doPTKeyFunction()
 	else if (m_nPTKeyCode == 2) {
 		if (/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive != true) {
 			//buttonPressed(5);
-			if(m_objVISubject->getCalibrationStatus()){
-				qDebug()<<"Calibration is in Progress";
+			if(m_objVISubject->getCalibrationStatus()==true){
+				if(showMessageBox(true, true, "Do you want to cancel the calibration.") == true)
+					m_objVISubject->setCalibrationStatus(false);
 			}
 			else if(m_objVISubject->getLearnStatus()){
 				qDebug()<<"Lean is in Progress";
@@ -1044,7 +1071,8 @@ void MainWindow::on_butProClip_clicked()
 	ui->deleteBox->setStyleSheet(highlightOFF);
 	ui->calibButton->setStyleSheet(highlightOFF);
 	ui->PCBox->setStyleSheet(PCBoxON);
-	ui->selectFrame->setGeometry(ui->selectFrame->x(),50,ui->selectFrame->width(),ui->selectFrame->height());
+//	ui->selectFrame->setGeometry(ui->selectFrame->x(),50,ui->selectFrame->width(),ui->selectFrame->height());
+	ui->selectFrame->setGeometry(702, 54, 9, 60);
 	if(m_bPCMode == true)
 	{
 		ui->butProClip->setIcon(QIcon(":/res/Clip.png"));
@@ -1097,7 +1125,8 @@ void MainWindow::on_startButton_clicked()
 	ui->deleteBox->setStyleSheet(highlightOFF);
 	ui->CalibBox->setStyleSheet(highlightOFF);
 	ui->PCBox->setStyleSheet(highlightOFF);
-	ui->selectFrame->setGeometry(ui->selectFrame->x(),138,ui->selectFrame->width(),ui->selectFrame->height());
+//	ui->selectFrame->setGeometry(ui->selectFrame->x(),138,ui->selectFrame->width(),ui->selectFrame->height());
+	ui->selectFrame->setGeometry(702, 154, 9, 60);
 
 
 	if(m_bAutoCurveFit==true)
@@ -1384,7 +1413,8 @@ void MainWindow::on_storeButton_clicked()
 	ui->deleteBox->setStyleSheet(highlightOFF);
 	ui->CalibBox->setStyleSheet(highlightOFF);
 	ui->PCBox->setStyleSheet(highlightOFF);
-	ui->selectFrame->setGeometry(ui->selectFrame->x(),230,ui->selectFrame->width(),ui->selectFrame->height());
+//	ui->selectFrame->setGeometry(ui->selectFrame->x(),230,ui->selectFrame->width(),ui->selectFrame->height());
+	ui->selectFrame->setGeometry(702, 254, 9, 60);
 
 
 	if (m_objVISubject->getProbeDialog(0) == 1)
@@ -1403,7 +1433,8 @@ void MainWindow::on_deleteButton_clicked()
 	ui->deleteBox->setStyleSheet(highlightON);
 	ui->CalibBox->setStyleSheet(highlightOFF);
 	ui->PCBox->setStyleSheet(highlightOFF);
-	ui->selectFrame->setGeometry(ui->selectFrame->x(),320,ui->selectFrame->width(),ui->selectFrame->height());
+//	ui->selectFrame->setGeometry(ui->selectFrame->x(),320,ui->selectFrame->width(),ui->selectFrame->height());
+	ui->selectFrame->setGeometry(702, 354, 9, 60);
 	if (m_objVISubject->getProbeDialog(0) == 1)
 		return;
 
@@ -1417,23 +1448,28 @@ void MainWindow::on_deleteButton_clicked()
 
 void MainWindow::on_calibButton_clicked()
 {
+	if(m_objVISubject->getCalibrationStatus()==true){
+			if(showMessageBox(true, true, "Do you want to cancel the calibration.") == true)
+				m_objVISubject->setCalibrationStatus(false);
+		}else{
 	ui->storeBox->setStyleSheet(highlightOFF);
 	ui->startBox->setStyleSheet(highlightOFF);
 	ui->deleteBox->setStyleSheet(highlightOFF);
 	ui->CalibBox->setStyleSheet(highlightON);
 	ui->PCBox->setStyleSheet(highlightOFF);
 
-	ui->selectFrame->setGeometry(ui->selectFrame->x(),410,ui->selectFrame->width(),ui->selectFrame->height());
+//	ui->selectFrame->setGeometry(ui->selectFrame->x(),410,ui->selectFrame->width(),ui->selectFrame->height());
+	ui->selectFrame->setGeometry(702, 454, 9, 60);
 	if( m_startTimer== true)
 		return;
 	//    qDebug() << "Start Calibration";
 	if( /*IPTMessageBox->QMsgBox*/showMessageBox(true, true, "Do you want to calibrate.") == true)
 	{
-		if( /*IPTMessageBox->QMsgBox*/showMessageBox(true, false, "Please Ensure it Probes are Open.") == true)
+		if( /*IPTMessageBox->QMsgBox*/showMessageBox(true, false, "Please Ensure it Probes are not connected to DUT.") == true)
 		{
-			ISplash->setLoadingText("Calibration in Progress....");
+			ISplash->setLoadingText("CALIBRATION IN PROGRESS....\n(Press ESC Key to Abort)");
 			ISplash->selectSplashImage(0);
-			ISplash->setPos(350,325,300,30);
+			ISplash->setPos(220,315,350,50);
 			ISplash->setSplashStyle("border-width: 3px; border-style: groove; border-color: #ED9D13;border-radius: 10px; padding: 0 8px;text-align: center;background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1,stop:0 #E7F598, stop: 0.5 #ECF5BA,stop: 0.7 #F3F7DA,stop:1 #F7F7F2);font:bold 18px;color:#3A3B32");
 			ISplash->ShowSplash();
 
@@ -1451,6 +1487,7 @@ void MainWindow::on_calibButton_clicked()
 
 		}
 	}
+		}
 }
 
 void MainWindow::on_exit_clicked()
@@ -1688,14 +1725,27 @@ void MainWindow::on_butProbe1_clicked()
 		//        ui->errPallete->setPalette(Qt::green);
 		return;
 	}
-	ui->vi1->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-	ui->vi2->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-	ui->frame_31->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-	ui->frame_20->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-	ui->dso1_outer_3->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-	ui->dso_outer_3->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-	//    qDebug()<<"Probe Status:"<<m_nSelectedProbe;
+	ui->ah1_inner->setVisible(true);
+	ui->ah1_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui->ah1_outer->setGeometry(22,26,41,41);
 
+	ui->ah2_inner->setVisible(true);
+	ui->ah2_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui->ah2_outer->setGeometry(96,26,41,41);
+
+	ui->ah3_inner->setVisible(true);
+	ui->ah3_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui->ah3_outer->setGeometry(167,26,41,41);
+
+	ui->ah0_inner->setVisible(true);
+	ui->ah0_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui->ah0_outer->setGeometry(237,26,41,41);
+
+	ui->fp_VI1_ICM_SL->setGeometry(24,20,53,49);
+	ui->fp_VI1_ICM_SL->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/VI_SL_ICM.png);");
+
+	ui->fp_VI2_EXT->setGeometry(110,20,41,41);
+	ui->fp_VI2_EXT->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
 }
 
 void MainWindow::on_butProbe2_clicked()
@@ -1726,12 +1776,27 @@ void MainWindow::on_butProbe2_clicked()
 
 		return;
 	}
-	ui->vi1->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-	ui->vi2->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-	ui->frame_31->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-	ui->frame_20->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-	ui->dso1_outer_3->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-	ui->dso_outer_3->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui->ah1_inner->setVisible(true);
+	ui->ah1_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui->ah1_outer->setGeometry(22,26,41,41);
+
+	ui->ah2_inner->setVisible(true);
+	ui->ah2_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui->ah2_outer->setGeometry(96,26,41,41);
+
+	ui->ah3_inner->setVisible(true);
+	ui->ah3_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui->ah3_outer->setGeometry(167,26,41,41);
+
+	ui->ah0_inner->setVisible(true);
+	ui->ah0_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui->ah0_outer->setGeometry(237,26,41,41);
+
+	ui->fp_VI1_ICM_SL->setGeometry(24,20,41,41);
+	ui->fp_VI1_ICM_SL->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+
+	ui->fp_VI2_EXT->setGeometry(105,20,53,49);
+	ui->fp_VI2_EXT->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/VI_SL_ICM.png);");
 	//    qDebug()<<"Probe Status:"<<m_nSelectedProbe;
 }
 
@@ -1766,12 +1831,27 @@ void MainWindow::on_butExternal_2_clicked()
 		if(m_objVISubject->getProbeDialog(0)==1) return;
 		m_nSelectedProbe=3;
 
-		ui->vi1->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-		ui->vi2->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-		ui->frame_31->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-		ui->frame_20->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-		ui->dso1_outer_3->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
-		ui->dso_outer_3->setStyleSheet("border:3px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+		ui->ah1_inner->setVisible(false);
+		ui->ah1_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/fp_images/bnc.png);");
+		ui->ah1_outer->setGeometry(22,26,41,41);
+
+		ui->ah2_inner->setVisible(false);
+		ui->ah2_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/fp_images/bnc.png);");
+		ui->ah2_outer->setGeometry(96,26,41,41);
+
+		ui->ah3_inner->setVisible(false);
+		ui->ah3_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/fp_images/bnc.png);");
+		ui->ah3_outer->setGeometry(167,26,41,41);
+
+		ui->ah0_inner->setVisible(false);
+		ui->ah0_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/fp_images/bnc.png);");
+		ui->ah0_outer->setGeometry(237,26,41,41);
+
+		ui->fp_VI1_ICM_SL->setGeometry(24,20,41,41);
+		ui->fp_VI1_ICM_SL->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+
+		ui->fp_VI2_EXT->setGeometry(110,20,41,41);
+		ui->fp_VI2_EXT->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
 	}
 	//    qDebug()<<"Probe Status:"<<m_nSelectedProbe;
 }

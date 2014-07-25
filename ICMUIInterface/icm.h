@@ -25,6 +25,7 @@
 #include "GPIOInterfaces.h"
 #include "PTGPIOEventInterfaces.h"
 #include "PTEventInterfaces.h"
+#include "qcustomplot.h"
 
 #define		GPIOINT		0x0100
 #define		KNOBINT		0x0800
@@ -72,6 +73,13 @@ public:
     DISPLAY *dis;
 
     double m_nActualGain;
+
+    //graphing
+    void setupSimpleDemo(QCustomPlot *customPlot);
+    void plotSimpleDemo(QCustomPlot *customPlot);
+    int loopOut;
+    QString m_strRLC;
+    QVector<double> x, y;
 protected:
 
     PTGPIOEventInterface *IGPIOEvent;
@@ -168,6 +176,7 @@ signals:
 
 private  slots:
 
+void on_graphBut_clicked();
 void on_ACDC_clicked();
 void on_cBut_clicked();
 void on_lBut_clicked();

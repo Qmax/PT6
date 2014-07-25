@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'clipdialog.ui'
 **
-** Created: Thu Jul 24 12:58:07 2014
+** Created: Fri Jul 25 12:43:00 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

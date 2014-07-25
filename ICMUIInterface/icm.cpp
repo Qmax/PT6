@@ -24,6 +24,9 @@ QMainWindow(parent), ui(new Ui::ICM) {
 	ui->label_X->setVisible(false);
 	ui->label_LC->setVisible(false);
 	ui->value_XLXC->setVisible(false);
+
+	loopOut = 0;//graphing
+	setupSimpleDemo(ui->customPlot);
 }
 void ICM::ToolBox(bool hide) {
 	ui->calibrateDisplay->setVisible(hide);
@@ -54,6 +57,92 @@ void ICM::ToolBox(bool hide) {
 	ui->pushButton_3->setVisible(hide);
 	ui->RacRdc->setVisible(hide);
 
+}
+
+void ICM::setupSimpleDemo(QCustomPlot *customPlot) {
+    customPlot->addGraph();
+    QPen pen;
+    int minRange, maxRange;
+
+    pen.setColor(QColor(0, 0, 255, 200));
+    customPlot->graph()->setLineStyle(QCPGraph::lsLine);
+    customPlot->graph()->setPen(pen);
+
+    customPlot->xAxis->setLabel("time");
+    customPlot->xAxis->setScaleLogBase(10);
+    QString str = m_strRLC;
+    customPlot->yAxis->setLabel(str);
+    // set axes ranges, so we see all data:
+    customPlot->xAxis->setRange(0, 60);
+
+    QString str2 = ui->rangeLabel->text();
+
+    if (str2.endsWith("F") || str2.endsWith("H") || str2.endsWith("E"))
+        str2.chop(1);
+    if (str2.endsWith("m") || str2.endsWith("n") || str2.endsWith("K") || str2.endsWith("M") || str2.endsWith("u"))
+        str2.chop(1);
+
+    bool ok = true;
+
+        minRange = 0;
+        maxRange = str2.toInt(&ok, 10);
+
+
+    customPlot->yAxis->setRange(minRange, maxRange);
+    //	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+    customPlot->setInteractions(QCP::iRangeZoom | QCP::iMultiSelect
+                                | QCP::iSelectPlottables | QCP::iSelectAxes | QCP::iSelectLegend
+                                | QCP::iSelectItems | QCP::iSelectOther);
+}
+void ICM::plotSimpleDemo(QCustomPlot *customPlot) {
+    QDateTime dateTime = QDateTime::currentDateTime();
+    QString dateTimeString = dateTime.toString();
+
+    //Save to File START ~~~~~~~~~~~~~~~~~~~~~~~
+    QFile outFile("ICMGraph.log");
+    if (outFile.size() > 1298368)
+        outFile.open(QIODevice::WriteOnly | QIODevice::Text);
+    else
+        outFile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append);
+    QTextStream ts(&outFile);
+    //Save to File END ~~~~~~~~~~~~~~~~~~~~~~~
+
+/*    if (loopOut != 250) {
+        if (loopOut > 60) {
+            customPlot->xAxis->setRange(loopOut - 60, loopOut);
+        }
+
+        x[loopOut] = loopOut;
+
+        if (ui->ResistanceRanges->isVisible()) {
+        	y[loopOut] = m_nResistance;
+            ts << QString("time") << "\t" << dateTimeString << "\t"
+                      << m_strRLC << "\t"
+                      << m_nResistance << endl;
+        }else if(ui->Inductorranges->isVisible()){
+        	y[loopOut] = m_nInductance;
+            ts << QString("time") << "\t" << dateTimeString << "\t"
+                      << m_strRLC << "\t"
+                      << m_nInductance << endl;
+        }else if(ui->CapacitanceRanges->isVisible()){
+        	y[loopOut] = m_nCapacitance;
+            ts << QString("time") << "\t" << dateTimeString << "\t"
+                      << m_strRLC << "\t"
+                      << m_nCapacitance << endl;
+        }
+
+
+        loopOut++;
+    } else {
+        for (int k = 0; k < 60; k++) {
+            x[k] = x[190 + k];
+            y[k] = y[190 + k];
+        }
+
+        loopOut = 59;
+    }*/
+
+    customPlot->graph(0)->setData(x, y);
 }
 
 void ICM::GCalib2ICM(double value, QString comp) {
@@ -184,11 +273,11 @@ void ICM::initialiseHWLibraries() {
 			debugPanel.append(textStream.readLine());
 			if(debugPanel.value(0)=="1"){
 				ui->debugPanel->setVisible(true);;
-				ui->frontPanel->setVisible(false);
+				ui->frontPanel_ICM->setVisible(false);
 			}
 			else{
 				ui->debugPanel->setVisible(false);;
-				ui->frontPanel->setVisible(true);
+				ui->frontPanel_ICM->setVisible(true);
 			}
 		}
 	}
@@ -708,6 +797,9 @@ void ICM::readADC() {
 		ui->rangeLabel->setText(m_mapInductance.value(L_Index));
 		emit ICM2GCalib(m_nInductance, "ICM-L");
 	}
+    //<-------For Enabling graph plot-------
+    plotSimpleDemo(ui->customPlot);
+    ui->customPlot->replot();//------------->
 }
 void ICM::AutoRangeGain(){
 
@@ -2131,14 +2223,11 @@ void ICM::on_pushButton_clicked() {
 		IPsoc->switchFly();
 		m_bExternal = true;
 		ui->pushButton->setIcon(QIcon(QPixmap(":/Symbols/Letter-E-icon.png")));
-                ui->frame_20->setStyleSheet("border:0px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;image: url(:/Symbols/25PinDIN.png)");
-                ui->frame_20->setGeometry(121,20,110,50);
-                ui->frame_23->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;");
-                ui->frame_23->setGeometry(28,90,60,15);
-		ui->label_35->setStyleSheet("color:black");
-		ui->label_32->setStyleSheet("color:gray");
-		ui->label_32->setText("SL/ICM/VI2");
+		ui->fp_VI1_ICM_SL->setGeometry(24,20,41,41);
+		ui->fp_VI1_ICM_SL->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
 
+		ui->fp_VI2_EXT->setGeometry(105,20,53,49);
+		ui->fp_VI2_EXT->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/VI_SL_ICM.png);");
 
 	} else {
 		//qDebug()<<"Internal Measurement";
@@ -2146,13 +2235,11 @@ void ICM::on_pushButton_clicked() {
 		IPsoc->icmMeasurement();
 		m_bExternal = false;
 		ui->pushButton->setIcon(QIcon(QPixmap(":/Symbols/Letter-I-icon.png")));
-		ui->frame_20->setStyleSheet("border:1px solid gray; border-top-right-radius: 5px; border-top-left-radius: 5px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;");
-		ui->frame_20->setGeometry(120,38,100,15);
-		ui->frame_23->setStyleSheet("border:1px solid rgba(0,0,0,0);background-color:rgba(0,0,0,0);image: url(:/Symbols/icm.png);");
-		ui->frame_23->setGeometry(20,83,90,27);
-		ui->label_35->setStyleSheet("color:gray");
-		ui->label_32->setStyleSheet("color:black");
-		ui->label_32->setText("ICM INT");
+		ui->fp_VI1_ICM_SL->setGeometry(24,20,53,49);
+		ui->fp_VI1_ICM_SL->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/VI_SL_ICM.png);");
+
+		ui->fp_VI2_EXT->setGeometry(110,20,41,41);
+		ui->fp_VI2_EXT->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
 	}
 
 }
@@ -2473,6 +2560,7 @@ void ICM::on_exit_clicked()
 
 void ICM::on_rBut_clicked()
 {
+	m_strRLC = "Resistance";
 	ui->selectFrame->setGeometry(701,50,10,60);
 	ui->rBox->setStyleSheet("QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}");
 	ui->lBox->setStyleSheet("QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;border-top:1px solid gray; border-top-right-radius: 0px; border-top-left-radius: 0px;}");
@@ -2483,6 +2571,7 @@ void ICM::on_rBut_clicked()
 
 void ICM::on_lBut_clicked()
 {
+	m_strRLC = "Inductance";
 	ui->selectFrame->setGeometry(701,140,10,60);
 	ui->rBox->setStyleSheet("QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}");
 	ui->lBox->setStyleSheet("QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;border-top:1px solid gray; border-top-right-radius: 0px; border-top-left-radius: 0px;}");
@@ -2493,6 +2582,7 @@ void ICM::on_lBut_clicked()
 
 void ICM::on_cBut_clicked()
 {
+	m_strRLC = "Capacitance";
 	ui->selectFrame->setGeometry(701,230,10,60);
 	ui->rBox->setStyleSheet("QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}");
 	ui->lBox->setStyleSheet("QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;border-top:1px solid gray; border-top-right-radius: 0px; border-top-left-radius: 0px;}");
@@ -2504,4 +2594,16 @@ void ICM::on_cBut_clicked()
 void ICM::on_ACDC_clicked()
 {
 	on_RacRdc_clicked();
+}
+
+void ICM::on_graphBut_clicked()
+{
+    if (ui->plottingWindow->isVisible()){
+        ui->plottingWindow->setVisible(false);
+        ui->frontPanel_ICM->setVisible(true);
+    }
+    else{
+        ui->plottingWindow->setVisible(true);
+        ui->frontPanel_ICM->setVisible(false);
+    }
 }

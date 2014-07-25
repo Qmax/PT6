@@ -57,11 +57,11 @@ void FG::PluginsInitialisation(){
 			debugPanel.append(textStream.readLine());
 			if(debugPanel.value(0)=="1"){
 				ui->debugPanel->setVisible(true);
-				ui->frontPanel->setVisible(false);
+				ui->frontPanel_FG->setVisible(false);
 			}
 			else{
 				ui->debugPanel->setVisible(false);
-				ui->frontPanel->setVisible(true);
+				ui->frontPanel_FG->setVisible(true);
 			}
 		}
 	}
@@ -836,28 +836,28 @@ void FG::HighlightButtons(int but){
 		ui->squareBox->setStyleSheet(UnSelectSquare);
 		ui->rampBox->setStyleSheet(UnSelectRamp);
 		ui->triangleBox->setStyleSheet(UnSelectTriangle);
-		ui->selectFrame->setGeometry(701,50,10,60);
+		ui->selectFrame->setGeometry(701,54,10,60);
 		break;
 	case SQUARE_WAVE:
 		ui->sineBox->setStyleSheet(UnSelectSine);
 		ui->squareBox->setStyleSheet(selectSquare);
 		ui->rampBox->setStyleSheet(UnSelectRamp);
 		ui->triangleBox->setStyleSheet(UnSelectTriangle);
-		ui->selectFrame->setGeometry(701,140,10,60);
+		ui->selectFrame->setGeometry(701,154,10,60);
 		break;
 	case RAMP_WAVE:
 		ui->sineBox->setStyleSheet(UnSelectSine);
 		ui->squareBox->setStyleSheet(UnSelectSquare);
 		ui->rampBox->setStyleSheet(selectRamp);
 		ui->triangleBox->setStyleSheet(UnSelectTriangle);
-		ui->selectFrame->setGeometry(701,230,10,60);
+		ui->selectFrame->setGeometry(701,254,10,60);
 		break;
 	case TRIANGLE_WAVE:
 		ui->sineBox->setStyleSheet(UnSelectSine);
 		ui->squareBox->setStyleSheet(UnSelectSquare);
 		ui->rampBox->setStyleSheet(UnSelectRamp);
 		ui->triangleBox->setStyleSheet(selectTriangle);
-		ui->selectFrame->setGeometry(701,320,10,60);
+		ui->selectFrame->setGeometry(701,354,10,60);
 		break;
 	case SINGLE:
 		m_bContinuous=false;m_bBurst=false;	m_bSingle=true;m_bGate=false;

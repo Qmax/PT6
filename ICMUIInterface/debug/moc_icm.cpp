@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'icm.h'
 **
-** Created: Wed Jul 9 18:21:33 2014
+** Created: Fri Jul 25 16:20:31 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_ICM[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      59,   14, // methods
+      60,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -35,73 +35,74 @@ static const uint qt_meta_data_ICM[] = {
 
  // slots: signature, parameters, type, tag, flags
       34,    4,    4,    4, 0x08,
-      52,    4,    4,    4, 0x08,
-      70,    4,    4,    4, 0x08,
-      88,    4,    4,    4, 0x08,
-     106,    4,    4,    4, 0x08,
-     124,    4,    4,    4, 0x08,
-     144,    4,    4,    4, 0x08,
-     170,    4,    4,    4, 0x08,
-     196,    5,    4,    4, 0x08,
-     223,    4,    4,    4, 0x08,
-     247,    4,    4,    4, 0x08,
-     268,    4,    4,    4, 0x08,
-     287,    4,    4,    4, 0x08,
-     308,    4,    4,    4, 0x08,
+      56,    4,    4,    4, 0x08,
+      74,    4,    4,    4, 0x08,
+      92,    4,    4,    4, 0x08,
+     110,    4,    4,    4, 0x08,
+     128,    4,    4,    4, 0x08,
+     146,    4,    4,    4, 0x08,
+     166,    4,    4,    4, 0x08,
+     192,    4,    4,    4, 0x08,
+     218,    5,    4,    4, 0x08,
+     245,    4,    4,    4, 0x08,
+     269,    4,    4,    4, 0x08,
+     290,    4,    4,    4, 0x08,
+     309,    4,    4,    4, 0x08,
      330,    4,    4,    4, 0x08,
-     347,    4,    4,    4, 0x08,
-     366,    4,    4,    4, 0x08,
+     352,    4,    4,    4, 0x08,
+     369,    4,    4,    4, 0x08,
      388,    4,    4,    4, 0x08,
-     422,  414,    4,    4, 0x08,
-     448,    4,    4,    4, 0x08,
-     468,    4,    4,    4, 0x08,
-     496,    4,    4,    4, 0x08,
-     521,    4,    4,    4, 0x08,
-     545,    4,    4,    4, 0x08,
-     569,    4,    4,    4, 0x08,
-     592,    4,    4,    4, 0x08,
-     613,    4,    4,    4, 0x08,
-     637,    4,    4,    4, 0x08,
-     656,    4,    4,    4, 0x08,
-     676,    4,    4,    4, 0x08,
-     695,    4,    4,    4, 0x08,
-     705,    4,    4,    4, 0x08,
+     410,    4,    4,    4, 0x08,
+     444,  436,    4,    4, 0x08,
+     470,    4,    4,    4, 0x08,
+     490,    4,    4,    4, 0x08,
+     518,    4,    4,    4, 0x08,
+     543,    4,    4,    4, 0x08,
+     567,    4,    4,    4, 0x08,
+     591,    4,    4,    4, 0x08,
+     614,    4,    4,    4, 0x08,
+     635,    4,    4,    4, 0x08,
+     659,    4,    4,    4, 0x08,
+     678,    4,    4,    4, 0x08,
+     698,    4,    4,    4, 0x08,
+     717,    4,    4,    4, 0x08,
      727,    4,    4,    4, 0x08,
-     745,    4,    4,    4, 0x08,
-     762,    4,    4,    4, 0x08,
-     781,    4,    4,    4, 0x08,
-     799,    4,    4,    4, 0x08,
-     819,    4,    4,    4, 0x08,
-     839,    4,    4,    4, 0x08,
-     857,    4,    4,    4, 0x08,
-     875,    4,    4,    4, 0x08,
-     894,    4,    4,    4, 0x08,
-     912,    4,    4,    4, 0x08,
-     931,    4,    4,    4, 0x08,
-     949,    4,    4,    4, 0x08,
-     968,    4,    4,    4, 0x08,
-     986,    4,    4,    4, 0x08,
-    1006,    4,    4,    4, 0x08,
-    1025,    4,    4,    4, 0x08,
-    1045,    4,    4,    4, 0x08,
-    1064,    4,    4,    4, 0x08,
-    1082,    4,    4,    4, 0x08,
-    1102,    4,    4,    4, 0x08,
-    1126, 1120,    4,    4, 0x08,
-    1164, 1120,    4,    4, 0x08,
-    1197,    4,    4,    4, 0x08,
-    1212,    4,    4,    4, 0x08,
-    1227,    4,    4,    4, 0x08,
+     749,    4,    4,    4, 0x08,
+     767,    4,    4,    4, 0x08,
+     784,    4,    4,    4, 0x08,
+     803,    4,    4,    4, 0x08,
+     821,    4,    4,    4, 0x08,
+     841,    4,    4,    4, 0x08,
+     861,    4,    4,    4, 0x08,
+     879,    4,    4,    4, 0x08,
+     897,    4,    4,    4, 0x08,
+     916,    4,    4,    4, 0x08,
+     934,    4,    4,    4, 0x08,
+     953,    4,    4,    4, 0x08,
+     971,    4,    4,    4, 0x08,
+     990,    4,    4,    4, 0x08,
+    1008,    4,    4,    4, 0x08,
+    1028,    4,    4,    4, 0x08,
+    1047,    4,    4,    4, 0x08,
+    1067,    4,    4,    4, 0x08,
+    1086,    4,    4,    4, 0x08,
+    1104,    4,    4,    4, 0x08,
+    1124,    4,    4,    4, 0x08,
+    1148, 1142,    4,    4, 0x08,
+    1186, 1142,    4,    4, 0x08,
+    1219,    4,    4,    4, 0x08,
+    1234,    4,    4,    4, 0x08,
+    1249,    4,    4,    4, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_ICM[] = {
     "ICM\0\0,\0ICM2GCalib(double,QString)\0"
-    "on_ACDC_clicked()\0on_cBut_clicked()\0"
-    "on_lBut_clicked()\0on_rBut_clicked()\0"
-    "on_exit_clicked()\0on_RacRdc_clicked()\0"
-    "on_hideSettings_clicked()\0"
+    "on_graphBut_clicked()\0on_ACDC_clicked()\0"
+    "on_cBut_clicked()\0on_lBut_clicked()\0"
+    "on_rBut_clicked()\0on_exit_clicked()\0"
+    "on_RacRdc_clicked()\0on_hideSettings_clicked()\0"
     "on_pushButton_3_clicked()\0"
     "GCalib2ICM(double,QString)\0"
     "on_printImage_clicked()\0on_chkLoad_clicked()\0"
@@ -164,67 +165,68 @@ int ICM::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: ICM2GCalib((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 1: on_ACDC_clicked(); break;
-        case 2: on_cBut_clicked(); break;
-        case 3: on_lBut_clicked(); break;
-        case 4: on_rBut_clicked(); break;
-        case 5: on_exit_clicked(); break;
-        case 6: on_RacRdc_clicked(); break;
-        case 7: on_hideSettings_clicked(); break;
-        case 8: on_pushButton_3_clicked(); break;
-        case 9: GCalib2ICM((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 10: on_printImage_clicked(); break;
-        case 11: on_chkLoad_clicked(); break;
-        case 12: receiveValue((*reinterpret_cast< uint(*)>(_a[1]))); break;
-        case 13: receiveValue((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 14: receiveValue((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 15: callActualEdit(); break;
-        case 16: callMeasuredEdit(); break;
-        case 17: on_checkBox_clicked(); break;
-        case 18: on_pushButton_2_clicked(); break;
-        case 19: on_external_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 20: on_NULL_2_clicked(); break;
-        case 21: callFrequencyChange((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 22: callOffsetChange((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 23: callFeedBackChange((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 24: on_pushButton_clicked(); break;
-        case 25: on_calibrate_clicked(); break;
-        case 26: on_ExitBut_clicked(); break;
-        case 27: on_AutoManual_clicked(); break;
-        case 28: on_L30mH_clicked(); break;
-        case 29: on_R100KE_clicked(); break;
-        case 30: on_ONOFF_clicked(); break;
-        case 31: readADC(); break;
-        case 32: on_settings_clicked(); break;
-        case 33: on_L3mH_clicked(); break;
-        case 34: on_L3H_clicked(); break;
-        case 35: on_L30uH_clicked(); break;
-        case 36: on_L30H_clicked(); break;
-        case 37: on_L300uH_clicked(); break;
-        case 38: on_L300mH_clicked(); break;
-        case 39: on_R1ME_clicked(); break;
-        case 40: on_R1KE_clicked(); break;
-        case 41: on_R10KE_clicked(); break;
-        case 42: on_R10E_clicked(); break;
-        case 43: on_R100E_clicked(); break;
-        case 44: on_C1uF_clicked(); break;
-        case 45: on_C10mF_clicked(); break;
-        case 46: on_C1mF_clicked(); break;
-        case 47: on_C100uF_clicked(); break;
-        case 48: on_C10uF_clicked(); break;
-        case 49: on_C100nF_clicked(); break;
-        case 50: on_C10nF_clicked(); break;
-        case 51: on_C1nF_clicked(); break;
-        case 52: on_C100pF_clicked(); break;
-        case 53: on_Exit_clicked(); break;
-        case 54: on_AutoManualSlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 55: on_OnOffSlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 56: on_C_clicked(); break;
-        case 57: on_L_clicked(); break;
-        case 58: on_R_clicked(); break;
+        case 1: on_graphBut_clicked(); break;
+        case 2: on_ACDC_clicked(); break;
+        case 3: on_cBut_clicked(); break;
+        case 4: on_lBut_clicked(); break;
+        case 5: on_rBut_clicked(); break;
+        case 6: on_exit_clicked(); break;
+        case 7: on_RacRdc_clicked(); break;
+        case 8: on_hideSettings_clicked(); break;
+        case 9: on_pushButton_3_clicked(); break;
+        case 10: GCalib2ICM((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 11: on_printImage_clicked(); break;
+        case 12: on_chkLoad_clicked(); break;
+        case 13: receiveValue((*reinterpret_cast< uint(*)>(_a[1]))); break;
+        case 14: receiveValue((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 15: receiveValue((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 16: callActualEdit(); break;
+        case 17: callMeasuredEdit(); break;
+        case 18: on_checkBox_clicked(); break;
+        case 19: on_pushButton_2_clicked(); break;
+        case 20: on_external_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 21: on_NULL_2_clicked(); break;
+        case 22: callFrequencyChange((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 23: callOffsetChange((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 24: callFeedBackChange((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 25: on_pushButton_clicked(); break;
+        case 26: on_calibrate_clicked(); break;
+        case 27: on_ExitBut_clicked(); break;
+        case 28: on_AutoManual_clicked(); break;
+        case 29: on_L30mH_clicked(); break;
+        case 30: on_R100KE_clicked(); break;
+        case 31: on_ONOFF_clicked(); break;
+        case 32: readADC(); break;
+        case 33: on_settings_clicked(); break;
+        case 34: on_L3mH_clicked(); break;
+        case 35: on_L3H_clicked(); break;
+        case 36: on_L30uH_clicked(); break;
+        case 37: on_L30H_clicked(); break;
+        case 38: on_L300uH_clicked(); break;
+        case 39: on_L300mH_clicked(); break;
+        case 40: on_R1ME_clicked(); break;
+        case 41: on_R1KE_clicked(); break;
+        case 42: on_R10KE_clicked(); break;
+        case 43: on_R10E_clicked(); break;
+        case 44: on_R100E_clicked(); break;
+        case 45: on_C1uF_clicked(); break;
+        case 46: on_C10mF_clicked(); break;
+        case 47: on_C1mF_clicked(); break;
+        case 48: on_C100uF_clicked(); break;
+        case 49: on_C10uF_clicked(); break;
+        case 50: on_C100nF_clicked(); break;
+        case 51: on_C10nF_clicked(); break;
+        case 52: on_C1nF_clicked(); break;
+        case 53: on_C100pF_clicked(); break;
+        case 54: on_Exit_clicked(); break;
+        case 55: on_AutoManualSlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 56: on_OnOffSlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 57: on_C_clicked(); break;
+        case 58: on_L_clicked(); break;
+        case 59: on_R_clicked(); break;
         default: ;
         }
-        _id -= 59;
+        _id -= 60;
     }
     return _id;
 }
