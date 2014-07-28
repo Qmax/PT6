@@ -333,7 +333,7 @@ void DMM::InitialiseValues() {
         avgRetval[i] = 0.0;
 
     buttonPressed(9);
-
+//QVector initialization
     x.resize(250);
     y.resize(250);
 

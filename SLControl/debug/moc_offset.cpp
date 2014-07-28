@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'offset.h'
 **
-** Created: Fri Jul 11 12:18:09 2014
+** Created: Mon Jul 28 13:15:13 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

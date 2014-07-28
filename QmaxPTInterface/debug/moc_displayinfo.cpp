@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'displayinfo.h'
 **
-** Created: Wed Jul 9 11:25:31 2014
+** Created: Mon Jul 28 13:31:08 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

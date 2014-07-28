@@ -80,6 +80,10 @@ public:
     int loopOut;
     QString m_strRLC;
     QVector<double> x, y;
+    int m_nSweepStartFrequency,m_nSweepEndFrequency,m_nSweepInterval;
+    int m_nSweepStartFrequency2,m_nSweepEndFrequency2,m_nSweepInterval2;
+    int m_nSweepStartFrequencyUnit,m_nSweepEndFrequencyUnit,m_nSweepIntervalUnit;
+
 protected:
 
     PTGPIOEventInterface *IGPIOEvent;
@@ -129,6 +133,8 @@ protected:
     void AutoRange();
     void AutoRangeGain();
     QString convertToUnits(double l_nvalue);
+    double convertToValues(QString input);
+
 //    void resetDAC(AD5318_DACSELECT DAC);
 //    void updateDAC(double);
 
@@ -176,6 +182,13 @@ signals:
 
 private  slots:
 
+void on_sweep_interval_unit_currentIndexChanged(int index);
+void on_sweep_interval_valueChanged(int );
+void on_sweep_endfreq_unit_currentIndexChanged(int index);
+void on_sweep_endfreq_valueChanged(int );
+void on_sweep_startfreq_unit_currentIndexChanged(int index);
+void on_sweep_startfreq_valueChanged(int );
+void on_sweep_capture_clicked();
 void on_graphBut_clicked();
 void on_ACDC_clicked();
 void on_cBut_clicked();

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'messagewidget.h'
 **
-** Created: Wed Jul 9 11:19:38 2014
+** Created: Mon Jul 28 13:25:20 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

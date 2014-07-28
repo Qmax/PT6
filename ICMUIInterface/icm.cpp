@@ -26,7 +26,6 @@ QMainWindow(parent), ui(new Ui::ICM) {
 	ui->value_XLXC->setVisible(false);
 
 	loopOut = 0;//graphing
-	setupSimpleDemo(ui->customPlot);
 }
 void ICM::ToolBox(bool hide) {
 	ui->calibrateDisplay->setVisible(hide);
@@ -68,12 +67,12 @@ void ICM::setupSimpleDemo(QCustomPlot *customPlot) {
     customPlot->graph()->setLineStyle(QCPGraph::lsLine);
     customPlot->graph()->setPen(pen);
 
-    customPlot->xAxis->setLabel("time");
+    customPlot->xAxis->setLabel("Frequency-->");
     customPlot->xAxis->setScaleLogBase(10);
     QString str = m_strRLC;
-    customPlot->yAxis->setLabel(str);
+    customPlot->yAxis->setLabel(str+"-->");
     // set axes ranges, so we see all data:
-    customPlot->xAxis->setRange(0, 60);
+    customPlot->xAxis->setRange(10, 240000);
 
     QString str2 = ui->rangeLabel->text();
 
@@ -88,7 +87,7 @@ void ICM::setupSimpleDemo(QCustomPlot *customPlot) {
         maxRange = str2.toInt(&ok, 10);
 
 
-    customPlot->yAxis->setRange(minRange, maxRange);
+    customPlot->yAxis->setRange(minRange, 1000000);
     //	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     customPlot->setInteractions(QCP::iRangeZoom | QCP::iMultiSelect
                                 | QCP::iSelectPlottables | QCP::iSelectAxes | QCP::iSelectLegend
@@ -2108,7 +2107,41 @@ void ICM::GetDisplayInductance(double p_nData, short int p_nRange) {
 		dis->setValue(l_sDisplayData);
 	}
 }
+double ICM::convertToValues(QString input) {
 
+    QString unit, value;
+    double inValue;
+    bool ok = true;
+
+    int j = 0;
+
+    for (int i = 0; i <= input.count(); i++) {
+        if ((input[i] >= 'A' && input[i] <= 'Z') || (input[i] >= 'a'
+                                                     && input[i] <= 'z') || (input[i] == QChar(0x2126)) || (input[i]
+                                                                                                            == QChar(0x00B5))) {
+            unit[j] = input[i];
+            j++;
+        }
+    }
+    for (int k = 0; k < (input.count() - unit.count()); k++)
+        value[k] = input[k];
+
+    inValue = value.toDouble(&ok);
+
+    if (unit[0] == 'n') {
+        return (inValue / 1000000000);
+    } else if ((unit[0] == QChar(0x00B5)) || (unit[0] == 'u')) {
+        return (inValue / 1000000);
+    } else if (unit[0] == 'm') {
+        return (inValue / 1000);
+    } else if (unit[0] == 'K') {
+        return (inValue * 1000);
+    } else if (unit[0] == 'M') {
+        return (inValue * 1000000);
+    } else {
+        return (inValue * 1);
+    }
+}
 QString ICM::convertToUnits(double l_nvalue) {
 	QString unit;
 	double value;
@@ -2592,19 +2625,122 @@ void ICM::on_ACDC_clicked()
 {
 	on_RacRdc_clicked();
 }
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Frequency Sweep~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void ICM::on_graphBut_clicked()
 {
-    if (ui->plottingWindow->isVisible()){
+	//~~~~~~~~Check for debug panel~~~~~~~~~~~~~~~~~~~~~~~~
+	QStringList debugPanel;
+	QFile textFile2("debugPanel.txt");
+	if (textFile2.open(QIODevice::ReadOnly))
+	{
+		QTextStream textStream(&textFile2);
+		while (!textStream.atEnd())
+		{
+			debugPanel.append(textStream.readLine());
+		}
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	if (ui->plottingWindow->isVisible()){
         ui->plottingWindow->setVisible(false);
-        ui->frontPanel_ICM->setVisible(true);
+		if(debugPanel.value(0)=="1")
+			ui->debugPanel->setVisible(true);
+		else
+			ui->frontPanel_ICM->setVisible(true);
     }
     else{
         ui->plottingWindow->setVisible(true);
-        ui->frontPanel_ICM->setVisible(false);
-    }
+		if(debugPanel.value(0)=="1")
+			ui->debugPanel->setVisible(false);
+		else
+			ui->frontPanel_ICM->setVisible(false);
+		}
 
-    //<-------For Enabling graph plot-------
+
+    ADCtimer->stop();
+    m_nSweepStartFrequencyUnit=m_nSweepEndFrequencyUnit=m_nSweepIntervalUnit=1;
+	setupSimpleDemo(ui->customPlot);
+
+}
+
+void ICM::on_sweep_capture_clicked()
+{
+    QFile outFile("ICMGraph.log");
+//    if (outFile.size() > 1298368)
+        outFile.open(QIODevice::WriteOnly | QIODevice::Text);
+//    else
+//        outFile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append);
+    QTextStream ts(&outFile);
+	int loop=0;
+    x.resize(m_nSweepEndFrequency);   y.resize(convertToValues(ui->rangeLabel->text()));
+
+	qDebug()<<"SweepStartFrequency:"<<m_nSweepStartFrequency;
+	qDebug()<<"SweepEndFrequency:"<<m_nSweepEndFrequency;
+	qDebug()<<"SweepInterval:"<<m_nSweepInterval;
+
+	for(int i=m_nSweepStartFrequency;i<=m_nSweepEndFrequency;i=i+m_nSweepInterval){
+		hwInterface->setFrequency((double)i);
+		m_nFrequency = (double)i;
+		usleep(5000);
+		readADC();
+		x[loop]=(double)i;
+		if (ui->ResistanceRanges->isVisible()) {
+			y[loop]=m_nResistance;
+			qDebug()<<"Frequency:"<<i<<"Resistance:"<<(m_nResistance);
+            ts << QString("Frequency:") << "\t" << m_nFrequency<< "\t"<<QString("Resistance:") << "\t" << m_nResistance<<"\n";
+		}else if(ui->CapacitanceRanges->isVisible()){
+			y[loop]=m_nCapacitance;
+			qDebug()<<"Frequency:"<<i<<"Capacitance:"<<(m_nCapacitance);
+			ts << QString("Frequency:") << "\t" << m_nFrequency<< "\t"<<QString("Capacitance:") << "\t" << m_nCapacitance<<"\n";
+		}else if(ui->Inductorranges->isVisible()){
+			y[loop]=m_nInductance;
+			qDebug()<<"Frequency:"<<i<<"Inductance:"<<(m_nInductance);
+			ts << QString("Frequency:") << "\t" << m_nFrequency<< "\t"<<QString("Inductance:") << "\t" << m_nInductance<<"\n";
+		}
+		loop++;
+	}
     plotSimpleDemo(ui->customPlot);
-    ui->customPlot->replot();//------------->
+    ui->customPlot->replot();
+}
+
+void ICM::on_sweep_startfreq_valueChanged(int value )
+{
+	m_nSweepStartFrequency2=value;
+	m_nSweepStartFrequency=m_nSweepStartFrequency2*m_nSweepStartFrequencyUnit;
+}
+
+void ICM::on_sweep_startfreq_unit_currentIndexChanged(int index)
+{
+	if(index==0)		m_nSweepStartFrequencyUnit=1;
+	else if(index==1)	m_nSweepStartFrequencyUnit=1000;
+	m_nSweepStartFrequency=m_nSweepStartFrequency2*m_nSweepStartFrequencyUnit;
+
+
+}
+
+void ICM::on_sweep_endfreq_valueChanged(int value )
+{
+	m_nSweepEndFrequency2=value;
+	m_nSweepEndFrequency=m_nSweepEndFrequency2*m_nSweepEndFrequencyUnit;
+}
+
+void ICM::on_sweep_endfreq_unit_currentIndexChanged(int index)
+{
+	if(index==0)		m_nSweepEndFrequencyUnit=1;
+	else if(index==1)	m_nSweepEndFrequencyUnit=1000;
+	m_nSweepEndFrequency=m_nSweepEndFrequency2*m_nSweepEndFrequencyUnit;
+
+}
+
+void ICM::on_sweep_interval_valueChanged(int value)
+{
+	m_nSweepInterval2=value;
+	m_nSweepInterval=m_nSweepInterval2*m_nSweepIntervalUnit;
+}
+
+void ICM::on_sweep_interval_unit_currentIndexChanged(int index)
+{
+	if(index==0)		m_nSweepIntervalUnit=1;
+	else if(index==1)	m_nSweepIntervalUnit=1000;
+	m_nSweepInterval=m_nSweepInterval2*m_nSweepIntervalUnit;
 }

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'visettings.ui'
 **
-** Created: Fri Jul 25 12:43:00 2014
+** Created: Mon Jul 28 13:11:32 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'icm.ui'
 **
-** Created: Fri Jul 25 17:26:48 2014
+** Created: Mon Jul 28 18:45:31 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,6 +15,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QCheckBox>
+#include <QtGui/QComboBox>
 #include <QtGui/QFrame>
 #include <QtGui/QGridLayout>
 #include <QtGui/QGroupBox>
@@ -135,6 +136,16 @@ public:
     QLabel *label_20;
     QFrame *plottingWindow;
     QCustomPlot *customPlot;
+    QComboBox *sweep_interval_unit;
+    QSpinBox *sweep_endfreq;
+    QLabel *lbl_endfreq;
+    QPushButton *sweep_capture;
+    QLabel *lbl_startfreq;
+    QSpinBox *sweep_startfreq;
+    QComboBox *sweep_startfreq_unit;
+    QComboBox *sweep_endfreq_unit;
+    QSpinBox *sweep_interval;
+    QLabel *lbl_interval;
     QFrame *frontPanel_ICM;
     QFrame *framePowerUSB;
     QFrame *fp_usbSocket;
@@ -2187,7 +2198,77 @@ public:
         plottingWindow->setFrameShadow(QFrame::Raised);
         customPlot = new QCustomPlot(plottingWindow);
         customPlot->setObjectName(QString::fromUtf8("customPlot"));
-        customPlot->setGeometry(QRect(6, 10, 690, 147));
+        customPlot->setGeometry(QRect(2, 2, 689, 128));
+        sweep_interval_unit = new QComboBox(plottingWindow);
+        sweep_interval_unit->setObjectName(QString::fromUtf8("sweep_interval_unit"));
+        sweep_interval_unit->setGeometry(QRect(565, 131, 45, 29));
+        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(sweep_interval_unit->sizePolicy().hasHeightForWidth());
+        sweep_interval_unit->setSizePolicy(sizePolicy1);
+        sweep_interval_unit->setStyleSheet(QString::fromUtf8("max-width:45px;"));
+        sweep_endfreq = new QSpinBox(plottingWindow);
+        sweep_endfreq->setObjectName(QString::fromUtf8("sweep_endfreq"));
+        sweep_endfreq->setGeometry(QRect(286, 132, 90, 27));
+        sweep_endfreq->setStyleSheet(QString::fromUtf8("QSpinBox{max-width:90px;}\n"
+"QSpinBox::up-button {\n"
+"     width: 50px; \n"
+" }\n"
+"QSpinBox::down-button {\n"
+"     width: 50px;\n"
+" }"));
+        sweep_endfreq->setMaximum(999);
+        lbl_endfreq = new QLabel(plottingWindow);
+        lbl_endfreq->setObjectName(QString::fromUtf8("lbl_endfreq"));
+        lbl_endfreq->setGeometry(QRect(213, 130, 70, 29));
+        lbl_endfreq->setStyleSheet(QString::fromUtf8("max-width:70px;"));
+        sweep_capture = new QPushButton(plottingWindow);
+        sweep_capture->setObjectName(QString::fromUtf8("sweep_capture"));
+        sweep_capture->setGeometry(QRect(610, 132, 80, 27));
+        sweep_capture->setStyleSheet(QString::fromUtf8("max-width:80px;"));
+        lbl_startfreq = new QLabel(plottingWindow);
+        lbl_startfreq->setObjectName(QString::fromUtf8("lbl_startfreq"));
+        lbl_startfreq->setGeometry(QRect(0, 131, 72, 29));
+        lbl_startfreq->setStyleSheet(QString::fromUtf8("max-width:70px;"));
+        sweep_startfreq = new QSpinBox(plottingWindow);
+        sweep_startfreq->setObjectName(QString::fromUtf8("sweep_startfreq"));
+        sweep_startfreq->setGeometry(QRect(77, 132, 90, 27));
+        sweep_startfreq->setStyleSheet(QString::fromUtf8("QSpinBox{max-width:90px;}\n"
+"QSpinBox::up-button {\n"
+"     width: 50px; \n"
+" }\n"
+"QSpinBox::down-button {\n"
+"     width: 50px;\n"
+" }"));
+        sweep_startfreq->setMaximum(999);
+        sweep_startfreq_unit = new QComboBox(plottingWindow);
+        sweep_startfreq_unit->setObjectName(QString::fromUtf8("sweep_startfreq_unit"));
+        sweep_startfreq_unit->setGeometry(QRect(167, 131, 45, 29));
+        sizePolicy1.setHeightForWidth(sweep_startfreq_unit->sizePolicy().hasHeightForWidth());
+        sweep_startfreq_unit->setSizePolicy(sizePolicy1);
+        sweep_startfreq_unit->setStyleSheet(QString::fromUtf8("max-width:45px;"));
+        sweep_endfreq_unit = new QComboBox(plottingWindow);
+        sweep_endfreq_unit->setObjectName(QString::fromUtf8("sweep_endfreq_unit"));
+        sweep_endfreq_unit->setGeometry(QRect(375, 131, 45, 29));
+        sizePolicy1.setHeightForWidth(sweep_endfreq_unit->sizePolicy().hasHeightForWidth());
+        sweep_endfreq_unit->setSizePolicy(sizePolicy1);
+        sweep_endfreq_unit->setStyleSheet(QString::fromUtf8("max-width:45px;"));
+        sweep_interval = new QSpinBox(plottingWindow);
+        sweep_interval->setObjectName(QString::fromUtf8("sweep_interval"));
+        sweep_interval->setGeometry(QRect(478, 132, 90, 27));
+        sweep_interval->setStyleSheet(QString::fromUtf8("QSpinBox{max-width:90px;}\n"
+"QSpinBox::up-button {\n"
+"     width: 50px; \n"
+" }\n"
+"QSpinBox::down-button {\n"
+"     width: 50px;\n"
+" }"));
+        sweep_interval->setMaximum(999);
+        lbl_interval = new QLabel(plottingWindow);
+        lbl_interval->setObjectName(QString::fromUtf8("lbl_interval"));
+        lbl_interval->setGeometry(QRect(420, 131, 62, 29));
+        lbl_interval->setStyleSheet(QString::fromUtf8("max-width:60px;"));
         frontPanel_ICM = new QFrame(centralWidget);
         frontPanel_ICM->setObjectName(QString::fromUtf8("frontPanel_ICM"));
         frontPanel_ICM->setGeometry(QRect(10, 434, 693, 160));
@@ -2791,6 +2872,25 @@ public:
         lBox->setTitle(QString());
         lBut->setText(QString());
         label_20->setText(QApplication::translate("ICM", "L", 0, QApplication::UnicodeUTF8));
+        sweep_interval_unit->clear();
+        sweep_interval_unit->insertItems(0, QStringList()
+         << QApplication::translate("ICM", "Hz", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ICM", "KHz", 0, QApplication::UnicodeUTF8)
+        );
+        lbl_endfreq->setText(QApplication::translate("ICM", "End Freq:", 0, QApplication::UnicodeUTF8));
+        sweep_capture->setText(QApplication::translate("ICM", "Capture", 0, QApplication::UnicodeUTF8));
+        lbl_startfreq->setText(QApplication::translate("ICM", "Start Freq:", 0, QApplication::UnicodeUTF8));
+        sweep_startfreq_unit->clear();
+        sweep_startfreq_unit->insertItems(0, QStringList()
+         << QApplication::translate("ICM", "Hz", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ICM", "KHz", 0, QApplication::UnicodeUTF8)
+        );
+        sweep_endfreq_unit->clear();
+        sweep_endfreq_unit->insertItems(0, QStringList()
+         << QApplication::translate("ICM", "Hz", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ICM", "KHz", 0, QApplication::UnicodeUTF8)
+        );
+        lbl_interval->setText(QApplication::translate("ICM", "Interval:", 0, QApplication::UnicodeUTF8));
         fp_powerLabel->setText(QApplication::translate("ICM", "POWER", 0, QApplication::UnicodeUTF8));
         ah3_label->setText(QApplication::translate("ICM", "AH3", 0, QApplication::UnicodeUTF8));
         ah1_label->setText(QApplication::translate("ICM", "AH1", 0, QApplication::UnicodeUTF8));

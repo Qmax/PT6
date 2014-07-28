@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'testencoder.h'
 **
-** Created: Fri Jun 20 13:33:46 2014
+** Created: Mon Jul 28 13:33:17 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

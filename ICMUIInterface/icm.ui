@@ -5517,11 +5517,228 @@ QLabel{border:1px solid rgba(0,0,0,0);}
     <widget class="QCustomPlot" name="customPlot" native="true">
      <property name="geometry">
       <rect>
-       <x>6</x>
-       <y>10</y>
-       <width>690</width>
-       <height>147</height>
+       <x>2</x>
+       <y>2</y>
+       <width>689</width>
+       <height>128</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="sweep_interval_unit">
+     <property name="geometry">
+      <rect>
+       <x>565</x>
+       <y>131</y>
+       <width>45</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">max-width:45px;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Hz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>KHz</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QSpinBox" name="sweep_endfreq">
+     <property name="geometry">
+      <rect>
+       <x>286</x>
+       <y>132</y>
+       <width>90</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSpinBox{max-width:90px;}
+QSpinBox::up-button {
+     width: 50px; 
+ }
+QSpinBox::down-button {
+     width: 50px;
+ }</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbl_endfreq">
+     <property name="geometry">
+      <rect>
+       <x>213</x>
+       <y>130</y>
+       <width>70</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">max-width:70px;</string>
+     </property>
+     <property name="text">
+      <string>End Freq:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="sweep_capture">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>132</y>
+       <width>80</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">max-width:80px;</string>
+     </property>
+     <property name="text">
+      <string>Capture</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbl_startfreq">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>131</y>
+       <width>72</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">max-width:70px;</string>
+     </property>
+     <property name="text">
+      <string>Start Freq:</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sweep_startfreq">
+     <property name="geometry">
+      <rect>
+       <x>77</x>
+       <y>132</y>
+       <width>90</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSpinBox{max-width:90px;}
+QSpinBox::up-button {
+     width: 50px; 
+ }
+QSpinBox::down-button {
+     width: 50px;
+ }</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="sweep_startfreq_unit">
+     <property name="geometry">
+      <rect>
+       <x>167</x>
+       <y>131</y>
+       <width>45</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">max-width:45px;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Hz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>KHz</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QComboBox" name="sweep_endfreq_unit">
+     <property name="geometry">
+      <rect>
+       <x>375</x>
+       <y>131</y>
+       <width>45</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">max-width:45px;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Hz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>KHz</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QSpinBox" name="sweep_interval">
+     <property name="geometry">
+      <rect>
+       <x>478</x>
+       <y>132</y>
+       <width>90</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSpinBox{max-width:90px;}
+QSpinBox::up-button {
+     width: 50px; 
+ }
+QSpinBox::down-button {
+     width: 50px;
+ }</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbl_interval">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>131</y>
+       <width>62</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">max-width:60px;</string>
+     </property>
+     <property name="text">
+      <string>Interval:</string>
      </property>
     </widget>
    </widget>
