@@ -797,9 +797,6 @@ void ICM::readADC() {
 		ui->rangeLabel->setText(m_mapInductance.value(L_Index));
 		emit ICM2GCalib(m_nInductance, "ICM-L");
 	}
-    //<-------For Enabling graph plot-------
-    plotSimpleDemo(ui->customPlot);
-    ui->customPlot->replot();//------------->
 }
 void ICM::AutoRangeGain(){
 
@@ -2606,4 +2603,8 @@ void ICM::on_graphBut_clicked()
         ui->plottingWindow->setVisible(true);
         ui->frontPanel_ICM->setVisible(false);
     }
+
+    //<-------For Enabling graph plot-------
+    plotSimpleDemo(ui->customPlot);
+    ui->customPlot->replot();//------------->
 }
