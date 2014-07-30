@@ -37,5 +37,6 @@ HEADERS += serialdevice.h \
 FORMS = offset.ui \
     shortlocater.ui
 DESTDIR = /exports/nfsroot-ccwmx51js/home/
-RESOURCES += svgResource.qrc \
+RESOURCES += fp_res.qrc \
+    svgResource.qrc \
     svgbutton.qrc

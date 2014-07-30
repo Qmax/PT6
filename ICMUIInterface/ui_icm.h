@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'icm.ui'
 **
-** Created: Mon Jul 28 18:45:31 2014
+** Created: Wed Jul 30 11:00:06 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -2026,7 +2026,7 @@ public:
         calibrate->setIconSize(QSize(48, 48));
         selectFrame = new QFrame(centralWidget);
         selectFrame->setObjectName(QString::fromUtf8("selectFrame"));
-        selectFrame->setGeometry(QRect(701, 50, 10, 60));
+        selectFrame->setGeometry(QRect(701, 54, 10, 60));
         selectFrame->setStyleSheet(QString::fromUtf8("/*background-color: qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);*/\n"
 "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "                                       stop: 0 #3a5976, stop: 1 #000000);\n"
@@ -2198,7 +2198,7 @@ public:
         plottingWindow->setFrameShadow(QFrame::Raised);
         customPlot = new QCustomPlot(plottingWindow);
         customPlot->setObjectName(QString::fromUtf8("customPlot"));
-        customPlot->setGeometry(QRect(2, 2, 689, 128));
+        customPlot->setGeometry(QRect(2, 2, 690, 128));
         sweep_interval_unit = new QComboBox(plottingWindow);
         sweep_interval_unit->setObjectName(QString::fromUtf8("sweep_interval_unit"));
         sweep_interval_unit->setGeometry(QRect(565, 131, 45, 29));
@@ -2762,7 +2762,6 @@ public:
         displayBox->raise();
         Components->raise();
         debugPanel->raise();
-        selectFrame->raise();
         cBox->raise();
         ExitBox->raise();
         rBox->raise();
@@ -2770,6 +2769,7 @@ public:
         graphBox->raise();
         lBox->raise();
         frontPanel_ICM->raise();
+        selectFrame->raise();
 
         retranslateUi(ICM);
 

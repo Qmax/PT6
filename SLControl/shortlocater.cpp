@@ -45,9 +45,9 @@ ShortLocater::ShortLocater(QWidget *parent)
     HAADC->setHACADC(ui.HAADC_WIDGET);
     ui.HAADC_WIDGET->setWindowFlags(Qt::Dialog);
     HAADC->showWidget();
-
-    toolboxFlag=false;
-    ToolBox(toolboxFlag);
+//
+//    toolboxFlag=false;
+//    ToolBox(toolboxFlag);
 
     Initializations();
 
@@ -56,7 +56,7 @@ ShortLocater::ShortLocater(QWidget *parent)
 }
 void ShortLocater::ToolBox(bool flag){
     ui.debugPanel->setVisible(flag);
-    ui.frontPanel->setVisible(!flag);
+    ui.frontPanel_SHLOC->setVisible(!flag);
     ui.calibrateDisplay->setVisible(flag);
     ui.HAADC_WIDGET->setVisible(flag);
     ui.pushButton->setVisible(flag);
@@ -1012,6 +1012,27 @@ void ShortLocater::on_Internal_clicked()
 
             ui.Internal->setVisible(false);
             ui.External->setVisible(true);
+    		ui.ah1_inner->setVisible(false);
+    		ui.ah1_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/fp_images/bnc.png);");
+    		ui.ah1_outer->setGeometry(22,26,41,41);
+
+    		ui.ah2_inner->setVisible(false);
+    		ui.ah2_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/fp_images/bnc.png);");
+    		ui.ah2_outer->setGeometry(96,26,41,41);
+
+    		ui.ah3_inner->setVisible(false);
+    		ui.ah3_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/fp_images/bnc.png);");
+    		ui.ah3_outer->setGeometry(167,26,41,41);
+
+    		ui.ah0_inner->setVisible(false);
+    		ui.ah0_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/fp_images/bnc.png);");
+    		ui.ah0_outer->setGeometry(237,26,41,41);
+
+    		ui.fp_VI1_ICM_SL->setGeometry(24,20,41,41);
+    		ui.fp_VI1_ICM_SL->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+
+    		ui.fp_VI2_EXT->setGeometry(110,20,41,41);
+    		ui.fp_VI2_EXT->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
 
 }
 
@@ -1021,6 +1042,27 @@ void ShortLocater::on_External_clicked()
 //    IPsoc->shLocatorDetection();
     ui.Internal->setVisible(true);
     ui.External->setVisible(false);
+	ui.ah1_inner->setVisible(true);
+	ui.ah1_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui.ah1_outer->setGeometry(22,26,41,41);
+
+	ui.ah2_inner->setVisible(true);
+	ui.ah2_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui.ah2_outer->setGeometry(96,26,41,41);
+
+	ui.ah3_inner->setVisible(true);
+	ui.ah3_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui.ah3_outer->setGeometry(167,26,41,41);
+
+	ui.ah0_inner->setVisible(true);
+	ui.ah0_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+	ui.ah0_outer->setGeometry(237,26,41,41);
+
+	ui.fp_VI1_ICM_SL->setGeometry(24,20,53,49);
+	ui.fp_VI1_ICM_SL->setStyleSheet("border:1px rgba(0,0,0,0);border-radius:20px;image: url(:/fp_images/VI_SL_ICM.png);");
+
+	ui.fp_VI2_EXT->setGeometry(110,20,41,41);
+	ui.fp_VI2_EXT->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
 }
 
 void ShortLocater::on_openShortEnable_clicked(bool checked)

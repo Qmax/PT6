@@ -5062,7 +5062,7 @@ Calibration</string>
     <property name="geometry">
      <rect>
       <x>701</x>
-      <y>50</y>
+      <y>54</y>
       <width>10</width>
       <height>60</height>
      </rect>
@@ -5519,7 +5519,7 @@ QLabel{border:1px solid rgba(0,0,0,0);}
       <rect>
        <x>2</x>
        <y>2</y>
-       <width>689</width>
+       <width>690</width>
        <height>128</height>
       </rect>
      </property>
@@ -7155,7 +7155,6 @@ background-color: rgb(0, 0, 0,0);
    <zorder>displayBox</zorder>
    <zorder>Components</zorder>
    <zorder>debugPanel</zorder>
-   <zorder>selectFrame</zorder>
    <zorder>cBox</zorder>
    <zorder>ExitBox</zorder>
    <zorder>rBox</zorder>
@@ -7163,6 +7162,7 @@ background-color: rgb(0, 0, 0,0);
    <zorder>graphBox</zorder>
    <zorder>lBox</zorder>
    <zorder>frontPanel_ICM</zorder>
+   <zorder>selectFrame</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

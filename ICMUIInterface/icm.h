@@ -83,6 +83,8 @@ public:
     int m_nSweepStartFrequency,m_nSweepEndFrequency,m_nSweepInterval;
     int m_nSweepStartFrequency2,m_nSweepEndFrequency2,m_nSweepInterval2;
     int m_nSweepStartFrequencyUnit,m_nSweepEndFrequencyUnit,m_nSweepIntervalUnit;
+    int xSize,ySize,yRangeMax;
+
 
 protected:
 
