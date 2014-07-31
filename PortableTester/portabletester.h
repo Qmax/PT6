@@ -34,6 +34,8 @@
 #include "UtilityWidgetInterface.h"
 #include "operatorInterface.h"
 #include "QDigitalClock.h"
+#include "logindialog.h"
+
 
 #define _DMM_ 0
 #define _VI_  1
@@ -178,6 +180,8 @@ protected:
 	void on_shutDownButton_clicked();
 	void on_testjigButton_clicked();
 
+    bool m_nPassword;
+
 private:
 	Ui::PortableTester *ui;
 
@@ -188,6 +192,8 @@ public slots:
 	void UnHide();
 	void checkButton();
 	void idleScreen();
+    void slotAcceptUserLogin(QString& name,QString& password);
+
 };
 
 

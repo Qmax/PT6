@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Mon Jul 28 13:11:32 2014
+** Created: Thu Jul 31 19:29:55 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -256,16 +256,13 @@ public:
 ""));
         exit = new QPushButton(ExitBox);
         exit->setObjectName(QString::fromUtf8("exit"));
-        exit->setGeometry(QRect(5, 0, 64, 70));
+        exit->setGeometry(QRect(5, 0, 60, 70));
         exit->setFont(font);
         exit->setFocusPolicy(Qt::NoFocus);
         exit->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0);color:blue;\n"
 "	image: url(:/res/logout-icon.png);\n"
 "}\n"
 ""));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/logout-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        exit->setIcon(icon1);
         exit->setIconSize(QSize(70, 70));
         PCBox = new QGroupBox(centralWidget);
         PCBox->setObjectName(QString::fromUtf8("PCBox"));
@@ -342,13 +339,13 @@ public:
 "color:lightgrey;\n"
 "background-color:grey\n"
 "}"));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/res/Probe.png"), QSize(), QIcon::Normal, QIcon::Off);
-        butProClip->setIcon(icon2);
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/res/Probe.png"), QSize(), QIcon::Normal, QIcon::Off);
+        butProClip->setIcon(icon1);
         butProClip->setIconSize(QSize(64, 64));
         singleCap_7 = new QLabel(PCBox);
         singleCap_7->setObjectName(QString::fromUtf8("singleCap_7"));
-        singleCap_7->setGeometry(QRect(10, 80, 71, 20));
+        singleCap_7->setGeometry(QRect(4, 80, 71, 20));
         singleCap_7->setFont(font1);
         singleCap_7->setStyleSheet(QString::fromUtf8("QLabel {color:white;border: rgba(0,0,0,0);}"));
         selectFrame = new QFrame(centralWidget);
@@ -385,9 +382,9 @@ public:
         storeButton->setFocusPolicy(Qt::NoFocus);
         storeButton->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);\n"
 "}"));
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/res/Store.png"), QSize(), QIcon::Normal, QIcon::Off);
-        storeButton->setIcon(icon3);
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/res/Store.png"), QSize(), QIcon::Normal, QIcon::Off);
+        storeButton->setIcon(icon2);
         storeButton->setIconSize(QSize(64, 64));
         CalibBox = new QGroupBox(centralWidget);
         CalibBox->setObjectName(QString::fromUtf8("CalibBox"));
@@ -422,9 +419,9 @@ public:
 "}\n"
 "\n"
 ""));
-        QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/res/Calibar.png"), QSize(), QIcon::Normal, QIcon::Off);
-        calibButton->setIcon(icon4);
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/res/Calibar.png"), QSize(), QIcon::Normal, QIcon::Off);
+        calibButton->setIcon(icon3);
         calibButton->setIconSize(QSize(64, 64));
         startBox = new QGroupBox(centralWidget);
         startBox->setObjectName(QString::fromUtf8("startBox"));
@@ -452,9 +449,9 @@ public:
 "}\n"
 "\n"
 ""));
-        QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/res/Start.png"), QSize(), QIcon::Normal, QIcon::Off);
-        startButton->setIcon(icon5);
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/res/Start.png"), QSize(), QIcon::Normal, QIcon::Off);
+        startButton->setIcon(icon4);
         startButton->setIconSize(QSize(64, 64));
         grpInteractive = new QGroupBox(centralWidget);
         grpInteractive->setObjectName(QString::fromUtf8("grpInteractive"));
@@ -498,9 +495,9 @@ public:
         butUP->setFocusPolicy(Qt::NoFocus);
         butUP->setStyleSheet(QString::fromUtf8("border:0px rgba(0,0,0,0);\n"
 "background-color:rgba(0,0,0,0)"));
-        QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/res/up-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        butUP->setIcon(icon6);
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8(":/res/up-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        butUP->setIcon(icon5);
         butUP->setIconSize(QSize(54, 54));
         butDown = new QPushButton(Parameters);
         butDown->setObjectName(QString::fromUtf8("butDown"));
@@ -509,9 +506,9 @@ public:
         butDown->setStyleSheet(QString::fromUtf8("\n"
 "border:0px rgba(0,0,0,0);\n"
 "background-color:rgba(0,0,0,0);"));
-        QIcon icon7;
-        icon7.addFile(QString::fromUtf8(":/res/down-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        butDown->setIcon(icon7);
+        QIcon icon6;
+        icon6.addFile(QString::fromUtf8(":/res/down-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        butDown->setIcon(icon6);
         butDown->setIconSize(QSize(54, 54));
         lblFrequency = new QLabel(Parameters);
         lblFrequency->setObjectName(QString::fromUtf8("lblFrequency"));
@@ -1037,9 +1034,9 @@ public:
 "color:lightgrey;\n"
 "background-color:grey\n"
 "}"));
-        QIcon icon8;
-        icon8.addFile(QString::fromUtf8(":/res/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
-        butProbe->setIcon(icon8);
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8(":/res/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
+        butProbe->setIcon(icon7);
         butProbe->setIconSize(QSize(70, 70));
         butAM = new QPushButton(grpProbes);
         butAM->setObjectName(QString::fromUtf8("butAM"));
@@ -1051,9 +1048,9 @@ public:
 "border:1px solid rgba(0,0,0,0);\n"
 "}\n"
 ""));
-        QIcon icon9;
-        icon9.addFile(QString::fromUtf8(":/res/pressedOrange.png"), QSize(), QIcon::Normal, QIcon::Off);
-        butAM->setIcon(icon9);
+        QIcon icon8;
+        icon8.addFile(QString::fromUtf8(":/res/pressedOrange.png"), QSize(), QIcon::Normal, QIcon::Off);
+        butAM->setIcon(icon8);
         butAM->setIconSize(QSize(48, 48));
         singleCap_2 = new QLabel(grpProbes);
         singleCap_2->setObjectName(QString::fromUtf8("singleCap_2"));
@@ -1124,7 +1121,7 @@ public:
         butProbe2->setIconSize(QSize(48, 48));
         layoutWidget = new QWidget(groupBox_2);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 76, 271, 20));
+        layoutWidget->setGeometry(QRect(20, 76, 271, 21));
         horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -1692,9 +1689,9 @@ public:
 "border:1px solid rgba(0,0,0,0);\n"
 "}\n"
 ""));
-        QIcon icon10;
-        icon10.addFile(QString::fromUtf8(":/res/48L.png"), QSize(), QIcon::Normal, QIcon::Off);
-        butL->setIcon(icon10);
+        QIcon icon9;
+        icon9.addFile(QString::fromUtf8(":/res/48L.png"), QSize(), QIcon::Normal, QIcon::Off);
+        butL->setIcon(icon9);
         butL->setIconSize(QSize(64, 64));
         butM = new QPushButton(grpEmbedded);
         butM->setObjectName(QString::fromUtf8("butM"));
@@ -1706,9 +1703,9 @@ public:
 "border:1px solid rgba(0,0,0,0);\n"
 "}\n"
 ""));
-        QIcon icon11;
-        icon11.addFile(QString::fromUtf8(":/res/48M.png"), QSize(), QIcon::Normal, QIcon::Off);
-        butM->setIcon(icon11);
+        QIcon icon10;
+        icon10.addFile(QString::fromUtf8(":/res/48M.png"), QSize(), QIcon::Normal, QIcon::Off);
+        butM->setIcon(icon10);
         butM->setIconSize(QSize(64, 64));
         butR = new QPushButton(grpEmbedded);
         butR->setObjectName(QString::fromUtf8("butR"));
@@ -1721,9 +1718,9 @@ public:
 "border:1px solid rgba(0,0,0,0);\n"
 "}\n"
 ""));
-        QIcon icon12;
-        icon12.addFile(QString::fromUtf8(":/res/48R.png"), QSize(), QIcon::Normal, QIcon::Off);
-        butR->setIcon(icon12);
+        QIcon icon11;
+        icon11.addFile(QString::fromUtf8(":/res/48R.png"), QSize(), QIcon::Normal, QIcon::Off);
+        butR->setIcon(icon11);
         butR->setIconSize(QSize(64, 64));
         tblVoltage = new QToolButton(grpInteractive);
         tblVoltage->setObjectName(QString::fromUtf8("tblVoltage"));
@@ -1809,7 +1806,7 @@ public:
 "color:lightgrey;\n"
 "background-color:grey\n"
 "}"));
-        butClip->setIcon(icon8);
+        butClip->setIcon(icon7);
         butClip->setIconSize(QSize(64, 64));
         butLearn = new QPushButton(grpClip);
         butLearn->setObjectName(QString::fromUtf8("butLearn"));
@@ -2088,7 +2085,7 @@ public:
         line_2->setFrameShadow(QFrame::Sunken);
         layoutWidget1 = new QWidget(grpClip);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(100, 30, 123, 25));
+        layoutWidget1->setGeometry(QRect(100, 30, 126, 26));
         gridLayout_3 = new QGridLayout(layoutWidget1);
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -2110,7 +2107,7 @@ public:
 
         layoutWidget2 = new QWidget(grpClip);
         layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(11, 136, 147, 121));
+        layoutWidget2->setGeometry(QRect(11, 136, 152, 126));
         gridLayout = new QGridLayout(layoutWidget2);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -2153,7 +2150,7 @@ public:
 
         layoutWidget3 = new QWidget(grpClip);
         layoutWidget3->setObjectName(QString::fromUtf8("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(158, 136, 141, 121));
+        layoutWidget3->setGeometry(QRect(158, 136, 141, 126));
         gridLayout_2 = new QGridLayout(layoutWidget3);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -2744,15 +2741,15 @@ public:
         fp_GND->setFrameShape(QFrame::StyledPanel);
         fp_GND->setFrameShadow(QFrame::Raised);
         MainWindow->setCentralWidget(centralWidget);
-        deleteBox->raise();
-        ExitBox->raise();
         PCBox->raise();
-        storeBox->raise();
-        CalibBox->raise();
-        startBox->raise();
         grpInteractive->raise();
         debugPanel->raise();
         frontPanel_VI->raise();
+        startBox->raise();
+        storeBox->raise();
+        CalibBox->raise();
+        deleteBox->raise();
+        ExitBox->raise();
         selectFrame->raise();
 
         retranslateUi(MainWindow);

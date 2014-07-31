@@ -17,8 +17,9 @@ const	QString knobOFF="QPushButton{background-color:rgba(0,0,0,0);border:1px sol
 
 QString highlightON="QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:0px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}";
 QString PCBoxON="QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}";
-QString highlightOFF="QGroupBox{border:1px rgba(0,0,0,0); background-color: rgba(0,0,0,0); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}";
-
+//QString highlightOFF="QGroupBox{border:1px rgba(0,0,0,0); background-color: rgba(0,0,0,0); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}";
+QString highlightOFF="QGroupBox{border:1px solid white; background-color: #dadbde;border-top:1px qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde);border-top:1px solid gray;border-top:1px solid gray;}";
+QString highlightOFF2="QGroupBox{border:1px solid white;background-color: #dadbde;border-top:1px qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde);border-top:1px solid gray;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}";
 
 MainWindow::MainWindow(QWidget *parent) :
     		QMainWindow(parent),
@@ -1124,7 +1125,7 @@ void MainWindow::on_startButton_clicked()
 	ui->startBox->setStyleSheet(highlightON);
 	ui->deleteBox->setStyleSheet(highlightOFF);
 	ui->CalibBox->setStyleSheet(highlightOFF);
-	ui->PCBox->setStyleSheet(highlightOFF);
+	ui->PCBox->setStyleSheet(highlightOFF2);
 //	ui->selectFrame->setGeometry(ui->selectFrame->x(),138,ui->selectFrame->width(),ui->selectFrame->height());
 	ui->selectFrame->setGeometry(702, 154, 9, 60);
 
@@ -1412,7 +1413,7 @@ void MainWindow::on_storeButton_clicked()
 	ui->startBox->setStyleSheet(highlightOFF);
 	ui->deleteBox->setStyleSheet(highlightOFF);
 	ui->CalibBox->setStyleSheet(highlightOFF);
-	ui->PCBox->setStyleSheet(highlightOFF);
+	ui->PCBox->setStyleSheet(highlightOFF2);
 //	ui->selectFrame->setGeometry(ui->selectFrame->x(),230,ui->selectFrame->width(),ui->selectFrame->height());
 	ui->selectFrame->setGeometry(702, 254, 9, 60);
 
@@ -1432,7 +1433,7 @@ void MainWindow::on_deleteButton_clicked()
 	ui->startBox->setStyleSheet(highlightOFF);
 	ui->deleteBox->setStyleSheet(highlightON);
 	ui->CalibBox->setStyleSheet(highlightOFF);
-	ui->PCBox->setStyleSheet(highlightOFF);
+	ui->PCBox->setStyleSheet(highlightOFF2);
 //	ui->selectFrame->setGeometry(ui->selectFrame->x(),320,ui->selectFrame->width(),ui->selectFrame->height());
 	ui->selectFrame->setGeometry(702, 354, 9, 60);
 	if (m_objVISubject->getProbeDialog(0) == 1)
@@ -1456,7 +1457,7 @@ void MainWindow::on_calibButton_clicked()
 	ui->startBox->setStyleSheet(highlightOFF);
 	ui->deleteBox->setStyleSheet(highlightOFF);
 	ui->CalibBox->setStyleSheet(highlightON);
-	ui->PCBox->setStyleSheet(highlightOFF);
+	ui->PCBox->setStyleSheet(highlightOFF2);
 
 //	ui->selectFrame->setGeometry(ui->selectFrame->x(),410,ui->selectFrame->width(),ui->selectFrame->height());
 	ui->selectFrame->setGeometry(702, 454, 9, 60);

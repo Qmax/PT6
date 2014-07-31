@@ -3,14 +3,16 @@
 # -------------------------------------------------
 TARGET = PortableTester
 TEMPLATE = app
-SOURCES += QDigitalClock.cpp \
+SOURCES += logindialog.cpp \
+    QDigitalClock.cpp \
     main.cpp \
     portabletester.cpp \
     mainwindowview.cpp \
     probestatus.cpp \
     qmaxbutton.cpp \
     colors.cpp
-HEADERS += serialdevice.h \
+HEADERS += logindialog.h \
+    serialdevice.h \
     QDigitalClock.h \
     UtilityWidgetInterface.h \
     AppdeviceRegisterDetails.h \

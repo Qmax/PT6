@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'icm.ui'
 **
-** Created: Wed Jul 30 11:00:06 2014
+** Created: Thu Jul 31 19:37:08 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -2081,13 +2081,13 @@ public:
 ""));
         exit = new QPushButton(ExitBox);
         exit->setObjectName(QString::fromUtf8("exit"));
-        exit->setGeometry(QRect(5, 2, 64, 70));
+        exit->setGeometry(QRect(5, 0, 60, 70));
         exit->setFocusPolicy(Qt::NoFocus);
-        exit->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0);color:blue;}\n"
+        exit->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0);color:blue;\n"
+"	\n"
+"	image: url(:/logout-icon.png);\n"
+"}\n"
 ""));
-        QIcon icon10;
-        icon10.addFile(QString::fromUtf8(":/logout-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        exit->setIcon(icon10);
         exit->setIconSize(QSize(70, 70));
         rBox = new QGroupBox(centralWidget);
         rBox->setObjectName(QString::fromUtf8("rBox"));
@@ -2109,9 +2109,9 @@ public:
         rBut->setGeometry(QRect(8, 20, 64, 64));
         rBut->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon11;
-        icon11.addFile(QString::fromUtf8(":/R1.png"), QSize(), QIcon::Normal, QIcon::Off);
-        rBut->setIcon(icon11);
+        QIcon icon10;
+        icon10.addFile(QString::fromUtf8(":/R1.png"), QSize(), QIcon::Normal, QIcon::Off);
+        rBut->setIcon(icon10);
         rBut->setIconSize(QSize(60, 60));
         label_19 = new QLabel(rBox);
         label_19->setObjectName(QString::fromUtf8("label_19"));
@@ -2159,9 +2159,9 @@ public:
         graphBut->setGeometry(QRect(8, 20, 64, 64));
         graphBut->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon12;
-        icon12.addFile(QString::fromUtf8(":/graph.png"), QSize(), QIcon::Normal, QIcon::Off);
-        graphBut->setIcon(icon12);
+        QIcon icon11;
+        icon11.addFile(QString::fromUtf8(":/graph.png"), QSize(), QIcon::Normal, QIcon::Off);
+        graphBut->setIcon(icon11);
         graphBut->setIconSize(QSize(80, 90));
         lBox = new QGroupBox(centralWidget);
         lBox->setObjectName(QString::fromUtf8("lBox"));
@@ -2179,9 +2179,9 @@ public:
         lBut->setGeometry(QRect(8, 20, 64, 64));
         lBut->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon13;
-        icon13.addFile(QString::fromUtf8(":/L1.png"), QSize(), QIcon::Normal, QIcon::Off);
-        lBut->setIcon(icon13);
+        QIcon icon12;
+        icon12.addFile(QString::fromUtf8(":/L1.png"), QSize(), QIcon::Normal, QIcon::Off);
+        lBut->setIcon(icon12);
         lBut->setIconSize(QSize(60, 60));
         label_20 = new QLabel(lBox);
         label_20->setObjectName(QString::fromUtf8("label_20"));

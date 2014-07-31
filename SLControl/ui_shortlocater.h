@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'shortlocater.ui'
 **
-** Created: Wed Jul 30 12:50:36 2014
+** Created: Thu Jul 31 19:35:28 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -961,13 +961,11 @@ public:
 ""));
         exit = new QPushButton(ExitBox);
         exit->setObjectName(QString::fromUtf8("exit"));
-        exit->setGeometry(QRect(5, 1, 64, 70));
+        exit->setGeometry(QRect(5, 1, 60, 70));
         exit->setFocusPolicy(Qt::NoFocus);
-        exit->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0);color:blue;}\n"
+        exit->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0);color:blue;\n"
+"image: url(:/logout-icon.png);}\n"
 ""));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/logout-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        exit->setIcon(icon2);
         exit->setIconSize(QSize(70, 70));
         temp1 = new QGroupBox(ShortLocaterClass);
         temp1->setObjectName(QString::fromUtf8("temp1"));
@@ -1026,27 +1024,27 @@ public:
         pushButton_16->setGeometry(QRect(80, 40, 50, 50));
         pushButton_16->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/Letter-R-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_16->setIcon(icon3);
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/Letter-R-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_16->setIcon(icon2);
         pushButton_16->setIconSize(QSize(48, 48));
         pushButton = new QPushButton(debugPanel);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(10, 100, 50, 50));
         pushButton->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/Control-Panel-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton->setIcon(icon4);
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/Control-Panel-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton->setIcon(icon3);
         pushButton->setIconSize(QSize(48, 48));
         HAADC = new QPushButton(debugPanel);
         HAADC->setObjectName(QString::fromUtf8("HAADC"));
         HAADC->setGeometry(QRect(10, 40, 50, 50));
         HAADC->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid #8f8f91; border-radius: 8px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); color:blue;}\n"
 ""));
-        QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/Letter-A-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        HAADC->setIcon(icon5);
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/Letter-A-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        HAADC->setIcon(icon4);
         HAADC->setIconSize(QSize(48, 48));
         calibrateDisplay = new QCheckBox(debugPanel);
         calibrateDisplay->setObjectName(QString::fromUtf8("calibrateDisplay"));

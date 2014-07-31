@@ -5198,8 +5198,8 @@ border-top:1px solid gray;
      <property name="geometry">
       <rect>
        <x>5</x>
-       <y>2</y>
-       <width>64</width>
+       <y>0</y>
+       <width>60</width>
        <height>70</height>
       </rect>
      </property>
@@ -5207,15 +5207,14 @@ border-top:1px solid gray;
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0);color:blue;}
+      <string notr="true">QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0);color:blue;
+	
+	image: url(:/logout-icon.png);
+}
 </string>
      </property>
      <property name="text">
       <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="icm.qrc">
-       <normaloff>:/logout-icon.png</normaloff>:/logout-icon.png</iconset>
      </property>
      <property name="iconSize">
       <size>
