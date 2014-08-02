@@ -26,6 +26,8 @@
 #include "RefCALIBTestJigInterface.h"
 #include "serialdevice.h"
 
+#include "AWGUIInterface.h"
+
 const unsigned int guid = 0x46474D;
 
 const QEvent::Type GpioEvent = (QEvent::Type) 1234;//embedded probe
@@ -152,6 +154,7 @@ protected:
    	InterfaceGPIOPins *IGPIOPin;
    	IPTAppBckPsocInterface *test;
     IRefCALIBTestJigInterface *REFCalib;
+    AWGUIInterface *AWGGUI;
 
     //Variables
     QString m_strWaveType;
@@ -200,6 +203,7 @@ public slots:
     void Beep();
     void Mute();
 private slots:
+    void on_AWGBox_clicked();
     void on_modeBox_currentIndexChanged(int index);
     void on_calibrate_clicked();
     void on_appBckPSoC_clicked();

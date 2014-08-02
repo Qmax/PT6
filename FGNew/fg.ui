@@ -142,7 +142,7 @@ border-top:1px solid gray;
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="tempBox">
+   <widget class="QGroupBox" name="AWG">
     <property name="geometry">
      <rect>
       <x>710</x>
@@ -172,7 +172,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
     <property name="title">
      <string/>
     </property>
-    <widget class="QPushButton" name="ohmMeter_3">
+    <widget class="QPushButton" name="AWGBox">
      <property name="geometry">
       <rect>
        <x>8</x>
@@ -191,6 +191,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);
+	image: url(:/res/awg2.png);
 	}</string>
      </property>
      <property name="text">
@@ -1617,7 +1618,7 @@ border-top:0px solid white;
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="fg.qrc">
+      <iconset>
        <normaloff>:/res/Letter-R-icon.png</normaloff>:/res/Letter-R-icon.png</iconset>
      </property>
      <property name="iconSize">
@@ -1644,7 +1645,7 @@ border-top:0px solid white;
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="fg.qrc">
+      <iconset>
        <normaloff>:/res/Control-Panel-icon.png</normaloff>:/res/Control-Panel-icon.png</iconset>
      </property>
      <property name="iconSize">
@@ -3064,7 +3065,7 @@ background-color: rgb(0, 0, 0,0);
     </widget>
    </widget>
    <zorder>ExitBox</zorder>
-   <zorder>tempBox</zorder>
+   <zorder>AWG</zorder>
    <zorder>triangleBox</zorder>
    <zorder>sineBox</zorder>
    <zorder>rampBox</zorder>
@@ -3078,9 +3079,6 @@ background-color: rgb(0, 0, 0,0);
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="fg.qrc"/>
-  <include location="fp_res.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'fg.ui'
 **
-** Created: Mon Jul 28 13:13:47 2014
+** Created: Fri Aug 1 12:58:12 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -31,8 +31,8 @@ public:
     QWidget *centralWidget;
     QGroupBox *ExitBox;
     QPushButton *exit;
-    QGroupBox *tempBox;
-    QPushButton *ohmMeter_3;
+    QGroupBox *AWG;
+    QPushButton *AWGBox;
     QFrame *selectFrame;
     QGroupBox *triangleBox;
     QPushButton *triangleBut;
@@ -184,11 +184,11 @@ public:
         icon.addFile(QString::fromUtf8(":/logout-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         exit->setIcon(icon);
         exit->setIconSize(QSize(70, 70));
-        tempBox = new QGroupBox(centralWidget);
-        tempBox->setObjectName(QString::fromUtf8("tempBox"));
-        tempBox->setGeometry(QRect(710, 432, 80, 100));
-        tempBox->setFont(font);
-        tempBox->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
+        AWG = new QGroupBox(centralWidget);
+        AWG->setObjectName(QString::fromUtf8("AWG"));
+        AWG->setGeometry(QRect(710, 432, 80, 100));
+        AWG->setFont(font);
+        AWG->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
 "border:1px solid white; background-color: #dadbde;border-radius:10px;\n"
 "border-top:1px qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); border-top-right-radius: 0px;\n"
 " border-top-left-radius: 0px;\n"
@@ -199,14 +199,15 @@ public:
 " border-top-left-radius: 0px;\n"
 "}\n"
 ""));
-        ohmMeter_3 = new QPushButton(tempBox);
-        ohmMeter_3->setObjectName(QString::fromUtf8("ohmMeter_3"));
-        ohmMeter_3->setGeometry(QRect(8, 20, 64, 64));
-        ohmMeter_3->setFont(font);
-        ohmMeter_3->setFocusPolicy(Qt::NoFocus);
-        ohmMeter_3->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);\n"
+        AWGBox = new QPushButton(AWG);
+        AWGBox->setObjectName(QString::fromUtf8("AWGBox"));
+        AWGBox->setGeometry(QRect(8, 20, 64, 64));
+        AWGBox->setFont(font);
+        AWGBox->setFocusPolicy(Qt::NoFocus);
+        AWGBox->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);\n"
+"	image: url(:/res/awg2.png);\n"
 "	}"));
-        ohmMeter_3->setIconSize(QSize(55, 55));
+        AWGBox->setIconSize(QSize(55, 55));
         selectFrame = new QFrame(centralWidget);
         selectFrame->setObjectName(QString::fromUtf8("selectFrame"));
         selectFrame->setGeometry(QRect(702, 54, 9, 60));
@@ -1359,7 +1360,7 @@ public:
         fp_GND->setFrameShadow(QFrame::Raised);
         FG->setCentralWidget(centralWidget);
         ExitBox->raise();
-        tempBox->raise();
+        AWG->raise();
         triangleBox->raise();
         sineBox->raise();
         rampBox->raise();
@@ -1381,8 +1382,8 @@ public:
         FG->setWindowTitle(QApplication::translate("FG", "FG", 0, QApplication::UnicodeUTF8));
         ExitBox->setTitle(QString());
         exit->setText(QString());
-        tempBox->setTitle(QString());
-        ohmMeter_3->setText(QString());
+        AWG->setTitle(QString());
+        AWGBox->setText(QString());
         triangleBox->setTitle(QString());
         triangleBut->setText(QString());
         sineBox->setTitle(QString());

@@ -43,6 +43,9 @@ void FG::PluginsInitialisation(){
 	QPluginLoader loaderREF("libRefCalib.so",this);
 	REFCalib = qobject_cast<IRefCALIBTestJigInterface*>(loaderREF.instance());
 
+	QPluginLoader awgGUI("libArbitaryWaveform.so",this);
+	AWGGUI = qobject_cast<AWGUIInterface*>(awgGUI.instance());
+
 //	IBackPlane->writeBackPlaneRegister(0x2, 0x26);
 //	qDebug()<<"Before src imp selection";
 	IPsoc->srcImpedanceSelection(SRC_IMP_50E);
@@ -748,7 +751,13 @@ void FG::on_squareBut_clicked() {
 	GenerateWave();
 	hwInterface->SelectWaveForm(SQUARE_W);
 }
-
+void FG::on_AWGBox_clicked()
+{
+	QWidget *newWidget=AWGGUI->getAWGUIInterface();
+	newWidget->setWindowTitle("Arbitary Waveform Generator");
+	newWidget->show();
+	HighlightButtons(AWG_WAVE);
+}
 void FG::on_rampBut_clicked() {
 	m_strWaveType = "RAMP";
 	HighlightButtons(RAMP_WAVE);
@@ -829,6 +838,8 @@ void FG::HighlightButtons(int but){
 	QString UnSelectRamp="QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-top:1px qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); border-top-right-radius: 0px; border-top-left-radius: 0px;border-top:1px solid gray;border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;}";
 	QString selectTriangle="QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:10px;border-top:1px qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); border-top-right-radius: 0px; border-top-left-radius: 0px;border-top:1px solid gray;border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;}";
 	QString UnSelectTriangle="QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-top:1px qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); border-top-right-radius: 0px; border-top-left-radius: 0px;border-top:1px solid gray;border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;}";
+	QString selectAWG="QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:10px;border-top:1px qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); border-top-right-radius: 0px; border-top-left-radius: 0px;border-top:1px solid gray;border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;}";
+	QString UnSelectAWG="QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-top:1px qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); border-top-right-radius: 0px; border-top-left-radius: 0px;border-top:1px solid gray;border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;}";
 
 	switch(but){
 	case SINE_WAVE:
@@ -836,6 +847,7 @@ void FG::HighlightButtons(int but){
 		ui->squareBox->setStyleSheet(UnSelectSquare);
 		ui->rampBox->setStyleSheet(UnSelectRamp);
 		ui->triangleBox->setStyleSheet(UnSelectTriangle);
+		ui->AWG->setStyleSheet(UnSelectAWG);
 		ui->selectFrame->setGeometry(701,54,10,60);
 		break;
 	case SQUARE_WAVE:
@@ -843,6 +855,7 @@ void FG::HighlightButtons(int but){
 		ui->squareBox->setStyleSheet(selectSquare);
 		ui->rampBox->setStyleSheet(UnSelectRamp);
 		ui->triangleBox->setStyleSheet(UnSelectTriangle);
+		ui->AWG->setStyleSheet(UnSelectAWG);
 		ui->selectFrame->setGeometry(701,154,10,60);
 		break;
 	case RAMP_WAVE:
@@ -850,6 +863,7 @@ void FG::HighlightButtons(int but){
 		ui->squareBox->setStyleSheet(UnSelectSquare);
 		ui->rampBox->setStyleSheet(selectRamp);
 		ui->triangleBox->setStyleSheet(UnSelectTriangle);
+		ui->AWG->setStyleSheet(UnSelectAWG);
 		ui->selectFrame->setGeometry(701,254,10,60);
 		break;
 	case TRIANGLE_WAVE:
@@ -857,8 +871,17 @@ void FG::HighlightButtons(int but){
 		ui->squareBox->setStyleSheet(UnSelectSquare);
 		ui->rampBox->setStyleSheet(UnSelectRamp);
 		ui->triangleBox->setStyleSheet(selectTriangle);
+		ui->AWG->setStyleSheet(UnSelectAWG);
 		ui->selectFrame->setGeometry(701,354,10,60);
 		break;
+	case AWG_WAVE:
+		ui->sineBox->setStyleSheet(UnSelectSine);
+		ui->squareBox->setStyleSheet(UnSelectSquare);
+		ui->rampBox->setStyleSheet(UnSelectRamp);
+		ui->triangleBox->setStyleSheet(UnSelectTriangle);
+		ui->AWG->setStyleSheet(selectAWG);
+		ui->selectFrame->setGeometry(701,454,10,60);
+
 	case SINGLE:
 		m_bContinuous=false;m_bBurst=false;	m_bSingle=true;m_bGate=false;
 		m_bManual=true;m_bInternal=false;m_bExternal=false;
@@ -2036,3 +2059,5 @@ void FG::on_modeBox_currentIndexChanged(int index)
         break;
     }
 }
+
+

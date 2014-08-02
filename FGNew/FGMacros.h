@@ -13,6 +13,7 @@
 #define SINE_WAVE		0
 #define SQUARE_WAVE		1
 #define TRIANGLE_WAVE   3
+#define AWG_WAVE		5
 
 #define BURST          13
 #define CONTINUOUS     12

@@ -187,6 +187,8 @@ void ICM::plotSimpleDemo(QCustomPlot *customPlot) {
     }*/
 
     customPlot->graph(0)->setData(x, y);
+    customPlot->graph(0)->rescaleAxes();
+
 }
 
 void ICM::GCalib2ICM(double value, QString comp) {
@@ -2898,13 +2900,13 @@ void ICM::on_sweep_capture_clicked()
 			qDebug()<<"Frequency:"<<i<<"Resistance:"<<(m_nResistance);
             ts << QString("Frequency:") << "\t" << m_nFrequency<< "\t"<<QString("Resistance:") << "\t" << m_nResistance<<"\n";
 		}else if(ui->CapacitanceRanges->isVisible()){
-//			y[loop]=(m_nCapacitance);
-			y[loop]=m_nResistance;
+			y[loop]=(m_nCapacitance);
+//			y[loop]=m_nResistance;
 			qDebug()<<"Frequency:"<<i<<"Capacitance:"<<m_nResistance;//(m_nCapacitance);
 			ts << QString("Frequency:") << "\t" << m_nFrequency<< "\t"<<QString("Capacitance:") << "\t" << m_nCapacitance<<"\n";
 		}else if(ui->Inductorranges->isVisible()){
-//			y[loop]=(m_nInductance);
-			y[loop]=m_nResistance;
+			y[loop]=(m_nInductance);
+//			y[loop]=m_nResistance;
 			qDebug()<<"Frequency:"<<i<<"Indcuctance:"<<m_nResistance;//(m_nInductance);
 			ts << QString("Frequency:") << "\t" << m_nFrequency<< "\t"<<QString("Inductance:") << "\t" << m_nInductance<<"\n";
 		}

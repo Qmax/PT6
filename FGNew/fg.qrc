@@ -39,5 +39,6 @@
         <file>res/down.png</file>
         <file>res/coarse.png</file>
         <file>res/fine.png</file>
+        <file>res/awg2.png</file>
     </qresource>
 </RCC>

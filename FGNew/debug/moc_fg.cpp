@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'fg.h'
 **
-** Created: Mon Jul 28 13:14:29 2014
+** Created: Fri Aug 1 12:58:33 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -158,7 +158,7 @@ static const uint qt_meta_data_FG[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      28,   14, // methods
+      29,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -172,28 +172,29 @@ static const uint qt_meta_data_FG[] = {
       84,   73,    3,    3, 0x0a,
      107,    3,    3,    3, 0x0a,
      114,    3,    3,    3, 0x0a,
-     127,  121,    3,    3, 0x08,
-     163,    3,    3,    3, 0x08,
-     186,    3,    3,    3, 0x08,
-     210,    3,    3,    3, 0x08,
-     234,    3,    3,    3, 0x08,
-     255,    3,    3,    3, 0x08,
-     277,    3,    3,    3, 0x08,
-     295,    3,    3,    3, 0x08,
-     314,    3,    3,    3, 0x08,
-     335,    3,    3,    3, 0x08,
-     356,    3,    3,    3, 0x08,
+     121,    3,    3,    3, 0x08,
+     147,  141,    3,    3, 0x08,
+     183,    3,    3,    3, 0x08,
+     206,    3,    3,    3, 0x08,
+     230,    3,    3,    3, 0x08,
+     254,    3,    3,    3, 0x08,
+     275,    3,    3,    3, 0x08,
+     297,    3,    3,    3, 0x08,
+     315,    3,    3,    3, 0x08,
+     334,    3,    3,    3, 0x08,
+     355,    3,    3,    3, 0x08,
      376,    3,    3,    3, 0x08,
      396,    3,    3,    3, 0x08,
      416,    3,    3,    3, 0x08,
      436,    3,    3,    3, 0x08,
      456,    3,    3,    3, 0x08,
-     481,    3,    3,    3, 0x08,
-     502,    3,    3,    3, 0x08,
-     525,    3,    3,    3, 0x08,
-     546,    3,    3,    3, 0x08,
-     569,    3,    3,    3, 0x08,
-     591,    3,    3,    3, 0x08,
+     476,    3,    3,    3, 0x08,
+     501,    3,    3,    3, 0x08,
+     522,    3,    3,    3, 0x08,
+     545,    3,    3,    3, 0x08,
+     566,    3,    3,    3, 0x08,
+     589,    3,    3,    3, 0x08,
+     611,    3,    3,    3, 0x08,
 
        0        // eod
 };
@@ -202,8 +203,8 @@ static const char qt_meta_stringdata_FG[] = {
     "FG\0\0pValue\0receiveValue(double)\0"
     "receiveValue(QString)\0receiveValue(uint)\0"
     "leFocussed\0callLineEditInput(int)\0"
-    "Beep()\0Mute()\0index\0"
-    "on_modeBox_currentIndexChanged(int)\0"
+    "Beep()\0Mute()\0on_AWGBox_clicked()\0"
+    "index\0on_modeBox_currentIndexChanged(int)\0"
     "on_calibrate_clicked()\0on_appBckPSoC_clicked()\0"
     "on_fineCoarse_clicked()\0on_leftBut_clicked()\0"
     "on_rightBut_clicked()\0on_exit_clicked()\0"
@@ -252,31 +253,32 @@ int FG::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 3: callLineEditInput((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: Beep(); break;
         case 5: Mute(); break;
-        case 6: on_modeBox_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 7: on_calibrate_clicked(); break;
-        case 8: on_appBckPSoC_clicked(); break;
-        case 9: on_fineCoarse_clicked(); break;
-        case 10: on_leftBut_clicked(); break;
-        case 11: on_rightBut_clicked(); break;
-        case 12: on_exit_clicked(); break;
-        case 13: on_upBut_clicked(); break;
-        case 14: on_downBut_clicked(); break;
-        case 15: on_GateBut_clicked(); break;
-        case 16: on_EXTBut_clicked(); break;
-        case 17: on_INTBut_clicked(); break;
-        case 18: on_MANBut_clicked(); break;
-        case 19: on_RUNBut_clicked(); break;
-        case 20: on_hiZBut_clicked(); break;
-        case 21: on_triangleBut_clicked(); break;
-        case 22: on_rampBut_clicked(); break;
-        case 23: on_squareBut_clicked(); break;
-        case 24: on_sineBut_clicked(); break;
-        case 25: on_singleBut_clicked(); break;
-        case 26: on_burstBut_clicked(); break;
-        case 27: on_continuousBut_clicked(); break;
+        case 6: on_AWGBox_clicked(); break;
+        case 7: on_modeBox_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: on_calibrate_clicked(); break;
+        case 9: on_appBckPSoC_clicked(); break;
+        case 10: on_fineCoarse_clicked(); break;
+        case 11: on_leftBut_clicked(); break;
+        case 12: on_rightBut_clicked(); break;
+        case 13: on_exit_clicked(); break;
+        case 14: on_upBut_clicked(); break;
+        case 15: on_downBut_clicked(); break;
+        case 16: on_GateBut_clicked(); break;
+        case 17: on_EXTBut_clicked(); break;
+        case 18: on_INTBut_clicked(); break;
+        case 19: on_MANBut_clicked(); break;
+        case 20: on_RUNBut_clicked(); break;
+        case 21: on_hiZBut_clicked(); break;
+        case 22: on_triangleBut_clicked(); break;
+        case 23: on_rampBut_clicked(); break;
+        case 24: on_squareBut_clicked(); break;
+        case 25: on_sineBut_clicked(); break;
+        case 26: on_singleBut_clicked(); break;
+        case 27: on_burstBut_clicked(); break;
+        case 28: on_continuousBut_clicked(); break;
         default: ;
         }
-        _id -= 28;
+        _id -= 29;
     }
     return _id;
 }

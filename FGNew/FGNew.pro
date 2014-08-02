@@ -13,7 +13,8 @@ SOURCES += ad5293.cpp \
     ptfginterface.cpp \
     main.cpp \
     fg.cpp
-HEADERS += serialdevice.h \
+HEADERS += AWGUIInterface.h \
+    serialdevice.h \
     RefCALIBTestJigInterface.h \
     FGMacros.h \
     AppdeviceRegisterDetails.h \
