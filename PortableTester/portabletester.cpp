@@ -37,11 +37,11 @@ PortableTester::PortableTester(QWidget *parent) :
         ui(new Ui::PortableTester) {
     
     ui->setupUi(this);
-    LoginDialog* loginDialog = new LoginDialog( this );
+/*    LoginDialog* loginDialog = new LoginDialog( this );
     connect(loginDialog,SIGNAL(acceptLogin(QString&,QString&,int&)),this,SLOT(slotAcceptUserLogin(QString&,QString&)));
     do{
         loginDialog->exec();
-    }while(!m_nPassword);
+    }while(!m_nPassword);*/
     qDebug()
             << "----------------------------PORTABLE TESTER STARTS----------------------------";
     

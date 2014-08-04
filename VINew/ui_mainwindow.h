@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Thu Jul 31 19:29:55 2014
+** Created: Mon Aug 4 19:53:51 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -2201,7 +2201,7 @@ public:
         debugPanel->setFrameShadow(QFrame::Raised);
         frame_5 = new QFrame(debugPanel);
         frame_5->setObjectName(QString::fromUtf8("frame_5"));
-        frame_5->setGeometry(QRect(10, 10, 211, 111));
+        frame_5->setGeometry(QRect(7, 4, 430, 151));
         frame_5->setStyleSheet(QString::fromUtf8("QFrame{border:2px solid black; background-color: rgba(0,0,0,0);border-radius:10px;}\n"
 "QLabel{border:1px solid rgba(0,0,0,0);}\n"
 "\n"
@@ -2223,13 +2223,15 @@ public:
         label_41->setAlignment(Qt::AlignCenter);
         yAxisBox = new QDoubleSpinBox(frame_5);
         yAxisBox->setObjectName(QString::fromUtf8("yAxisBox"));
-        yAxisBox->setGeometry(QRect(90, 63, 111, 41));
+        yAxisBox->setGeometry(QRect(300, 30, 111, 110));
         yAxisBox->setFont(font4);
         yAxisBox->setStyleSheet(QString::fromUtf8("QDoubleSpinBox::up-button {\n"
 "     width: 50px; \n"
+"	height:50px\n"
 " }\n"
 "QDoubleSpinBox::down-button {\n"
 "     width: 50px;\n"
+"	height:50px\n"
 " }"));
         yAxisBox->setDecimals(1);
         yAxisBox->setMinimum(-99);
@@ -2241,18 +2243,20 @@ public:
         xAxis->setStyleSheet(QString::fromUtf8("QLabel {color:black;border: rgba(0,0,0,0);}"));
         YAxis = new QLabel(frame_5);
         YAxis->setObjectName(QString::fromUtf8("YAxis"));
-        YAxis->setGeometry(QRect(10, 74, 70, 23));
+        YAxis->setGeometry(QRect(220, 30, 70, 23));
         YAxis->setFont(font7);
         YAxis->setStyleSheet(QString::fromUtf8("QLabel {color:black;border: rgba(0,0,0,0);}"));
         xAxisBox = new QDoubleSpinBox(frame_5);
         xAxisBox->setObjectName(QString::fromUtf8("xAxisBox"));
-        xAxisBox->setGeometry(QRect(90, 23, 111, 41));
+        xAxisBox->setGeometry(QRect(90, 30, 111, 110));
         xAxisBox->setFont(font4);
         xAxisBox->setStyleSheet(QString::fromUtf8("QDoubleSpinBox::up-button {\n"
 "     width: 50px; \n"
+"	height:50px\n"
 " }\n"
 "QDoubleSpinBox::down-button {\n"
 "     width: 50px;\n"
+"	height:50px\n"
 " }"));
         xAxisBox->setDecimals(1);
         xAxisBox->setMinimum(-99);

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qmaxbutton.h'
 **
-** Created: Thu Jul 31 19:33:25 2014
+** Created: Mon Aug 4 18:55:18 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

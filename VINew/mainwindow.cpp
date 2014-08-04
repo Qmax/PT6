@@ -732,6 +732,17 @@ void MainWindow::doPTKeyFunction()
 		//qDebug() << ("\nF1");
 		if(/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive!=true)
 		{
+			on_butProClip_clicked();
+
+		}
+
+		else if(/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive==true){
+
+		}
+	}if (m_nPTKeyCode == 5) {
+		//qDebug() << ("\nF1");
+		if(/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive!=true)
+		{
 			on_startButton_clicked();
 
 		}
@@ -739,14 +750,14 @@ void MainWindow::doPTKeyFunction()
 		else if(/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive==true){
 
 		}
-	} else if (m_nPTKeyCode == 5) {
+	} else if (m_nPTKeyCode == 6) {
 		//qDebug() << ("\nF2");
 		if (/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive != true) {
 			on_storeButton_clicked();
 		}else if(/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive==true){
 
 		}
-	} else if (m_nPTKeyCode == 6) {
+	} else if (m_nPTKeyCode == 7) {
 		if (/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive != true) {
 			on_deleteButton_clicked();
 		}
@@ -754,7 +765,7 @@ void MainWindow::doPTKeyFunction()
 		else if(/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive==true){
 
 		}
-	} else if (m_nPTKeyCode == 7) {
+	} else if (m_nPTKeyCode == 8) {
 		if (/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive != true) {
 			on_calibButton_clicked();
 		}
@@ -762,7 +773,7 @@ void MainWindow::doPTKeyFunction()
 		else if(/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive==true){
 
 		}
-	} else if (m_nPTKeyCode == 8) {
+	} else if (m_nPTKeyCode == 9) {
 		if (/*IPTMessageBox->GetmsgBoxLiveStatus()*/msgBoxLive != true) {
 			//buttonPressed(5);
 		}
@@ -1493,6 +1504,7 @@ void MainWindow::on_calibButton_clicked()
 
 void MainWindow::on_exit_clicked()
 {
+	m_objFunctionalObject->resetPSOC();
 	parentWidget()->close();
 }
 

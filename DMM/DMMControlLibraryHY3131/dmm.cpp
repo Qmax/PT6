@@ -173,6 +173,7 @@ void DMM::doPTKeyFunction() {
     } else if (m_nPTKeyCode == 6) {
         ui->ohmMeter->animateClick(1);
     } else if (m_nPTKeyCode == 7) {
+        ui->ohmMeter_2->animateClick(1);
     } else if (m_nPTKeyCode == 8) {
     } else if (m_nPTKeyCode == 9) {
     } else if (m_nPTKeyCode == 10) {
@@ -706,6 +707,7 @@ void DMM::onMeasure() {
     }
     //<-------For Enabling graph plot-------
     plotSimpleDemo(ui->customPlot);
+    ui->customPlot->graph()->rescaleAxes();
     ui->customPlot->replot();//------------->
 }
 void DMM::setupSimpleDemo(QCustomPlot *customPlot) {
@@ -721,7 +723,7 @@ void DMM::setupSimpleDemo(QCustomPlot *customPlot) {
     QString str = ui->textEdit_5->toPlainText();
     customPlot->yAxis->setLabel(str);
     // set axes ranges, so we see all data:
-    customPlot->xAxis->setRange(0, 60);
+//    customPlot->xAxis->setRange(0, 60);
 
     QString str2 = ui->label->text();
     if (str2.endsWith("V") || str2.endsWith("A") || str2.endsWith("E"))
@@ -739,7 +741,7 @@ void DMM::setupSimpleDemo(QCustomPlot *customPlot) {
         maxRange = str2.toInt(&ok, 10);
     }
 
-    customPlot->yAxis->setRange(minRange, maxRange);
+//    customPlot->yAxis->setRange(minRange, maxRange);
     //	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     customPlot->setInteractions(QCP::iRangeZoom | QCP::iMultiSelect
                                 | QCP::iSelectPlottables | QCP::iSelectAxes | QCP::iSelectLegend
@@ -1968,6 +1970,17 @@ void DMM::on_calibrateDisplay_clicked() {
 }
 
 void DMM::on_ohmMeter_2_clicked() {
+    ui->selectFrame->setGeometry(701, 354, 10, 60);
+
+    ui->voltBox->setStyleSheet(
+            "QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde); border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}");
+    ui->AmpBox->setStyleSheet(
+            "QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;border-top:1px solid gray; border-top-right-radius: 0px; border-top-left-radius: 0px;}");
+    ui->OhmBox->setStyleSheet(
+            "QGroupBox{border:1px solid white; background-color: #dadbde;border-radius:10px;border-bottom:1px qlineargradient(x1: 0, y1: 0,stop: 0 #f6f7fa, stop: 1 #dadbde);border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;border-top:1px solid gray; border-top-right-radius: 0px; border-top-left-radius: 0px;}");
+    ui->OhmBox_2->setStyleSheet(
+            "QGroupBox{border:1px solid white; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-radius:10px;border-top:1px qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #f6f7fa, stop: 1 #dadbde); border-top-right-radius: 0px; border-top-left-radius: 0px;border-top:1px solid gray;border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;}");
+
     if (ui->plottingWindow->isVisible()){
         ui->plottingWindow->setVisible(false);
         ui->frontPanel_DMM->setVisible(true);
