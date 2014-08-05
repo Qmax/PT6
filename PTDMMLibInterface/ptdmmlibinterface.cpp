@@ -1,5 +1,6 @@
 
 // Project by Ravivarman.R , Created 04-02-2013
+//Qmax Test Equipments
 
 #include "ptdmmlibinterface.h"
 #include "math.h"
