@@ -56,7 +56,10 @@ ShortLocater::ShortLocater(QWidget *parent)
 }
 void ShortLocater::ToolBox(bool flag){
     ui.debugPanel->setVisible(flag);
-    ui.frontPanel_SHLOC->setVisible(!flag);
+    if(flag==false)
+    	ui.frontPanel_SHLOC->setVisible(true);
+    else
+    	ui.frontPanel_SHLOC->setVisible(false);
     ui.calibrateDisplay->setVisible(flag);
     ui.HAADC_WIDGET->setVisible(flag);
     ui.pushButton->setVisible(flag);

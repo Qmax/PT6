@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'shortlocater.ui'
 **
-** Created: Thu Jul 31 19:35:28 2014
+** Created: Tue Aug 5 10:55:14 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -1007,7 +1007,7 @@ public:
         ohmMeter_2->setIconSize(QSize(55, 55));
         debugPanel = new QGroupBox(ShortLocaterClass);
         debugPanel->setObjectName(QString::fromUtf8("debugPanel"));
-        debugPanel->setGeometry(QRect(900, 433, 693, 160));
+        debugPanel->setGeometry(QRect(10, 433, 693, 160));
         QFont font10;
         font10.setBold(true);
         font10.setWeight(75);

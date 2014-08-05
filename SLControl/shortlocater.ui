@@ -2977,7 +2977,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
   <widget class="QGroupBox" name="debugPanel">
    <property name="geometry">
     <rect>
-     <x>900</x>
+     <x>10</x>
      <y>433</y>
      <width>693</width>
      <height>160</height>
