@@ -93,6 +93,11 @@ public:
     	~ShortLocater();
 
     	DISPLAY *dis;
+
+    	double retval3;
+    	double m_dOutput[10];
+    	int m_nAvgCount;
+    	int movingAverage;
 protected:
 
     	IntefaceBackPlane *IBackPlane;

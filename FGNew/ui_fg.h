@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'fg.ui'
 **
-** Created: Fri Aug 1 12:58:12 2014
+** Created: Fri Aug 8 17:40:46 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -363,18 +363,17 @@ public:
         leftBut->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
-"/*image: url(:/res/left-icon.png);*/\n"
 "image: url(:/res/leftButton.png);\n"
 "}\n"
 "QPushButton::pressed{\n"
 "background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
-"image: url(:/res/left-icon_pressed.png);\n"
+"image: url(:/res/leftButton.png);\n"
 "}\n"
 "QPushButton::released{\n"
 "background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
-"image: url(:/res/left-icon.png);\n"
+"image: url(:/res/leftButton.png);\n"
 "}\n"
 ""));
         upBut = new QPushButton(frame_5);
@@ -385,18 +384,17 @@ public:
         upBut->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
-"/*image: url(:/res/up-icon.png);*/\n"
 "image: url(:/res/upButton.png);\n"
 "}\n"
 "QPushButton::pressed{\n"
 "background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
-"image: url(:/res/up-icon_released.png);\n"
+"image: url(:/res/upButton.png);\n"
 "}\n"
 "QPushButton::released{\n"
 "background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
-"image: url(:/res/up-icon.png);\n"
+"image: url(:/res/upButton.png);\n"
 "}\n"
 ""));
         rightBut = new QPushButton(frame_5);
@@ -407,13 +405,12 @@ public:
         rightBut->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
-"/*image: url(:/res/right-icon.png);*/\n"
 "image: url(:/res/rightButton.png);\n"
 "}\n"
 "QPushButton::pressed{\n"
 "background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
-"image: url(:/res/right-icon_preseed.png);\n"
+"image: url(:/res/rightButton.png);\n"
 "}\n"
 "QPushButton::released{\n"
 "background-color:rgba(0,0,0,0);\n"
@@ -440,18 +437,17 @@ public:
         downBut->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
-"/*image: url(:/res/down-icon.png);*/\n"
 "image: url(:/res/downButton.png);\n"
 "}\n"
 "QPushButton::pressed{\n"
 "background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
-"image: url(:/res/down-icon_pressed.png);\n"
+"image: url(:/res/downButton.png);\n"
 "}\n"
 "QPushButton::released{\n"
 "background-color:rgba(0,0,0,0);\n"
 "border:1px solid rgba(0,0,0,0);\n"
-"image: url(:/res/down-icon.png);\n"
+"image: url(:/res/downButton.png);\n"
 "}\n"
 ""));
         sidePanel = new QFrame(centralWidget);

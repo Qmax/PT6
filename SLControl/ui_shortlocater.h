@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'shortlocater.ui'
 **
-** Created: Tue Aug 5 10:55:14 2014
+** Created: Thu Aug 7 18:19:50 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -59,6 +59,8 @@ public:
     QLabel *r2Ecap;
     QPushButton *r200mEBut;
     QLabel *r200mECap;
+    QWidget *splashWidget;
+    QLabel *splashLabel;
     QGroupBox *temp4;
     QPushButton *ohmMeter_3;
     QGroupBox *temp2;
@@ -88,8 +90,6 @@ public:
     QCheckBox *openShortEnable;
     QLineEdit *displayOffset;
     QWidget *HAADC_WIDGET;
-    QWidget *splashWidget;
-    QLabel *splashLabel;
     QFrame *frontPanel_SHLOC;
     QFrame *framePowerUSB;
     QFrame *fp_usbSocket;
@@ -906,6 +906,23 @@ public:
         r200mECap->setObjectName(QString::fromUtf8("r200mECap"));
         r200mECap->setGeometry(QRect(469, 38, 71, 17));
         r200mECap->setFont(font5);
+        splashWidget = new QWidget(inputPanel);
+        splashWidget->setObjectName(QString::fromUtf8("splashWidget"));
+        splashWidget->setGeometry(QRect(260, 110, 210, 40));
+        splashWidget->setStyleSheet(QString::fromUtf8("border-radius:20px;\n"
+"background-color: qradialgradient(spread:repeat, cx:0.5, cy:0.5, radius:0.077, fx:0.5, fy:0.5, stop:0 rgba(0, 169, 255, 200), stop:0.497326 rgba(0, 0, 0, 200), stop:1 rgba(0, 169, 255, 200));\n"
+"border:2px solid white;"));
+        splashLabel = new QLabel(splashWidget);
+        splashLabel->setObjectName(QString::fromUtf8("splashLabel"));
+        splashLabel->setGeometry(QRect(10, 10, 190, 20));
+        splashLabel->setFont(font8);
+        splashLabel->setStyleSheet(QString::fromUtf8("color:white;\n"
+"border: 1px solid #2D5059;\n"
+"border-radius: 20px;\n"
+"font:bold;\n"
+"background-color: rgb(0, 0, 0,0);\n"
+"border-color: rgb(0, 0, 0,0);"));
+        splashLabel->setAlignment(Qt::AlignCenter);
         temp4 = new QGroupBox(ShortLocaterClass);
         temp4->setObjectName(QString::fromUtf8("temp4"));
         temp4->setGeometry(QRect(710, 432, 80, 100));
@@ -1192,27 +1209,6 @@ public:
         HAADC_WIDGET->setObjectName(QString::fromUtf8("HAADC_WIDGET"));
         HAADC_WIDGET->setGeometry(QRect(633, 525, 50, 2));
         HAADC_WIDGET->setStyleSheet(QString::fromUtf8(""));
-        splashWidget = new QWidget(ShortLocaterClass);
-        splashWidget->setObjectName(QString::fromUtf8("splashWidget"));
-        splashWidget->setGeometry(QRect(250, 310, 210, 40));
-        splashWidget->setStyleSheet(QString::fromUtf8("border-radius:20px;\n"
-"background-color: qradialgradient(spread:repeat, cx:0.5, cy:0.5, radius:0.077, fx:0.5, fy:0.5, stop:0 rgba(0, 169, 255, 200), stop:0.497326 rgba(0, 0, 0, 200), stop:1 rgba(0, 169, 255, 200));\n"
-"border:2px solid white;"));
-        splashLabel = new QLabel(splashWidget);
-        splashLabel->setObjectName(QString::fromUtf8("splashLabel"));
-        splashLabel->setGeometry(QRect(10, 10, 190, 20));
-        QFont font13;
-        font13.setPointSize(12);
-        font13.setBold(true);
-        font13.setItalic(false);
-        font13.setWeight(75);
-        splashLabel->setFont(font13);
-        splashLabel->setStyleSheet(QString::fromUtf8("color:white;\n"
-"border: 1px solid #2D5059;\n"
-"border-radius: 20px;\n"
-"font:bold;\n"
-"background-color: rgb(0, 0, 0,0);\n"
-"border-color: rgb(0, 0, 0,0);"));
         frontPanel_SHLOC = new QFrame(ShortLocaterClass);
         frontPanel_SHLOC->setObjectName(QString::fromUtf8("frontPanel_SHLOC"));
         frontPanel_SHLOC->setGeometry(QRect(10, 434, 693, 160));
@@ -1267,12 +1263,12 @@ public:
         fp_powerLabel = new QLabel(framePowerUSB);
         fp_powerLabel->setObjectName(QString::fromUtf8("fp_powerLabel"));
         fp_powerLabel->setGeometry(QRect(-3, 66, 50, 17));
-        QFont font14;
-        font14.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font14.setPointSize(9);
-        font14.setBold(false);
-        font14.setWeight(50);
-        fp_powerLabel->setFont(font14);
+        QFont font13;
+        font13.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font13.setPointSize(9);
+        font13.setBold(false);
+        font13.setWeight(50);
+        fp_powerLabel->setFont(font13);
         fp_powerLabel->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         analogHighway = new QFrame(frontPanel_SHLOC);
         analogHighway->setObjectName(QString::fromUtf8("analogHighway"));
@@ -1290,12 +1286,12 @@ public:
         ah3_label = new QLabel(analogHighway);
         ah3_label->setObjectName(QString::fromUtf8("ah3_label"));
         ah3_label->setGeometry(QRect(100, 11, 38, 17));
-        ah3_label->setFont(font14);
+        ah3_label->setFont(font13);
         ah3_label->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         ah1_label = new QLabel(analogHighway);
         ah1_label->setObjectName(QString::fromUtf8("ah1_label"));
         ah1_label->setGeometry(QRect(26, 11, 38, 17));
-        ah1_label->setFont(font14);
+        ah1_label->setFont(font13);
         ah1_label->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         ah1_outer = new QFrame(analogHighway);
         ah1_outer->setObjectName(QString::fromUtf8("ah1_outer"));
@@ -1339,7 +1335,7 @@ public:
         ah0_label = new QLabel(analogHighway);
         ah0_label->setObjectName(QString::fromUtf8("ah0_label"));
         ah0_label->setGeometry(QRect(240, 11, 43, 17));
-        ah0_label->setFont(font14);
+        ah0_label->setFont(font13);
         ah0_label->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);\n"
 "background-color: rgb(0, 0, 0,0);"));
         ah0_outer = new QFrame(analogHighway);
@@ -1359,7 +1355,7 @@ public:
         ah2_label = new QLabel(analogHighway);
         ah2_label->setObjectName(QString::fromUtf8("ah2_label"));
         ah2_label->setGeometry(QRect(170, 11, 35, 17));
-        ah2_label->setFont(font14);
+        ah2_label->setFont(font13);
         ah2_label->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         ah2_outer = new QFrame(analogHighway);
         ah2_outer->setObjectName(QString::fromUtf8("ah2_outer"));
@@ -1408,12 +1404,12 @@ public:
         fp_VI1_ICM_SL_label = new QLabel(fp_VI_ICM_SL);
         fp_VI1_ICM_SL_label->setObjectName(QString::fromUtf8("fp_VI1_ICM_SL_label"));
         fp_VI1_ICM_SL_label->setGeometry(QRect(11, 1, 74, 17));
-        fp_VI1_ICM_SL_label->setFont(font14);
+        fp_VI1_ICM_SL_label->setFont(font13);
         fp_VI1_ICM_SL_label->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         fp_VI2_EXT_label = new QLabel(fp_VI_ICM_SL);
         fp_VI2_EXT_label->setObjectName(QString::fromUtf8("fp_VI2_EXT_label"));
         fp_VI2_EXT_label->setGeometry(QRect(106, 1, 60, 17));
-        fp_VI2_EXT_label->setFont(font14);
+        fp_VI2_EXT_label->setFont(font13);
         fp_VI2_EXT_label->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         fp_VI1_ICM_SL = new QFrame(fp_VI_ICM_SL);
         fp_VI1_ICM_SL->setObjectName(QString::fromUtf8("fp_VI1_ICM_SL"));
@@ -1425,7 +1421,7 @@ public:
         fp_ICM_Guard = new QLabel(fp_VI_ICM_SL);
         fp_ICM_Guard->setObjectName(QString::fromUtf8("fp_ICM_Guard"));
         fp_ICM_Guard->setGeometry(QRect(196, 1, 75, 17));
-        fp_ICM_Guard->setFont(font14);
+        fp_ICM_Guard->setFont(font13);
         fp_ICM_Guard->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         frame_15 = new QFrame(frontPanel_SHLOC);
         frame_15->setObjectName(QString::fromUtf8("frame_15"));
@@ -1443,12 +1439,12 @@ public:
         label_74 = new QLabel(frame_15);
         label_74->setObjectName(QString::fromUtf8("label_74"));
         label_74->setGeometry(QRect(100, 12, 38, 17));
-        label_74->setFont(font14);
+        label_74->setFont(font13);
         label_74->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         label_75 = new QLabel(frame_15);
         label_75->setObjectName(QString::fromUtf8("label_75"));
         label_75->setGeometry(QRect(26, 12, 38, 17));
-        label_75->setFont(font14);
+        label_75->setFont(font13);
         label_75->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         dso1_outer_9 = new QFrame(frame_15);
         dso1_outer_9->setObjectName(QString::fromUtf8("dso1_outer_9"));
@@ -1492,7 +1488,7 @@ public:
         label_77 = new QLabel(frame_15);
         label_77->setObjectName(QString::fromUtf8("label_77"));
         label_77->setGeometry(QRect(241, 12, 43, 17));
-        label_77->setFont(font14);
+        label_77->setFont(font13);
         label_77->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         frame_40 = new QFrame(frame_15);
         frame_40->setObjectName(QString::fromUtf8("frame_40"));
@@ -1511,7 +1507,7 @@ public:
         label_78 = new QLabel(frame_15);
         label_78->setObjectName(QString::fromUtf8("label_78"));
         label_78->setGeometry(QRect(171, 12, 35, 17));
-        label_78->setFont(font14);
+        label_78->setFont(font13);
         label_78->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         frame_42 = new QFrame(frame_15);
         frame_42->setObjectName(QString::fromUtf8("frame_42"));
@@ -1543,7 +1539,7 @@ public:
         fp_A_label = new QLabel(frame_DMM);
         fp_A_label->setObjectName(QString::fromUtf8("fp_A_label"));
         fp_A_label->setGeometry(QRect(247, 14, 20, 12));
-        fp_A_label->setFont(font14);
+        fp_A_label->setFont(font13);
         fp_A_label->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         fp_LO_inner = new QFrame(frame_DMM);
         fp_LO_inner->setObjectName(QString::fromUtf8("fp_LO_inner"));
@@ -1585,7 +1581,7 @@ public:
         fp_HI_label = new QLabel(frame_DMM);
         fp_HI_label->setObjectName(QString::fromUtf8("fp_HI_label"));
         fp_HI_label->setGeometry(QRect(37, 14, 20, 12));
-        fp_HI_label->setFont(font14);
+        fp_HI_label->setFont(font13);
         fp_HI_label->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         fp_HI_label->setAlignment(Qt::AlignCenter);
         fp_LO_outer = new QFrame(frame_DMM);
@@ -1605,7 +1601,7 @@ public:
         fp_LO_label = new QLabel(frame_DMM);
         fp_LO_label->setObjectName(QString::fromUtf8("fp_LO_label"));
         fp_LO_label->setGeometry(QRect(85, 14, 22, 12));
-        fp_LO_label->setFont(font14);
+        fp_LO_label->setFont(font13);
         fp_LO_label->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         fp_HI_inner = new QFrame(frame_DMM);
         fp_HI_inner->setObjectName(QString::fromUtf8("fp_HI_inner"));
@@ -1629,7 +1625,7 @@ public:
         fp_fuse_label = new QLabel(frame_DMM);
         fp_fuse_label->setObjectName(QString::fromUtf8("fp_fuse_label"));
         fp_fuse_label->setGeometry(QRect(178, 14, 50, 12));
-        fp_fuse_label->setFont(font14);
+        fp_fuse_label->setFont(font13);
         fp_fuse_label->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         fp_fuse = new QFrame(frame_DMM);
         fp_fuse->setObjectName(QString::fromUtf8("fp_fuse"));
@@ -1643,7 +1639,7 @@ public:
         fp_mA_label = new QLabel(frame_DMM);
         fp_mA_label->setObjectName(QString::fromUtf8("fp_mA_label"));
         fp_mA_label->setGeometry(QRect(133, 15, 35, 12));
-        fp_mA_label->setFont(font14);
+        fp_mA_label->setFont(font13);
         fp_mA_label->setStyleSheet(QString::fromUtf8("color: rgb(53, 53, 53);"));
         fp_A_label->raise();
         fp_A_outer->raise();
@@ -1674,14 +1670,14 @@ public:
         fp_REF_label = new QLabel(frontPanel_SHLOC);
         fp_REF_label->setObjectName(QString::fromUtf8("fp_REF_label"));
         fp_REF_label->setGeometry(QRect(655, 51, 32, 17));
-        fp_REF_label->setFont(font14);
+        fp_REF_label->setFont(font13);
         fp_REF_label->setStyleSheet(QString::fromUtf8("color:white;\n"
 "background-color: rgb(0, 0, 0,0);\n"
 "border-color:rgb(0, 0, 0,0);"));
         fp_GND_label = new QLabel(frontPanel_SHLOC);
         fp_GND_label->setObjectName(QString::fromUtf8("fp_GND_label"));
         fp_GND_label->setGeometry(QRect(653, 131, 35, 17));
-        fp_GND_label->setFont(font14);
+        fp_GND_label->setFont(font13);
         fp_GND_label->setStyleSheet(QString::fromUtf8("color:white;\n"
 "background-color: rgb(0, 0, 0,0);\n"
 "border-color:rgb(0, 0, 0,0);"));
@@ -1730,6 +1726,7 @@ public:
         r2Ecap->setText(QApplication::translate("ShortLocaterClass", "2E", 0, QApplication::UnicodeUTF8));
         r200mEBut->setText(QString());
         r200mECap->setText(QApplication::translate("ShortLocaterClass", "200mE", 0, QApplication::UnicodeUTF8));
+        splashLabel->setText(QApplication::translate("ShortLocaterClass", "OFFSET APPLYING.....", 0, QApplication::UnicodeUTF8));
         temp4->setTitle(QString());
         ohmMeter_3->setText(QString());
         temp2->setTitle(QString());
@@ -1754,7 +1751,6 @@ public:
         pushButton_2->setText(QApplication::translate("ShortLocaterClass", "NULL ON", 0, QApplication::UnicodeUTF8));
         pushButton_3->setText(QApplication::translate("ShortLocaterClass", "NULL OFF", 0, QApplication::UnicodeUTF8));
         openShortEnable->setText(QApplication::translate("ShortLocaterClass", "OpenShort Values", 0, QApplication::UnicodeUTF8));
-        splashLabel->setText(QApplication::translate("ShortLocaterClass", "OFFSET APPLYING.....", 0, QApplication::UnicodeUTF8));
         fp_powerLabel->setText(QApplication::translate("ShortLocaterClass", "POWER", 0, QApplication::UnicodeUTF8));
         ah3_label->setText(QApplication::translate("ShortLocaterClass", "AH3", 0, QApplication::UnicodeUTF8));
         ah1_label->setText(QApplication::translate("ShortLocaterClass", "AH1", 0, QApplication::UnicodeUTF8));

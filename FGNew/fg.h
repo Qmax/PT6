@@ -27,6 +27,7 @@
 #include "serialdevice.h"
 
 #include "AWGUIInterface.h"
+#include "AWGUIInterface2.h"
 
 const unsigned int guid = 0x46474D;
 
@@ -155,6 +156,7 @@ protected:
    	IPTAppBckPsocInterface *test;
     IRefCALIBTestJigInterface *REFCalib;
     AWGUIInterface *AWGGUI;
+    AWGUIInterface2 *AWGGUI2;
 
     //Variables
     QString m_strWaveType;

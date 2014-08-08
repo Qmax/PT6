@@ -46,6 +46,9 @@ void FG::PluginsInitialisation(){
 	QPluginLoader awgGUI("libArbitaryWaveform.so",this);
 	AWGGUI = qobject_cast<AWGUIInterface*>(awgGUI.instance());
 
+	QPluginLoader awgGUI2("libArbitaryWaveGen.so",this);
+	AWGGUI2 = qobject_cast<AWGUIInterface2*>(awgGUI2.instance());
+
 //	IBackPlane->writeBackPlaneRegister(0x2, 0x26);
 //	qDebug()<<"Before src imp selection";
 	IPsoc->srcImpedanceSelection(SRC_IMP_50E);
@@ -753,7 +756,7 @@ void FG::on_squareBut_clicked() {
 }
 void FG::on_AWGBox_clicked()
 {
-	QWidget *newWidget=AWGGUI->getAWGUIInterface();
+	QWidget *newWidget=AWGGUI2->getAWGUIInterface2();
 	newWidget->setWindowTitle("Arbitary Waveform Generator");
 	newWidget->show();
 	HighlightButtons(AWG_WAVE);

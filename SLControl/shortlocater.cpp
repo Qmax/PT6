@@ -30,7 +30,7 @@ ShortLocater::ShortLocater(QWidget *parent)
     QPluginLoader loader3("libPTPsocInterface2.so",this);
     IPsoc = qobject_cast<IPSOCCOMMUNICATION*>(loader3.instance());
     IPsoc->openSerial();
-    QPluginLoader loader4("libPTDMMLibInterface.so",this);
+    QPluginLoader loader4("libPTDMMLibInterface2.so",this);
     IDMMLib = qobject_cast<IDMMLibInterface*>(loader4.instance());
     QPluginLoader loader5("libGPIOEventInterface.so",this);
     IGPIOEvent = qobject_cast<PTGPIOEventInterface*>(loader5.instance());
@@ -146,7 +146,7 @@ void ShortLocater::Initializations(){
     for(int i=0;i<100;i++)
         avgRetval[i]=0.0;
 
-    retval=retval2=0.0;
+    retval=retval2=retval3=0.0;
     nullify=0.0;
     nullit=0.0;
     avg=0;
@@ -163,7 +163,13 @@ void ShortLocater::Initializations(){
     startStop();
 
 	ui.openShortEnable->setChecked(true);
-	ui.splashWidget->setGeometry(800,600,210,40);
+
+	m_nAvgCount=0;
+	movingAverage=1;
+
+	ui.splashWidget->setVisible(false);
+		usleep(1000);
+
 }
 
 void ShortLocater::customEvent(QEvent *e){
@@ -498,9 +504,30 @@ void ShortLocater::Measure(){
                 ui.progressBar_2->setValue(200);
             }
             else{
-            	QString tempRetval=convertToUnits(retval);
-            	qDebug()<<"output from convertToUnits:"<<tempRetval;
-                dis->setValue(tempRetval);
+            	retval3=0;
+            	if(m_nAvgCount==movingAverage){
+            		for(int i=0;i<movingAverage;i++)
+            			retval3=retval3+m_dOutput[i];
+            		for(int k=0;k<movingAverage;k++)
+            			qDebug()<<"value"<<k<<":"<<m_dOutput[k];
+            		retval3=retval3/movingAverage;
+            			qDebug()<<"sum of 3:"<<retval3;
+                	QString tempRetval=convertToUnits(retval3);
+                	qDebug()<<"output from convertToUnits:"<<tempRetval;
+                	dis->setRange(200);
+                    dis->setValue(retval3);
+//                    for(int j=0;j<(movingAverage-1);j++)
+//                    	m_dOutput[j]=m_dOutput[j+1];
+//                    m_nAvgCount--;
+                    m_nAvgCount=0;
+            	}
+            	else{
+            		m_dOutput[m_nAvgCount]=retval;
+            		m_nAvgCount++;
+            	}
+//            	QString tempRetval=convertToUnits(retval);
+//            	qDebug()<<"output from convertToUnits:"<<tempRetval;
+//                dis->setValue(tempRetval);
             }
 
             ui.progressBar_2->setMinimum(0);
@@ -518,10 +545,30 @@ void ShortLocater::Measure(){
                 ui.progressBar_2->setMaximum(200);
                 ui.progressBar_2->setValue(200);
             }
-            else{
-            	QString tempRetval=convertToUnits(retval);
-            	qDebug()<<"output from convertToUnits:"<<tempRetval;
-                dis->setValue(tempRetval);
+            else{retval3=0;
+            	if(m_nAvgCount==movingAverage){
+            		for(int i=0;i<movingAverage;i++)
+            			retval3+=m_dOutput[i];
+            		for(int k=0;k<movingAverage;k++)
+            			qDebug()<<"value"<<k<<":"<<m_dOutput[k];
+            		retval3/=movingAverage;
+            			qDebug()<<"sum of 3:"<<retval3;
+                	QString tempRetval=convertToUnits(retval3);
+                	qDebug()<<"output from convertToUnits:"<<tempRetval;
+                	dis->setRange(2);
+                    dis->setValue(retval3);
+//                    for(int j=0;j<(movingAverage-1);j++)
+//                    	m_dOutput[j]=m_dOutput[j+1];
+//                    m_nAvgCount--;
+                    m_nAvgCount=0;
+            	}
+            	else{
+            		m_dOutput[m_nAvgCount]=retval;
+            		m_nAvgCount++;
+            	}
+//            	QString tempRetval=convertToUnits(retval);
+//            	qDebug()<<"output from convertToUnits:"<<tempRetval;
+//                dis->setValue(tempRetval);
             }
 
             ui.progressBar_2->setMinimum(0);
@@ -540,12 +587,31 @@ void ShortLocater::Measure(){
                 ui.progressBar_2->setMaximum(200);
                 ui.progressBar_2->setValue(200);
             }
-            else{
-            	QString tempRetval=convertToUnits(retval);
-            	qDebug()<<"output from convertToUnits:"<<tempRetval;
-                dis->setValue(tempRetval);
+            else{retval3=0;
+            	if(m_nAvgCount==movingAverage){
+            		for(int i=0;i<movingAverage;i++)
+            			retval3+=m_dOutput[i];
+            		for(int k=0;k<movingAverage;k++)
+            			qDebug()<<"value"<<k<<":"<<m_dOutput[k];
+            		retval3/=movingAverage;
+            			qDebug()<<"sum of 3:"<<retval3;
+                	QString tempRetval=convertToUnits(retval3);
+                	qDebug()<<"output from convertToUnits:"<<tempRetval;
+                	dis->setRange(200);
+                    dis->setValue(retval3*1000);
+//                    for(int j=0;j<(movingAverage-1);j++)
+//                    	m_dOutput[j]=m_dOutput[j+1];
+//                    m_nAvgCount--;
+                    m_nAvgCount=0;
+            	}
+            	else{
+            		m_dOutput[m_nAvgCount]=retval;
+            		m_nAvgCount++;
+            	}
+//            	QString tempRetval=convertToUnits(retval);
+//            	qDebug()<<"output from convertToUnits:"<<tempRetval;
+//                dis->setValue(tempRetval);
             }
-
             ui.progressBar_2->setMinimum(0);
             ui.progressBar_2->setMaximum(200);
             ui.progressBar_2->setValue((int)(retval*1000));
@@ -855,6 +921,7 @@ void ShortLocater::on_exit_clicked()
 	BuzzerFlag=false;
 	IBackPlane->closeObject();
 	IPsoc->closeSerial();
+	ShortLocater::destroy(true,true);
 	parentWidget()->close();
 }
 
@@ -896,7 +963,8 @@ void ShortLocater::on_Auto_clicked()
 
 void ShortLocater::on_offset_clicked()
 {
-	ui.splashWidget->setGeometry(250,310,210,40);
+	ui.splashWidget->setVisible(true);
+	usleep(1000);
 	qDebug()<<"Offset Applied";
 //    if(AutoFlag==true){
 	if(OffsetFlag==false){
@@ -915,6 +983,7 @@ void ShortLocater::on_offset_clicked()
             for(int i=0;i<10;i++){
             	retval=IDMMLib->displayResistance(R200mE);
             	usleep(100);
+                QApplication::processEvents();
             }
 
             if(ui.openShortEnable->isChecked())
@@ -938,7 +1007,8 @@ void ShortLocater::on_offset_clicked()
 //    }else{
 //        showMessageBox(true,false,"Offset works only in Auto Mode","OK","");
 //    }
-	ui.splashWidget->setGeometry(800,600,210,40);
+	ui.splashWidget->setVisible(false);
+	usleep(1000);
 }
 
 void ShortLocater::on_Null_clicked()

@@ -2029,7 +2029,36 @@ void ICM::GetDisplayResistance(double pResistanceValue, double pRangeValue) {
 	 }
 
 	 ui->display->setText(l_strResistanceValue);*/
-	dis->setValue(convertToUnits(pResistanceValue));
+//	dis->setValue(convertToUnits(pResistanceValue));
+
+	//Passing Range to display class~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		bool ok=true;
+		QString str_value = convertToUnits(pResistanceValue);
+		QString str_range = ui->rangeLabel->text();
+		double dbl_value;int int_range;
+
+		if(ui->rangeLabel->text().endsWith("KE") || ui->rangeLabel->text().endsWith("ME")){
+			str_range.chop(2);
+			dbl_value=str_value.toDouble(&ok);
+			if(dbl_value>=0 && dbl_value<9.9)
+				int_range=9;
+			else if(dbl_value>=10 && dbl_value<99.9)
+				int_range=99;
+			else if(dbl_value>=100 && dbl_value<999.9)
+				int_range=999;
+		}
+		else if(ui->rangeLabel->text().endsWith("E")){
+			str_range.chop(1);
+			dbl_value=str_value.toDouble(&ok);
+			int_range=str_range.toInt(&ok,10);
+		}
+
+		dis->setRange(int_range);
+		dis->setValue(dbl_value);
+
+		qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
+		qDebug()<<"intRange:"<<int_range<<"dbl_value:"<<dbl_value;
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 
 void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
@@ -2087,7 +2116,8 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
 
 		l_sDisplayData = QString::number((p_nData), 'f', 2);// + picoFarad;
 		ui->Unit->setText(picoFarad);
-		dis->setValue(l_sDisplayData);
+//		dis->setValue(l_sDisplayData);
+
 
 	} else if (p_nRange == 1) {
 		if ((p_nData * 1000000000) >= 1) {
@@ -2099,7 +2129,8 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
 			p_nData = p_nData * 1000000000000.0;
 			l_sDisplayData = QString::number((p_nData), 'f', 2);// + picoFarad;
 			ui->Unit->setText(picoFarad);
-			dis->setValue(l_sDisplayData);
+//			dis->setValue(l_sDisplayData);
+
 		}
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		//		double d = ( (double) ( (int) (p_nData * 100.0) ) ) / 100.0 ;
@@ -2123,7 +2154,8 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		l_sDisplayData = QString::number((p_nData), 'f', 2);// + nanoFarad;
 		ui->Unit->setText(nanoFarad);
-		dis->setValue(l_sDisplayData);
+//		dis->setValue(l_sDisplayData);
+
 	}/*
 	 else if (p_nRange == 3)
 	 {
@@ -2206,8 +2238,24 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
 	else {
 		l_sDisplayData = convertToUnits(p_nData);// + "F";
 		//		ui->Unit->setText("F");
-		dis->setValue(l_sDisplayData);
+//		dis->setValue(l_sDisplayData);
+
 	}
+	//Passing Range to display class~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		bool ok=true;
+		QString str_value = convertToUnits(p_nData);
+		QString str_range = ui->rangeLabel->text();
+		if(ui->rangeLabel->text().endsWith("pF")||ui->rangeLabel->text().endsWith("nF")||ui->rangeLabel->text().endsWith("uF")||ui->rangeLabel->text().endsWith("uH")||ui->rangeLabel->text().endsWith("mF") || ui->rangeLabel->text().endsWith("mH")||ui->rangeLabel->text().endsWith("KE")||ui->rangeLabel->text().endsWith("ME"))
+			str_range.chop(2);
+		else if(ui->rangeLabel->text().endsWith("E")||ui->rangeLabel->text().endsWith("H"))
+			str_range.chop(1);
+		int int_range=str_range.toInt(&ok,10);
+		dis->setRange(int_range);
+		double dbl_value=str_value.toDouble(&ok);
+		dis->setValue(dbl_value);
+		qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
+		qDebug()<<"dblValue:"<<int_range<<"dbl_value:"<<dbl_value;
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 void ICM::GetDisplayInductance(double p_nData, short int p_nRange) {
 	p_nData = p_nData + m_dOffset;
@@ -2255,13 +2303,13 @@ void ICM::GetDisplayInductance(double p_nData, short int p_nRange) {
 		p_nData = p_nData * 1000000;
 		l_sDisplayData = QString::number((p_nData), 'f', 2) ;//+ microHenry;//"n"+Henry;			//?
 		ui->Unit->setText(microHenry);
-		dis->setValue(l_sDisplayData);
+//		dis->setValue(l_sDisplayData);
 	} else if (p_nRange == 1) // 3uH - 30uH
 	{
 		p_nData = p_nData * 1000000;
 		l_sDisplayData = QString::number((p_nData), 'f', 2);// + microHenry;
 		ui->Unit->setText(microHenry);
-		dis->setValue(l_sDisplayData);
+//		dis->setValue(l_sDisplayData);
 	}
 	/*
 	 else if(p_nRange == 2) // 30uH - 300 uH
@@ -2296,8 +2344,23 @@ void ICM::GetDisplayInductance(double p_nData, short int p_nRange) {
 	else {
 		l_sDisplayData = convertToUnits(p_nData);// + "H";
 		//		ui->Unit->setText("H");
-		dis->setValue(l_sDisplayData);
+//		dis->setValue(l_sDisplayData);
 	}
+	//Passing Range to display class~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		bool ok=true;
+		QString str_value = convertToUnits(p_nData);
+		QString str_range = ui->rangeLabel->text();
+		if(ui->rangeLabel->text().endsWith("pF")||ui->rangeLabel->text().endsWith("nF")||ui->rangeLabel->text().endsWith("uF")||ui->rangeLabel->text().endsWith("uH")||ui->rangeLabel->text().endsWith("mF") || ui->rangeLabel->text().endsWith("mH")||ui->rangeLabel->text().endsWith("KE")||ui->rangeLabel->text().endsWith("ME"))
+			str_range.chop(2);
+		else if(ui->rangeLabel->text().endsWith("E")||ui->rangeLabel->text().endsWith("H"))
+			str_range.chop(1);
+		int int_range=str_range.toInt(&ok,10);
+		dis->setRange(int_range);
+		double dbl_value=str_value.toDouble(&ok);
+		dis->setValue(dbl_value);
+		qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
+		qDebug()<<"dblValue:"<<int_range<<"dbl_value:"<<dbl_value;
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 double ICM::convertToValues(QString input) {
 

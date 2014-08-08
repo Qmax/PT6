@@ -5,6 +5,9 @@
 #include <QFrame>
 #include <QLabel>
 #include <QWidget>
+#include <math.h>
+#include <limits.h>
+#include <assert.h>
 
 class DISPLAY:public QFrame{
 
@@ -12,14 +15,16 @@ class DISPLAY:public QFrame{
 
 protected:
 
-    QLabel *digits[10];
+    QLabel *digits[6];
     QLabel *dpoint[9];
     QLabel *sign;
     short noOfDigits;
+	int m_intRange;
 
 public:
     void initialize(){
     setStyleSheet("QFrame{ border:1px solid black; border-radius:0px; background-color:black;color:yellow;}");
+
 
     sign=new QLabel(this);
     sign->setStyleSheet("QLabel{border:0px solid black;border-radius:0px;background-color:black;color:#fbec5d;}");
@@ -32,42 +37,24 @@ public:
 
     for(short i=0;i<noOfDigits;i++){
             digits[i]=new QLabel(this);
-            digits[i]->setStyleSheet("QLabel{border:0px solid black;border-radius:0px;background-color:black;color:#fbec5d;}");
+            digits[i]->setStyleSheet("QLabel{border:0px solid white;border-radius:0px;background-color:black;color:#fbec5d;}");
             digits[i]->setFont(QFont("DejaVu Sans", 85, 50, false));
             digits[i]->setAlignment(Qt::AlignHCenter);
         }
-    for(short i=0;i<(noOfDigits-1);i++){
-           dpoint[i]=new QLabel(this);
-           dpoint[i]->setStyleSheet("QLabel{border:1px solid black; border-radius:5px;background-color:#fbec5d;}");
-           dpoint[i]->setFont(QFont("DejaVu Sans", 15, 50, false));
-           dpoint[i]->setAlignment(Qt::AlignHCenter);
-
-       }
-        selectDPoint(-1);
+	m_intRange = 1;
     }
 
     void setXYWH(){
         for(short i=0;i<noOfDigits;i++){
             digits[i]->setGeometry((i+1)*50,3,50,80);
-//            digits[i]->setText("8");
         }
-        for(short i=0;i<(noOfDigits-1);i++){
-            dpoint[i]->setGeometry(((i+1)*50)+45,60,10,10);
-        }
-
     }
     void selectGeometry(int x,int y){
         setGeometry(x,y,350,90);
     }
-    void selectDPoint(short dpno){
-        for(short i=0;i<(noOfDigits-1);i++){
-            if(i==dpno)
-                dpoint[i]->setVisible(true);
-            else
-                dpoint[i]->setVisible(false);
-        }
-    }
-
+	void setRange(int pRange) {
+		m_intRange = pRange;
+	}
     void setNoOfDigits(short no){
         noOfDigits=no;
     }
@@ -80,68 +67,162 @@ public:
         setXYWH();
     }
 
-    void setValue(double value){
+    void setValue(double l_nValue){
 
-        QString strValue=QString::number(value);
-        qDebug()<<strValue;
+		qDebug() << "display.h-Data:" << l_nValue;
 
-    /*    int dpIndex=strValue.indexOf(".");
+		QString l_strDecimelValue;
+		QString Inf=QChar(0x221E);
+		int l_intValue=0, Q=0, R=0;
+		double l_nDecimelValue = 0;
 
-        if(dpIndex!=-1)
-            strValue=strValue.remove(".");*/
+	    if (l_nValue !=l_nValue){
+	    	setValue("Err");
+		}
+		else
+		{
+			if (l_nValue < 0){
+				l_nValue = fabs(l_nValue);
+				sign->setVisible(true);
+			}else{
+				sign->setVisible(false);
+			}
+			for (int i = 0; i < 6; i++) {
+				digits[i]->setText("0");
+			}
+			l_intValue = qRound(l_nValue);
+//_________________________________________________________________________________________
+			if (m_intRange == 1 || m_intRange == 3 ||m_intRange == 5 || m_intRange == 9) {
+				if (m_intRange==1 &&l_intValue > 1)
+					setValue("OL");
+				else if (m_intRange==3 &&l_intValue > 3)
+					setValue("OL");
+				else if (m_intRange==5 &&l_intValue > 5)
+					setValue("OL");
+				else if (m_intRange==9 &&l_intValue > 9)
+					setValue("OL");
+				else {
+					digits[0]->setText(QString::number(l_intValue, 10));
+					digits[1]->setText(".");
 
-        int signIndex=strValue.indexOf("-");
+					l_nDecimelValue = l_nValue - (double)l_intValue;
+					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
 
-        if(signIndex!=-1){
-            strValue=strValue.remove("-");
-            sign->setVisible(true);
-        }else{
-            sign->setVisible(false);
-        }
+					qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
 
-        int count=strValue.count();
+					if (l_strDecimelValue.length() >= 3)
+						digits[2]->setText(l_strDecimelValue.at(2));
+					else
+						digits[2]->setText("0");
 
-        if(count>6)  count=6;
+					if (l_strDecimelValue.length() >= 4)
+						digits[3]->setText(l_strDecimelValue.at(3));
+					else
+						digits[3]->setText("0");
 
-        for(short i=0;i<6;i++)
-            if(i<count)
-                digits[i]->setText(QString(strValue[i]));
-            else
-                digits[i]->setText("");
+					if (l_strDecimelValue.length() >= 5)
+						digits[4]->setText(l_strDecimelValue.at(4));
+					else
+						digits[4]->setText("0");
 
-     /*   if(signIndex!=-1)
-             selectDPoint(dpIndex-2);
-        else
-             selectDPoint(dpIndex-1);*/
+					if (l_strDecimelValue.length() >= 6)
+						digits[5]->setText(l_strDecimelValue.at(5));
+					else
+						digits[5]->setText("0");
+
+				}
+			}
+//_________________________________________________________________________________________
+			else if (m_intRange == 10 || m_intRange == 30 || m_intRange == 99) {
+				if (m_intRange==10 && l_intValue >10)
+					setValue("OL");
+				else if (m_intRange==30 && l_intValue >30)
+					setValue("OL");
+				else if (m_intRange==99 && l_intValue >99)
+					setValue("OL");
+				else {
+					Q = l_intValue / 10;
+					R = l_intValue % 10;
+					digits[0]->setText(QString::number(Q, 10));
+					digits[1]->setText(QString::number(R, 10));
+					digits[2]->setText(".");
+
+					l_nDecimelValue = l_nValue - (double)l_intValue;
+					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
+					qDebug() << "2-l_strDecimelValue->" << l_strDecimelValue;
+
+					if (l_strDecimelValue.length() >= 3)
+						digits[3]->setText(l_strDecimelValue.at(2));
+					else
+						digits[3]->setText("0");
+
+					if (l_strDecimelValue.length() >= 4)
+						digits[4]->setText(l_strDecimelValue.at(3));
+					else
+						digits[4]->setText("0");
+
+					if (l_strDecimelValue.length() >= 5)
+						digits[5]->setText(l_strDecimelValue.at(4));
+					else
+						digits[5]->setText("0");
+
+				}
+			}
+//_________________________________________________________________________________________
+			else if (m_intRange == 100 ||m_intRange == 300||m_intRange == 999) {
+				if (m_intRange == 100 && l_intValue >100)
+					setValue("OL");
+				else if (m_intRange == 300 && l_intValue >300)
+					setValue("OL");
+				else if (m_intRange == 999 && l_intValue >999)
+					setValue("OL");
+				else {
+					Q = l_intValue / 100;
+					R = l_intValue % 100;
+					digits[0]->setText(QString::number(Q, 10));
+
+					Q = R / 10;
+					R = R % 10;
+					digits[1]->setText(QString::number(Q, 10));
+
+					digits[2]->setText(QString::number(R, 10));
+					digits[3]->setText(".");
+
+					l_nDecimelValue = l_nValue - (double)l_intValue;
+					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
+					qDebug() << "3-l_strDecimelValue->" << l_strDecimelValue;
+
+					if (l_strDecimelValue.length() >= 3)
+						digits[4]->setText(l_strDecimelValue.at(2));
+					else
+						digits[4]->setText("0");
+
+					if (l_strDecimelValue.length() >= 4)
+						digits[5]->setText(l_strDecimelValue.at(3));
+					else
+						digits[5]->setText("0");
+
+				}
+			}
+		}
     }
     void setValue(QString strValue){
-       /* int dpIndex=strValue.indexOf(".");
-        if(dpIndex!=-1)
-            strValue=strValue.remove(".");*/
-
-        int signIndex=strValue.indexOf("-");
-
-        if(signIndex!=-1){
-            strValue=strValue.remove("-");
-            sign->setVisible(true);
-        }else{
-            sign->setVisible(false);
-        }
-
-        int count=strValue.count();
-
-        if(count>6)  count=6;
-
-        for(short i=0;i<6;i++)
-            if(i<count)
-                digits[i]->setText(QString(strValue[i]));
-            else
-                digits[i]->setText("");
-
-     /*   if(signIndex!=-1)
-             selectDPoint(dpIndex-2);
-        else
-             selectDPoint(dpIndex-1);  */
+    qDebug() << "display.h(str)-Data:" << strValue;
+		int signIndex = strValue.indexOf("-");
+		if (signIndex != -1) {
+			strValue = strValue.remove("-");
+			sign->setVisible(true);
+		} else {
+			sign->setVisible(false);
+		}
+		int count = strValue.count();
+		if (count > 6)
+			count = 6;
+		for (short i = 0; i < 6; i++)
+			if (i < count)
+				digits[i]->setText(QString(strValue[i]));
+			else
+				digits[i]->setText(" ");
     }
 
 

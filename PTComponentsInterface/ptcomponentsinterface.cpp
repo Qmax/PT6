@@ -60,17 +60,14 @@ void PTComponentsInterface::LoadVIPlugins(){
 }
 void PTComponentsInterface::LoadSHLPlugins(){
 	qDebug()<<"load Short Locator test plugins";
-
-	pluginSHL=new QPluginLoader("libSLInterface2.so",this);
-	ptSHL = pluginSHL->instance();
-	ISHL =qobject_cast<IPTSHLInterface*>(ptSHL);
-	m_PTFactories[ISHL->getGUID()]= dynamic_cast<QWidget*>(ISHL->getPTWidget());
-	qDebug()<<"ptcomponentinterface-dp71";
-}
+	qDebug()<<"dp-63";pluginSHL=new QPluginLoader("libSLInterface2.so",this);
+	qDebug()<<"dp-64";ptSHL = pluginSHL->instance();
+	qDebug()<<"dp-65";ISHL =qobject_cast<IPTSHLInterface*>(ptSHL);
+	qDebug()<<"dp-66";m_PTFactories[ISHL->getGUID()]= dynamic_cast<QWidget*>(ISHL->getPTWidget());
+	qDebug()<<"dp-67";}
 void PTComponentsInterface::LoadSLPlugins(){
  //SL
 	qDebug()<<"load SL plugins";
-
 	pluginSL=new QPluginLoader("libSLInterface.so",this);
 	ptSL = pluginSL->instance();
 	ISL =qobject_cast<IPTSLInterface*>(ptSL);
@@ -116,14 +113,14 @@ void PTComponentsInterface::LoadPTPlugins()
     m_PTFactories[ISL->getGUID()]= dynamic_cast<QWidget*>(ISL->getPTWidget());
 
     //SL2
-	pluginSHL=new QPluginLoader("libSLInterface2.so",this);
-	ptSHL = pluginSHL->instance();
+    QPluginLoader pluginSHL("libSLInterface2.so",this);
+	QObject *ptSHL = pluginSHL.instance();
 	ISHL =qobject_cast<IPTSHLInterface*>(ptSHL);
 	m_PTFactories[ISHL->getGUID()]= dynamic_cast<QWidget*>(ISHL->getPTWidget());
 
     //ICM
     QPluginLoader pluginICM("libICMUIInterface.so",this);
-	ptICM = pluginICM.instance();
+    QObject *ptICM = pluginICM.instance();
 	IICM =qobject_cast<IPTICMInterface*>(ptICM);
 	m_PTFactories[IICM->getGUID()]= dynamic_cast<QWidget*>(IICM->getPTWidget());
 

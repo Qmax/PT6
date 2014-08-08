@@ -583,18 +583,17 @@ background-color:rgba(0,0,0,0);</string>
        <string notr="true">QPushButton{
 background-color:rgba(0,0,0,0);
 border:1px solid rgba(0,0,0,0);
-/*image: url(:/res/left-icon.png);*/
 image: url(:/res/leftButton.png);
 }
 QPushButton::pressed{
 background-color:rgba(0,0,0,0);
 border:1px solid rgba(0,0,0,0);
-image: url(:/res/left-icon_pressed.png);
+image: url(:/res/leftButton.png);
 }
 QPushButton::released{
 background-color:rgba(0,0,0,0);
 border:1px solid rgba(0,0,0,0);
-image: url(:/res/left-icon.png);
+image: url(:/res/leftButton.png);
 }
 </string>
       </property>
@@ -623,18 +622,17 @@ image: url(:/res/left-icon.png);
        <string notr="true">QPushButton{
 background-color:rgba(0,0,0,0);
 border:1px solid rgba(0,0,0,0);
-/*image: url(:/res/up-icon.png);*/
 image: url(:/res/upButton.png);
 }
 QPushButton::pressed{
 background-color:rgba(0,0,0,0);
 border:1px solid rgba(0,0,0,0);
-image: url(:/res/up-icon_released.png);
+image: url(:/res/upButton.png);
 }
 QPushButton::released{
 background-color:rgba(0,0,0,0);
 border:1px solid rgba(0,0,0,0);
-image: url(:/res/up-icon.png);
+image: url(:/res/upButton.png);
 }
 </string>
       </property>
@@ -663,13 +661,12 @@ image: url(:/res/up-icon.png);
        <string notr="true">QPushButton{
 background-color:rgba(0,0,0,0);
 border:1px solid rgba(0,0,0,0);
-/*image: url(:/res/right-icon.png);*/
 image: url(:/res/rightButton.png);
 }
 QPushButton::pressed{
 background-color:rgba(0,0,0,0);
 border:1px solid rgba(0,0,0,0);
-image: url(:/res/right-icon_preseed.png);
+image: url(:/res/rightButton.png);
 }
 QPushButton::released{
 background-color:rgba(0,0,0,0);
@@ -732,18 +729,17 @@ image: url(:/res/coarse.png);
        <string notr="true">QPushButton{
 background-color:rgba(0,0,0,0);
 border:1px solid rgba(0,0,0,0);
-/*image: url(:/res/down-icon.png);*/
 image: url(:/res/downButton.png);
 }
 QPushButton::pressed{
 background-color:rgba(0,0,0,0);
 border:1px solid rgba(0,0,0,0);
-image: url(:/res/down-icon_pressed.png);
+image: url(:/res/downButton.png);
 }
 QPushButton::released{
 background-color:rgba(0,0,0,0);
 border:1px solid rgba(0,0,0,0);
-image: url(:/res/down-icon.png);
+image: url(:/res/downButton.png);
 }
 </string>
       </property>

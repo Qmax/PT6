@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'ptfginterface.h'
 **
-** Created: Fri Aug 1 12:58:29 2014
+** Created: Fri Aug 8 11:59:46 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
