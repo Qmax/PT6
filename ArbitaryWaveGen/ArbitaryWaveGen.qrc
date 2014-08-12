@@ -6,5 +6,9 @@
         <file>res/LH1-Play-icon.png</file>
         <file>res/LH1-Standby-icon.png</file>
         <file>res/LH1-Stop-icon.png</file>
+        <file>res/Refresh-icon.png</file>
+        <file>res/Zoom-icon.png</file>
+        <file>res/Zoom-In-icon.png</file>
+        <file>res/Zoom-Out-icon.png</file>
     </qresource>
 </RCC>

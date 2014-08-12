@@ -3,10 +3,15 @@
 
 #include <QMainWindow>
 #include <QInputDialog>
+#include <QPluginLoader>
 #include <QLabel>
 #include "qcustomplot.h"
+
 #include "InterfacePTLibrary.h"
 #include "PTEventInterfaces.h"
+#include "ApplicationCardInterface.h"
+#include "AppdeviceRegisterDetails.h"
+#include "PTSPIMemoryInterface.h"
 
 
 namespace Ui {
@@ -51,7 +56,7 @@ public:
     QmaxLabel(int pIndex,QWidget *p=0):QLabel(p){
         m_nIndex=pIndex;
         setAlignment(Qt::AlignCenter);
-        setStyleSheet("color: rgba(255,255,255,255);""border: rgba(0,0,0,0);""border-radius: 3px;""background-color: rgba(0, 0, 0,0);""qproperty-wordWrap: true;");
+        setStyleSheet("color: rgba(0,0,0,255);""border: rgba(0,0,0,0);""border-radius: 3px;""background-color: rgba(0, 0, 0,0);""qproperty-wordWrap: true;");
         setFont(QFont("DejaVu Sans",14,75,false));
         setFrameStyle(3);
     }
@@ -61,7 +66,7 @@ public slots:
         if(state)
             setStyleSheet("color: rgba(0,0,0,255);""border: 1px solid black;""border-radius: 3px;""background-color: rgba(170, 255, 127,255);""qproperty-wordWrap: true;");
         else
-            setStyleSheet("color: rgba(255,255,255,255);""border: rgba(0,0,0,0);""border-radius: 3px;""background-color: rgba(0, 0, 0,0);""qproperty-wordWrap: true;");
+            setStyleSheet("color: rgba(0,0,0,255);""border: rgba(0,0,0,0);""border-radius: 3px;""background-color: rgba(0, 0, 0,0);""qproperty-wordWrap: true;");
     }
 
 protected:
@@ -77,24 +82,39 @@ public:
   explicit MainWindow(QWidget *parent = 0);
   ~MainWindow();
   void clearGraphData();
-    void MergeAll();
+  void MergeAll();
+
+  void GenerateHexPattern();
+  void loadRAM();
+
   QVector<double> m_nX,m_nY,m_nX1,m_nY1,m_nX2,m_nY2,m_nX3,m_nY3,m_nX4,m_nY4,m_nX5,m_nY5,m_nX6,m_nY6;
   int graphSelect;
+
 protected:
   //Widgets
+  IApplicationCardInterface *IAppCard;
+  ISPIMemoryInterface *ISPIMemory;
+
   QmaxLineEdit *lineEdit[4];
   QmaxLabel *label[4];
   IQmaxNumberPanel *INumberPanel;
   PTEventInterface	*IPTKeyEvent;
-  double m_nAmplitude,m_nOffset,m_nPeriod,m_nPhase;
   int m_nLineEditIndex,m_nPTKeyCode;
 
-  void receiveValue(double pValue);
-  void receiveValue(QString pValue);
-  void receiveValue(uint pValue);
-  void callLineEditInput(int leFocussed);
+  double m_nAmplitude;
+  int m_nCycles;
+  bool rescaleAxis;
+  bool m_bUnipolar;
+  double xAxisLower,xAxisUpper,yAxisLower,yAxisUpper;
+
+  QList<double> minList;
+  QList<double> maxList;
+  QList<char>   callType;
 
 private slots:
+  void on_butRefresh_clicked();
+  void on_butStop_clicked();
+  void on_butStart_clicked();
   void on_butZoomIn_clicked();
   void on_butZoomOut_clicked();
   void on_butExit_clicked();
@@ -137,6 +157,11 @@ private slots:
   void contextMenuRequest(QPoint pos);
   void moveLegend();
   void graphClicked(QCPAbstractPlottable *plottable);
+
+  void receiveValue(double pValue);
+  void receiveValue(QString pValue);
+  void receiveValue(uint pValue);
+  void callLineEditInput(int leFocussed);
   
 private:
   Ui::MainWindow *ui;

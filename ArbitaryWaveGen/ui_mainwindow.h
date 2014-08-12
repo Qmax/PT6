@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Fri Aug 8 16:19:26 2014
+** Created: Tue Aug 12 13:08:05 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -64,15 +64,16 @@ public:
     QLabel *label_Frequency;
     QLineEdit *lineEdit_2;
     QWidget *verticalWidget_4;
-    QLabel *label_Phase;
+    QLabel *label_Offset;
     QLineEdit *lineEdit_3;
     QWidget *verticalWidget_5;
-    QLabel *label_Offset;
+    QLabel *label_Phase;
     QLineEdit *lineEdit_4;
     QPushButton *butZoomIn;
     QPushButton *butZoomOut;
-    QPushButton *butExit_2;
+    QPushButton *butStop;
     QPushButton *butStart;
+    QPushButton *butRefresh;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -484,14 +485,14 @@ public:
         verticalWidget_4 = new QWidget(centralWidget);
         verticalWidget_4->setObjectName(QString::fromUtf8("verticalWidget_4"));
         verticalWidget_4->setGeometry(QRect(430, 490, 141, 61));
-        label_Phase = new QLabel(verticalWidget_4);
-        label_Phase->setObjectName(QString::fromUtf8("label_Phase"));
-        label_Phase->setGeometry(QRect(9, 9, 120, 17));
-        sizePolicy1.setHeightForWidth(label_Phase->sizePolicy().hasHeightForWidth());
-        label_Phase->setSizePolicy(sizePolicy1);
-        label_Phase->setFont(font1);
-        label_Phase->setStyleSheet(QString::fromUtf8("background-color: rgba(0, 0, 0, 0);"));
-        label_Phase->setAlignment(Qt::AlignCenter);
+        label_Offset = new QLabel(verticalWidget_4);
+        label_Offset->setObjectName(QString::fromUtf8("label_Offset"));
+        label_Offset->setGeometry(QRect(9, 9, 120, 17));
+        sizePolicy1.setHeightForWidth(label_Offset->sizePolicy().hasHeightForWidth());
+        label_Offset->setSizePolicy(sizePolicy1);
+        label_Offset->setFont(font1);
+        label_Offset->setStyleSheet(QString::fromUtf8("background-color: rgba(0, 0, 0, 0);"));
+        label_Offset->setAlignment(Qt::AlignCenter);
         lineEdit_3 = new QLineEdit(verticalWidget_4);
         lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
         lineEdit_3->setGeometry(QRect(9, 28, 123, 30));
@@ -500,14 +501,14 @@ public:
         verticalWidget_5 = new QWidget(centralWidget);
         verticalWidget_5->setObjectName(QString::fromUtf8("verticalWidget_5"));
         verticalWidget_5->setGeometry(QRect(290, 490, 141, 61));
-        label_Offset = new QLabel(verticalWidget_5);
-        label_Offset->setObjectName(QString::fromUtf8("label_Offset"));
-        label_Offset->setGeometry(QRect(9, 9, 120, 17));
-        sizePolicy1.setHeightForWidth(label_Offset->sizePolicy().hasHeightForWidth());
-        label_Offset->setSizePolicy(sizePolicy1);
-        label_Offset->setFont(font1);
-        label_Offset->setStyleSheet(QString::fromUtf8("background-color: rgba(0, 0, 0, 0);"));
-        label_Offset->setAlignment(Qt::AlignCenter);
+        label_Phase = new QLabel(verticalWidget_5);
+        label_Phase->setObjectName(QString::fromUtf8("label_Phase"));
+        label_Phase->setGeometry(QRect(9, 9, 120, 17));
+        sizePolicy1.setHeightForWidth(label_Phase->sizePolicy().hasHeightForWidth());
+        label_Phase->setSizePolicy(sizePolicy1);
+        label_Phase->setFont(font1);
+        label_Phase->setStyleSheet(QString::fromUtf8("background-color: rgba(0, 0, 0, 0);"));
+        label_Phase->setAlignment(Qt::AlignCenter);
         lineEdit_4 = new QLineEdit(verticalWidget_5);
         lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
         lineEdit_4->setGeometry(QRect(9, 28, 123, 30));
@@ -515,72 +516,35 @@ public:
         lineEdit_4->setSizePolicy(sizePolicy1);
         butZoomIn = new QPushButton(centralWidget);
         butZoomIn->setObjectName(QString::fromUtf8("butZoomIn"));
-        butZoomIn->setGeometry(QRect(64, 10, 79, 30));
+        butZoomIn->setGeometry(QRect(50, 4, 40, 40));
         sizePolicy1.setHeightForWidth(butZoomIn->sizePolicy().hasHeightForWidth());
         butZoomIn->setSizePolicy(sizePolicy1);
         butZoomIn->setFont(font);
         butZoomIn->setFocusPolicy(Qt::NoFocus);
-        butZoomIn->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"color:white;\n"
-"border: 1px solid #2D5059;\n"
-"border-radius: 20px;\n"
-"background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1A74DB, stop: 0.6 #5293DE, stop:1 #FFFFFF);\n"
-"font:bold;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
-"}\n"
-"QPushButton:flat {\n"
-"border: none; \n"
-"}\n"
-"QPushButton:default {\n"
-"border-color: navy; \n"
-"}\n"
+        butZoomIn->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);\n"
 "\n"
-"QPushButton:disabled\n"
-"{\n"
-"color:lightgrey;\n"
-"background-color:grey\n"
-"}"));
+"\n"
+"image: url(:/res/Zoom-Out-icon.png);}\n"
+""));
         butZoomOut = new QPushButton(centralWidget);
         butZoomOut->setObjectName(QString::fromUtf8("butZoomOut"));
-        butZoomOut->setGeometry(QRect(164, 10, 79, 30));
+        butZoomOut->setGeometry(QRect(90, 4, 40, 40));
         sizePolicy1.setHeightForWidth(butZoomOut->sizePolicy().hasHeightForWidth());
         butZoomOut->setSizePolicy(sizePolicy1);
         butZoomOut->setFont(font);
         butZoomOut->setFocusPolicy(Qt::NoFocus);
-        butZoomOut->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"color:white;\n"
-"border: 1px solid #2D5059;\n"
-"border-radius: 20px;\n"
-"background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1A74DB, stop: 0.6 #5293DE, stop:1 #FFFFFF);\n"
-"font:bold;\n"
+        butZoomOut->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);\n"
+"	image: url(:/res/Zoom-In-icon.png);\n"
 "}\n"
-"QPushButton:pressed {\n"
-"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
-"}\n"
-"QPushButton:flat {\n"
-"border: none; \n"
-"}\n"
-"QPushButton:default {\n"
-"border-color: navy; \n"
-"}\n"
-"\n"
-"QPushButton:disabled\n"
-"{\n"
-"color:lightgrey;\n"
-"background-color:grey\n"
-"}"));
-        butExit_2 = new QPushButton(centralWidget);
-        butExit_2->setObjectName(QString::fromUtf8("butExit_2"));
-        butExit_2->setGeometry(QRect(650, 490, 61, 61));
-        sizePolicy1.setHeightForWidth(butExit_2->sizePolicy().hasHeightForWidth());
-        butExit_2->setSizePolicy(sizePolicy1);
-        butExit_2->setFont(font);
-        butExit_2->setFocusPolicy(Qt::NoFocus);
-        butExit_2->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);\n"
+""));
+        butStop = new QPushButton(centralWidget);
+        butStop->setObjectName(QString::fromUtf8("butStop"));
+        butStop->setGeometry(QRect(650, 490, 61, 61));
+        sizePolicy1.setHeightForWidth(butStop->sizePolicy().hasHeightForWidth());
+        butStop->setSizePolicy(sizePolicy1);
+        butStop->setFont(font);
+        butStop->setFocusPolicy(Qt::NoFocus);
+        butStop->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);\n"
 "\n"
 "	image: url(:/res/LH1-Stop-icon.png);\n"
 "}\n"
@@ -596,6 +560,16 @@ public:
 "\n"
 "image: url(:/res/LH1-Play-icon.png);}\n"
 ""));
+        butRefresh = new QPushButton(centralWidget);
+        butRefresh->setObjectName(QString::fromUtf8("butRefresh"));
+        butRefresh->setGeometry(QRect(10, 4, 40, 40));
+        sizePolicy1.setHeightForWidth(butRefresh->sizePolicy().hasHeightForWidth());
+        butRefresh->setSizePolicy(sizePolicy1);
+        butRefresh->setFont(font);
+        butRefresh->setFocusPolicy(Qt::NoFocus);
+        butRefresh->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);\n"
+"\n"
+"	image: url(:/res/Refresh-icon.png);}"));
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -634,13 +608,14 @@ public:
 "All", 0, QApplication::UnicodeUTF8));
         butExit->setText(QString());
         label_Amplitude->setText(QApplication::translate("MainWindow", "AMPLITUDE", 0, QApplication::UnicodeUTF8));
-        label_Frequency->setText(QApplication::translate("MainWindow", "FREQUENCY", 0, QApplication::UnicodeUTF8));
-        label_Phase->setText(QApplication::translate("MainWindow", "PHASE", 0, QApplication::UnicodeUTF8));
+        label_Frequency->setText(QApplication::translate("MainWindow", "START TIME", 0, QApplication::UnicodeUTF8));
         label_Offset->setText(QApplication::translate("MainWindow", "OFFSET", 0, QApplication::UnicodeUTF8));
-        butZoomIn->setText(QApplication::translate("MainWindow", "ZoomIn", 0, QApplication::UnicodeUTF8));
-        butZoomOut->setText(QApplication::translate("MainWindow", "ZoomOut", 0, QApplication::UnicodeUTF8));
-        butExit_2->setText(QString());
+        label_Phase->setText(QApplication::translate("MainWindow", "CYCLES", 0, QApplication::UnicodeUTF8));
+        butZoomIn->setText(QString());
+        butZoomOut->setText(QString());
+        butStop->setText(QString());
         butStart->setText(QString());
+        butRefresh->setText(QString());
     } // retranslateUi
 
 };

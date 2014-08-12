@@ -5,12 +5,16 @@ QT += core \
     gui
 TARGET = ArbitaryWaveGen
 TEMPLATE = lib
+
 CONFIG += plugin
 SOURCES += IAWGUIInterface2.cpp \
     qcustomplot.cpp \
     main.cpp \
     mainwindow.cpp
-HEADERS += InterfacePTLibrary.h \
+HEADERS += AppdeviceRegisterDetails.h \
+    ApplicationCardInterface.h \
+    appcardfunctiontemplate.h \
+    InterfacePTLibrary.h \
     PTEventInterfaces.h \
     PTSPIMemoryInterface.h \
     IAWGUIInterface2.h \

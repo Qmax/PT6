@@ -650,7 +650,7 @@ All</string>
       <string notr="true">background-color: rgba(0, 0, 0, 0);</string>
      </property>
      <property name="text">
-      <string>FREQUENCY</string>
+      <string>START TIME</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -677,64 +677,6 @@ All</string>
     <property name="geometry">
      <rect>
       <x>430</x>
-      <y>490</y>
-      <width>141</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <widget class="QLabel" name="label_Phase">
-     <property name="geometry">
-      <rect>
-       <x>9</x>
-       <y>9</y>
-       <width>120</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVu Sans</family>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgba(0, 0, 0, 0);</string>
-     </property>
-     <property name="text">
-      <string>PHASE</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_3">
-     <property name="geometry">
-      <rect>
-       <x>9</x>
-       <y>28</y>
-       <width>123</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="verticalWidget_5" native="true">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
       <y>490</y>
       <width>141</width>
       <height>61</height>
@@ -772,6 +714,64 @@ All</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+    <widget class="QLineEdit" name="lineEdit_3">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>28</y>
+       <width>123</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="verticalWidget_5" native="true">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>490</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="label_Phase">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>9</y>
+       <width>120</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>DejaVu Sans</family>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgba(0, 0, 0, 0);</string>
+     </property>
+     <property name="text">
+      <string>CYCLES</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
     <widget class="QLineEdit" name="lineEdit_4">
      <property name="geometry">
       <rect>
@@ -792,10 +792,10 @@ All</string>
    <widget class="QPushButton" name="butZoomIn">
     <property name="geometry">
      <rect>
-      <x>64</x>
-      <y>10</y>
-      <width>79</width>
-      <height>30</height>
+      <x>50</x>
+      <y>4</y>
+      <width>40</width>
+      <height>40</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -816,41 +816,23 @@ All</string>
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {
-color:white;
-border: 1px solid #2D5059;
-border-radius: 20px;
-background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1A74DB, stop: 0.6 #5293DE, stop:1 #FFFFFF);
-font:bold;
-}
-QPushButton:pressed {
-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-stop: 0 #dadbde, stop: 1 #f6f7fa);
-}
-QPushButton:flat {
-border: none; 
-}
-QPushButton:default {
-border-color: navy; 
-}
+     <string notr="true">QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);
 
-QPushButton:disabled
-{
-color:lightgrey;
-background-color:grey
-}</string>
+
+image: url(:/res/Zoom-Out-icon.png);}
+</string>
     </property>
     <property name="text">
-     <string>ZoomIn</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="butZoomOut">
     <property name="geometry">
      <rect>
-      <x>164</x>
-      <y>10</y>
-      <width>79</width>
-      <height>30</height>
+      <x>90</x>
+      <y>4</y>
+      <width>40</width>
+      <height>40</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -871,35 +853,16 @@ background-color:grey
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {
-color:white;
-border: 1px solid #2D5059;
-border-radius: 20px;
-background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0,stop: 0 #1A74DB, stop: 0.6 #5293DE, stop:1 #FFFFFF);
-font:bold;
+     <string notr="true">QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);
+	image: url(:/res/Zoom-In-icon.png);
 }
-QPushButton:pressed {
-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-stop: 0 #dadbde, stop: 1 #f6f7fa);
-}
-QPushButton:flat {
-border: none; 
-}
-QPushButton:default {
-border-color: navy; 
-}
-
-QPushButton:disabled
-{
-color:lightgrey;
-background-color:grey
-}</string>
+</string>
     </property>
     <property name="text">
-     <string>ZoomOut</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="butExit_2">
+   <widget class="QPushButton" name="butStop">
     <property name="geometry">
      <rect>
       <x>650</x>
@@ -972,6 +935,41 @@ image: url(:/res/LH1-Play-icon.png);}
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="butRefresh">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>4</y>
+      <width>40</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <family>DejaVu Sans</family>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);
+
+	image: url(:/res/Refresh-icon.png);}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionSine">
@@ -1039,8 +1037,6 @@ image: url(:/res/LH1-Play-icon.png);}
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="ArbitaryWaveGen.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

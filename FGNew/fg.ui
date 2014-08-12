@@ -191,7 +191,7 @@ border-top:1px solid gray; border-top-right-radius: 0px;
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);
-	image: url(:/res/awg2.png);
+	image: url(:/res/awg3.png);
 	}</string>
      </property>
      <property name="text">

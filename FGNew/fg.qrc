@@ -40,5 +40,6 @@
         <file>res/coarse.png</file>
         <file>res/fine.png</file>
         <file>res/awg2.png</file>
+        <file>res/awg3.png</file>
     </qresource>
 </RCC>
