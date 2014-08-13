@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue Aug 12 13:08:05 2014
+** Created: Wed Aug 13 18:17:10 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -74,6 +74,7 @@ public:
     QPushButton *butStop;
     QPushButton *butStart;
     QPushButton *butRefresh;
+    QPushButton *butAppBck;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -570,6 +571,17 @@ public:
         butRefresh->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);\n"
 "\n"
 "	image: url(:/res/Refresh-icon.png);}"));
+        butAppBck = new QPushButton(centralWidget);
+        butAppBck->setObjectName(QString::fromUtf8("butAppBck"));
+        butAppBck->setGeometry(QRect(660, 0, 40, 40));
+        sizePolicy1.setHeightForWidth(butAppBck->sizePolicy().hasHeightForWidth());
+        butAppBck->setSizePolicy(sizePolicy1);
+        butAppBck->setFont(font);
+        butAppBck->setFocusPolicy(Qt::NoFocus);
+        butAppBck->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);\n"
+"\n"
+"image: url(:/res/automatic-512.png);}\n"
+""));
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -608,7 +620,7 @@ public:
 "All", 0, QApplication::UnicodeUTF8));
         butExit->setText(QString());
         label_Amplitude->setText(QApplication::translate("MainWindow", "AMPLITUDE", 0, QApplication::UnicodeUTF8));
-        label_Frequency->setText(QApplication::translate("MainWindow", "START TIME", 0, QApplication::UnicodeUTF8));
+        label_Frequency->setText(QApplication::translate("MainWindow", "SAMPLES", 0, QApplication::UnicodeUTF8));
         label_Offset->setText(QApplication::translate("MainWindow", "OFFSET", 0, QApplication::UnicodeUTF8));
         label_Phase->setText(QApplication::translate("MainWindow", "CYCLES", 0, QApplication::UnicodeUTF8));
         butZoomIn->setText(QString());
@@ -616,6 +628,7 @@ public:
         butStop->setText(QString());
         butStart->setText(QString());
         butRefresh->setText(QString());
+        butAppBck->setText(QString());
     } // retranslateUi
 
 };

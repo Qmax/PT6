@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'fg.ui'
 **
-** Created: Tue Aug 12 17:34:13 2014
+** Created: Wed Aug 13 11:16:34 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -205,8 +205,8 @@ public:
         AWGBox->setFont(font);
         AWGBox->setFocusPolicy(Qt::NoFocus);
         AWGBox->setStyleSheet(QString::fromUtf8("QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);\n"
-"	image: url(:/res/awg3.png);\n"
-"	}"));
+"	\n"
+"image: url(:/res/awg2.png);}"));
         AWGBox->setIconSize(QSize(55, 55));
         selectFrame = new QFrame(centralWidget);
         selectFrame->setObjectName(QString::fromUtf8("selectFrame"));

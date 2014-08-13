@@ -650,7 +650,7 @@ All</string>
       <string notr="true">background-color: rgba(0, 0, 0, 0);</string>
      </property>
      <property name="text">
-      <string>START TIME</string>
+      <string>SAMPLES</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -965,6 +965,42 @@ image: url(:/res/LH1-Play-icon.png);}
      <string notr="true">QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);
 
 	image: url(:/res/Refresh-icon.png);}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="butAppBck">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>0</y>
+      <width>40</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <family>DejaVu Sans</family>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {border: 1px solid rgba(0,0,0,0); border-radius: 8px; background-color: rgba(0,0,0,0,);
+
+image: url(:/res/automatic-512.png);}
+</string>
     </property>
     <property name="text">
      <string/>

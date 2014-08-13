@@ -6,12 +6,15 @@
 #include <QPluginLoader>
 #include <QLabel>
 #include "qcustomplot.h"
+#include <unistd.h>
 
 #include "InterfacePTLibrary.h"
 #include "PTEventInterfaces.h"
 #include "ApplicationCardInterface.h"
 #include "AppdeviceRegisterDetails.h"
 #include "PTSPIMemoryInterface.h"
+#include "PTAppBckPsocInterface.h"
+
 
 
 namespace Ui {
@@ -94,6 +97,7 @@ protected:
   //Widgets
   IApplicationCardInterface *IAppCard;
   ISPIMemoryInterface *ISPIMemory;
+  IPTAppBckPsocInterface *testjig;
 
   QmaxLineEdit *lineEdit[4];
   QmaxLabel *label[4];
@@ -102,7 +106,7 @@ protected:
   int m_nLineEditIndex,m_nPTKeyCode;
 
   double m_nAmplitude;
-  int m_nCycles;
+  int m_nCycles,m_nSamples,m_nCount;
   bool rescaleAxis;
   bool m_bUnipolar;
   double xAxisLower,xAxisUpper,yAxisLower,yAxisUpper;
@@ -111,7 +115,10 @@ protected:
   QList<double> maxList;
   QList<char>   callType;
 
+  void customEvent(QEvent *eve);
+
 private slots:
+  void on_butAppBck_clicked();
   void on_butRefresh_clicked();
   void on_butStop_clicked();
   void on_butStart_clicked();

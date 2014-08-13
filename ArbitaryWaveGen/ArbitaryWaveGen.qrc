@@ -10,5 +10,6 @@
         <file>res/Zoom-icon.png</file>
         <file>res/Zoom-In-icon.png</file>
         <file>res/Zoom-Out-icon.png</file>
+        <file>res/automatic-512.png</file>
     </qresource>
 </RCC>
