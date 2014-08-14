@@ -14,6 +14,7 @@
 #include "AppdeviceRegisterDetails.h"
 #include "PTSPIMemoryInterface.h"
 #include "PTAppBckPsocInterface.h"
+#include "hardwareinterface.h"
 
 
 
@@ -98,6 +99,7 @@ protected:
   IApplicationCardInterface *IAppCard;
   ISPIMemoryInterface *ISPIMemory;
   IPTAppBckPsocInterface *testjig;
+  HardwareInterface *hwInterface;
 
   QmaxLineEdit *lineEdit[4];
   QmaxLabel *label[4];
@@ -105,7 +107,7 @@ protected:
   PTEventInterface	*IPTKeyEvent;
   int m_nLineEditIndex,m_nPTKeyCode;
 
-  double m_nAmplitude;
+  double m_nAmplitude,m_nOffset;
   int m_nCycles,m_nSamples,m_nCount;
   bool rescaleAxis;
   bool m_bUnipolar;

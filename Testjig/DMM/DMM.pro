@@ -4,12 +4,14 @@
 TARGET = DMM
 
 # TEMPLATE = app
-SOURCES += ad7190component.cpp \
+SOURCES += plotter.cpp \
+    ad7190component.cpp \
     ad5318components.cpp \
     IDMMWidget.cpp \
     main.cpp \
     dmmjig.cpp
-HEADERS += IPSOCCommunication.h \
+HEADERS += plotter.h \
+    IPSOCCommunication.h \
     ad7190component.h \
     AppdeviceRegisterDetails.h \
     ApplicationCardInterface.h \

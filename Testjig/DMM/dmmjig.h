@@ -7,7 +7,8 @@
 #include <QtCore>
 #include "InterfacePTLibrary.h"
 #include "WaveformTestjigInterface.h"
-//#include "DMMTestJigInterface.h"
+#include "DMMTestJigInterface.h"
+#include "plotter.h"
 
 #include "IPSOCCommunication.h"
 #include "AppdeviceRegisterDetails.h"

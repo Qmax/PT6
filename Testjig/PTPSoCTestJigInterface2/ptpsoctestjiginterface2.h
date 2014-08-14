@@ -51,6 +51,7 @@ protected:
 
 
 private slots:
+        void on_switchFLY_clicked();
         void on_switchSRCIMP_clicked();
         void on_comboBox_10_currentIndexChanged(int index);
         void EnDisSRCIM(bool);

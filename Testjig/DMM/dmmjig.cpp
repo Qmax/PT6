@@ -200,7 +200,7 @@ void DMMJig::InitializeHardwareLibraries(){
     m_objAD7190Component = new AD7190Component(IAppCard);
 
 
-    QPluginLoader loader3("libPTPsocInterface.so",this);
+    QPluginLoader loader3("libPTPsocInterface2.so",this);
     IPsoc = qobject_cast<IPSOCCOMMUNICATION*>(loader3.instance());
     IPsoc->openSerial();
 

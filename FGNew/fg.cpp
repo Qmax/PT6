@@ -49,6 +49,9 @@ void FG::PluginsInitialisation(){
 	QPluginLoader awgGUI2("libArbitaryWaveGen.so",this);
 	AWGGUI2 = qobject_cast<AWGUIInterface2*>(awgGUI2.instance());
 
+	AWGWidget=AWGGUI2->getAWGUIInterface2();
+	AWGWidget->setWindowTitle("Arbitary Waveform Generator");
+
 //	IBackPlane->writeBackPlaneRegister(0x2, 0x26);
 //	qDebug()<<"Before src imp selection";
 	IPsoc->srcImpedanceSelection(SRC_IMP_50E);
@@ -96,14 +99,22 @@ void FG::readEncoderData(){
 }
 void FG::doPTKeyFunction() {
 	if(m_nPTKeyCode==1){qDebug()<<("\nMENU");
-	IBackPlane->closeObject();
-	IPsoc->closeSerial();
-	parentWidget()->close();
+	if(AWGWidget->isVisible()){
+		AWGWidget->close();
+	}else{
+		IBackPlane->closeObject();
+		IPsoc->closeSerial();
+		parentWidget()->close();
+	}
 	}
 	else if(m_nPTKeyCode==2){qDebug()<<("\nESC");
-	IBackPlane->closeObject();
-	IPsoc->closeSerial();
-	parentWidget()->close();
+	if(AWGWidget->isVisible()){
+		AWGWidget->close();
+	}else{
+		IBackPlane->closeObject();
+		IPsoc->closeSerial();
+		parentWidget()->close();
+	}
 	}
 	else if(m_nPTKeyCode==3){qDebug()<<("\nNULL");
 	}
@@ -757,9 +768,7 @@ void FG::on_squareBut_clicked() {
 }
 void FG::on_AWGBox_clicked()
 {
-	QWidget *newWidget=AWGGUI2->getAWGUIInterface2();
-	newWidget->setWindowTitle("Arbitary Waveform Generator");
-	newWidget->show();
+	AWGWidget->show();
 	HighlightButtons(AWG_WAVE);
 }
 void FG::on_rampBut_clicked() {

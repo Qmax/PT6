@@ -20,6 +20,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QPluginLoader testing("libAppBckPsoc.so", this);
     testjig = qobject_cast<IPTAppBckPsocInterface*> (testing.instance());
+    //_______________________________________________
+	m_nAmplitude=1.0;
+	m_nOffset=0.0;
+	hwInterface=new HardwareInterface();
+	hwInterface->Init();
+	hwInterface->setHighImpedance(true);
+	hwInterface->setAmplitude(m_nAmplitude);
+	hwInterface->setFrequency(1000.0);
+	hwInterface->setOffset(m_nOffset);
+	hwInterface->setPhase(0);
+	hwInterface->Drive(STOPDRIVE);
+	//__________________________________________________
 
      m_nX.resize(4000);     m_nY.resize(4000);
     m_nX1.resize(4000);    m_nY1.resize(4000);
@@ -43,9 +55,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes |
                                     QCP::iSelectLegend | QCP::iSelectPlottables | QCP::iMultiSelect | QCP::iSelectItems | QCP::iSelectOther);
     xAxisLower=-1;
-    xAxisUpper=100;
-    yAxisLower=-3;
-    yAxisUpper=3;
+    xAxisUpper=500;
+    yAxisLower=-5;
+    yAxisUpper=5;
     ui->customPlot->xAxis->setRange(xAxisLower, xAxisUpper);
     ui->customPlot->yAxis->setRange(yAxisLower, yAxisUpper);
     ui->customPlot->axisRect()->setupFullAxesBox();
@@ -143,7 +155,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(lineEdit[3],SIGNAL(focussed(bool)),label[3],SLOT(setlabelFocus(bool)));
     connect(lineEdit[3],SIGNAL(focussed(int)),this,SLOT(callLineEditInput(int)));
 
-    m_nAmplitude=1.0;
     m_nCycles =1;
     m_nSamples=5;
     m_nCount=1;
@@ -161,10 +172,8 @@ void MainWindow::customEvent(QEvent *e) {
     if (e->type() == ((QEvent::Type) 5678)) {
 
         if(m_nPTKeyCode==1){qDebug()<<("\nMENU");
-            parentWidget()->close();
         }
         else if(m_nPTKeyCode==2){qDebug()<<("\nESC");
-            this->close();
         }
         else if(m_nPTKeyCode==3){qDebug()<<("\nNULL");
         }
@@ -336,7 +345,7 @@ void MainWindow::addSineGraph(){
     for (int l_nIndex=0; l_nIndex<63*m_nCycles; ++l_nIndex)
     {
         m_nX2[l_nIndex] = l_nIndex;
-        m_nY2[l_nIndex]=m_nAmplitude*sin(l_nIndex/10);
+        m_nY2[l_nIndex]=1*sin(l_nIndex/10.0);
         if(l_nIndex>m_nCount)m_nCount = l_nIndex;
     }
     ui->customPlot->addGraph();
@@ -354,7 +363,6 @@ void MainWindow::addSineGraph(){
         m_nX[i]=m_nX2[i];
         m_nY[i]=m_nY2[i];
     }
-
 }
 void MainWindow::addSawtoothGraph(){
     graphSelect=5;
@@ -629,10 +637,10 @@ void MainWindow::addRandomGraph()
     double r3 = (rand()/(double)RAND_MAX - 0.5)*2;
     double r4 = (rand()/(double)RAND_MAX - 0.5)*2;
     QVector<double> x(n), y(n);
-    for (int l_nIndex=0; l_nIndex<n*m_nCycles; l_nIndex++)
+    for (int l_nIndex=0; l_nIndex<n; l_nIndex++)
     {
         m_nX1[l_nIndex] = 1*(l_nIndex/(double)n-0.5)*10.0*xScale + xOffset;
-        m_nY1[l_nIndex] = m_nAmplitude*(sin(x[l_nIndex]*r1*5)*sin(cos(x[l_nIndex]*r2)*r4*3)+r3*cos(sin(x[l_nIndex])*r4*2))*yScale + yOffset;
+        m_nY1[l_nIndex] = 1*(sin(x[l_nIndex]*r1*5)*sin(cos(x[l_nIndex]*r2)*r4*3)+r3*cos(sin(x[l_nIndex])*r4*2))*yScale + yOffset;
         if(l_nIndex>m_nCount)m_nCount = l_nIndex;
     }
 
@@ -649,7 +657,7 @@ void MainWindow::addRandomGraph()
     //ui->customPlot->graph()->rescaleAxes();
     ui->customPlot->replot();
 
-    for(int i=0;i<n*m_nCycles;i++){
+    for(int i=0;i<n;i++){
         m_nX[i]=m_nX1[i];
         m_nY[i]=m_nY1[i];
     }
@@ -901,6 +909,7 @@ void MainWindow::receiveValue(double pValue){
     switch(m_nLineEditIndex){
     case 0:
         m_nAmplitude = pValue;
+    	hwInterface->setAmplitude(m_nAmplitude);
         break;
     case 1:
         m_nSamples= (int) pValue;
@@ -909,6 +918,8 @@ void MainWindow::receiveValue(double pValue){
         m_nCycles = (int) pValue;
         break;
     case 3:
+    	m_nOffset = pValue;
+    	hwInterface->setOffset(m_nOffset);
         break;
     }
 }
@@ -976,8 +987,10 @@ void MainWindow::on_butStop_clicked()
 void MainWindow::on_butRefresh_clicked()
 {
     if(rescaleAxis){
-        xAxisLower=-1;        xAxisUpper=100;
-        yAxisLower=-3;       yAxisUpper=3;
+        xAxisLower=-1;
+        xAxisUpper=500;
+        yAxisLower=-5;
+        yAxisUpper=5;
         ui->customPlot->xAxis->setRange(xAxisLower, xAxisUpper);
         ui->customPlot->yAxis->setRange(yAxisLower, yAxisUpper);
         ui->customPlot->replot();
@@ -1038,16 +1051,20 @@ void MainWindow::GenerateHexPattern()
 
     short int l_nHexValue = 0;
 
-    l_nHexValue = (0.6) * ((pow(2,14))-1) / (2 * (0.6));
+    l_nHexValue = (1.0) * ((pow(2,14))-1) / (2 * (1.0));
     fprintf(fpWaveFile,"%X\n",l_nHexValue);
 
     for(int l_nIndex=0;l_nIndex<m_nCount;l_nIndex++){
-        l_nHexValue=((m_nY[l_nIndex]+0.6) * ((pow(2,14))-1))/(2*0.6);
-        fprintf(fpWaveFile,"%X\n",l_nHexValue & 0x00003FFF);
+    	if(l_nIndex>m_nCount){
+    		l_nHexValue = (1.0) * ((pow(2,14))-1) / (2 * (1.0));
+    	}else{
+    		l_nHexValue=(((m_nY[l_nIndex]*1.0)+1.0) * ((pow(2,14))-1))/(2*1.0);
+    		fprintf(fpWaveFile,"%X\n",l_nHexValue & 0x00003FFF);
+    	}
     }
 
-    l_nHexValue = (0.6) * ((pow(2,14))-1) / (2 * (0.6));
-    fprintf(fpWaveFile,"%X\n",l_nHexValue);
+//    l_nHexValue = (1.0) * ((pow(2,14))-1) / (2 * (1.0));
+//    fprintf(fpWaveFile,"%X\n",l_nHexValue);
 
     fclose(fpWaveFile);
 
@@ -1070,9 +1087,10 @@ void MainWindow::loadRAM()
     qDebug()<<"SRAM Load Started...";
 
     while(l_nIndex<m_nCount){
-        fscanf(l_nFD,"%x",&l_nFileData);
         if(feof(l_nFD))
             l_nFileData =0;
+        else
+            fscanf(l_nFD,"%x",&l_nFileData);
         m_nWriteData[l_nIndex]=l_nFileData;
         l_nIndex = l_nIndex + 1;
     }
@@ -1082,7 +1100,7 @@ void MainWindow::loadRAM()
 
     ISPIMemory->accessSPIRAM(DRIVERAM);
 	IAppCard->setDriveRAMStarAddress(0);
-	IAppCard->setDriveRAMEndAddress(m_nCount);
+	IAppCard->setDriveRAMEndAddress((unsigned short)m_nCount);
 
     ISPIMemory->writeAppCardSRAM(0x0000, l_nIndex, &m_nWriteData[0]);
     usleep(1000);

@@ -3177,7 +3177,7 @@ font:bold 14px;</string>
     <rect>
      <x>10</x>
      <y>400</y>
-     <width>321</width>
+     <width>311</width>
      <height>80</height>
     </rect>
    </property>
@@ -3468,19 +3468,47 @@ font:bold 14px;</string>
     </property>
    </item>
   </widget>
-  <zorder>groupBox_3</zorder>
-  <zorder>groupBox_4</zorder>
-  <zorder>groupBox_6</zorder>
-  <zorder>groupBox_7</zorder>
-  <zorder>groupBox_10</zorder>
-  <zorder>groupBox_11</zorder>
-  <zorder>groupBox_12</zorder>
-  <zorder>groupBox_14</zorder>
-  <zorder>label_9</zorder>
-  <zorder>groupBox_13</zorder>
-  <zorder>groupBox_15</zorder>
-  <zorder>comboBox_10</zorder>
-  <zorder>switchSRCIMP</zorder>
+  <widget class="QPushButton" name="switchFLY">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>426</y>
+     <width>111</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> QPushButton {
+     border: 2px solid #8f8f91;
+     border-radius: 10px;
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #f6f7fa, stop: 1 #dadbde);
+     min-width: 80px;
+ }
+
+ QPushButton:pressed {
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #dadbde, stop: 1 #f6f7fa);
+ }
+
+ QPushButton:flat {
+     border: none; /* no border for a flat push button */
+ }
+
+ QPushButton:default {
+     border-color: navy; /* make the default button prominent */
+ }</string>
+   </property>
+   <property name="text">
+    <string>SWITCH FLY</string>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

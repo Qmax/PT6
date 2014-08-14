@@ -2,8 +2,7 @@
 #define WAVEFORMTESTJIGINTERFACE_H
 
 #include<QObject>
-#include <Qmax/stwavedata.h>
-
+#include "plotter.h"
 class IQmaxWaveProduct
 {
 public:

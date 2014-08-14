@@ -157,6 +157,7 @@ protected:
     IRefCALIBTestJigInterface *REFCalib;
     AWGUIInterface *AWGGUI;
     AWGUIInterface2 *AWGGUI2;
+    QWidget *AWGWidget;
 
     //Variables
     QString m_strWaveType;

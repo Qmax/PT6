@@ -139,6 +139,7 @@ void PTPSoCTestJigInterface2::enableRichGUI(){
 	ui.label_9->setParent(m_objWidget);
     ui.comboBox_10->setParent(m_objWidget);
     ui.switchSRCIMP->setParent(m_objWidget);
+    ui.switchFLY->setParent(m_objWidget);;
 
 	ui.groupBox_3->setGeometry(10,10,161,70);
 	ui.groupBox_4->setGeometry(180,10,161,71);
@@ -153,6 +154,7 @@ void PTPSoCTestJigInterface2::enableRichGUI(){
 	ui.label_9->setGeometry(500,410,251,20);
     ui.comboBox_10->setGeometry(40,430,125,30);
     ui.switchSRCIMP->setGeometry(210,426,84,40);
+    ui.switchFLY->setGeometry(350,426,111,40);
 
     m_objWidget->setStyleSheet("QLabel{color:white;}");
 
@@ -712,4 +714,9 @@ void PTPSoCTestJigInterface2::EnDisSRCIM(bool val)
 
     IPsoc->srcImpedanceEnable(val);
 
+}
+
+void PTPSoCTestJigInterface2::on_switchFLY_clicked()
+{
+    IPsoc->switchFly();
 }
