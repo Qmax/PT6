@@ -156,7 +156,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(lineEdit[3],SIGNAL(focussed(int)),this,SLOT(callLineEditInput(int)));
 
     m_nCycles =1;
-    m_nSamples=5;
+    m_nSamples=100;
     m_nCount=1;
     rescaleAxis=false;
     m_bUnipolar=false;
@@ -342,10 +342,10 @@ void MainWindow::addSineGraph(){
     graphSelect=2;
     // generate data:
     clearGraphData();
-    for (int l_nIndex=0; l_nIndex<63*m_nCycles; ++l_nIndex)
+    for (int l_nIndex=0; l_nIndex<(m_nSamples*m_nCycles); ++l_nIndex)
     {
         m_nX2[l_nIndex] = l_nIndex;
-        m_nY2[l_nIndex]=1*sin(l_nIndex/10.0);
+        m_nY2[l_nIndex]=1*sin(l_nIndex/1.0);
         if(l_nIndex>m_nCount)m_nCount = l_nIndex;
     }
     ui->customPlot->addGraph();
@@ -359,7 +359,7 @@ void MainWindow::addSineGraph(){
     //ui->customPlot->graph()->rescaleAxes();
     ui->customPlot->replot();
 
-    for(int i=0;i<63*m_nCycles;i++){
+    for(int i=0;i<(m_nSamples*m_nCycles);i++){
         m_nX[i]=m_nX2[i];
         m_nY[i]=m_nY2[i];
     }
@@ -498,8 +498,8 @@ void MainWindow::addSquareGraph(){
     unsigned int l_nRemainder =0;
     unsigned int l_nTemp=0;
 
-    l_nSamples = 100 / 1;
-    l_nRemainder = (100%1)/100;
+    l_nSamples = m_nSamples / m_nCycles;
+    l_nRemainder = (m_nSamples%m_nCycles)/m_nSamples;
     l_nTemp = l_nSamples;
     double l_nPhaseAngle=0.0;
     l_nPhaseAngle = (l_nDegree*3.14) / 180.0;
@@ -512,7 +512,7 @@ void MainWindow::addSquareGraph(){
 
     while(l_nSampleIndex < (1+l_nRemainder))
     {
-        for(;l_nIndex<100*m_nCycles;l_nIndex++)
+        for(;l_nIndex<m_nSamples;l_nIndex++)
         {
 
             if(l_nPhaseAngle < l_nConstValue){
@@ -527,7 +527,7 @@ void MainWindow::addSquareGraph(){
             if( false == true)
                 l_nYPoint = l_nYPoint + 1.0;
 
-            l_nPhaseAngle = (l_nPhaseAngle +(2*3.14) / (100/1));
+            l_nPhaseAngle = (l_nPhaseAngle +(2*3.14) / (m_nSamples/m_nCycles));
             m_nX3[l_nIndex] = l_nIndex;
             //printf("Phase Angle : %f XPoint :%f YPoint : %f\n",l_nPhaseAngle,l_nXPoint,l_nYPoint);
             if(l_nPhaseAngle > (2*3.14) )
@@ -550,7 +550,7 @@ void MainWindow::addSquareGraph(){
     //ui->customPlot->graph()->rescaleAxes();
     ui->customPlot->replot();
 
-    for(int i=0;i<100*m_nCycles;i++){
+    for(int i=0;i<m_nSamples;i++){
         m_nX[i]=m_nX3[i];
         m_nY[i]=m_nY3[i];
     }
@@ -922,6 +922,7 @@ void MainWindow::receiveValue(double pValue){
     	hwInterface->setOffset(m_nOffset);
         break;
     }
+        ui->customPlot->replot();
 }
 void MainWindow::receiveValue(QString pValue){
     lineEdit[m_nLineEditIndex]->setText(pValue);
