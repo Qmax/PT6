@@ -92,7 +92,7 @@ public:
   void loadRAM();
 
   QVector<double> m_nX,m_nY,m_nX1,m_nY1,m_nX2,m_nY2,m_nX3,m_nY3,m_nX4,m_nY4,m_nX5,m_nY5,m_nX6,m_nY6;
-  int graphSelect;
+  int graphSelect,prevGraphSelect;
 
 protected:
   //Widgets
@@ -112,6 +112,7 @@ protected:
   bool rescaleAxis;
   bool m_bUnipolar;
   double xAxisLower,xAxisUpper,yAxisLower,yAxisUpper;
+  double m_nVRef;
 
   QList<double> minList;
   QList<double> maxList;

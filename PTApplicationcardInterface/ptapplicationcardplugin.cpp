@@ -373,11 +373,13 @@ unsigned short PTApplicationCardPlugin::readReceiveRAMData()
 
 void PTApplicationCardPlugin::setDriveRAMStarAddress(unsigned short pStartAddress)
 {
+	qDebug()<<"RAM Start Address:"<<pStartAddress;
     writeRegister(pStartAddress,PT_APPCARD_MODULES::PT_SRAM_APPCARD_DRSAR);
 }
 
 void PTApplicationCardPlugin::setDriveRAMEndAddress(unsigned short pEndAddress)
 {
+	qDebug()<<"RAM End Address:"<<pEndAddress;
     writeRegister(pEndAddress,PT_APPCARD_MODULES::PT_SRAM_APPCARD_DREAR);
 }
 

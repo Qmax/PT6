@@ -405,8 +405,6 @@ protected:
             m_nData.clear();
             m_nData1.clear();
             double l_nConstValue = (2.0*PI) *(float)(m_objWaveData->m_nDutyCycles);
-            //qDebug() << "Square Wave " << m_objWaveData->m_nDutyCycles <<"Cycles"<< m_objWaveData->m_nCycles << "Constant Value" <<l_nConstValue;
-            //printf(" DutyCycles %f\n",m_objWaveData->m_nDutyCycles);
             unsigned int l_nSampleIndex=0;
             unsigned int l_nIndex =0;
             unsigned int l_nSamples=0;
@@ -414,20 +412,13 @@ protected:
             unsigned int l_nRemainder =0;
             unsigned int l_nTemp=0;
 
-    //        if( m_objWaveData->m_nCycles != 1)
-    //            m_objWaveData->m_nSamples+=1;
             l_nSamples = m_objWaveData->m_nSamples / m_objWaveData->m_nCycles;
             l_nRemainder = (m_objWaveData->m_nSamples%(int)m_objWaveData->m_nCycles)/l_nSamples;
-             //printf("Remainter : %d\n",l_nRemainder);
             l_nTemp = l_nSamples;
             double l_nPhaseAngle=0.0;
             l_nPhaseAngle = (l_nDegree*PI) / 180.0;
-            //qDebug() << "Phase Angle " << l_nPhaseAngle;
-            //double l_nAmplitude = ((m_objWaveData->m_nAmplitude/2.0)/m_objWaveData->m_nVRef);
-            //double l_nAmplitude = (m_objWaveData->m_nAmplitude);
             double l_nAmplitude = (m_objWaveData->m_nAmplitude)*m_objWaveData->m_nVRef;
 
-            //printf("Local Sample: %d\n",l_nSamples);
             double l_nTempYPoint=0.0;
             double l_nTempAmp =0.0;
              double l_nYPoint1 =0.0;
@@ -457,7 +448,6 @@ protected:
                     m_nData1.append(QPointF(l_nXPoint,l_nYPoint1));
                     l_nPhaseAngle = (l_nPhaseAngle +(2*PI) / (m_objWaveData->m_nSamples/m_objWaveData->m_nCycles));
                     l_nXPoint += m_objWaveData->m_nTimeperSample;
-                    //printf("Phase Angle : %f XPoint :%f YPoint : %f\n",l_nPhaseAngle,l_nXPoint,l_nYPoint);
                     if(l_nPhaseAngle > (2*PI) )
                         l_nPhaseAngle = l_nPhaseAngle - (2*PI);
                 }

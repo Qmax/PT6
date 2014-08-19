@@ -30,8 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	hwInterface->setFrequency(1000.0);
 	hwInterface->setOffset(m_nOffset);
 	hwInterface->setPhase(0);
-	hwInterface->Drive(STOPDRIVE);
-	//__________________________________________________
+        hwInterface->Drive(STOPDRIVE);
+   //__________________________________________________
 
      m_nX.resize(4000);     m_nY.resize(4000);
     m_nX1.resize(4000);    m_nY1.resize(4000);
@@ -98,20 +98,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->customPlot, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequest(QPoint)));
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
-    maxList.insert(0,20.0);
-    maxList.insert(1,5000000.0);
-    maxList.insert(2,360.0);
-    maxList.insert(3,5.0);
+    maxList.insert(0,20.0);             minList.insert(0,0.01);
+    maxList.insert(1,5000000.0);        minList.insert(1,0.01);
+    maxList.insert(2,360.0);            minList.insert(2,0.0);
+    maxList.insert(3,5.0);              minList.insert(3,-5.0);
 
-    minList.insert(0,0.01);
-    minList.insert(1,0.01);
-    minList.insert(2,0.0);
-    minList.insert(3,-5.0);
-
-    callType.insert(0,'V');
-    callType.insert(1,'X');
-    callType.insert(2,'X');
-    callType.insert(3,'v');
+    callType.insert(0,'V');             callType.insert(1,'X');
+    callType.insert(2,'X');             callType.insert(3,'v');
 
     setGeometry(0,33,800,567);
 
@@ -160,6 +153,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_nCount=1;
     rescaleAxis=false;
     m_bUnipolar=false;
+    graphSelect=prevGraphSelect=0;
+    m_nVRef=1.0;
 }
 
 MainWindow::~MainWindow()
@@ -170,45 +165,25 @@ void MainWindow::customEvent(QEvent *e) {
 
 
     if (e->type() == ((QEvent::Type) 5678)) {
-
-        if(m_nPTKeyCode==1){qDebug()<<("\nMENU");
-        }
-        else if(m_nPTKeyCode==2){qDebug()<<("\nESC");
-        }
-        else if(m_nPTKeyCode==3){qDebug()<<("\nNULL");
-        }
-        else if(m_nPTKeyCode==4){qDebug()<<("\nF1");
-        }
-        else if(m_nPTKeyCode==5){qDebug()<<("\nF2");
-        }
-        else if(m_nPTKeyCode==6){qDebug()<<("\nF3");
-        }
-        else if(m_nPTKeyCode==7){qDebug()<<("\nF4");
-        }
-        else if(m_nPTKeyCode==8){qDebug()<<("\nF5");
-        }
-        else if(m_nPTKeyCode==9){qDebug()<<("\nUP");
-        }
-        else if(m_nPTKeyCode==10){qDebug()<<("\nDOWN");
-        }
-        else if(m_nPTKeyCode==11){qDebug()<<("\nRIGHT");
-        }
-        else if(m_nPTKeyCode==12){qDebug()<<("\nLEFT");
-        }
-        else if(m_nPTKeyCode==13){qDebug()<<("\nENTER");
-        }
-        else if(m_nPTKeyCode==14){qDebug()<<("\nSETUP");
-        }
-        else if(m_nPTKeyCode==15){qDebug()<<("\nDEFAULT");
-        }
-        else if(m_nPTKeyCode==16){qDebug()<<("\nTOUCH");
-        }
-        else if(m_nPTKeyCode==17){qDebug()<<("\nFILE");
-        }
-        else if(m_nPTKeyCode==18){qDebug()<<("\nSCALE");
-        }
-        else if(m_nPTKeyCode==19){qDebug()<<("\nRUN/STOP");
-        }
+        if(m_nPTKeyCode==1)      {  qDebug()<<("\nMENU"     );   }
+        else if(m_nPTKeyCode==2) {  qDebug()<<("\nESC"      );   }
+        else if(m_nPTKeyCode==3) {  qDebug()<<("\nNULL"     );   }
+        else if(m_nPTKeyCode==4) {  qDebug()<<("\nF1"       );   }
+        else if(m_nPTKeyCode==5) {  qDebug()<<("\nF2"       );   }
+        else if(m_nPTKeyCode==6) {  qDebug()<<("\nF3"       );   }
+        else if(m_nPTKeyCode==7) {  qDebug()<<("\nF4"       );   }
+        else if(m_nPTKeyCode==8) {  qDebug()<<("\nF5"       );   }
+        else if(m_nPTKeyCode==9) {  qDebug()<<("\nUP"       );   }
+        else if(m_nPTKeyCode==10){  qDebug()<<("\nDOWN"     );   }
+        else if(m_nPTKeyCode==11){  qDebug()<<("\nRIGHT"    );   }
+        else if(m_nPTKeyCode==12){  qDebug()<<("\nLEFT"     );   }
+        else if(m_nPTKeyCode==13){  qDebug()<<("\nENTER"    );   }
+        else if(m_nPTKeyCode==14){  qDebug()<<("\nSETUP"    );   }
+        else if(m_nPTKeyCode==15){  qDebug()<<("\nDEFAULT"  );   }
+        else if(m_nPTKeyCode==16){  qDebug()<<("\nTOUCH"    );   }
+        else if(m_nPTKeyCode==17){  qDebug()<<("\nFILE"     );   }
+        else if(m_nPTKeyCode==18){  qDebug()<<("\nSCALE"    );   }
+        else if(m_nPTKeyCode==19){  qDebug()<<("\nRUN/STOP" );   }
     }
 
     QEvent(e->type());
@@ -328,7 +303,7 @@ void MainWindow::mouseWheel()
 }
 void MainWindow::clearGraphData(){
     for(int i=0;i<1000;i++){
-        if(graphSelect==0){            m_nX[i]=0;        m_nY[i]=0;        }
+        if(graphSelect==0){            m_nX[i]=0;         m_nY[i]=0;         }
         if(graphSelect==1){            m_nX1[i]=0;        m_nY1[i]=0;        }
         if(graphSelect==2){            m_nX2[i]=0;        m_nY2[i]=0;        }
         if(graphSelect==3){            m_nX3[i]=0;        m_nY3[i]=0;        }
@@ -338,15 +313,21 @@ void MainWindow::clearGraphData(){
     }
 }
 
-void MainWindow::addSineGraph(){
-    graphSelect=2;
+/*void MainWindow::addSineGraph(){
+	prevGraphSelect=graphSelect;
+	graphSelect=2;
     // generate data:
     clearGraphData();
     for (int l_nIndex=0; l_nIndex<(m_nSamples*m_nCycles); ++l_nIndex)
     {
         m_nX2[l_nIndex] = l_nIndex;
         m_nY2[l_nIndex]=1*sin(l_nIndex/1.0);
-        if(l_nIndex>m_nCount)m_nCount = l_nIndex;
+        if(graphSelect!=prevGraphSelect){
+        	if(l_nIndex>m_nCount)
+        		m_nCount = l_nIndex;
+        }else{
+        	m_nCount = l_nIndex;
+        }
     }
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName(QString("Sine-%1").arg(ui->customPlot->graphCount()-1));
@@ -363,9 +344,70 @@ void MainWindow::addSineGraph(){
         m_nX[i]=m_nX2[i];
         m_nY[i]=m_nY2[i];
     }
+}*/
+void MainWindow::addSineGraph(){
+    prevGraphSelect=graphSelect;
+    graphSelect=2;
+    clearGraphData();
+    //************************************************************************
+    double l_nYPoint =0.0,l_nDegree =0.0,l_nXPoint =0.0;
+    unsigned int l_nSampleIndex=0,l_nIndex =0,l_nSamples=0,l_nRemainder =0,l_nTemp=0;
+
+    l_nSamples = m_nSamples / m_nCycles;
+    l_nRemainder = (m_nSamples%(int)m_nCycles)/m_nSamples;
+    l_nTemp = l_nSamples;
+
+    double l_nPhaseAngle=0.0;
+    l_nPhaseAngle = (l_nDegree*3.14) / 180.0;
+
+    double l_nAmplitude = 1*m_nVRef;
+    double l_nTempYPoint=0.0;
+    double l_nYPoint1 =0.0;
+    double l_nTempAmp =0.0;
+
+    while(l_nSampleIndex < (m_nCycles+l_nRemainder))
+    {
+        for(;l_nIndex<m_nSamples;l_nIndex++)
+        {
+            l_nTempYPoint = l_nAmplitude*sin(l_nPhaseAngle);
+            l_nYPoint = l_nTempYPoint;
+            l_nYPoint1 = l_nTempAmp*sin(l_nPhaseAngle);
+            m_nY2[l_nIndex] = l_nYPoint;
+            l_nPhaseAngle = (l_nPhaseAngle +(2*3.14) / (m_nSamples/m_nCycles));
+            m_nX2[l_nIndex]=l_nIndex;
+            if(l_nPhaseAngle > (2*3.14))
+                l_nPhaseAngle = l_nPhaseAngle - (2*3.14);
+            if(graphSelect!=prevGraphSelect){
+                if(l_nIndex>m_nCount)
+                        m_nCount = l_nIndex;
+            }else{
+                m_nCount = l_nIndex;
+            }
+        }
+        l_nSamples += l_nTemp;
+        l_nSampleIndex++;
+    }
+
+    //************************************************************************
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setName(QString("Sine-%1").arg(ui->customPlot->graphCount()-1));
+    ui->customPlot->graph()->setData(m_nX2, m_nY2);
+    ui->customPlot->graph()->setLineStyle(QCPGraph::lsLine);
+    QPen graphPen;
+    graphPen.setColor(QColor(rand()%245+10, rand()%245+10, rand()%245+10));
+    graphPen.setWidthF(2);
+    ui->customPlot->graph()->setPen(graphPen);
+    //ui->customPlot->graph()->rescaleAxes();
+    ui->customPlot->replot();
+
+    for(int i=0;i<m_nSamples;i++){
+        m_nX[i]=m_nX2[i];
+        m_nY[i]=m_nY2[i];
+    }
 }
 void MainWindow::addSawtoothGraph(){
-    graphSelect=5;
+	prevGraphSelect=graphSelect;
+	graphSelect=5;
     clearGraphData();
     double l_nYPoint =0.0,l_nDegree =0,l_nXPoint =0.0;
     unsigned int l_nSampleIndex=0;
@@ -397,7 +439,14 @@ void MainWindow::addSawtoothGraph(){
             m_nX5[l_nIndex] = l_nIndex;
             if(l_nPhaseAngle > (2*3.14))
                 l_nPhaseAngle = l_nPhaseAngle - (2*3.14);
-            if(l_nIndex>m_nCount)m_nCount = l_nIndex;
+
+            if(graphSelect!=prevGraphSelect){
+            	if(l_nIndex>m_nCount)
+            		m_nCount = l_nIndex;
+            }else{
+            	m_nCount = l_nIndex;
+            }
+
         }
         l_nSamples -= l_nTemp;
         l_nSampleIndex++;
@@ -422,6 +471,7 @@ void MainWindow::addSawtoothGraph(){
 }
 
 void MainWindow::addPulseGraph(){
+	prevGraphSelect=graphSelect;
     graphSelect=6;
     clearGraphData();
     double l_nYPoint =0.0,l_nDegree =0,l_nXPoint =0.0;
@@ -464,7 +514,12 @@ void MainWindow::addPulseGraph(){
             m_nX6[l_nIndex] = l_nIndex;
             if(l_nPhaseAngle > (2*3.14) )
                 l_nPhaseAngle = l_nPhaseAngle - (2*3.14);
-            if(l_nIndex>m_nCount)m_nCount = l_nIndex;
+            if(graphSelect!=prevGraphSelect){
+            	if(l_nIndex>m_nCount)
+            		m_nCount = l_nIndex;
+            }else{
+            	m_nCount = l_nIndex;
+            }
         }
         l_nSamples += l_nTemp;
         l_nSampleIndex++;
@@ -488,6 +543,7 @@ void MainWindow::addPulseGraph(){
 }
 
 void MainWindow::addSquareGraph(){
+	prevGraphSelect=graphSelect;
     graphSelect=3;
     clearGraphData();
     double l_nYPoint =0.0,l_nDegree =90,l_nXPoint =0.0;
@@ -532,7 +588,12 @@ void MainWindow::addSquareGraph(){
             //printf("Phase Angle : %f XPoint :%f YPoint : %f\n",l_nPhaseAngle,l_nXPoint,l_nYPoint);
             if(l_nPhaseAngle > (2*3.14) )
                 l_nPhaseAngle = l_nPhaseAngle - (2*3.14);
-            if(l_nIndex>m_nCount)m_nCount = l_nIndex;
+            if(graphSelect!=prevGraphSelect){
+            	if(l_nIndex>m_nCount)
+            		m_nCount = l_nIndex;
+            }else{
+            	m_nCount = l_nIndex;
+            }
         }
         l_nSamples += l_nTemp;
         l_nSampleIndex++;
@@ -557,6 +618,7 @@ void MainWindow::addSquareGraph(){
 }
 
 void MainWindow::addTriangleGraph(){
+	prevGraphSelect=graphSelect;
     graphSelect=4;
     clearGraphData();
     double l_nYPoint =0.0,l_nDegree =0,l_nXPoint =0.0;
@@ -600,7 +662,12 @@ void MainWindow::addTriangleGraph(){
             m_nX4[l_nIndex] = l_nIndex;
             if(l_nPhaseAngle > (2*3.14))
                 l_nPhaseAngle = l_nPhaseAngle - (2*3.14);
-            if(l_nIndex>m_nCount)m_nCount = l_nIndex;
+            if(graphSelect!=prevGraphSelect){
+            	if(l_nIndex>m_nCount)
+            		m_nCount = l_nIndex;
+            }else{
+            	m_nCount = l_nIndex;
+            }
         }
         l_nSamples += l_nTemp;
         l_nSampleIndex++;
@@ -623,8 +690,8 @@ void MainWindow::addTriangleGraph(){
     }
 }
 
-void MainWindow::addRandomGraph()
-{
+void MainWindow::addRandomGraph(){
+	prevGraphSelect=graphSelect;
     graphSelect=1;
     clearGraphData();
     int n = 100; // number of points in graph
@@ -641,7 +708,12 @@ void MainWindow::addRandomGraph()
     {
         m_nX1[l_nIndex] = 1*(l_nIndex/(double)n-0.5)*10.0*xScale + xOffset;
         m_nY1[l_nIndex] = 1*(sin(x[l_nIndex]*r1*5)*sin(cos(x[l_nIndex]*r2)*r4*3)+r3*cos(sin(x[l_nIndex])*r4*2))*yScale + yOffset;
-        if(l_nIndex>m_nCount)m_nCount = l_nIndex;
+        if(graphSelect!=prevGraphSelect){
+        	if(l_nIndex>m_nCount)
+        		m_nCount = l_nIndex;
+        }else{
+        	m_nCount = l_nIndex;
+        }
     }
 
     ui->customPlot->addGraph();
@@ -740,6 +812,7 @@ void MainWindow::graphClicked(QCPAbstractPlottable *plottable)
 
 void MainWindow::MergeAll()
 {
+	prevGraphSelect=graphSelect;
     graphSelect=0;
     //    clearGraphData();
     //    for(int i=0;i<100;i++){
@@ -935,6 +1008,7 @@ void MainWindow::callLineEditInput(int leFocussed){
     m_nLineEditIndex=leFocussed;
     m_w = INumberPanel->getNumKBPanelIncDec(1,1,callType.value(leFocussed), maxList.value(leFocussed), minList.value(leFocussed),this);
     m_w->setWindowFlags(Qt::WindowCloseButtonHint | Qt::Dialog);
+    m_w->setStyleSheet("color: #333;background: qradialgradient(cx: 0.3, cy: -0.4,fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);");
     m_w->show();
 }
 
@@ -956,26 +1030,50 @@ void MainWindow::on_butStart_clicked()
     //    IAppCard->writeRegister(0x63,0x84);
     //    IAppCard->writeRegister(0x0003,0x86);
     IAppCard->stopDrive();
-    while((IAppCard->readRegister(0x12)& 0x0002));
-    usleep(100);
-    IAppCard->writeRegister(0x0999,0x04);
-    IAppCard->writeRegister(0x0000,0x06);
-    IAppCard->writeRegister(0x0100,0x1C);
-    IAppCard->writeRegister(0xc34f,0x18);
-    IAppCard->writeRegister(0x0000,0x1A);
-    IAppCard->writeRegister(0x0001,0x94);
+    usleep(1000);
+
+    IAppCard->writeRegister(0x0999,0x04);      //BTU
+    usleep(1000);
+
+    IAppCard->writeRegister(0x0000,0x06);      //BDR
+    usleep(1000);
+
+    IAppCard->writeRegister(0x0100,0x1C);      //Start/Stop Delay
+    usleep(1000);
+
+    IAppCard->writeRegister(0xc34f,0x18);      //WDP
+    usleep(1000);
+
+    IAppCard->writeRegister(0x0000,0x1A);      //Pattern Repeat
+    usleep(1000);
+
     IAppCard->writeRegister(0x0001,0x34);
+    usleep(1000);
+
+    IAppCard->writeRegister(0x0000,0x82);       //Start Addr
+    usleep(1000);
+
+    IAppCard->writeRegister(m_nCount,0x84);     //End Addr
+    usleep(1000);
+
     IAppCard->writeRegister(0x0000,0x86);
+    usleep(1000);
 
     loadRAM();
 
-    IAppCard->writeRegister(0x0000,0x82);
-    IAppCard->writeRegister(m_nCount,0x84);
-    IAppCard->writeRegister(0x0000,0x72);
     IAppCard->writeRegister(0x0003,0x86);
-    IAppCard->startDrive(1);
-    while((IAppCard->readRegister(0x12)& 0x0001));
-    usleep(100);
+    usleep(1000);
+
+    IAppCard->writeRegister(0x0000,0x72);
+    usleep(1000);
+
+    IAppCard->writeRegister(0x0000,0x94);
+    usleep(1000);
+
+    hwInterface->Drive(STARTDRIVE);
+//    IAppCard->startDrive(1);
+//    while((IAppCard->readRegister(0x12)& 0x0001));
+//    usleep(100);
 }
 void MainWindow::on_butStop_clicked()
 {
@@ -1070,6 +1168,7 @@ void MainWindow::GenerateHexPattern()
     fclose(fpWaveFile);
 
 }
+
 void MainWindow::loadRAM()
 {
     ISPIMemory->accessSPIMemory(APPLICATIONCARD);
@@ -1100,11 +1199,7 @@ void MainWindow::loadRAM()
     qDebug()<<"SRAM Data Acquired...index:"<<l_nIndex;
 
     ISPIMemory->accessSPIRAM(DRIVERAM);
-	IAppCard->setDriveRAMStarAddress(0);
-	IAppCard->setDriveRAMEndAddress((unsigned short)m_nCount);
-
-    ISPIMemory->writeAppCardSRAM(0x0000, l_nIndex, &m_nWriteData[0]);
-    usleep(1000);
+    ISPIMemory->writeAppCardSRAM(0x0000, l_nIndex, &m_nWriteData[0]);   usleep(1000);
 
     qDebug()<<"SRAM Loaded...";
 }
