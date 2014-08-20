@@ -492,7 +492,7 @@ void PortableTester::showButtons() {
     
     
     shutDownButton->setVisible(true);
-    shlocButton->setVisible(true);
+    shlocButton->setVisible(false);
     //	testjigButton->setVisible(true);
 }
 

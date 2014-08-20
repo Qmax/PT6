@@ -5,6 +5,7 @@
 #include <QInputDialog>
 #include <QPluginLoader>
 #include <QLabel>
+#include <QDebug>
 #include "qcustomplot.h"
 #include <unistd.h>
 
@@ -15,8 +16,7 @@
 #include "PTSPIMemoryInterface.h"
 #include "PTAppBckPsocInterface.h"
 #include "hardwareinterface.h"
-
-
+#include "wavedata.h"
 
 namespace Ui {
 class MainWindow;
@@ -96,6 +96,7 @@ public:
 
 protected:
   //Widgets
+  WaveData *m_objWaveData;
   IApplicationCardInterface *IAppCard;
   ISPIMemoryInterface *ISPIMemory;
   IPTAppBckPsocInterface *testjig;
@@ -108,7 +109,8 @@ protected:
   int m_nLineEditIndex,m_nPTKeyCode;
 
   double m_nAmplitude,m_nOffset;
-  int m_nCycles,m_nSamples,m_nCount;
+  int m_nCycles,m_nSamples,m_nCount,m_nTotalSamples;
+  int m_nWaveSamples,m_nWaveStartTick,m_nWaveStopTick,m_nWaveDutyCycle;
   bool rescaleAxis;
   bool m_bUnipolar;
   double xAxisLower,xAxisUpper,yAxisLower,yAxisUpper;
@@ -119,7 +121,8 @@ protected:
   QList<char>   callType;
 
   void customEvent(QEvent *eve);
-
+signals:
+    void SendTotalSamples(int);
 private slots:
   void on_butAppBck_clicked();
   void on_butRefresh_clicked();
@@ -173,6 +176,12 @@ private slots:
   void receiveValue(uint pValue);
   void callLineEditInput(int leFocussed);
   
+  void openWaveDataWindow();
+  void RxSamples(int);
+  void RxStartTick(int);
+  void RxStopTick(int);
+  void RxDutyCycle(int);
+
 private:
   Ui::MainWindow *ui;
 };

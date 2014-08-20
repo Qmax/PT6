@@ -6,13 +6,16 @@ QT += core \
 TARGET = ArbitaryWaveGen
 TEMPLATE = lib
 CONFIG += plugin
-SOURCES += ad5293.cpp \
+SOURCES += wavedata.cpp \
+    ad5293.cpp \
     ad5318components.cpp \
     IAWGUIInterface2.cpp \
     qcustomplot.cpp \
     main.cpp \
     mainwindow.cpp
-HEADERS += InterfaceFunctionalComponents.h \
+HEADERS += WaveDataClass.h \
+    wavedata.h \
+    InterfaceFunctionalComponents.h \
     appcardcomponents.h \
     ad5293.h \
     ad5318components.h \
@@ -28,6 +31,7 @@ HEADERS += InterfaceFunctionalComponents.h \
     AWGUIInterface2.h \
     qcustomplot.h \
     mainwindow.h
-FORMS += mainwindow.ui
+FORMS += wavedata.ui \
+    mainwindow.ui
 DESTDIR = /exports/nfsroot-ccwmx51js/home
 RESOURCES = ArbitaryWaveGen.qrc
