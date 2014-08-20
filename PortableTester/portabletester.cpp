@@ -311,6 +311,7 @@ void PortableTester::CreateButton() {
     shlocButton->setGeometry(50*((6-3)*3), 250, 80, 80);
     shlocButton->setIcon(QIcon(QPixmap(":/Desktop/app3.png")));
     connect(shlocButton,SIGNAL(CClicked(int)),this,SLOT(buttonPressed(int)));
+    shlocButton->setVisible(false);
 
 }
 

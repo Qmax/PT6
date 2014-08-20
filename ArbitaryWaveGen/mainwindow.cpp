@@ -21,19 +21,19 @@ MainWindow::MainWindow(QWidget *parent) :
     QPluginLoader testing("libAppBckPsoc.so", this);
     testjig = qobject_cast<IPTAppBckPsocInterface*> (testing.instance());
     //_______________________________________________
-	m_nAmplitude=1.0;
-	m_nOffset=0.0;
-	hwInterface=new HardwareInterface();
-	hwInterface->Init();
-	hwInterface->setHighImpedance(true);
-	hwInterface->setAmplitude(m_nAmplitude);
-	hwInterface->setFrequency(1000.0);
-	hwInterface->setOffset(m_nOffset);
-	hwInterface->setPhase(0);
-        hwInterface->Drive(STOPDRIVE);
-   //__________________________________________________
+    m_nAmplitude=1.0;
+    m_nOffset=0.0;
+    hwInterface=new HardwareInterface();
+    hwInterface->Init();
+    hwInterface->setHighImpedance(true);
+    hwInterface->setAmplitude(m_nAmplitude);
+    hwInterface->setFrequency(1000.0);
+    hwInterface->setOffset(m_nOffset);
+    hwInterface->setPhase(0);
+    hwInterface->Drive(STOPDRIVE);
+    //__________________________________________________
 
-     m_nX.resize(4000);     m_nY.resize(4000);
+    m_nX.resize(4000);     m_nY.resize(4000);
     m_nX1.resize(4000);    m_nY1.resize(4000);
     m_nX2.resize(4000);    m_nY2.resize(4000);
     m_nX3.resize(4000);    m_nY3.resize(4000);
@@ -117,6 +117,7 @@ MainWindow::MainWindow(QWidget *parent) :
     lineEdit[0]->setGeometry(18,517,124,30);
     connect(lineEdit[0],SIGNAL(focussed(bool)),label[0],SLOT(setlabelFocus(bool)));
     connect(lineEdit[0],SIGNAL(focussed(int)),this,SLOT(callLineEditInput(int)));
+    lineEdit[0]->setText("1Vpp");
 
     label[1]=new QmaxLabel(1,this);
     label[1]->setGeometry(ui->label_Frequency->geometry());
@@ -127,6 +128,7 @@ MainWindow::MainWindow(QWidget *parent) :
     lineEdit[1]->setGeometry(158,517,124,30);
     connect(lineEdit[1],SIGNAL(focussed(bool)),label[1],SLOT(setlabelFocus(bool)));
     connect(lineEdit[1],SIGNAL(focussed(int)),this,SLOT(callLineEditInput(int)));
+    lineEdit[1]->setText("100");
 
     label[2]=new QmaxLabel(2,this);
     label[2]->setGeometry(ui->label_Phase->geometry());
@@ -137,6 +139,7 @@ MainWindow::MainWindow(QWidget *parent) :
     lineEdit[2]->setGeometry(300,517,124,30);
     connect(lineEdit[2],SIGNAL(focussed(bool)),label[2],SLOT(setlabelFocus(bool)));
     connect(lineEdit[2],SIGNAL(focussed(int)),this,SLOT(callLineEditInput(int)));
+    lineEdit[2]->setText("1");
 
     label[3]=new QmaxLabel(3,this);
     label[3]->setGeometry(ui->label_Offset->geometry());
@@ -147,6 +150,7 @@ MainWindow::MainWindow(QWidget *parent) :
     lineEdit[3]->setGeometry(437,517,124,30);
     connect(lineEdit[3],SIGNAL(focussed(bool)),label[3],SLOT(setlabelFocus(bool)));
     connect(lineEdit[3],SIGNAL(focussed(int)),this,SLOT(callLineEditInput(int)));
+    lineEdit[3]->setText("0V");
 
     m_nCycles =1;
     m_nSamples=100;
@@ -354,13 +358,13 @@ void MainWindow::addSineGraph(){
     unsigned int l_nSampleIndex=0,l_nIndex =0,l_nSamples=0,l_nRemainder =0,l_nTemp=0;
 
     l_nSamples = m_nSamples / m_nCycles;
-    l_nRemainder = (m_nSamples%(int)m_nCycles)/m_nSamples;
+    l_nRemainder = (m_nSamples%(int)m_nCycles)/l_nSamples;
     l_nTemp = l_nSamples;
 
     double l_nPhaseAngle=0.0;
     l_nPhaseAngle = (l_nDegree*3.14) / 180.0;
 
-    double l_nAmplitude = 1*m_nVRef;
+    double l_nAmplitude = 1.0*m_nVRef;
     double l_nTempYPoint=0.0;
     double l_nYPoint1 =0.0;
     double l_nTempAmp =0.0;
@@ -379,7 +383,7 @@ void MainWindow::addSineGraph(){
                 l_nPhaseAngle = l_nPhaseAngle - (2*3.14);
             if(graphSelect!=prevGraphSelect){
                 if(l_nIndex>m_nCount)
-                        m_nCount = l_nIndex;
+                    m_nCount = l_nIndex;
             }else{
                 m_nCount = l_nIndex;
             }
@@ -406,35 +410,27 @@ void MainWindow::addSineGraph(){
     }
 }
 void MainWindow::addSawtoothGraph(){
-	prevGraphSelect=graphSelect;
-	graphSelect=5;
+    prevGraphSelect=graphSelect;
+    graphSelect=5;
     clearGraphData();
     double l_nYPoint =0.0,l_nDegree =0,l_nXPoint =0.0;
-    unsigned int l_nSampleIndex=0;
-    unsigned int l_nIndex =0;
-    unsigned int l_nSamples=0;
-    unsigned int l_nTemp=0;
-    unsigned int l_nRemainder =0;
-    double l_nConstValue = (2.0*3.14) *(float)(0.5);
-    Q_UNUSED(l_nConstValue)
-    l_nSamples = 100 / 5;
-    l_nRemainder = (100%(int)5)/l_nSamples;
+    unsigned int l_nSampleIndex=0,l_nIndex =0,l_nSamples=0,l_nTemp=0,l_nRemainder =0;
+    l_nSamples = m_nSamples / m_nCycles;
+    l_nRemainder = (100%(int)5)/100;
     double l_nPhaseAngle=0.0;
     l_nPhaseAngle = (l_nDegree*3.14) / 180.0;
-    double l_nAmplitude = (10)*1*m_nAmplitude;
+    double l_nAmplitude = 1.0*m_nVRef;
     double l_nTempYPoint=0.0;
     double l_nTempAmp =0.0;
-    if(10 >0.0)
-        l_nTempAmp =1.0;
+    double l_nYPoint1 =0.0;
 
     while(l_nSampleIndex < (5+l_nRemainder))
     {
-        for(;l_nIndex<20*m_nCycles;l_nIndex++)
+        for(;l_nIndex<m_nSamples;l_nIndex++)
         {
             l_nTempYPoint =(l_nAmplitude) - (l_nAmplitude/3.14) * l_nPhaseAngle;
             m_nY5[l_nIndex] = ((l_nTempAmp) - (l_nTempAmp/3.14) * l_nPhaseAngle);
-            if( false == true)
-                l_nYPoint = l_nYPoint + 1.0;
+
             l_nPhaseAngle = (l_nPhaseAngle +sin((2*3.14) / (100/5)));
             m_nX5[l_nIndex] = l_nIndex;
             if(l_nPhaseAngle > (2*3.14))
@@ -442,7 +438,7 @@ void MainWindow::addSawtoothGraph(){
 
             if(graphSelect!=prevGraphSelect){
             	if(l_nIndex>m_nCount)
-            		m_nCount = l_nIndex;
+                    m_nCount = l_nIndex;
             }else{
             	m_nCount = l_nIndex;
             }
@@ -464,40 +460,33 @@ void MainWindow::addSawtoothGraph(){
     //ui->customPlot->graph()->rescaleAxes();
     ui->customPlot->replot();
 
-    for(int i=0;i<20*m_nCycles;i++){
+    for(int i=0;i<m_nSamples;i++){
         m_nX[i]=m_nX5[i];
         m_nY[i]=m_nY5[i];
     }
 }
 
 void MainWindow::addPulseGraph(){
-	prevGraphSelect=graphSelect;
+    prevGraphSelect=graphSelect;
     graphSelect=6;
     clearGraphData();
     double l_nYPoint =0.0,l_nDegree =0,l_nXPoint =0.0;
     double l_nConstValue = (2.0*3.14) *(float)(0.5);
-    unsigned int l_nSampleIndex=0;
-    unsigned int l_nIndex =0;
-    unsigned int l_nSamples=0;
+    unsigned int l_nSampleIndex=0,l_nIndex =0,l_nSamples=0,l_nRemainder =0,l_nTemp=0;
 
-    unsigned int l_nRemainder =0;
-    unsigned int l_nTemp=0;
-
-    l_nSamples = 100 / 5;
-    l_nRemainder = (100%(int)5)/l_nSamples;
+    l_nSamples = m_nSamples / m_nCycles;
+    l_nRemainder = (m_nSamples%(int)m_nCycles)/l_nSamples;
     l_nTemp = l_nSamples;
     double l_nPhaseAngle=0.0;
     l_nPhaseAngle = (l_nDegree*3.14) / 180.0;
-    double l_nAmplitude = (10)*m_nAmplitude;
+    double l_nAmplitude = 1*m_nVRef;
     double l_nTempYPoint=0.0;
     double l_nTempAmp =0.0;
     double l_nYPoint1 =0.0;
-    if(10 >0.0)
-        l_nTempAmp =1.0;
 
-    while(l_nSampleIndex < (5+l_nRemainder))
+    while(l_nSampleIndex < (m_nCycles+l_nRemainder))
     {
-        for(;l_nIndex<20*m_nCycles;l_nIndex++)
+        for(;l_nIndex<m_nSamples;l_nIndex++)
         {
 
             if(l_nPhaseAngle < l_nConstValue){
@@ -510,13 +499,13 @@ void MainWindow::addPulseGraph(){
                 m_nY6[l_nIndex] = -l_nTempAmp;
             }
 
-            l_nPhaseAngle = (l_nPhaseAngle +(2*3.14) / (100/5));
+            l_nPhaseAngle = (l_nPhaseAngle +(2*3.14) / (m_nSamples/m_nCycles));
             m_nX6[l_nIndex] = l_nIndex;
             if(l_nPhaseAngle > (2*3.14) )
                 l_nPhaseAngle = l_nPhaseAngle - (2*3.14);
             if(graphSelect!=prevGraphSelect){
             	if(l_nIndex>m_nCount)
-            		m_nCount = l_nIndex;
+                    m_nCount = l_nIndex;
             }else{
             	m_nCount = l_nIndex;
             }
@@ -536,17 +525,17 @@ void MainWindow::addPulseGraph(){
     //ui->customPlot->graph()->rescaleAxes();
     ui->customPlot->replot();
 
-    for(int i=0;i<20*m_nCycles;i++){
+    for(int i=0;i<m_nSamples;i++){
         m_nX[i]=m_nX6[i];
         m_nY[i]=m_nY6[i];
     }
 }
 
 void MainWindow::addSquareGraph(){
-	prevGraphSelect=graphSelect;
+    prevGraphSelect=graphSelect;
     graphSelect=3;
     clearGraphData();
-    double l_nYPoint =0.0,l_nDegree =90,l_nXPoint =0.0;
+    double l_nYPoint =0.0,l_nDegree =0,l_nXPoint =0.0;
     double l_nConstValue = (2.0*3.14) *(float)(0.5);
     unsigned int l_nSampleIndex=0;
     unsigned int l_nIndex =0;
@@ -559,14 +548,12 @@ void MainWindow::addSquareGraph(){
     l_nTemp = l_nSamples;
     double l_nPhaseAngle=0.0;
     l_nPhaseAngle = (l_nDegree*3.14) / 180.0;
-    double l_nAmplitude = (10)*1*m_nAmplitude;
+    double l_nAmplitude = 1*m_nVRef;
 
     double l_nTempYPoint=0.0;
     double l_nTempAmp =0.0;
-    if(10 >0.0)
-        l_nTempAmp =1.0;
 
-    while(l_nSampleIndex < (1+l_nRemainder))
+    while(l_nSampleIndex < (m_nCycles+l_nRemainder))
     {
         for(;l_nIndex<m_nSamples;l_nIndex++)
         {
@@ -580,8 +567,6 @@ void MainWindow::addSquareGraph(){
                 l_nTempYPoint = -(l_nAmplitude);
                 m_nY3[l_nIndex]  = -l_nTempAmp;
             }
-            if( false == true)
-                l_nYPoint = l_nYPoint + 1.0;
 
             l_nPhaseAngle = (l_nPhaseAngle +(2*3.14) / (m_nSamples/m_nCycles));
             m_nX3[l_nIndex] = l_nIndex;
@@ -590,7 +575,7 @@ void MainWindow::addSquareGraph(){
                 l_nPhaseAngle = l_nPhaseAngle - (2*3.14);
             if(graphSelect!=prevGraphSelect){
             	if(l_nIndex>m_nCount)
-            		m_nCount = l_nIndex;
+                    m_nCount = l_nIndex;
             }else{
             	m_nCount = l_nIndex;
             }
@@ -618,32 +603,26 @@ void MainWindow::addSquareGraph(){
 }
 
 void MainWindow::addTriangleGraph(){
-	prevGraphSelect=graphSelect;
+    prevGraphSelect=graphSelect;
     graphSelect=4;
     clearGraphData();
     double l_nYPoint =0.0,l_nDegree =0,l_nXPoint =0.0;
 
-    unsigned int l_nSampleIndex=0;
-    unsigned int l_nIndex =0;
-    unsigned int l_nSamples=0;
-    unsigned int l_nRemainder =0;
-    unsigned int l_nTemp=0;
+    unsigned int l_nSampleIndex=0,l_nIndex =0,l_nSamples=0,l_nRemainder =0,l_nTemp=0;
 
-    l_nSamples = 100 / 5;
-    l_nRemainder = (100%(int)5)/100;
+    l_nSamples = m_nSamples / m_nCycles;
+    l_nRemainder = (m_nSamples%(int)m_nCycles)/l_nSamples;
 
     double l_nPhaseAngle=0.0;
     l_nPhaseAngle = (l_nDegree*3.14) / 180.0;
-    double l_nAmplitude = (10)*1*m_nAmplitude;
+    double l_nAmplitude = 1*m_nVRef;
     double l_nTempYPoint=0.0;
     double l_nTempAmp =0.0;
-    if(10 >0.0)
-        l_nTempAmp =1.0;
 
-    while(l_nSampleIndex < (5+l_nRemainder))
+    while(l_nSampleIndex < (m_nSamples+l_nRemainder))
     {
 
-        for(l_nIndex=0;l_nIndex<20*m_nCycles;l_nIndex++)
+        for(l_nIndex=0;l_nIndex<m_nSamples;l_nIndex++)
         {
             if(l_nPhaseAngle < 3.14)
             {
@@ -655,16 +634,14 @@ void MainWindow::addTriangleGraph(){
                 l_nTempYPoint = 3*(l_nAmplitude) - (2*l_nAmplitude/3.14) * l_nPhaseAngle;
                 m_nY4[l_nIndex] = 3*(l_nTempAmp) - (2*l_nTempAmp/3.14) * l_nPhaseAngle;
             }
-            if( false == true)
-                m_nY4[l_nIndex] = l_nYPoint + 1.0;
 
-            l_nPhaseAngle = (l_nPhaseAngle +(2*3.14) / (100/5));
+            l_nPhaseAngle = (l_nPhaseAngle +(2*3.14) / (m_nSamples/m_nCycles));
             m_nX4[l_nIndex] = l_nIndex;
             if(l_nPhaseAngle > (2*3.14))
                 l_nPhaseAngle = l_nPhaseAngle - (2*3.14);
             if(graphSelect!=prevGraphSelect){
             	if(l_nIndex>m_nCount)
-            		m_nCount = l_nIndex;
+                    m_nCount = l_nIndex;
             }else{
             	m_nCount = l_nIndex;
             }
@@ -684,17 +661,16 @@ void MainWindow::addTriangleGraph(){
     //ui->customPlot->graph()->rescaleAxes();
     ui->customPlot->replot();
 
-    for(int i=0;i<20*m_nCycles;i++){
+    for(int i=0;i<m_nSamples;i++){
         m_nX[i]=m_nX4[i];
         m_nY[i]=m_nY4[i];
     }
 }
 
 void MainWindow::addRandomGraph(){
-	prevGraphSelect=graphSelect;
+    prevGraphSelect=graphSelect;
     graphSelect=1;
     clearGraphData();
-    int n = 100; // number of points in graph
     double xScale = (rand()/(double)RAND_MAX + 0.5)*2;
     double yScale = (rand()/(double)RAND_MAX + 0.5)*2;
     double xOffset = (rand()/(double)RAND_MAX - 0.5)*4;
@@ -703,16 +679,16 @@ void MainWindow::addRandomGraph(){
     double r2 = (rand()/(double)RAND_MAX - 0.5)*2;
     double r3 = (rand()/(double)RAND_MAX - 0.5)*2;
     double r4 = (rand()/(double)RAND_MAX - 0.5)*2;
-    QVector<double> x(n), y(n);
-    for (int l_nIndex=0; l_nIndex<n; l_nIndex++)
+    QVector<double> x(m_nSamples), y(m_nSamples);
+    for (int l_nIndex=0; l_nIndex<m_nSamples; l_nIndex++)
     {
-        m_nX1[l_nIndex] = 1*(l_nIndex/(double)n-0.5)*10.0*xScale + xOffset;
+        m_nX1[l_nIndex] = 1*(l_nIndex/(double)m_nSamples-0.5)*10.0*xScale + xOffset;
         m_nY1[l_nIndex] = 1*(sin(x[l_nIndex]*r1*5)*sin(cos(x[l_nIndex]*r2)*r4*3)+r3*cos(sin(x[l_nIndex])*r4*2))*yScale + yOffset;
         if(graphSelect!=prevGraphSelect){
-        	if(l_nIndex>m_nCount)
-        		m_nCount = l_nIndex;
+            if(l_nIndex>m_nCount)
+                m_nCount = l_nIndex;
         }else{
-        	m_nCount = l_nIndex;
+            m_nCount = l_nIndex;
         }
     }
 
@@ -729,7 +705,7 @@ void MainWindow::addRandomGraph(){
     //ui->customPlot->graph()->rescaleAxes();
     ui->customPlot->replot();
 
-    for(int i=0;i<n;i++){
+    for(int i=0;i<m_nSamples;i++){
         m_nX[i]=m_nX1[i];
         m_nY[i]=m_nY1[i];
     }
@@ -812,7 +788,7 @@ void MainWindow::graphClicked(QCPAbstractPlottable *plottable)
 
 void MainWindow::MergeAll()
 {
-	prevGraphSelect=graphSelect;
+    prevGraphSelect=graphSelect;
     graphSelect=0;
     //    clearGraphData();
     //    for(int i=0;i<100;i++){
@@ -995,7 +971,7 @@ void MainWindow::receiveValue(double pValue){
     	hwInterface->setOffset(m_nOffset);
         break;
     }
-        ui->customPlot->replot();
+    ui->customPlot->replot();
 }
 void MainWindow::receiveValue(QString pValue){
     lineEdit[m_nLineEditIndex]->setText(pValue);
@@ -1071,9 +1047,9 @@ void MainWindow::on_butStart_clicked()
     usleep(1000);
 
     hwInterface->Drive(STARTDRIVE);
-//    IAppCard->startDrive(1);
-//    while((IAppCard->readRegister(0x12)& 0x0001));
-//    usleep(100);
+    //    IAppCard->startDrive(1);
+    //    while((IAppCard->readRegister(0x12)& 0x0001));
+    //    usleep(100);
 }
 void MainWindow::on_butStop_clicked()
 {
@@ -1155,15 +1131,15 @@ void MainWindow::GenerateHexPattern()
 
     for(int l_nIndex=0;l_nIndex<m_nCount;l_nIndex++){
     	if(l_nIndex>m_nCount){
-    		l_nHexValue = (1.0) * ((pow(2,14))-1) / (2 * (1.0));
+            l_nHexValue = (1.0) * ((pow(2,14))-1) / (2 * (1.0));
     	}else{
-    		l_nHexValue=(((m_nY[l_nIndex]*1.0)+1.0) * ((pow(2,14))-1))/(2*1.0);
-    		fprintf(fpWaveFile,"%X\n",l_nHexValue & 0x00003FFF);
+            l_nHexValue=(((m_nY[l_nIndex]*1.0)+1.0) * ((pow(2,14))-1))/(2*1.0);
+            fprintf(fpWaveFile,"%X\n",l_nHexValue & 0x00003FFF);
     	}
     }
 
-//    l_nHexValue = (1.0) * ((pow(2,14))-1) / (2 * (1.0));
-//    fprintf(fpWaveFile,"%X\n",l_nHexValue);
+    //    l_nHexValue = (1.0) * ((pow(2,14))-1) / (2 * (1.0));
+    //    fprintf(fpWaveFile,"%X\n",l_nHexValue);
 
     fclose(fpWaveFile);
 
