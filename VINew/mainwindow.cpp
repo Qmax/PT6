@@ -277,7 +277,7 @@ void MainWindow::notifyClipObserver()
 {
 	if( m_objVISubject->getChipDialog(0) == 0)
 	{
-		ui->lblClip->setText("14 Pins");
+            ui->lblClip->setText("14 Pins");
 	}
 	else if( m_objVISubject->getChipDialog(0) == 1)
 	{
@@ -318,12 +318,12 @@ void MainWindow::notifyClipObserver()
 		ui->lblRefereceType->setText("Moving");
 		ui->lblNC->setText(QString::number(m_objVISubject->getChipDialog(4)));
 	}
-	if(m_objVISubject->getChipDialog(5) == 0)
+        if(m_objVISubject->getChipDialog(5) == 0)
 		ui->lblComparisonMode->setText("Average");
-	else
+        else
 		ui->lblComparisonMode->setText("Envelope");
 	m_isProbesOnly =false;
-	m_bClipLearn=false;
+        m_bClipLearn=false;
 }
 
 void MainWindow::notifyProbeObserver()
@@ -1108,6 +1108,7 @@ void MainWindow::on_butProClip_clicked()
 	    ui->frame_23->setGeometry(30,90,60,15);02072014*/
 
 		//	notifyProbeObserver();
+                on_butProbe2_clicked();
 	}
 	else
 	{
@@ -1240,35 +1241,38 @@ void MainWindow::clipLearn(bool pLearnFlag)
 			//			m_objFunctionalObject->externalMuxMeasurement(m_objVISubject->getPin2Channel(l_lstPindexIndex->value(l_nPinsIndex)),m_objVISubject->getPin2Channel(l_nReferencePin));////commented RRV 26062014
 			m_objFunctionalObject->switchTestChannel(m_objVISubject->getPin2Channel(l_lstPindexIndex->value(l_nPinsIndex)));
 			m_objFunctionalObject->switchRefChannel(m_objVISubject->getPin2Channel(l_nReferencePin));
-			//			if(!m_objFunctionalObject->switchTestChannel(m_objVISubject->getPin2Channel(l_lstPindexIndex->value(l_nPinsIndex))))
-			//			{
-			//				abortFlag=true;
-			//				break;
-			//			}
-			//			usleep(10000);
-			//			///*IPTMessageBox->QMsgBox*/showMessageBox(true, false, "Test Channel Switched.");
-			//			if(!m_objFunctionalObject->switchRefChannel(m_objVISubject->getPin2Channel(l_nReferencePin)))
-			//			{
-			//				abortFlag=true;
-			//				break;
-			//			}
-			//			usleep(10000);
-			///*IPTMessageBox->QMsgBox*/showMessageBox(true, false, "Ref Channel Switched.");
+                        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//                                                if(!m_objFunctionalObject->switchTestChannel(m_objVISubject->getPin2Channel(l_lstPindexIndex->value(l_nPinsIndex))))
+//                                                {
+//                                                        abortFlag=true;
+//                                                        break;
+//                                                }
+//                                                usleep(10000);
+//                                                ///*IPTMessageBox->QMsgBox*/showMessageBox(true, false, "Test Channel Switched.");
+//                                                if(!m_objFunctionalObject->switchRefChannel(m_objVISubject->getPin2Channel(l_nReferencePin)))
+//                                                {
+//                                                        abortFlag=true;
+//                                                        break;
+//                                                }
+//                                                usleep(10000);
+//                        /*IPTMessageBox->QMsgBox*/showMessageBox(true, false, "Ref Channel Switched.");
+                        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			ISplash->setLoadingText(l_strText + l_strCombination);
 			ISplash->selectSplashImage(0);
 			ISplash->setPos(300,325,327,30);
 			ISplash->setSplashStyle("border-width: 3px; border-style: groove; border-color: #ED9D13;border-radius: 10px; padding: 0 8px;text-align: center;background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1,stop:0 #E7F598, stop: 0.5 #ECF5BA,stop: 0.7 #F3F7DA,stop:1 #F7F7F2);font:bold 18px;color:#3A3B32");
 			ISplash->ShowSplash();
-
-			//			qDebug() << "Test Channel:"<<m_objVISubject->getPin2Channel(l_lstPindexIndex->value(l_nPinsIndex));
-			//			qDebug() << "Reference Channel:" << m_objVISubject->getPin2Channel(l_nReferencePin);
-			//sleep(1);
-			//			m_objFunctionalObject->readChannels();
-			/*			if( m_objFunctionalObject->checkMuxStatus() == false)
-			{
-				abortFlag=true;
-				break;
-			}*///commented RRV 26062014
+                        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//                                               qDebug() << "Test Channel:"<<m_objVISubject->getPin2Channel(l_lstPindexIndex->value(l_nPinsIndex));
+//                                                qDebug() << "Reference Channel:" << m_objVISubject->getPin2Channel(l_nReferencePin);
+//                        sleep(1);
+//                                                m_objFunctionalObject->readChannels();
+//                                                if( m_objFunctionalObject->checkMuxStatus() == false)
+//			{
+//				abortFlag=true;
+//				break;
+//                        }//commented RRV 26062014
+                        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			l_strTestFileName = l_strLearnt+QString::number(l_nReferencePin,10)+"_"+QString::number(l_lstPindexIndex->value(l_nPinsIndex),10)+".bin";
 			m_objFunctionalObject->peformDrive();
 			usleep(10000);
@@ -1282,27 +1286,28 @@ void MainWindow::clipLearn(bool pLearnFlag)
 			m_objFunctionalObject->converttoVoltage(m_objFunctionalObject->getFileData(l_strTestFileName),m_objVISubject->getVoltageValue(), l_objCalibData);
 			double l_nPosPeakVoltage = (m_objVISubject->getPosPeak()* m_objVISubject->getVoltageValue())/REFERENCE_THRESHOLD;
 			double l_nNetPeakVoltage = (m_objVISubject->getNegPeak()* m_objVISubject->getVoltageValue())/REFERENCE_THRESHOLD;
-			//		    qDebug()<<"PositivePeak:"<<l_nPosPeakVoltage;
-			//		    qDebug()<<"NegativePeak:"<<l_nNetPeakVoltage;
-			//		    if(l_nPosPeakVoltage <0.5 && l_nNetPeakVoltage >-0.5)//by ravi
-			//		    {
-			//		    	isFailFlag = true;
-			//		    	break;
-			//		    }
-
-			//			if(pLearnFlag == false)
-			//			{
-			//				qDebug()<<"File:"<<l_strTestFileName;
-			//				if(compareTwoClipTraces("Learnt_"+QString::number(l_nReferencePin,10)+"_"+QString::number(l_lstPindexIndex->value(l_nPinsIndex),10)+".bin","Test_"+QString::number(l_nReferencePin,10)+"_"+QString::number(l_lstPindexIndex->value(l_nPinsIndex),10)+".bin"))
-			//				{
-			//					qDebug() <<"Pin:"<<l_lstPindexIndex->value(l_nPinsIndex)<<"Reference Pin:"<<l_nReferencePin;
-			//					qDebug() << "Test Channel:"<<m_objVISubject->getPin2Channel(l_lstPindexIndex->value(l_nPinsIndex));
-			//					qDebug() << "Ref Channe:" << m_objVISubject->getPin2Channel(l_nReferencePin);
-			//					isFailFlag = true;
-			//					break;
-			//				}
-			//			}
-
+                        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//                                            qDebug()<<"PositivePeak:"<<l_nPosPeakVoltage;
+//                                            qDebug()<<"NegativePeak:"<<l_nNetPeakVoltage;
+//                                            if(l_nPosPeakVoltage <0.5 && l_nNetPeakVoltage >-0.5)//by ravi
+//                                            {
+//                                                isFailFlag = true;
+//                                                break;
+//                                            }
+//
+//                                                if(pLearnFlag == false)
+//                                                {
+//                                                        qDebug()<<"File:"<<l_strTestFileName;
+//                                                        if(compareTwoClipTraces("Learnt_"+QString::number(l_nReferencePin,10)+"_"+QString::number(l_lstPindexIndex->value(l_nPinsIndex),10)+".bin","Test_"+QString::number(l_nReferencePin,10)+"_"+QString::number(l_lstPindexIndex->value(l_nPinsIndex),10)+".bin"))
+//                                                        {
+//                                                                qDebug() <<"Pin:"<<l_lstPindexIndex->value(l_nPinsIndex)<<"Reference Pin:"<<l_nReferencePin;
+//                                                                qDebug() << "Test Channel:"<<m_objVISubject->getPin2Channel(l_lstPindexIndex->value(l_nPinsIndex));
+//                                                                qDebug() << "Ref Channe:" << m_objVISubject->getPin2Channel(l_nReferencePin);
+//                                                                isFailFlag = true;
+//                                                                break;
+//                                                        }
+//                                                }
+                    //~~~~~~~~~~~~
 		}
 		if(isFailFlag == true) break;
 	}
@@ -1377,6 +1382,19 @@ void MainWindow::clipLearn(bool pLearnFlag)
 	disableClipLearnGrp(false);
 
 
+}
+bool MainWindow::compareTwoClipTraces(QString pStrLearntName,QString pStrTestName)
+{
+        QStringList l_lstRefData = m_objFunctionalObject->getFileData(pStrLearntName);//m_obVImodel->getFileData("Learnt" +l_strActualFileName+".bin");
+        QStringList l_lstTestData = m_objFunctionalObject->getFileData(pStrTestName);
+        m_objFunctionalObject->calculateAverage("./CalibrationReference.bin");
+        unsigned int l_nErrpercentage = m_objFunctionalObject->caluculateErrorPercentange(l_lstRefData,l_lstTestData);
+        if(l_nErrpercentage >m_objVISubject->getClipThreshold())
+        {
+                return true;
+        }
+        else
+                return false;
 }
 void MainWindow::disableClipLearnGrp(bool pFlag)
 {

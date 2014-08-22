@@ -132,6 +132,7 @@ protected:
         void clipLearn(bool pLearnFlag);
         void disableClipLearnGrp(bool);
         void disableInteractiveGrp(bool);
+        bool compareTwoClipTraces(QString pStrLearntName,QString pStrTestName);
 
         //AutoCurveFit
         void callAutoCurveFit();

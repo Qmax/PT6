@@ -1,15 +1,16 @@
+/*Created by Ravivarman,Qmax
+ * 11th Jan 2013
+ */
+
 #include "shortlocater.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QPixmap>
 #include <QBrush>
 #include <quuid.h>
-
 #include <QtDebug>
 #include <QFile>
-/*Created by Ravivarman,Qmax
- * 11th Jan 2013
- */
+
 #include <QTextStream>
 
 ShortLocater::ShortLocater(QWidget *parent)
@@ -90,9 +91,11 @@ void ShortLocater::Initializations(){
     micro=QChar(0x00B5);
 
     //~~~~~~~~~~~~~Reading Short Values from File~~~~~~~~~~~~~~~~~~~~~~
-    QStringList stringList;
-    bool ok=true;
-    QFile textFile("shortValues.txt");
+	QStringList stringList;
+	bool ok=true;
+	QFile textFile;
+   	textFile.setFileName("shortValuesI.txt");
+
     if (textFile.open(QIODevice::ReadOnly))
     {
         QTextStream textStream(&textFile);
@@ -165,7 +168,7 @@ void ShortLocater::Initializations(){
 	ui.openShortEnable->setChecked(true);
 
 	m_nAvgCount=0;
-	movingAverage=1;
+	movingAverage=5;
 
 	ui.splashWidget->setVisible(false);
 		usleep(1000);
@@ -681,17 +684,17 @@ QString ShortLocater::convertToUnits(double l_nvalue){
     double value;
     if(rangeFlag=="200mE"){
         if(l_nvalue>=-0.0001&&l_nvalue<0){
-            value=-100;unit=unit=QChar(0x00B5)+ohms;
+            value=-100;unit=QChar(0x00B5)+ohms;
             ui.units->setText(unit);
             return (QString::number(value));
         }
         if(l_nvalue>0&&l_nvalue<0.0001){
-            value=100;unit=unit=QChar(0x00B5)+ohms;
+            value=100;unit=QChar(0x00B5)+ohms;
             ui.units->setText(unit);
             return (QString::number(value));
         }
         if(l_nvalue>0.22||l_nvalue<-0.22){
-            value=l_nvalue;unit=unit=ohms;
+            value=l_nvalue;unit=ohms;
             ui.units->setText(unit);
             IBackPlane->writeBackPlaneRegister(0x0,0x16);
             return ("OL");
@@ -699,17 +702,17 @@ QString ShortLocater::convertToUnits(double l_nvalue){
     }
     if(rangeFlag=="2E"){
         if(l_nvalue>=-0.001&&l_nvalue<0){
-            value=-1;unit=unit="m"+ohms;
+            value=-1;unit="m"+ohms;
             ui.units->setText(unit);
             return (QString::number(value));
         }
         if(l_nvalue>0&&l_nvalue<0.001){
-            value=1;unit=unit="m"+ohms;
+            value=1;unit="m"+ohms;
             ui.units->setText(unit);
             return (QString::number(value));
         }
         if(l_nvalue>2.2||l_nvalue<-2.2){
-            value=l_nvalue;unit=unit=ohms;
+            value=l_nvalue;unit=ohms;
             ui.units->setText(unit);
             IBackPlane->writeBackPlaneRegister(0x0,0x16);
             return ("OL");
@@ -717,17 +720,17 @@ QString ShortLocater::convertToUnits(double l_nvalue){
     }
     if(rangeFlag=="200E"){
         if(l_nvalue>=-0.1&&l_nvalue<0){
-            value=-100;unit=unit="m"+ohms;
+            value=-100;unit="m"+ohms;
             ui.units->setText(unit);
             return (QString::number(value));
         }
         if(l_nvalue>0&&l_nvalue<0.1){
-            value=100;unit=unit="m"+ohms;
+            value=100;unit="m"+ohms;
             ui.units->setText(unit);
             return (QString::number(value));
         }
         if(l_nvalue>220||l_nvalue<-220){
-            value=l_nvalue;unit=unit=ohms;
+            value=l_nvalue;unit=ohms;
             ui.units->setText(unit);
             IBackPlane->writeBackPlaneRegister(0x0,0x16);
             return ("OL");
@@ -743,7 +746,12 @@ QString ShortLocater::convertToUnits(double l_nvalue){
         value=value*1;			unit="";
     }
     else if((value*1000)>=1&&value<1000){
-        value=value*1000;        unit="m";
+
+    	if(rangeFlag=="200E" || rangeFlag=="2E"){
+    		value=value*1000;        unit="";
+    	}else if(rangeFlag=="200mE"){
+    		value=value*1000;        unit="m";
+    	}
     }
     else if((value*1000000)>=1&&value<1000000){
         value=value*1000000;     unit=QChar(0x00B5);
@@ -851,7 +859,12 @@ void ShortLocater::shortCalibration(){
         Configure(99);
     }
 
-    QFile outFile("shortValues.txt");
+    QFile outFile;
+    if(ui.External->isVisible())
+    	outFile.setFileName("shortValuesE.txt");
+    if(ui.Internal->isVisible())
+    	outFile.setFileName("shortValuesI.txt");
+
     outFile.open(QIODevice::WriteOnly);
     QTextStream ts(&outFile);
     ts <<r200EShortValue<<endl<<r2EShortValue<<endl<<r200mEShortValue<<endl;
@@ -986,9 +999,9 @@ void ShortLocater::on_offset_clicked()
                 QApplication::processEvents();
             }
 
-            if(ui.openShortEnable->isChecked())
+/*            if(ui.openShortEnable->isChecked())
             	nullify=retval-r200mEShortValue;
-            else
+            else*/
             	nullify=retval;
             qDebug()<<"debug point:"<<retval<<"nullify"<<nullify<<"initial offset"<<r200mEShortValue;
 	}else{
@@ -1107,6 +1120,31 @@ void ShortLocater::on_Internal_clicked()
     		ui.fp_VI2_EXT->setGeometry(110,20,41,41);
     		ui.fp_VI2_EXT->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
 
+    		QStringList stringList;
+    		bool ok=true;
+    		QFile textFile;
+    	    if(ui.External->isVisible())
+    	    	textFile.setFileName("shortValuesE.txt");
+    	    if(ui.Internal->isVisible())
+    	    	textFile.setFileName("shortValuesI.txt");
+
+    	    if (textFile.open(QIODevice::ReadOnly))
+    	    {
+    	        QTextStream textStream(&textFile);
+    	        while (!textStream.atEnd())
+    	        {
+    	            stringList.append(textStream.readLine());
+    	        }
+    	        r200EShortValue=stringList.value(0).toDouble(&ok);
+    	        qDebug()<<"200E Short Value:"<<r200EShortValue;
+    	        r2EShortValue=stringList.value(1).toDouble(&ok);
+    	        qDebug()<<"2E Short Value:"<<r2EShortValue;
+    	       	r200mEShortValue=stringList.value(2).toDouble(&ok);
+    	        qDebug()<<"200mE Short Value:"<<r200mEShortValue;
+    	    }else{
+    	        r200EShortValue=r200mEShortValue=r2EShortValue=0.0;
+    	    }
+
 }
 
 void ShortLocater::on_External_clicked()
@@ -1136,6 +1174,31 @@ void ShortLocater::on_External_clicked()
 
 	ui.fp_VI2_EXT->setGeometry(110,20,41,41);
 	ui.fp_VI2_EXT->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
+
+	QStringList stringList;
+	bool ok=true;
+	QFile textFile;
+    if(ui.External->isVisible())
+    	textFile.setFileName("shortValuesE.txt");
+    if(ui.Internal->isVisible())
+    	textFile.setFileName("shortValuesI.txt");
+
+    if (textFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream textStream(&textFile);
+        while (!textStream.atEnd())
+        {
+            stringList.append(textStream.readLine());
+        }
+        r200EShortValue=stringList.value(0).toDouble(&ok);
+        qDebug()<<"200E Short Value:"<<r200EShortValue;
+        r2EShortValue=stringList.value(1).toDouble(&ok);
+        qDebug()<<"2E Short Value:"<<r2EShortValue;
+       	r200mEShortValue=stringList.value(2).toDouble(&ok);
+        qDebug()<<"200mE Short Value:"<<r200mEShortValue;
+    }else{
+        r200EShortValue=r200mEShortValue=r2EShortValue=0.0;
+    }
 }
 
 void ShortLocater::on_openShortEnable_clicked(bool checked)

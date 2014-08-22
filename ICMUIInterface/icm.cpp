@@ -809,9 +809,12 @@ void ICM::readADC() {
 
         m_nActualGain = m_nImpedanceValue / m_nResistance;
 //	qDebug()<<"Actual Gain :"<<m_nActualGain;
-	if(autoFlag==true){
-		AutoRangeGain();
-	}
+/*	if(autoFlag==true){
+		if (ui->ResistanceRanges->isVisible())
+			AutoRangeGain();
+		else
+			AutoRange();
+	}*/
 
 	if (ui->ResistanceRanges->isVisible()) {
 		ui->label_X->setVisible(false);
@@ -846,7 +849,82 @@ void ICM::readADC() {
 }
 void ICM::AutoRangeGain(){
 
-	if((m_nActualGain >=10 && m_nActualGain<100) && m_nImpedanceValue==10){
+	double prevRangeValue,curRangeValue,nextRangeValue;
+
+	ui->R1ME->setChecked(true);
+	on_R1ME_clicked();
+
+	curRangeValue = m_nResistance_2;
+
+	if(curRangeValue>300000 && curRangeValue<1000000){
+
+		ui->R100KE->setChecked(true);
+		on_R100KE_clicked();
+
+		readADC();
+
+		prevRangeValue = m_nResistance_2;
+
+
+	}
+
+
+	if (m_nResistance_2 > 300000 && m_nResistance_2 <1000000) {
+			qDebug()<<"greater than 300K & less than 1M";
+			ui->R1ME->setChecked(true);
+			on_R1ME_clicked();
+			if (l_nAIN1 >= 2.048 || l_nAIN2 >= 2.048) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		if (m_nResistance_2 > 29000 && m_nResistance_2 <= 310000) {
+			qDebug()<<"greater than 29K & less than 3.1K";
+			ui->R100KE->setChecked(true);
+			on_R100KE_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		if (m_nResistance_2 > 2900 && m_nResistance_2 <= 31000) {
+			qDebug()<<"greater than 2.9K & less than 31K";
+			ui->R10KE->setChecked(true);
+			on_R10KE_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		if (m_nResistance_2 > 290 && m_nResistance_2 <= 3100) {
+			qDebug()<<"greater than 29E & less than 3.1K";
+			ui->R1KE->setChecked(true);
+			on_R1KE_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		if (m_nResistance_2 > 1 && m_nResistance_2 <= 310) {
+			qDebug()<<"greater than 1E & less than 31E";
+			ui->R100E->setChecked(true);
+			on_R100E_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+		if (m_nResistance_2 <= 1) {
+			qDebug()<<"less than 1E";
+			ui->R100E->setChecked(true);
+			on_R10E_clicked();
+			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
+				ui->R10E->setChecked(true);
+				on_R10E_clicked();
+			}
+		}
+	}
+/*	if((m_nActualGain >=10 && m_nActualGain<100) && m_nImpedanceValue==10){
 		ui->R100E->setChecked(true);
 		on_R10E_clicked();
 		if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
@@ -943,8 +1021,7 @@ void ICM::AutoRangeGain(){
 				on_R10E_clicked();
 			}
 		}
-	}
-}
+	}*/
 void ICM::AutoRange() {
 	if (ui->ResistanceRanges->isVisible()) {
 		if (m_nResistance_2 > 1100000) {

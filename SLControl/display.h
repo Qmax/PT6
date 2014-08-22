@@ -90,7 +90,12 @@ public:
 			for (int i = 0; i < 6; i++) {
 				digits[i]->setText("0");
 			}
-			l_intValue = qRound(l_nValue);
+			if(((l_nValue)-((int)l_nValue))>0.6)
+				l_intValue = (int)l_nValue+1;
+			else
+				l_intValue = (int)l_nValue;
+//			l_intValue = qRound(l_nValue);
+
 //_________________________________________________________________________________________
 			if (m_intRange == 2) {
 				if (l_intValue > 2)
@@ -128,7 +133,7 @@ public:
 			}
 //_________________________________________________________________________________________
 			else if (m_intRange == 200) {
-				if (l_intValue >200)
+				if (l_intValue >220)
 					setValue("OL");
 				else {
 					Q = l_intValue / 100;
