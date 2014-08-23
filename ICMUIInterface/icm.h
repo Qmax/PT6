@@ -1,3 +1,8 @@
+/*
+ * icm.h
+ *
+ *      Author: Ravivarman.R
+ */
 #ifndef ICM_H
 #define ICM_H
 
@@ -133,9 +138,14 @@ protected:
     void initialiseHWLibraries();
     void initialiseFeedBackResistance();
     void AutoRange();
-    void AutoRangeGain();
+
+    double readADCR(QString);
+    void AutoRangeR();
+    void DisplayR();
+
     QString convertToUnits(double l_nvalue);
     double convertToValues(QString input);
+
 
 //    void resetDAC(AD5318_DACSELECT DAC);
 //    void updateDAC(double);
@@ -226,6 +236,7 @@ void callMeasuredEdit();
    void on_R100KE_clicked();
    void on_ONOFF_clicked();
    void readADC();
+   void readADC2();
 
     void on_settings_clicked();
     void on_L3mH_clicked();

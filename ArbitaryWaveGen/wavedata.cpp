@@ -100,28 +100,32 @@ void WaveData::receiveValue(QString pText){
 void WaveData::callSamplesEdit(){
 
     if (m_objSamples->hasFocus()) {
-        openNumKBPanelminmax(1,double(m_nTotalSamples),1);
+//        openNumKBPanelminmax(1,double(m_nTotalSamples),1);
+    	openNumKBPanel(1);
         m_nLineEditIndex = 1;
     }
 }
 
 void WaveData::callStartTickEdit(){
     if (m_objStartTick->hasFocus()) {
-        openNumKBPanelminmax(1,double(m_nTotalSamples),1);
+//        openNumKBPanelminmax(1,double(m_nTotalSamples),1);
+    	openNumKBPanel(1);
         m_nLineEditIndex = 2;
     }
 }
 
 void WaveData::callStopTickEdit(){
     if (m_objStoptick->hasFocus()) {
-        openNumKBPanelminmax(1,double(m_nTotalSamples),1);
+//        openNumKBPanelminmax(1,double(m_nTotalSamples),1);
+    	openNumKBPanel(1);
         m_nLineEditIndex = 3;
     }
 }
 
 void WaveData::callDutyCylceEdit(){
     if (m_objDutyCycle->hasFocus()) {
-        openNumKBPanelminmax(1,100,1);
+//        openNumKBPanelminmax(1,100,1);
+    	openNumKBPanel(1);
         m_nLineEditIndex = 4;
     }
 }

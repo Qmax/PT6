@@ -1,3 +1,7 @@
+/*
+ * icm.cpp
+ *      Author: Ravivarman.R
+ */
 #include "icm.h"
 #include "ui_icm.h"
 
@@ -20,6 +24,7 @@ QMainWindow(parent), ui(new Ui::ICM) {
 	//	m_bExternal = true;
 	IPsoc->icmMeasurement();
 	m_bExternal = false;
+	on_pushButton_clicked();//internal selection
 
 	ui->label_X->setVisible(false);
 	ui->label_LC->setVisible(false);
@@ -27,8 +32,8 @@ QMainWindow(parent), ui(new Ui::ICM) {
 
 	loopOut = 0;//graphing
 	ui->plottingWindow->setVisible(false);
-	   m_nSweepStartFrequency=m_nSweepEndFrequency=m_nSweepStartFrequency2=m_nSweepEndFrequency2=0;
-	   m_nSweepStartFrequencyUnit=m_nSweepEndFrequencyUnit=m_nSweepIntervalUnit=1;
+	m_nSweepStartFrequency=m_nSweepEndFrequency=m_nSweepStartFrequency2=m_nSweepEndFrequency2=0;
+	m_nSweepStartFrequencyUnit=m_nSweepEndFrequencyUnit=m_nSweepIntervalUnit=1;
 }
 void ICM::ToolBox(bool hide) {
 	ui->calibrateDisplay->setVisible(hide);
@@ -62,84 +67,84 @@ void ICM::ToolBox(bool hide) {
 }
 
 void ICM::setupSimpleDemo(QCustomPlot *customPlot) {
-    customPlot->addGraph();
-    QPen pen;
-    int minRange, maxRange;
+	customPlot->addGraph();
+	QPen pen;
+	int minRange, maxRange;
 
-    pen.setColor(QColor(0, 0, 255, 200));
-    customPlot->graph()->setLineStyle(QCPGraph::lsLine);
-    customPlot->graph()->setPen(pen);
+	pen.setColor(QColor(0, 0, 255, 200));
+	customPlot->graph()->setLineStyle(QCPGraph::lsLine);
+	customPlot->graph()->setPen(pen);
 
-    customPlot->xAxis->setLabel("Frequency-->");
-    QString str = m_strRLC;
+	customPlot->xAxis->setLabel("Frequency-->");
+	QString str = m_strRLC;
 
-    bool ok=true;
-    QString str_yRangeMax;
-    if(ui->rangeLabel->text().endsWith("pF")){
-    	customPlot->yAxis->setLabel(str+"(in pF)");
-    	str_yRangeMax=ui->rangeLabel->text();
-    	str_yRangeMax.chop(2);
-    	yRangeMax=str_yRangeMax.toInt(&ok,10);
+	bool ok=true;
+	QString str_yRangeMax;
+	if(ui->rangeLabel->text().endsWith("pF")){
+		customPlot->yAxis->setLabel(str+"(in pF)");
+		str_yRangeMax=ui->rangeLabel->text();
+		str_yRangeMax.chop(2);
+		yRangeMax=str_yRangeMax.toInt(&ok,10);
 	}else if(ui->rangeLabel->text().endsWith("nF")){
 		customPlot->yAxis->setLabel(str+"(in nF)");
-    	str_yRangeMax=ui->rangeLabel->text();
-    	str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
+		str_yRangeMax=ui->rangeLabel->text();
+		str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
 	}else if(ui->rangeLabel->text().endsWith("uF")){
 		customPlot->yAxis->setLabel(str+"(in uF)");
-    	str_yRangeMax=ui->rangeLabel->text();
-    	str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
+		str_yRangeMax=ui->rangeLabel->text();
+		str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
 	}else if(ui->rangeLabel->text().endsWith("uH")){
 		customPlot->yAxis->setLabel(str+"(in uH)");
-    	str_yRangeMax=ui->rangeLabel->text();
-    	str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
+		str_yRangeMax=ui->rangeLabel->text();
+		str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
 	}else if(ui->rangeLabel->text().endsWith("mF")){
 		customPlot->yAxis->setLabel(str+"(in mF)");
-    	str_yRangeMax=ui->rangeLabel->text();
-    	str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
+		str_yRangeMax=ui->rangeLabel->text();
+		str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
 	}else if(ui->rangeLabel->text().endsWith("mH")){
 		customPlot->yAxis->setLabel(str+"(in mH)");
-    	str_yRangeMax=ui->rangeLabel->text();
-    	str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
+		str_yRangeMax=ui->rangeLabel->text();
+		str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
 	}else if(ui->rangeLabel->text().endsWith("KE")){
 		customPlot->yAxis->setLabel(str+"(in KE)");
-    	str_yRangeMax=ui->rangeLabel->text();
-    	str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
+		str_yRangeMax=ui->rangeLabel->text();
+		str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
 	}else if(ui->rangeLabel->text().endsWith("ME")){
 		customPlot->yAxis->setLabel(str+"(in ME)");
-    	str_yRangeMax=ui->rangeLabel->text();
-    	str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
+		str_yRangeMax=ui->rangeLabel->text();
+		str_yRangeMax.chop(2);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
 	}else if(ui->rangeLabel->text().endsWith("E")){
 		customPlot->yAxis->setLabel(str+"(in E)");
-    	str_yRangeMax=ui->rangeLabel->text();
-    	str_yRangeMax.chop(1);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
+		str_yRangeMax=ui->rangeLabel->text();
+		str_yRangeMax.chop(1);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
 	}else if(ui->rangeLabel->text().endsWith("H")){
 		customPlot->yAxis->setLabel(str+"(in H)");
-    	str_yRangeMax=ui->rangeLabel->text();
-    	str_yRangeMax.chop(1);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
+		str_yRangeMax=ui->rangeLabel->text();
+		str_yRangeMax.chop(1);    	yRangeMax=str_yRangeMax.toInt(&ok,10);
 	}
 
-    // set axes ranges, so we see all data:
+	// set axes ranges, so we see all data:
 
-       customPlot->xAxis->setRange(-10, xSize*2);
-    QString str2 = ui->rangeLabel->text();
+	customPlot->xAxis->setRange(-10, xSize*2);
+	QString str2 = ui->rangeLabel->text();
 
-    if (str2.endsWith("F") || str2.endsWith("H") || str2.endsWith("E"))
-        str2.chop(1);
-    if (str2.endsWith("m") || str2.endsWith("n") || str2.endsWith("K") || str2.endsWith("M") || str2.endsWith("u"))
-        str2.chop(1);
+	if (str2.endsWith("F") || str2.endsWith("H") || str2.endsWith("E"))
+		str2.chop(1);
+	if (str2.endsWith("m") || str2.endsWith("n") || str2.endsWith("K") || str2.endsWith("M") || str2.endsWith("u"))
+		str2.chop(1);
 
-        minRange = -50;
-        maxRange = str2.toInt(&ok, 10);
+	minRange = -50;
+	maxRange = str2.toInt(&ok, 10);
 
 
-    customPlot->yAxis->setRange(minRange, yRangeMax*2);
-    //	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
-    customPlot->setInteractions(QCP::iRangeZoom | QCP::iMultiSelect
-                                | QCP::iSelectPlottables | QCP::iSelectAxes | QCP::iSelectLegend
-                                | QCP::iSelectItems | QCP::iSelectOther);
+	customPlot->yAxis->setRange(minRange, yRangeMax*2);
+	//	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+	customPlot->setInteractions(QCP::iRangeZoom | QCP::iMultiSelect
+			| QCP::iSelectPlottables | QCP::iSelectAxes | QCP::iSelectLegend
+			| QCP::iSelectItems | QCP::iSelectOther);
 }
 void ICM::plotSimpleDemo(QCustomPlot *customPlot) {
-    /*QDateTime dateTime = QDateTime::currentDateTime();
+	/*QDateTime dateTime = QDateTime::currentDateTime();
     QString dateTimeString = dateTime.toString();
 
     //Save to File START ~~~~~~~~~~~~~~~~~~~~~~~
@@ -149,9 +154,9 @@ void ICM::plotSimpleDemo(QCustomPlot *customPlot) {
     else
         outFile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append);
     QTextStream ts(&outFile);*/
-    //Save to File END ~~~~~~~~~~~~~~~~~~~~~~~
+	//Save to File END ~~~~~~~~~~~~~~~~~~~~~~~
 
-/*    if (loopOut != 250) {
+	/*    if (loopOut != 250) {
         if (loopOut > 60) {
             customPlot->xAxis->setRange(loopOut - 60, loopOut);
         }
@@ -186,8 +191,8 @@ void ICM::plotSimpleDemo(QCustomPlot *customPlot) {
         loopOut = 59;
     }*/
 
-    customPlot->graph(0)->setData(x, y);
-    customPlot->graph(0)->rescaleAxes();
+	customPlot->graph(0)->setData(x, y);
+	customPlot->graph(0)->rescaleAxes();
 
 }
 
@@ -728,8 +733,80 @@ void ICM::callFeedBackChange(int index) {
 		m_lstRFCapcitance.insert(C_Index, m_lstRFResistance.value(index));
 
 }
+void ICM::readADC(){
+	usleep(5000);
+	if(ui->ResistanceRanges->isVisible()){
+		if(autoFlag==true)
+			AutoRangeR();
+		else
+			m_nResistance = readADCR(ui->rangeLabel->text());
+		ui->lblfrequency->setText(QString::number(m_nFrequency, 'f', 0));
+	    DisplayR();
+	}
+}
+void ICM::DisplayR(){
+	ui->label_X->setVisible(false);
+	ui->label_LC->setVisible(false);
+	ui->value_XLXC->setVisible(false);
 
-void ICM::readADC() {
+	double pResistanceValue=0.0;
+	pResistanceValue = m_nResistance;
+	pResistanceValue = pResistanceValue + m_dOffset;
+
+	if (ui->calibrateDisplay->isChecked()) {
+		CalibrateDisplay("ICM-R");
+
+		double y, x, c, m;
+		x = pResistanceValue;
+		c = calibedConstant;
+		m = calibedSlope;
+
+		y = (x - c) / m;
+
+		pResistanceValue = y;
+		cbdR=y;
+	}
+	if (m_bNull == true) {
+		pResistanceValue =pResistanceValue - m_dRNull;
+	}
+
+	if(pResistanceValue>1000000){
+		dis->setValue("OL");
+	}else{
+	//Passing Range to display class~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	bool ok=true;
+	QString str_value = convertToUnits(pResistanceValue);
+	QString str_range = ui->rangeLabel->text();
+	double dbl_value;int int_range;
+
+	if(ui->rangeLabel->text().endsWith("KE") || ui->rangeLabel->text().endsWith("ME")){
+		str_range.chop(2);
+		dbl_value=str_value.toDouble(&ok);
+		if(dbl_value>=0 && dbl_value<9.9)
+			int_range=9;
+		else if(dbl_value>=10 && dbl_value<99.9)
+			int_range=99;
+		else if(dbl_value>=100 && dbl_value<999.9)
+			int_range=999;
+	}
+	else if(ui->rangeLabel->text().endsWith("E")){
+		str_range.chop(1);
+		dbl_value=str_value.toDouble(&ok);
+		int_range=str_range.toInt(&ok,10);
+	}
+
+	dis->setRange(int_range);
+	dis->setValue(dbl_value);
+
+	qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
+	qDebug()<<"intRange:"<<int_range<<"dbl_value:"<<dbl_value;
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	}
+
+	ui->rangeLabel->setText(m_mapResistance.value(R_Index));
+	emit ICM2GCalib(m_nResistance, "ICM-R");
+}
+void ICM::readADC2() {
 
 	usleep(10000);
 
@@ -750,7 +827,7 @@ void ICM::readADC() {
 	for (int i = 0; i < noOFsamples; i++) {
 		//if(i==0)
 		m_nADC1Voltage = m_objAD7190Component->readADCDataRegister(1)
-										& 0xFFFFFF;
+																& 0xFFFFFF;
 		//qDebug()<<"Hex ADC1 Code:"<<hex<<m_nADC1Voltage;
 		l_nFactor1 = (m_nADC1Voltage / pow(2, l_nResoulution)) - 1;
 		l_nFactor2 = (l_nGain / l_nVREF);
@@ -759,7 +836,7 @@ void ICM::readADC() {
 		ui->label_2->setText(QString::number(l_nAIN1, 'f', 8));
 		//if(i==0)
 		m_nADC2Voltage = m_objAD7190Component->readADCDataRegister(2)
-										& 0xFFFFFF;
+																& 0xFFFFFF;
 		//qDebug()<<"Hex ADC2 Code:"<<hex<<m_nADC2Voltage;
 		l_nFactor1 = (m_nADC2Voltage / pow(2, l_nResoulution)) - 1;
 		l_nFactor2 = (l_nGain / l_nVREF);
@@ -807,9 +884,9 @@ void ICM::readADC() {
 	ui->lblfrequency->setText(QString::number(m_nFrequency, 'f', 0));
 
 
-        m_nActualGain = m_nImpedanceValue / m_nResistance;
-//	qDebug()<<"Actual Gain :"<<m_nActualGain;
-/*	if(autoFlag==true){
+	m_nActualGain = m_nImpedanceValue / m_nResistance;
+	//	qDebug()<<"Actual Gain :"<<m_nActualGain;
+	/*	if(autoFlag==true){
 		if (ui->ResistanceRanges->isVisible())
 			AutoRangeGain();
 		else
@@ -847,181 +924,187 @@ void ICM::readADC() {
 		emit ICM2GCalib(m_nInductance, "ICM-L");
 	}
 }
-void ICM::AutoRangeGain(){
+double ICM::readADCR(QString str) {
+	usleep(1000);
+	double l_nResistance=0.0;
+	short int l_nResoulution = 23;
+	double l_nGain = 1.0, l_nVREF = 2.048;
+	double l_nFactor1 = 0.0, l_nFactor2 = 0.0;
+	IAppCard->setSPIAppendBit(0xC000);
+
+	noOFsamples = ui->spinBox_2->value();
+	double avgOut = 0.0;
+
+	m_nImpedanceValue = m_lstRFResistance.value(R_Index);
+
+	for (int i = 0; i < noOFsamples; i++) {
+		m_nADC1Voltage = m_objAD7190Component->readADCDataRegister(1)& 0xFFFFFF;
+		l_nFactor1 = (m_nADC1Voltage / pow(2, l_nResoulution)) - 1;
+		l_nFactor2 = (l_nGain / l_nVREF);
+		l_nAIN1 = l_nFactor1 / l_nFactor2;
+		ui->label_2->setText(QString::number(l_nAIN1, 'f', 8));
+		m_nADC2Voltage = m_objAD7190Component->readADCDataRegister(2)& 0xFFFFFF;
+		l_nFactor1 = (m_nADC2Voltage / pow(2, l_nResoulution)) - 1;
+		l_nFactor2 = (l_nGain / l_nVREF);
+		l_nAIN2 = l_nFactor1 / l_nFactor2;
+		ui->label_4->setText(QString::number(l_nAIN2, 'f', 8));
+		double l_nImpedanceValue = m_nImpedanceValue;
+		ui->label_6->setText(QString::number(l_nImpedanceValue, 'f', 1));
+		double l_n1 = (l_nImpedanceValue / l_nAIN2);
+		l_nResistance = (l_n1 * l_nAIN1);
+		avgOut = avgOut + l_nResistance;
+	}
+	l_nResistance = avgOut / noOFsamples;
+
+	ui->label_7->setText(QString::number(l_nResistance, 'f', 12));
+
+	ui->rangeLabel->setText(m_mapResistance.value(R_Index));
+	qDebug()<<"ReadADC Resistance for"<<str<<":"<<l_nResistance;
+	m_nResistance = l_nResistance;
+	return l_nResistance;
+}
+
+void ICM::AutoRangeR(){
 
 	double prevRangeValue,curRangeValue,nextRangeValue;
-
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Switch 1M Range
 	ui->R1ME->setChecked(true);
 	on_R1ME_clicked();
-
-	curRangeValue = m_nResistance_2;
-
-	if(curRangeValue>300000 && curRangeValue<1000000){
-
+	curRangeValue = readADCR("1ME");
+	if(curRangeValue > 1000000){
+		dis->setValue("OL");
+	}else{
+	usleep(1000);
+	if(curRangeValue>300000 && curRangeValue<=1000000){
+		//Switch 300K Range for Lower Range Value
 		ui->R100KE->setChecked(true);
 		on_R100KE_clicked();
-
-		readADC();
-
-		prevRangeValue = m_nResistance_2;
-
-
-	}
-
-
-	if (m_nResistance_2 > 300000 && m_nResistance_2 <1000000) {
-			qDebug()<<"greater than 300K & less than 1M";
+		prevRangeValue = readADCR("100KE");
+		if(prevRangeValue>300000 && prevRangeValue <=1000000){
+			if((curRangeValue - prevRangeValue)<=(curRangeValue*0.1)){
+				ui->R100KE->setChecked(true);
+				on_R100KE_clicked();
+			}else{
+				ui->R1ME->setChecked(true);
+				on_R1ME_clicked();
+			}
+		}else{
 			ui->R1ME->setChecked(true);
 			on_R1ME_clicked();
-			if (l_nAIN1 >= 2.048 || l_nAIN2 >= 2.048) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		if (m_nResistance_2 > 29000 && m_nResistance_2 <= 310000) {
-			qDebug()<<"greater than 29K & less than 3.1K";
-			ui->R100KE->setChecked(true);
-			on_R100KE_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		if (m_nResistance_2 > 2900 && m_nResistance_2 <= 31000) {
-			qDebug()<<"greater than 2.9K & less than 31K";
-			ui->R10KE->setChecked(true);
-			on_R10KE_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		if (m_nResistance_2 > 290 && m_nResistance_2 <= 3100) {
-			qDebug()<<"greater than 29E & less than 3.1K";
-			ui->R1KE->setChecked(true);
-			on_R1KE_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		if (m_nResistance_2 > 1 && m_nResistance_2 <= 310) {
-			qDebug()<<"greater than 1E & less than 31E";
-			ui->R100E->setChecked(true);
-			on_R100E_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		if (m_nResistance_2 <= 1) {
-			qDebug()<<"less than 1E";
-			ui->R100E->setChecked(true);
-			on_R10E_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
 		}
 	}
-/*	if((m_nActualGain >=10 && m_nActualGain<100) && m_nImpedanceValue==10){
-		ui->R100E->setChecked(true);
-		on_R10E_clicked();
-		if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-			ui->R10E->setChecked(true);
-			on_R10E_clicked();
-		}
-	}
-	else if ((m_nActualGain >=0.333 && m_nActualGain <100) && m_nImpedanceValue==100) {
-		ui->R100E->setChecked(true);
-		on_R100E_clicked();
-		if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-			ui->R10E->setChecked(true);
-			on_R10E_clicked();
-		}
-	}
-	else if ((m_nActualGain >=0.333 && m_nActualGain <3.333) && m_nImpedanceValue==1000) {
-		ui->R1KE->setChecked(true);
-		on_R1KE_clicked();
-		if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-			ui->R10E->setChecked(true);
-			on_R10E_clicked();
-		}
-	}
-	else if ((m_nActualGain >=0.333 && m_nActualGain <3.333) && m_nImpedanceValue==10000) {
-			ui->R10KE->setChecked(true);
-			on_R10KE_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-	else if ((m_nActualGain >=0.333 && m_nActualGain <3.333) && m_nImpedanceValue==100000) {
-			ui->R100KE->setChecked(true);
-			on_R100KE_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-	else if ((m_nActualGain >=0.4 && m_nActualGain <1.333) && m_nImpedanceValue==400000) {
-			ui->R1ME->setChecked(true);
-			on_R1ME_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	else{
-		if(m_nImpedanceValue == 10){
-			ui->R100E->setChecked(true);
-			on_R100E_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		else if(m_nImpedanceValue==100){
-			ui->R1KE->setChecked(true);
-			on_R1KE_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		else if(m_nImpedanceValue==1000){
+		//Switch 300K Range
+		ui->R100KE->setChecked(true);
+		on_R100KE_clicked();
+		curRangeValue=readADCR("100KE");
+		if(curRangeValue>30000 && curRangeValue<=300000){
+			//Switch 30K Range for Lower Range Value
 			ui->R10KE->setChecked(true);
 			on_R10KE_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
+			prevRangeValue = readADCR("10KE");
+
+			if(prevRangeValue>30000 && prevRangeValue <= 300000){
+				if((curRangeValue - prevRangeValue)<=(curRangeValue*0.1)){
+					ui->R10KE->setChecked(true);
+					on_R10KE_clicked();
+				}else{
+					ui->R100KE->setChecked(true);
+					on_R100KE_clicked();
+				}
+			}else{
+				ui->R100KE->setChecked(true);
+				on_R100KE_clicked();
 			}
-		}
-		else if(m_nImpedanceValue==10000){
-			ui->R100KE->setChecked(true);
-			on_R100KE_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
-			}
-		}
-		else if(m_nImpedanceValue==100000){
+			//Switch 1M Range for Higher Range Value
 			ui->R1ME->setChecked(true);
 			on_R1ME_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
+			nextRangeValue = readADCR("1ME");
+			if(nextRangeValue>30000 && nextRangeValue <= 300000){
+				if((curRangeValue - nextRangeValue)<=(curRangeValue*0.1)){
+					ui->R1ME->setChecked(true);
+					on_R1ME_clicked();
+				}else{
+					ui->R100KE->setChecked(true);
+					on_R100KE_clicked();
+				}
+			}else{
+				ui->R100KE->setChecked(true);
+				on_R100KE_clicked();
 			}
 		}
-		else if(m_nImpedanceValue==400000){
-			ui->R10E->setChecked(true);
-			on_R10E_clicked();
-			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
-				ui->R10E->setChecked(true);
-				on_R10E_clicked();
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		else{
+			//Switch 30K Range
+			ui->R10KE->setChecked(true);
+			on_R10KE_clicked();
+			curRangeValue=readADCR("10KE");
+			if(curRangeValue>300 && curRangeValue<=30000){
+				//Switch 300E Range for Lower Range Value
+				ui->R100E->setChecked(true);
+				on_R100E_clicked();
+				prevRangeValue = readADCR("100E");
+				if(prevRangeValue>300 && prevRangeValue <= 30000){
+					if((curRangeValue - prevRangeValue)<=(curRangeValue*0.1)){
+						ui->R100E->setChecked(true);
+						on_R100E_clicked();
+					}else{
+						ui->R10KE->setChecked(true);
+						on_R10KE_clicked();
+					}
+				}else{
+					ui->R10KE->setChecked(true);
+					on_R10KE_clicked();
+				}
+				//Switch 300KE Range for Higher Range Value
+				ui->R100KE->setChecked(true);
+				on_R100KE_clicked();
+				nextRangeValue = readADCR("100KE");
+				if(nextRangeValue>300 && nextRangeValue <= 30000){
+					if((curRangeValue - nextRangeValue)<=(curRangeValue*0.1)){
+						ui->R100KE->setChecked(true);
+						on_R100KE_clicked();
+					}else{
+						ui->R10KE->setChecked(true);
+						on_R10KE_clicked();
+					}
+				}else{
+					ui->R10KE->setChecked(true);
+					on_R10KE_clicked();
+				}
+			}
+			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			else{
+				//Switch 300E Range
+				ui->R100E->setChecked(true);
+				on_R100E_clicked();
+				curRangeValue=readADCR("100E");
+
+				if(curRangeValue>0 && curRangeValue<=300){
+					//Switch 30KE Range for Higher Range Value
+//					ui->R10KE->setChecked(true);
+//					on_R10KE_clicked();
+//					nextRangeValue = readADCR("10KE");
+//					if(nextRangeValue>0 && nextRangeValue <= 300){
+//						if((curRangeValue - nextRangeValue)<=(curRangeValue*0.1)){
+//							ui->R10KE->setChecked(true);
+//							on_R10KE_clicked();
+//						}else{
+							ui->R100E->setChecked(true);
+							on_R100E_clicked();
+//						}
+//					}else{
+//						ui->R100E->setChecked(true);
+//						on_R100E_clicked();
+//					}
+				}
 			}
 		}
-	}*/
+	}
+	}
+}
 void ICM::AutoRange() {
 	if (ui->ResistanceRanges->isVisible()) {
 		if (m_nResistance_2 > 1100000) {
@@ -1058,8 +1141,8 @@ void ICM::AutoRange() {
 		}
 		if (m_nResistance_2 > 290 && m_nResistance_2 <= 3100) {
 			qDebug()<<"greater than 29E & less than 3.1K";
-			ui->R1KE->setChecked(true);
-			on_R1KE_clicked();
+			ui->R10KE->setChecked(true);
+			on_R10KE_clicked();
 			if (l_nAIN1 >= 2.047 || l_nAIN2 >= 2.047) {
 				ui->R10E->setChecked(true);
 				on_R10E_clicked();
@@ -1698,15 +1781,16 @@ void ICM::on_R10E_clicked() {
 	ui->sweep_endfreq->setValue(1);
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
+//	showMessageBox(true,false,"10E Switched");
+	qDebug()<<"10E Switched";
+
 }
 void ICM::on_R100E_clicked() {
 	R_Index = 1;
 	m_nICMMGR = m_nICMMGR & 0xFFF8;
 	m_nICMMGR |= 1;
 	IAppCard->writeRegister(m_nICMMGR, 0x3A);
-	usleep(1000);
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x1 on 12062014
-	usleep(1000);
 	//	IBackPlane->writeBackPlaneRegister(0x1, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_20E);
 	//	//qDebug()<<"Range:"<<m_mapResistance.value(R_Index)<<"m_nICMMGR:"<<m_nICMMGR<<"Frequency:"<<m_nFrequency<<"Feedback:"<<m_lstRFResistance.value(R_Index);
@@ -1718,7 +1802,8 @@ void ICM::on_R100E_clicked() {
 	ui->sweep_endfreq->setValue(1);
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
-
+//	showMessageBox(true,false,"300E Switched");
+	qDebug()<<"300E Switched";
 }
 void ICM::on_R1KE_clicked() {
 	R_Index = 2;
@@ -1738,6 +1823,8 @@ void ICM::on_R1KE_clicked() {
 	ui->sweep_endfreq->setValue(1);
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
+//	showMessageBox(true,false,"3KE Switched");
+	qDebug()<<"3KE Switched";
 }
 void ICM::on_R10KE_clicked() {
 	R_Index = 3;
@@ -1757,6 +1844,10 @@ void ICM::on_R10KE_clicked() {
 	ui->sweep_endfreq->setValue(1);
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
+
+//	showMessageBox(true,false,"30KE Switched");
+	qDebug()<<"30KE Switched";
+
 }
 void ICM::on_R100KE_clicked() {
 	R_Index = 4;
@@ -1776,6 +1867,9 @@ void ICM::on_R100KE_clicked() {
 	ui->sweep_endfreq->setValue(1);
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
+
+//	showMessageBox(true,false,"300KE Switched");
+	qDebug()<<"100KE Switched";
 }
 void ICM::on_R1ME_clicked() {
 	R_Index = 5;
@@ -1795,6 +1889,9 @@ void ICM::on_R1ME_clicked() {
 	ui->sweep_endfreq->setValue(1);
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
+
+//	showMessageBox(true,false,"1ME Switched");
+	qDebug()<<"1ME Switched";
 }
 
 void ICM::on_L30uH_clicked() {
@@ -1959,7 +2056,7 @@ void ICM::on_settings_clicked() {
 void ICM::on_ONOFF_clicked() {
 	//	if (ui->OnOffSlider->value() == 1) {
 	if(runFlag==false){
-                ui->ONOFF->setIcon(QIcon(QPixmap(":/Symbols/Button-Play-icon.png")));
+		ui->ONOFF->setIcon(QIcon(QPixmap(":/Symbols/Button-Play-icon.png")));
 		ui->holdCap->setVisible(false);
 		//		ui->OnOffSlider->setValue(0);
 		on_OnOffSlider_valueChanged(1);
@@ -2052,7 +2149,7 @@ void ICM::GetDisplayResistance(double pResistanceValue, double pRangeValue) {
 	m_nResistance_2 = pResistanceValue;
 
 	if (autoFlag == true){
-		AutoRangeGain();
+		AutoRangeR();
 	}
 
 	if (ui->checkBox->isChecked()) {
@@ -2106,35 +2203,35 @@ void ICM::GetDisplayResistance(double pResistanceValue, double pRangeValue) {
 	 }
 
 	 ui->display->setText(l_strResistanceValue);*/
-//	dis->setValue(convertToUnits(pResistanceValue));
+	//	dis->setValue(convertToUnits(pResistanceValue));
 
 	//Passing Range to display class~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		bool ok=true;
-		QString str_value = convertToUnits(pResistanceValue);
-		QString str_range = ui->rangeLabel->text();
-		double dbl_value;int int_range;
+	bool ok=true;
+	QString str_value = convertToUnits(pResistanceValue);
+	QString str_range = ui->rangeLabel->text();
+	double dbl_value;int int_range;
 
-		if(ui->rangeLabel->text().endsWith("KE") || ui->rangeLabel->text().endsWith("ME")){
-			str_range.chop(2);
-			dbl_value=str_value.toDouble(&ok);
-			if(dbl_value>=0 && dbl_value<9.9)
-				int_range=9;
-			else if(dbl_value>=10 && dbl_value<99.9)
-				int_range=99;
-			else if(dbl_value>=100 && dbl_value<999.9)
-				int_range=999;
-		}
-		else if(ui->rangeLabel->text().endsWith("E")){
-			str_range.chop(1);
-			dbl_value=str_value.toDouble(&ok);
-			int_range=str_range.toInt(&ok,10);
-		}
+	if(ui->rangeLabel->text().endsWith("KE") || ui->rangeLabel->text().endsWith("ME")){
+		str_range.chop(2);
+		dbl_value=str_value.toDouble(&ok);
+		if(dbl_value>=0 && dbl_value<9.9)
+			int_range=9;
+		else if(dbl_value>=10 && dbl_value<99.9)
+			int_range=99;
+		else if(dbl_value>=100 && dbl_value<999.9)
+			int_range=999;
+	}
+	else if(ui->rangeLabel->text().endsWith("E")){
+		str_range.chop(1);
+		dbl_value=str_value.toDouble(&ok);
+		int_range=str_range.toInt(&ok,10);
+	}
 
-		dis->setRange(int_range);
-		dis->setValue(dbl_value);
+	dis->setRange(int_range);
+	dis->setValue(dbl_value);
 
-		qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
-		qDebug()<<"intRange:"<<int_range<<"dbl_value:"<<dbl_value;
+	qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
+	qDebug()<<"intRange:"<<int_range<<"dbl_value:"<<dbl_value;
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 
@@ -2193,7 +2290,7 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
 
 		l_sDisplayData = QString::number((p_nData), 'f', 2);// + picoFarad;
 		ui->Unit->setText(picoFarad);
-//		dis->setValue(l_sDisplayData);
+		//		dis->setValue(l_sDisplayData);
 
 
 	} else if (p_nRange == 1) {
@@ -2206,7 +2303,7 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
 			p_nData = p_nData * 1000000000000.0;
 			l_sDisplayData = QString::number((p_nData), 'f', 2);// + picoFarad;
 			ui->Unit->setText(picoFarad);
-//			dis->setValue(l_sDisplayData);
+			//			dis->setValue(l_sDisplayData);
 
 		}
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2231,7 +2328,7 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		l_sDisplayData = QString::number((p_nData), 'f', 2);// + nanoFarad;
 		ui->Unit->setText(nanoFarad);
-//		dis->setValue(l_sDisplayData);
+		//		dis->setValue(l_sDisplayData);
 
 	}/*
 	 else if (p_nRange == 3)
@@ -2315,23 +2412,23 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
 	else {
 		l_sDisplayData = convertToUnits(p_nData);// + "F";
 		//		ui->Unit->setText("F");
-//		dis->setValue(l_sDisplayData);
+		//		dis->setValue(l_sDisplayData);
 
 	}
 	//Passing Range to display class~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		bool ok=true;
-		QString str_value = convertToUnits(p_nData);
-		QString str_range = ui->rangeLabel->text();
-		if(ui->rangeLabel->text().endsWith("pF")||ui->rangeLabel->text().endsWith("nF")||ui->rangeLabel->text().endsWith("uF")||ui->rangeLabel->text().endsWith("uH")||ui->rangeLabel->text().endsWith("mF") || ui->rangeLabel->text().endsWith("mH")||ui->rangeLabel->text().endsWith("KE")||ui->rangeLabel->text().endsWith("ME"))
-			str_range.chop(2);
-		else if(ui->rangeLabel->text().endsWith("E")||ui->rangeLabel->text().endsWith("H"))
-			str_range.chop(1);
-		int int_range=str_range.toInt(&ok,10);
-		dis->setRange(int_range);
-		double dbl_value=str_value.toDouble(&ok);
-		dis->setValue(dbl_value);
-		qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
-		qDebug()<<"dblValue:"<<int_range<<"dbl_value:"<<dbl_value;
+	bool ok=true;
+	QString str_value = convertToUnits(p_nData);
+	QString str_range = ui->rangeLabel->text();
+	if(ui->rangeLabel->text().endsWith("pF")||ui->rangeLabel->text().endsWith("nF")||ui->rangeLabel->text().endsWith("uF")||ui->rangeLabel->text().endsWith("uH")||ui->rangeLabel->text().endsWith("mF") || ui->rangeLabel->text().endsWith("mH")||ui->rangeLabel->text().endsWith("KE")||ui->rangeLabel->text().endsWith("ME"))
+		str_range.chop(2);
+	else if(ui->rangeLabel->text().endsWith("E")||ui->rangeLabel->text().endsWith("H"))
+		str_range.chop(1);
+	int int_range=str_range.toInt(&ok,10);
+	dis->setRange(int_range);
+	double dbl_value=str_value.toDouble(&ok);
+	dis->setValue(dbl_value);
+	qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
+	qDebug()<<"dblValue:"<<int_range<<"dbl_value:"<<dbl_value;
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 void ICM::GetDisplayInductance(double p_nData, short int p_nRange) {
@@ -2380,13 +2477,13 @@ void ICM::GetDisplayInductance(double p_nData, short int p_nRange) {
 		p_nData = p_nData * 1000000;
 		l_sDisplayData = QString::number((p_nData), 'f', 2) ;//+ microHenry;//"n"+Henry;			//?
 		ui->Unit->setText(microHenry);
-//		dis->setValue(l_sDisplayData);
+		//		dis->setValue(l_sDisplayData);
 	} else if (p_nRange == 1) // 3uH - 30uH
 	{
 		p_nData = p_nData * 1000000;
 		l_sDisplayData = QString::number((p_nData), 'f', 2);// + microHenry;
 		ui->Unit->setText(microHenry);
-//		dis->setValue(l_sDisplayData);
+		//		dis->setValue(l_sDisplayData);
 	}
 	/*
 	 else if(p_nRange == 2) // 30uH - 300 uH
@@ -2421,56 +2518,56 @@ void ICM::GetDisplayInductance(double p_nData, short int p_nRange) {
 	else {
 		l_sDisplayData = convertToUnits(p_nData);// + "H";
 		//		ui->Unit->setText("H");
-//		dis->setValue(l_sDisplayData);
+		//		dis->setValue(l_sDisplayData);
 	}
 	//Passing Range to display class~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		bool ok=true;
-		QString str_value = convertToUnits(p_nData);
-		QString str_range = ui->rangeLabel->text();
-		if(ui->rangeLabel->text().endsWith("pF")||ui->rangeLabel->text().endsWith("nF")||ui->rangeLabel->text().endsWith("uF")||ui->rangeLabel->text().endsWith("uH")||ui->rangeLabel->text().endsWith("mF") || ui->rangeLabel->text().endsWith("mH")||ui->rangeLabel->text().endsWith("KE")||ui->rangeLabel->text().endsWith("ME"))
-			str_range.chop(2);
-		else if(ui->rangeLabel->text().endsWith("E")||ui->rangeLabel->text().endsWith("H"))
-			str_range.chop(1);
-		int int_range=str_range.toInt(&ok,10);
-		dis->setRange(int_range);
-		double dbl_value=str_value.toDouble(&ok);
-		dis->setValue(dbl_value);
-		qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
-		qDebug()<<"dblValue:"<<int_range<<"dbl_value:"<<dbl_value;
+	bool ok=true;
+	QString str_value = convertToUnits(p_nData);
+	QString str_range = ui->rangeLabel->text();
+	if(ui->rangeLabel->text().endsWith("pF")||ui->rangeLabel->text().endsWith("nF")||ui->rangeLabel->text().endsWith("uF")||ui->rangeLabel->text().endsWith("uH")||ui->rangeLabel->text().endsWith("mF") || ui->rangeLabel->text().endsWith("mH")||ui->rangeLabel->text().endsWith("KE")||ui->rangeLabel->text().endsWith("ME"))
+		str_range.chop(2);
+	else if(ui->rangeLabel->text().endsWith("E")||ui->rangeLabel->text().endsWith("H"))
+		str_range.chop(1);
+	int int_range=str_range.toInt(&ok,10);
+	dis->setRange(int_range);
+	double dbl_value=str_value.toDouble(&ok);
+	dis->setValue(dbl_value);
+	qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
+	qDebug()<<"dblValue:"<<int_range<<"dbl_value:"<<dbl_value;
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 double ICM::convertToValues(QString input) {
 
-    QString unit, value;
-    double inValue;
-    bool ok = true;
+	QString unit, value;
+	double inValue;
+	bool ok = true;
 
-    int j = 0;
+	int j = 0;
 
-    for (int i = 0; i <= input.count(); i++) {
-        if ((input[i] >= 'A' && input[i] <= 'Z') || (input[i] >= 'a' && input[i] <= 'z') || (input[i] == QChar(0x2126)) || (input[i]== QChar(0x00B5))) {
-            unit[j] = input[i];
-            j++;
-        }
-    }
-    for (int k = 0; k < (input.count() - unit.count()); k++)
-        value[k] = input[k];
+	for (int i = 0; i <= input.count(); i++) {
+		if ((input[i] >= 'A' && input[i] <= 'Z') || (input[i] >= 'a' && input[i] <= 'z') || (input[i] == QChar(0x2126)) || (input[i]== QChar(0x00B5))) {
+			unit[j] = input[i];
+			j++;
+		}
+	}
+	for (int k = 0; k < (input.count() - unit.count()); k++)
+		value[k] = input[k];
 
-    inValue = value.toDouble(&ok);
+	inValue = value.toDouble(&ok);
 
-    if (unit[0] == 'n') {
-        return (inValue / 1000000000);
-    } else if ((unit[0] == QChar(0x00B5)) || (unit[0] == 'u')) {
-        return (inValue / 1000000);
-    } else if (unit[0] == 'm') {
-        return (inValue / 1000);
-    } else if (unit[0] == 'K') {
-        return (inValue * 1000);
-    } else if (unit[0] == 'M') {
-        return (inValue * 1000000);
-    } else {
-        return (inValue * 1);
-    }
+	if (unit[0] == 'n') {
+		return (inValue / 1000000000);
+	} else if ((unit[0] == QChar(0x00B5)) || (unit[0] == 'u')) {
+		return (inValue / 1000000);
+	} else if (unit[0] == 'm') {
+		return (inValue / 1000);
+	} else if (unit[0] == 'K') {
+		return (inValue * 1000);
+	} else if (unit[0] == 'M') {
+		return (inValue * 1000000);
+	} else {
+		return (inValue * 1);
+	}
 }
 QString ICM::convertToUnits(double l_nvalue) {
 	QString unit;
@@ -2566,7 +2663,7 @@ void ICM::on_calibrate_clicked() {
 }
 
 void ICM::on_pushButton_clicked() {
-/*	    QWidget *newWidget=test->getPTAppBckPsoc();
+	/*	    QWidget *newWidget=test->getPTAppBckPsoc();
 	                    newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
 	                    newWidget->show();*/
 
@@ -2817,7 +2914,7 @@ void ICM::on_hideSettings_clicked() {
 }
 
 void ICM::on_pushButton_3_clicked() {
-		QWidget *newWidget = test->getPTAppBckPsoc();
+	QWidget *newWidget = test->getPTAppBckPsoc();
 	newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
 	newWidget->show();
 }
@@ -2972,23 +3069,23 @@ void ICM::on_graphBut_clicked()
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	if (ui->plottingWindow->isVisible()){
-        ui->plottingWindow->setVisible(false);
+		ui->plottingWindow->setVisible(false);
 		if(debugPanel.value(0)=="1")
 			ui->debugPanel->setVisible(true);
 		else
 			ui->frontPanel_ICM->setVisible(true);
-    }
-    else{
-        ui->plottingWindow->setVisible(true);
+	}
+	else{
+		ui->plottingWindow->setVisible(true);
 		if(debugPanel.value(0)=="1")
 			ui->debugPanel->setVisible(false);
 		else
 			ui->frontPanel_ICM->setVisible(false);
-		}
+	}
 
 	if(autoFlag==true)
 		ui->AutoManual->animateClick(1);
-    ui->ONOFF->animateClick(1);
+	ui->ONOFF->animateClick(1);
 
 }
 
@@ -2997,16 +3094,16 @@ void ICM::on_sweep_capture_clicked()
 
 
 	x.clear();y.clear();
-    QFile outFile("ICMGraph.log");
-//    if (outFile.size() > 1298368)
-        outFile.open(QIODevice::WriteOnly | QIODevice::Text);
-//    else
-//        outFile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append);
-    QTextStream ts(&outFile);
+	QFile outFile("ICMGraph.log");
+	//    if (outFile.size() > 1298368)
+	outFile.open(QIODevice::WriteOnly | QIODevice::Text);
+	//    else
+	//        outFile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append);
+	QTextStream ts(&outFile);
 	int loop=0;
 	xSize = ySize = m_nSweepEndFrequency;
 
-/*	if(ui->rangeLabel->text().endsWith("pF")){
+	/*if(ui->rangeLabel->text().endsWith("pF")){
 		ySize = convertToValues(ui->rangeLabel->text())*10e12;
 	}else if(ui->rangeLabel->text().endsWith("nF")){
 		ySize = convertToValues(ui->rangeLabel->text())*10e9;
@@ -3021,7 +3118,7 @@ void ICM::on_sweep_capture_clicked()
 	}*/
 
 	setupSimpleDemo(ui->customPlot);
-    qDebug()<<"xSize"<<xSize<<"ySize"<<ySize;
+	qDebug()<<"xSize"<<xSize<<"ySize"<<ySize;
 	x.resize(xSize);
 	y.resize(ySize);
 
@@ -3038,23 +3135,23 @@ void ICM::on_sweep_capture_clicked()
 		if (ui->ResistanceRanges->isVisible()) {
 			y[loop]=(m_nResistance);
 			qDebug()<<"Frequency:"<<i<<"Resistance:"<<(m_nResistance);
-            ts << QString("Frequency:") << "\t" << m_nFrequency<< "\t"<<QString("Resistance:") << "\t" << m_nResistance<<"\n";
+			ts << QString("Frequency:") << "\t" << m_nFrequency<< "\t"<<QString("Resistance:") << "\t" << m_nResistance<<"\n";
 		}else if(ui->CapacitanceRanges->isVisible()){
 			y[loop]=(m_nCapacitance);
-//			y[loop]=m_nResistance;
+			//			y[loop]=m_nResistance;
 			qDebug()<<"Frequency:"<<i<<"Capacitance:"<<m_nResistance;//(m_nCapacitance);
 			ts << QString("Frequency:") << "\t" << m_nFrequency<< "\t"<<QString("Capacitance:") << "\t" << m_nCapacitance<<"\n";
 		}else if(ui->Inductorranges->isVisible()){
 			y[loop]=(m_nInductance);
-//			y[loop]=m_nResistance;
+			//			y[loop]=m_nResistance;
 			qDebug()<<"Frequency:"<<i<<"Indcuctance:"<<m_nResistance;//(m_nInductance);
 			ts << QString("Frequency:") << "\t" << m_nFrequency<< "\t"<<QString("Inductance:") << "\t" << m_nInductance<<"\n";
 		}
 		loop++;
 		QApplication::processEvents();
 	}
-    plotSimpleDemo(ui->customPlot);
-    ui->customPlot->replot();
+	plotSimpleDemo(ui->customPlot);
+	ui->customPlot->replot();
 }
 
 void ICM::on_sweep_startfreq_valueChanged(int value )

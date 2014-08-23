@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'icm.h'
 **
-** Created: Fri Aug 22 19:54:25 2014
+** Created: Sat Aug 23 18:27:57 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_ICM[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      67,   14, // methods
+      68,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -74,32 +74,33 @@ static const uint qt_meta_data_ICM[] = {
      983,    4,    4,    4, 0x08,
     1002,    4,    4,    4, 0x08,
     1012,    4,    4,    4, 0x08,
-    1034,    4,    4,    4, 0x08,
-    1052,    4,    4,    4, 0x08,
-    1069,    4,    4,    4, 0x08,
-    1088,    4,    4,    4, 0x08,
-    1106,    4,    4,    4, 0x08,
-    1126,    4,    4,    4, 0x08,
-    1146,    4,    4,    4, 0x08,
-    1164,    4,    4,    4, 0x08,
-    1182,    4,    4,    4, 0x08,
-    1201,    4,    4,    4, 0x08,
-    1219,    4,    4,    4, 0x08,
-    1238,    4,    4,    4, 0x08,
-    1256,    4,    4,    4, 0x08,
-    1275,    4,    4,    4, 0x08,
-    1293,    4,    4,    4, 0x08,
-    1313,    4,    4,    4, 0x08,
-    1332,    4,    4,    4, 0x08,
-    1352,    4,    4,    4, 0x08,
-    1371,    4,    4,    4, 0x08,
-    1389,    4,    4,    4, 0x08,
-    1409,    4,    4,    4, 0x08,
-    1433, 1427,    4,    4, 0x08,
-    1471, 1427,    4,    4, 0x08,
-    1504,    4,    4,    4, 0x08,
-    1519,    4,    4,    4, 0x08,
-    1534,    4,    4,    4, 0x08,
+    1023,    4,    4,    4, 0x08,
+    1045,    4,    4,    4, 0x08,
+    1063,    4,    4,    4, 0x08,
+    1080,    4,    4,    4, 0x08,
+    1099,    4,    4,    4, 0x08,
+    1117,    4,    4,    4, 0x08,
+    1137,    4,    4,    4, 0x08,
+    1157,    4,    4,    4, 0x08,
+    1175,    4,    4,    4, 0x08,
+    1193,    4,    4,    4, 0x08,
+    1212,    4,    4,    4, 0x08,
+    1230,    4,    4,    4, 0x08,
+    1249,    4,    4,    4, 0x08,
+    1267,    4,    4,    4, 0x08,
+    1286,    4,    4,    4, 0x08,
+    1304,    4,    4,    4, 0x08,
+    1324,    4,    4,    4, 0x08,
+    1343,    4,    4,    4, 0x08,
+    1363,    4,    4,    4, 0x08,
+    1382,    4,    4,    4, 0x08,
+    1400,    4,    4,    4, 0x08,
+    1420,    4,    4,    4, 0x08,
+    1444, 1438,    4,    4, 0x08,
+    1482, 1438,    4,    4, 0x08,
+    1515,    4,    4,    4, 0x08,
+    1530,    4,    4,    4, 0x08,
+    1545,    4,    4,    4, 0x08,
 
        0        // eod
 };
@@ -131,7 +132,7 @@ static const char qt_meta_stringdata_ICM[] = {
     "on_calibrate_clicked()\0on_ExitBut_clicked()\0"
     "on_AutoManual_clicked()\0on_L30mH_clicked()\0"
     "on_R100KE_clicked()\0on_ONOFF_clicked()\0"
-    "readADC()\0on_settings_clicked()\0"
+    "readADC()\0readADC2()\0on_settings_clicked()\0"
     "on_L3mH_clicked()\0on_L3H_clicked()\0"
     "on_L30uH_clicked()\0on_L30H_clicked()\0"
     "on_L300uH_clicked()\0on_L300mH_clicked()\0"
@@ -218,36 +219,37 @@ int ICM::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 37: on_R100KE_clicked(); break;
         case 38: on_ONOFF_clicked(); break;
         case 39: readADC(); break;
-        case 40: on_settings_clicked(); break;
-        case 41: on_L3mH_clicked(); break;
-        case 42: on_L3H_clicked(); break;
-        case 43: on_L30uH_clicked(); break;
-        case 44: on_L30H_clicked(); break;
-        case 45: on_L300uH_clicked(); break;
-        case 46: on_L300mH_clicked(); break;
-        case 47: on_R1ME_clicked(); break;
-        case 48: on_R1KE_clicked(); break;
-        case 49: on_R10KE_clicked(); break;
-        case 50: on_R10E_clicked(); break;
-        case 51: on_R100E_clicked(); break;
-        case 52: on_C1uF_clicked(); break;
-        case 53: on_C10mF_clicked(); break;
-        case 54: on_C1mF_clicked(); break;
-        case 55: on_C100uF_clicked(); break;
-        case 56: on_C10uF_clicked(); break;
-        case 57: on_C100nF_clicked(); break;
-        case 58: on_C10nF_clicked(); break;
-        case 59: on_C1nF_clicked(); break;
-        case 60: on_C100pF_clicked(); break;
-        case 61: on_Exit_clicked(); break;
-        case 62: on_AutoManualSlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 63: on_OnOffSlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 64: on_C_clicked(); break;
-        case 65: on_L_clicked(); break;
-        case 66: on_R_clicked(); break;
+        case 40: readADC2(); break;
+        case 41: on_settings_clicked(); break;
+        case 42: on_L3mH_clicked(); break;
+        case 43: on_L3H_clicked(); break;
+        case 44: on_L30uH_clicked(); break;
+        case 45: on_L30H_clicked(); break;
+        case 46: on_L300uH_clicked(); break;
+        case 47: on_L300mH_clicked(); break;
+        case 48: on_R1ME_clicked(); break;
+        case 49: on_R1KE_clicked(); break;
+        case 50: on_R10KE_clicked(); break;
+        case 51: on_R10E_clicked(); break;
+        case 52: on_R100E_clicked(); break;
+        case 53: on_C1uF_clicked(); break;
+        case 54: on_C10mF_clicked(); break;
+        case 55: on_C1mF_clicked(); break;
+        case 56: on_C100uF_clicked(); break;
+        case 57: on_C10uF_clicked(); break;
+        case 58: on_C100nF_clicked(); break;
+        case 59: on_C10nF_clicked(); break;
+        case 60: on_C1nF_clicked(); break;
+        case 61: on_C100pF_clicked(); break;
+        case 62: on_Exit_clicked(); break;
+        case 63: on_AutoManualSlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 64: on_OnOffSlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 65: on_C_clicked(); break;
+        case 66: on_L_clicked(); break;
+        case 67: on_R_clicked(); break;
         default: ;
         }
-        _id -= 67;
+        _id -= 68;
     }
     return _id;
 }
