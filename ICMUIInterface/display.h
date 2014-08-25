@@ -108,7 +108,7 @@ public:
 					l_nDecimelValue = l_nValue - (double)l_intValue;
 					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
 
-					qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
+                                        //qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[2]->setText(l_strDecimelValue.at(2));
@@ -149,7 +149,7 @@ public:
 
 					l_nDecimelValue = l_nValue - (double)l_intValue;
 					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
-					qDebug() << "2-l_strDecimelValue->" << l_strDecimelValue;
+                                        //qDebug() << "2-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[3]->setText(l_strDecimelValue.at(2));
@@ -190,7 +190,7 @@ public:
 
 					l_nDecimelValue = l_nValue - (double)l_intValue;
 					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
-					qDebug() << "3-l_strDecimelValue->" << l_strDecimelValue;
+                                        //qDebug() << "3-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[4]->setText(l_strDecimelValue.at(2));
@@ -207,7 +207,7 @@ public:
 		}
     }
     void setValue(QString strValue){
-    qDebug() << "display.h(str)-Data:" << strValue;
+    //qDebug() << "display.h(str)-Data:" << strValue;
 		int signIndex = strValue.indexOf("-");
 		if (signIndex != -1) {
 			strValue = strValue.remove("-");

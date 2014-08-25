@@ -178,8 +178,8 @@ protected:
     bool m_bNull,m_bExternal;
 
 
-	int avg,noOFsamples;
-	double avgRetval[100];
+        int avg,noOFsamples;
+        double avgRetval[100];
 
         bool m_bToolboxFlag;
         bool m_bRacRdc;
@@ -190,7 +190,7 @@ private:
     Ui::ICM *ui;
 
 signals:
-	void ICM2GCalib(double,QString);
+        void ICM2GCalib(double,QString);
 
 private  slots:
 
