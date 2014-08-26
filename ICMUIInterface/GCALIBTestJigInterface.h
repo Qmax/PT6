@@ -1,3 +1,6 @@
+/*
+ *      Author: Ravivarman.R,Qmax
+ */
 #ifndef GCALIBINTERFACE_H
 #define GCALIBINTERFACE_H
 #include <QObject>

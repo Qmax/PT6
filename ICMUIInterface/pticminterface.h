@@ -1,3 +1,6 @@
+/*
+ *      Author: Ravivarman.R,Qmax
+ */
 #ifndef PTICMINTERFACE_H
 #define PTICMINTERFACE_H
 

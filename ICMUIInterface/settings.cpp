@@ -1,3 +1,6 @@
+/*
+ *      Author: Ravivarman.R,Qmax
+ */
 #include "settings.h"
 #include "ui_settings.h"
 

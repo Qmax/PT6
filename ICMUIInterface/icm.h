@@ -118,7 +118,7 @@ protected:
     double m_nResistance,m_nCapacitance,m_nInductance;
     double m_nImpedanceValue;
     double m_nFrequency;
-
+    int m_nRange;bool loop;
     double cbdR,cbdL,cbdC;
 
     unsigned short m_nICMMGR;

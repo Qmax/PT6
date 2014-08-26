@@ -1,3 +1,6 @@
+/*
+ *      Author: Ravivarman.R,Qmax
+ */
 #include "pticminterface.h"
 
 PTICMInterface::PTICMInterface(QObject *parent) : QObject(parent)

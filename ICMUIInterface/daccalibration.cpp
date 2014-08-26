@@ -1,3 +1,6 @@
+/*
+ *      Author: Ravivarman.R,Qmax
+ */
 #include "daccalibration.h"
 
 DACCalibration::DACCalibration(QWidget *parent)

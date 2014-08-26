@@ -1,3 +1,6 @@
+/*
+ *      Author: Ravivarman.R,Qmax
+ */
 #ifndef SETTINGS_H
 #define SETTINGS_H
 

@@ -1,3 +1,6 @@
+/*
+ *      Author: Ravivarman.R,Qmax
+ */
 #ifndef DISPLAY_H
 #define DISPLAY_H
 

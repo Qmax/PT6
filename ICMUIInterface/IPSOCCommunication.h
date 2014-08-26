@@ -1,3 +1,6 @@
+/*
+ *      Author: Ravivarman.R,Qmax
+ */
 #ifndef IPSOCCOMMUNICATION_H
 #define IPSOCCOMMUNICATION_H
 #include <QByteArray>
