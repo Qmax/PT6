@@ -93,16 +93,17 @@ public:
 			for (int i = 0; i < 6; i++) {
 				digits[i]->setText("0");
 			}
-			l_intValue = qRound(l_nValue);
+			l_intValue = int(l_nValue);
+			qDebug()<<"After Rounding:"<<l_intValue;
 //_________________________________________________________________________________________
 			if (m_intRange == 1 || m_intRange == 3 ||m_intRange == 5 || m_intRange == 9) {
-				if (m_intRange==1 &&l_intValue > 1)
+				if (m_intRange==1 &&l_nValue > 1)
 					setValue("OL");
-				else if (m_intRange==3 &&l_intValue > 3)
+				else if (m_intRange==3 &&l_nValue > 3)
 					setValue("OL");
-				else if (m_intRange==5 &&l_intValue > 5)
+				else if (m_intRange==5 &&l_nValue > 5)
 					setValue("OL");
-				else if (m_intRange==9 &&l_intValue > 9)
+				else if (m_intRange==9 &&l_nValue > 9)
 					setValue("OL");
 				else {
 					digits[0]->setText(QString::number(l_intValue, 10));
@@ -111,7 +112,7 @@ public:
 					l_nDecimelValue = l_nValue - (double)l_intValue;
 					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
 
-                                        //qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
+//					qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[2]->setText(l_strDecimelValue.at(2));
@@ -137,11 +138,11 @@ public:
 			}
 //_________________________________________________________________________________________
 			else if (m_intRange == 10 || m_intRange == 30 || m_intRange == 99) {
-				if (m_intRange==10 && l_intValue >10)
+				if (m_intRange==10 && l_nValue >10)
 					setValue("OL");
-				else if (m_intRange==30 && l_intValue >30)
+				else if (m_intRange==30 && l_nValue >30)
 					setValue("OL");
-				else if (m_intRange==99 && l_intValue >99)
+				else if (m_intRange==99 && l_nValue >99)
 					setValue("OL");
 				else {
 					Q = l_intValue / 10;
@@ -173,11 +174,11 @@ public:
 			}
 //_________________________________________________________________________________________
 			else if (m_intRange == 100 ||m_intRange == 300||m_intRange == 999) {
-				if (m_intRange == 100 && l_intValue >100)
+				if (m_intRange == 100 && l_nValue >100)
 					setValue("OL");
-				else if (m_intRange == 300 && l_intValue >300)
+				else if (m_intRange == 300 && l_nValue >300)
 					setValue("OL");
-				else if (m_intRange == 999 && l_intValue >999)
+				else if (m_intRange == 999 && l_nValue >999)
 					setValue("OL");
 				else {
 					Q = l_intValue / 100;

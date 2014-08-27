@@ -10,6 +10,7 @@
 #include <QGraphicsView>
 #include <QTimer>
 #include <qsettings.h>
+#include "PTAppBckPsocInterface.h"
 
 namespace Ui {
     class ADHighAccuracy;
@@ -24,6 +25,7 @@ public:
     void loadSPIBIT();
 
 protected:
+    IPTAppBckPsocInterface *test;
     IApplicationCardInterface *IAppCard;
     AD7190Component *m_objAD7190;
     void changeEvent(QEvent *e);
@@ -63,6 +65,7 @@ private slots:
 
 
 private slots:
+    void on_settings_clicked();
     void on_comboBox_currentIndexChanged(int index);
     void on_doubleSpinBox_6_valueChanged(double );
     void on_spnFSBits_3_valueChanged(int );

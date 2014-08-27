@@ -10,8 +10,8 @@ ADHighAccuracy::ADHighAccuracy(QWidget *parent) :
     InitialiseRegisterMap();
     InitialiseHWLibraries();
     enableRichGUI();
-    if(QFile(m_strADCSettingsFile).exists())
-    	loadSettings();
+//    if(QFile(m_strADCSettingsFile).exists())
+//    	loadSettings();
     mTimer = new QTimer(this);
     connect(mTimer, SIGNAL(timeout()), this, SLOT(checkADC()));
 }
@@ -49,19 +49,21 @@ void ADHighAccuracy::enableRichGUI(){
 	ui->groupBox_67->setParent(m_objWidget);
 //	ui->groupBox_68->setParent(m_objWidget);
 	ui->GPCon->setParent(m_objWidget);
+        ui->settings->setParent(m_objWidget);
 
 	ui->groupBox->setGeometry(585,288,197,99);
 	ui->groupBox_2->setGeometry(663,459,118,63);
 	ui->groupBox_3->setGeometry(340,390,440,60);
 	ui->groupBox_57->setGeometry(10,0,321,281);
 	ui->groupBox_62->setGeometry(10,280,321,161);
-	ui->groupBox_63->setGeometry(10,440,301,81);
+        ui->groupBox_63->setGeometry(10,440,230,81);
 	ui->groupBox_64->setGeometry(340,0,231,201);
 	ui->groupBox_65->setGeometry(340,200,231,80);
 	ui->groupBox_66->setGeometry(340,280,241,91);
 	ui->groupBox_67->setGeometry(580,0,201,281);
 //	ui->groupBox_68->setGeometry(320,450,341,71);
 	ui->GPCon->setGeometry(320,450,341,71);
+        ui->settings->setGeometry(240,450,70,70);
 }
 void ADHighAccuracy::changeEvent(QEvent *e)
 {
@@ -86,6 +88,8 @@ void ADHighAccuracy::InitialiseHWLibraries()
     qDebug()<<"Code ID:"<<hex<<IAppCard->readAppCardCodeId();
     m_objAD7190 = new AD7190Component(IAppCard);
 
+    QPluginLoader testing("libAppBckPsoc.so", this);
+    test = qobject_cast<IPTAppBckPsocInterface*> (testing.instance());
 }
 
 void ADHighAccuracy::loadSPIBIT()
@@ -811,4 +815,11 @@ void ADHighAccuracy::on_comboBox_currentIndexChanged(int index)
 	m_nGPConRegister=48+index;
 	qDebug()<<"GPCON:"<<hex<<m_nGPConRegister<<"(hex)"<<bin<<m_nGPConRegister<<"(bin)";
 	ui->GPCONHexLabel->setText(QString::number(m_nGPConRegister,16)+("<sub>HEX</sub>"));
+}
+
+void ADHighAccuracy::on_settings_clicked()
+{
+    QWidget *newWidget = test->getPTAppBckPsoc();
+    newWidget->setWindowTitle("AppCard BackPanel PSoC Panel");
+    newWidget->show();
 }

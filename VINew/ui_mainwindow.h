@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Fri Aug 22 17:50:25 2014
+** Created: Wed Aug 27 18:06:10 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -192,6 +192,7 @@ public:
     QLabel *fp_REF_label;
     QLabel *fp_GND_label;
     QFrame *fp_GND;
+    QPushButton *butZoom;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -2744,6 +2745,98 @@ public:
 "}"));
         fp_GND->setFrameShape(QFrame::StyledPanel);
         fp_GND->setFrameShadow(QFrame::Raised);
+        butZoom = new QPushButton(centralWidget);
+        butZoom->setObjectName(QString::fromUtf8("butZoom"));
+        butZoom->setGeometry(QRect(17, 40, 324, 272));
+        QPalette palette21;
+        palette21.setBrush(QPalette::Active, QPalette::WindowText, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::Button, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::Midlight, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::Dark, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::Mid, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::Text, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::BrightText, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::ButtonText, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::Base, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::Window, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::Shadow, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::Highlight, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::HighlightedText, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::Link, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::LinkVisited, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::AlternateBase, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::NoRole, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::ToolTipBase, brush2);
+        palette21.setBrush(QPalette::Active, QPalette::ToolTipText, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::WindowText, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::Button, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::Midlight, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::Dark, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::Mid, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::Text, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::BrightText, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::ButtonText, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::Base, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::Window, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::Shadow, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::Highlight, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::HighlightedText, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::Link, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::LinkVisited, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::NoRole, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush2);
+        palette21.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::WindowText, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::Button, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::Midlight, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::Dark, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::Mid, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::Text, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::BrightText, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::ButtonText, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::Base, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::Window, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::Shadow, brush2);
+        QBrush brush47(QColor(212, 212, 212, 255));
+        brush47.setStyle(Qt::SolidPattern);
+        palette21.setBrush(QPalette::Disabled, QPalette::Highlight, brush47);
+        palette21.setBrush(QPalette::Disabled, QPalette::HighlightedText, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::Link, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::LinkVisited, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::NoRole, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush2);
+        palette21.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush2);
+        butZoom->setPalette(palette21);
+        butZoom->setFocusPolicy(Qt::NoFocus);
+        butZoom->setStyleSheet(QString::fromUtf8(" QPushButton {\n"
+"background-color: rgb(0, 0, 0,0);\n"
+"border:2px solid white:\n"
+"color: rgba(0, 0, 0, 0);\n"
+" }\n"
+"\n"
+" QPushButton:pressed {\n"
+"background-color: rgb(0, 0, 0,0);\n"
+"border:2px solid white:\n"
+"color: rgba(0, 0, 0, 0);\n"
+" }\n"
+"\n"
+" QPushButton:flat {\n"
+"background-color: rgb(0, 0, 0,0);\n"
+"border:2px solid white:\n"
+"color: rgba(0, 0, 0, 0); }\n"
+"\n"
+" QPushButton:default {\n"
+"background-color: rgb(0, 0, 0,0);\n"
+"border:2px solid white:\n"
+"color: rgba(0, 0, 0, 0); }"));
+        butZoom->setAutoDefault(true);
+        butZoom->setDefault(true);
+        butZoom->setFlat(true);
         MainWindow->setCentralWidget(centralWidget);
         PCBox->raise();
         grpInteractive->raise();
@@ -2755,6 +2848,7 @@ public:
         deleteBox->raise();
         ExitBox->raise();
         selectFrame->raise();
+        butZoom->raise();
 
         retranslateUi(MainWindow);
 
@@ -2946,6 +3040,7 @@ public:
         fp_mA_label->setText(QApplication::translate("MainWindow", "mA", 0, QApplication::UnicodeUTF8));
         fp_REF_label->setText(QApplication::translate("MainWindow", "REF", 0, QApplication::UnicodeUTF8));
         fp_GND_label->setText(QApplication::translate("MainWindow", "GND", 0, QApplication::UnicodeUTF8));
+        butZoom->setText(QString());
     } // retranslateUi
 
 };

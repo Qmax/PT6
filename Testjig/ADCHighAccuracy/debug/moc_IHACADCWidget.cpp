@@ -1,15 +1,15 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'pticminterface.h'
+** Meta object code from reading C++ file 'IHACADCWidget.h'
 **
-** Created: Wed Aug 27 15:51:47 2014
+** Created: Wed Aug 27 11:00:44 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../pticminterface.h"
+#include "../IHACADCWidget.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'pticminterface.h' doesn't include <QObject>."
+#error "The header file 'IHACADCWidget.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
 #error "This file was generated using the moc from 4.7.1. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -17,7 +17,7 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_PTICMInterface[] = {
+static const uint qt_meta_data_IHACADCWidget[] = {
 
  // content:
        5,       // revision
@@ -33,37 +33,37 @@ static const uint qt_meta_data_PTICMInterface[] = {
        0        // eod
 };
 
-static const char qt_meta_stringdata_PTICMInterface[] = {
-    "PTICMInterface\0"
+static const char qt_meta_stringdata_IHACADCWidget[] = {
+    "IHACADCWidget\0"
 };
 
-const QMetaObject PTICMInterface::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_PTICMInterface,
-      qt_meta_data_PTICMInterface, 0 }
+const QMetaObject IHACADCWidget::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_IHACADCWidget,
+      qt_meta_data_IHACADCWidget, 0 }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &PTICMInterface::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &IHACADCWidget::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *PTICMInterface::metaObject() const
+const QMetaObject *IHACADCWidget::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *PTICMInterface::qt_metacast(const char *_clname)
+void *IHACADCWidget::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_PTICMInterface))
-        return static_cast<void*>(const_cast< PTICMInterface*>(this));
-    if (!strcmp(_clname, "IPTICMInterface"))
-        return static_cast< IPTICMInterface*>(const_cast< PTICMInterface*>(this));
-    if (!strcmp(_clname, "pt.ICMInterfaces/1.0.0.1"))
-        return static_cast< IPTICMInterface*>(const_cast< PTICMInterface*>(this));
+    if (!strcmp(_clname, qt_meta_stringdata_IHACADCWidget))
+        return static_cast<void*>(const_cast< IHACADCWidget*>(this));
+    if (!strcmp(_clname, "IHACADCTestJigInterface"))
+        return static_cast< IHACADCTestJigInterface*>(const_cast< IHACADCWidget*>(this));
+    if (!strcmp(_clname, "pt.HACADCTestJigInterface/1.0.0.1"))
+        return static_cast< IHACADCTestJigInterface*>(const_cast< IHACADCWidget*>(this));
     return QObject::qt_metacast(_clname);
 }
 
-int PTICMInterface::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int IHACADCWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)

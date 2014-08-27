@@ -174,6 +174,7 @@ private:
     Ui::MainWindow *ui;
 
 private slots:
+    void on_butZoom_clicked();
     void on_yAxisBox_valueChanged(double );
     void on_xAxisBox_valueChanged(double );
     void on_butExternal_2_clicked();

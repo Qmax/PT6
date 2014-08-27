@@ -11,7 +11,8 @@ SOURCES += ad5318components.cpp \
     main.cpp \
     adhighaccuracy.cpp \
     ad7190component.cpp
-HEADERS += AppdeviceRegisterDetails.h \
+HEADERS += PTAppBckPsocInterface.h \
+    AppdeviceRegisterDetails.h \
     AppdeviceRegisterDetails.h \
     InterfaceFunctionalComponents.h \
     ad5318components.h \

@@ -766,11 +766,18 @@ void ICM::readADC(){
 				}else if((m_nRange==1000000 && m_nResistance<200000)||(m_nRange==1000000 && m_nResistance>1100000)){
 					qDebug()<<"1ME Break";
 					break;
+				}else if(rFlag==false){
+					qDebug()<<"Not Resistance - Break";
+					break;
 				}
 			}while(1);
 		}
-
-
+	}
+	if(ui->Inductorranges->isVisible()){
+		readADC2();
+	}
+	if(ui->CapacitanceRanges->isVisible()){
+		readADC2();
 	}
 }
 void ICM::DisplayR(){
@@ -850,8 +857,8 @@ void ICM::readADC2() {
 		m_nImpedanceValue = m_lstRFCapcitance.value(C_Index);
 	if (ui->Inductorranges->isVisible())
 		m_nImpedanceValue = m_lstRFInductance.value(L_Index);
-	if (ui->ResistanceRanges->isVisible())
-		m_nImpedanceValue = m_lstRFResistance.value(R_Index);
+	/*if (ui->ResistanceRanges->isVisible())
+		m_nImpedanceValue = m_lstRFResistance.value(R_Index);*/
 
 	for (int i = 0; i < noOFsamples; i++) {
 		//if(i==0)
@@ -922,7 +929,7 @@ void ICM::readADC2() {
                         AutoRange();
         }*/
 
-	if (ui->ResistanceRanges->isVisible()) {
+/*	if (ui->ResistanceRanges->isVisible()) {
 		ui->label_X->setVisible(false);
 		ui->label_LC->setVisible(false);
 		ui->value_XLXC->setVisible(false);
@@ -931,7 +938,7 @@ void ICM::readADC2() {
 		emit ICM2GCalib(m_nResistance, "ICM-R");
 	}
 
-	else if (ui->CapacitanceRanges->isVisible()) {
+	else */if (ui->CapacitanceRanges->isVisible()) {
 		ui->label_X->setVisible(true);
 		ui->label_LC->setVisible(true);
 		ui->value_XLXC->setVisible(true);
@@ -1639,6 +1646,8 @@ void ICM::on_C100pF_clicked() {
 	ui->sweep_endfreq->setValue(8);
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
+
+	m_nRange = 0.0000000001;
 }
 void ICM::on_C1nF_clicked() {
 	_1nF++;
@@ -1658,6 +1667,8 @@ void ICM::on_C1nF_clicked() {
 	ui->sweep_endfreq->setValue(8);
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
+
+	m_nRange = 0.000000001;
 }
 void ICM::on_C10nF_clicked() {
 	_10nF++;
@@ -1677,6 +1688,8 @@ void ICM::on_C10nF_clicked() {
 	ui->sweep_endfreq->setValue(2);
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
+
+	m_nRange = 0.00000001;
 }
 void ICM::on_C100nF_clicked() {
 	_100nF++;
@@ -1697,6 +1710,7 @@ void ICM::on_C100nF_clicked() {
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
 
+	m_nRange = 0.0000001;
 }
 void ICM::on_C1uF_clicked() {
 	_1uF++;
@@ -1716,6 +1730,8 @@ void ICM::on_C1uF_clicked() {
 	ui->sweep_endfreq->setValue(m_nFrequency);
 	ui->sweep_startfreq_unit->setCurrentIndex(0);
 	ui->sweep_endfreq_unit->setCurrentIndex(0);
+
+	m_nRange = 0.000001;
 }
 void ICM::on_C10uF_clicked() {
 	_10uF++;
@@ -1735,6 +1751,8 @@ void ICM::on_C10uF_clicked() {
 	ui->sweep_endfreq->setValue(m_nFrequency);
 	ui->sweep_startfreq_unit->setCurrentIndex(0);
 	ui->sweep_endfreq_unit->setCurrentIndex(0);
+
+	m_nRange = 0.00001;
 }
 void ICM::on_C100uF_clicked() {
 	_100uF++;
@@ -1754,6 +1772,8 @@ void ICM::on_C100uF_clicked() {
 	ui->sweep_endfreq->setValue(2);
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
+
+	m_nRange = 0.0001;
 }
 void ICM::on_C1mF_clicked() {
 	_1mF++;
@@ -1773,6 +1793,8 @@ void ICM::on_C1mF_clicked() {
 	ui->sweep_endfreq->setValue(m_nFrequency);
 	ui->sweep_startfreq_unit->setCurrentIndex(0);
 	ui->sweep_endfreq_unit->setCurrentIndex(0);
+
+	m_nRange = 0.001;
 }
 void ICM::on_C10mF_clicked() {
 	_10mF++;
@@ -1792,6 +1814,8 @@ void ICM::on_C10mF_clicked() {
 	ui->sweep_endfreq->setValue(m_nFrequency);
 	ui->sweep_startfreq_unit->setCurrentIndex(0);
 	ui->sweep_endfreq_unit->setCurrentIndex(0);
+
+	m_nRange = 0.01;
 }
 
 void ICM::on_R10E_clicked() {
@@ -1962,6 +1986,8 @@ void ICM::on_L30uH_clicked() {
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
 
+	m_nRange = 0.00003;
+
 }
 void ICM::on_L300uH_clicked() {
 	/*	L_Index = 1;
@@ -1989,6 +2015,8 @@ void ICM::on_L300uH_clicked() {
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq->setValue(200);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
+
+	m_nRange = 0.0003;
 }
 void ICM::on_L3mH_clicked() {
 	L_Index = 2;
@@ -2008,7 +2036,7 @@ void ICM::on_L3mH_clicked() {
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
 
-
+	m_nRange = 	0.003;
 }
 void ICM::on_L30mH_clicked() {
 	L_Index = 3;
@@ -2027,6 +2055,8 @@ void ICM::on_L30mH_clicked() {
 	ui->sweep_endfreq->setValue(1);
 	ui->sweep_startfreq_unit->setCurrentIndex(1);
 	ui->sweep_endfreq_unit->setCurrentIndex(1);
+
+	m_nRange = 0.03;
 }
 void ICM::on_L300mH_clicked() {
 	L_Index = 4;
@@ -2045,6 +2075,8 @@ void ICM::on_L300mH_clicked() {
 	ui->sweep_endfreq->setValue(m_nFrequency);
 	ui->sweep_startfreq_unit->setCurrentIndex(0);
 	ui->sweep_endfreq_unit->setCurrentIndex(0);
+
+	m_nRange = 0.3;
 }
 void ICM::on_L3H_clicked() {
 	L_Index = 5;
@@ -2063,6 +2095,8 @@ void ICM::on_L3H_clicked() {
 	ui->sweep_endfreq->setValue(m_nFrequency);
 	ui->sweep_startfreq_unit->setCurrentIndex(0);
 	ui->sweep_endfreq_unit->setCurrentIndex(0);
+
+	m_nRange = 3;
 }
 void ICM::on_L30H_clicked() {
 	L_Index = 6;
@@ -2081,6 +2115,8 @@ void ICM::on_L30H_clicked() {
 	ui->sweep_endfreq->setValue(m_nFrequency);
 	ui->sweep_startfreq_unit->setCurrentIndex(0);
 	ui->sweep_endfreq_unit->setCurrentIndex(0);
+
+	m_nRange = 30;
 }
 
 void ICM::on_settings_clicked() {
@@ -2324,7 +2360,7 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
 		p_nData = Zdut;
 		//            qDebug()<<"Zdut Value :"<<Zdut;
 	}
-	QString l_sDisplayData("");
+/*	QString l_sDisplayData("");
 
 	if (p_nRange == 0) {
 		p_nData = p_nData * 1000000000000.0;
@@ -2380,7 +2416,7 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
 		ui->Unit->setText(nanoFarad);
 		//		dis->setValue(l_sDisplayData);
 
-	}/*
+	}
          else if (p_nRange == 3)
          {
          p_nData = p_nData * 1000000000.0;
@@ -2458,13 +2494,13 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
          //		qDebug()<<"Last 10 samples are constant";
          //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          l_sDisplayData = QString::number((p_nData),'f',2) + microFarad;
-         }*/
+         }
 	else {
 		l_sDisplayData = convertToUnits(p_nData);// + "F";
 		//		ui->Unit->setText("F");
 		//		dis->setValue(l_sDisplayData);
 
-	}
+	}*/
 	//Passing Range to display class~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	bool ok=true;
 	QString str_value = convertToUnits(p_nData);
@@ -2478,7 +2514,7 @@ void ICM::GetDisplayCapcitance(double p_nData, short int p_nRange) {
 	double dbl_value=str_value.toDouble(&ok);
 	dis->setValue(dbl_value);
 	qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
-	qDebug()<<"dblValue:"<<int_range<<"dbl_value:"<<dbl_value;
+	qDebug()<<"intRange:"<<int_range<<"dbl_value:"<<dbl_value;
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 void ICM::GetDisplayInductance(double p_nData, short int p_nRange) {
@@ -2520,7 +2556,7 @@ void ICM::GetDisplayInductance(double p_nData, short int p_nRange) {
 
 		p_nData = Zdut;
 	}
-	QString l_sDisplayData("");
+/*	QString l_sDisplayData("");
 
 	if (p_nRange == 0) // 300nH - 3uH
 	{
@@ -2535,41 +2571,40 @@ void ICM::GetDisplayInductance(double p_nData, short int p_nRange) {
 		ui->Unit->setText(microHenry);
 		//		dis->setValue(l_sDisplayData);
 	}
-	/*
-         else if(p_nRange == 2) // 30uH - 300 uH
+	     else if(p_nRange == 2) // 30uH - 300 uH
          {
          p_nData = p_nData * 1000000;
-         l_sDisplayData = QString::number((p_nData),'f',2) + microHenry;
+//         l_sDisplayData = QString::number((p_nData),'f',2) + microHenry;
          }
          else if(p_nRange == 3) // 300uH - 3mH
          {
          p_nData = p_nData * 1000000;
-         l_sDisplayData = QString::number((p_nData),'f',2) + microHenry;				//?
+//         l_sDisplayData = QString::number((p_nData),'f',2) + microHenry;				//?
          }
          else if(p_nRange == 4) // 3mH - 30mH
          {
          p_nData = p_nData * 1000;
-         l_sDisplayData = QString::number((p_nData),'f',2) + milliHenry;
+//         l_sDisplayData = QString::number((p_nData),'f',2) + milliHenry;
          }
          else if(p_nRange == 5) // 30mH - 300mH
          {
          p_nData = p_nData * 1000;
-         l_sDisplayData = QString::number((p_nData),'f',2) + milliHenry;
+//         l_sDisplayData = QString::number((p_nData),'f',2) + milliHenry;
          }
          else if(p_nRange == 6) // 300mH - 3H
          {
          p_nData = p_nData * 1000;
-         l_sDisplayData = QString::number((p_nData),'f',2) + milliHenry;				//?
+//         l_sDisplayData = QString::number((p_nData),'f',2) + milliHenry;				//?
          }
          else if(p_nRange == 7) // 3H - 30H
          {
-         l_sDisplayData = QString::number((p_nData),'f',2) + Henry;
-         }*/
+//         l_sDisplayData = QString::number((p_nData),'f',2) + Henry;
+         }
 	else {
-		l_sDisplayData = convertToUnits(p_nData);// + "H";
+//		l_sDisplayData = convertToUnits(p_nData);// + "H";
 		//		ui->Unit->setText("H");
 		//		dis->setValue(l_sDisplayData);
-	}
+	}*/
 	//Passing Range to display class~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	bool ok=true;
 	QString str_value = convertToUnits(p_nData);
@@ -2582,8 +2617,8 @@ void ICM::GetDisplayInductance(double p_nData, short int p_nRange) {
 	dis->setRange(int_range);
 	double dbl_value=str_value.toDouble(&ok);
 	dis->setValue(dbl_value);
-	qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
-	qDebug()<<"dblValue:"<<int_range<<"dbl_value:"<<dbl_value;
+/*	qDebug()<<"strRange:"<<str_range<<"str_value:"<<str_value;
+	qDebug()<<"dblValue:"<<int_range<<"dbl_value:"<<dbl_value;*/
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 double ICM::convertToValues(QString input) {
@@ -2620,10 +2655,10 @@ double ICM::convertToValues(QString input) {
 	}
 }
 QString ICM::convertToUnits(double l_nvalue) {
+	qDebug()<<"convertToUnits input:"<<l_nvalue;
 	QString unit;
 	double value;
 	if (l_nvalue < 0) {
-		//qDebug()<<"convertToUnits input:"<<l_nvalue;
 		if (rFlag==true && (l_nvalue < -0.1)) //<-100mOhms
 			return (QString("UL"));
 		else if (lFlag==true && (l_nvalue < -0.000001)) //<-1uH
@@ -2636,26 +2671,180 @@ QString ICM::convertToUnits(double l_nvalue) {
 		value = l_nvalue;
 
 	if (value >= 1000000 && value < 1000000000) {
-		value = value / 1000000;
-		unit = "M";
+		if(m_nRange == 0.0000000001){
+			value = value * 1000000000000;
+			unit = "p";
+		}
+		else if(m_nRange == 0.0000001 || m_nRange == 0.00000001 || m_nRange == 0.000000001){
+			value = value * 1000000000;
+			unit = "n";
+		}
+		else if(m_nRange == 0.00003 || m_nRange == 0.0003 || m_nRange == 0.0001 || m_nRange == 0.00001 || m_nRange == 0.000001){
+			value = value * 1000000;
+			unit = QChar(0x00B5);
+		}else if(m_nRange == 0.003 || m_nRange == 0.03 || m_nRange == 0.3 || m_nRange == 0.001 || m_nRange == 0.01){
+			value = value * 1000;
+			unit = "m";
+		}else if(m_nRange == 3 || m_nRange == 30 || m_nRange == 300){
+			value = value;
+			unit = "";
+		}else if(m_nRange == 3000 || m_nRange == 30000 || m_nRange == 300000){
+			value = value / 1000;
+			unit = "K";
+		}else if(m_nRange == 1000000){
+			value = value / 1000000;
+			unit = "M";
+		}
 	} else if (value >= 1000 && value < 1000000) {
-		value = value / 1000;
-		unit = "K";
+		if(m_nRange == 0.0000000001){
+			value = value * 1000000000000;
+			unit = "p";
+		}
+		else if(m_nRange == 0.0000001 || m_nRange == 0.00000001 || m_nRange == 0.000000001){
+			value = value * 1000000000;
+			unit = "n";
+		}
+		else if(m_nRange == 0.00003 || m_nRange == 0.0003 || m_nRange == 0.0001 || m_nRange == 0.00001 || m_nRange == 0.000001){
+			value = value * 1000000;
+			unit = QChar(0x00B5);
+		}else if(m_nRange == 0.003 || m_nRange == 0.03 || m_nRange == 0.3 || m_nRange == 0.001 || m_nRange == 0.01){
+			value = value * 1000;
+			unit = "m";
+		}else if(m_nRange == 3 || m_nRange == 30 || m_nRange == 300){
+			value = value;
+			unit = "";
+		}else if(m_nRange == 3000 || m_nRange == 30000 || m_nRange == 300000){
+			value = value / 1000;
+			unit = "K";
+		}else if(m_nRange == 1000000){
+			value = value / 1000000;
+			unit = "M";
+		}
 	} else if ((value >= 1 && value < 1000)) {
-		value = value * 1;
-		unit = "";
+		if(m_nRange == 0.0000000001){
+			value = value * 1000000000000;
+			unit = "p";
+		}
+		else if(m_nRange == 0.0000001 || m_nRange == 0.00000001 || m_nRange == 0.000000001){
+			value = value * 1000000000;
+			unit = "n";
+		}
+		else if(m_nRange == 0.00003 || m_nRange == 0.0003 || m_nRange == 0.0001 || m_nRange == 0.00001 || m_nRange == 0.000001){
+			value = value * 1000000;
+			unit = QChar(0x00B5);
+		}else if(m_nRange == 0.003 || m_nRange == 0.03 || m_nRange == 0.3 || m_nRange == 0.001 || m_nRange == 0.01){
+			value = value * 1000;
+			unit = "m";
+		}else if(m_nRange == 3 || m_nRange == 30 || m_nRange == 300){
+			value = value;
+			unit = "";
+		}else if(m_nRange == 3000 || m_nRange == 30000 || m_nRange == 300000){
+			value = value / 1000;
+			unit = "K";
+		}else if(m_nRange == 1000000){
+			value = value / 1000000;
+			unit = "M";
+		}
 	} else if ((value * 1000) >= 1 && value < 1000) {
-		value = value * 1000;
-		unit = "m";
+		if(m_nRange == 0.0000000001){
+			value = value * 1000000000000;
+			unit = "p";
+		}
+		else if(m_nRange == 0.0000001 || m_nRange == 0.00000001 || m_nRange == 0.000000001){
+			value = value * 1000000000;
+			unit = "n";
+		}
+		else if(m_nRange == 0.00003 || m_nRange == 0.0003 || m_nRange == 0.0001 || m_nRange == 0.00001 || m_nRange == 0.000001){
+			value = value * 1000000;
+			unit = QChar(0x00B5);
+		}else if(m_nRange == 0.003 || m_nRange == 0.03 || m_nRange == 0.3 || m_nRange == 0.001 || m_nRange == 0.01){
+			value = value * 1000;
+			unit = "m";
+		}else if(m_nRange == 3 || m_nRange == 30 || m_nRange == 300){
+			value = value;
+			unit = "";
+		}else if(m_nRange == 3000 || m_nRange == 30000 || m_nRange == 300000){
+			value = value / 1000;
+			unit = "K";
+		}else if(m_nRange == 1000000){
+			value = value / 1000000;
+			unit = "M";
+		}
 	} else if ((value * 1000000) >= 1 && value < 1000000) {
-		value = value * 1000000;
-		unit = QChar(0x00B5);
+		if(m_nRange == 0.0000000001){
+			value = value * 1000000000000;
+			unit = "p";
+		}
+		else if(m_nRange == 0.0000001 || m_nRange == 0.00000001 || m_nRange == 0.000000001){
+			value = value * 1000000000;
+			unit = "n";
+		}
+		else if(m_nRange == 0.00003 || m_nRange == 0.0003 || m_nRange == 0.0001 || m_nRange == 0.00001 || m_nRange == 0.000001){
+			value = value * 1000000;
+			unit = QChar(0x00B5);
+		}else if(m_nRange == 0.003 || m_nRange == 0.03 || m_nRange == 0.3 || m_nRange == 0.001 || m_nRange == 0.01){
+			value = value * 1000;
+			unit = "m";
+		}else if(m_nRange == 3 || m_nRange == 30 || m_nRange == 300){
+			value = value;
+			unit = "";
+		}else if(m_nRange == 3000 || m_nRange == 30000 || m_nRange == 300000){
+			value = value / 1000;
+			unit = "K";
+		}else if(m_nRange == 1000000){
+			value = value / 1000000;
+			unit = "M";
+		}
 	} else if ((value * 1000000000) >= 1 && value < 1000000000) {
-		value = value * 1000000000;
-		unit = "n";
+		if(m_nRange == 0.0000000001){
+			value = value * 1000000000000;
+			unit = "p";
+		}
+		else if(m_nRange == 0.0000001 || m_nRange == 0.00000001 || m_nRange == 0.000000001){
+			value = value * 1000000000;
+			unit = "n";
+		}
+		else if(m_nRange == 0.00003 || m_nRange == 0.0003 || m_nRange == 0.0001 || m_nRange == 0.00001 || m_nRange == 0.000001){
+			value = value * 1000000;
+			unit = QChar(0x00B5);
+		}else if(m_nRange == 0.003 || m_nRange == 0.03 || m_nRange == 0.3 || m_nRange == 0.001 || m_nRange == 0.01){
+			value = value * 1000;
+			unit = "m";
+		}else if(m_nRange == 3 || m_nRange == 30 || m_nRange == 300){
+			value = value;
+			unit = "";
+		}else if(m_nRange == 3000 || m_nRange == 30000 || m_nRange == 300000){
+			value = value / 1000;
+			unit = "K";
+		}else if(m_nRange == 1000000){
+			value = value / 1000000;
+			unit = "M";
+		}
 	} else if ((value * 1000000000000) >= 1 && value < 1000000000000) {
-		value = value * 1000000000000;
-		unit = "p";
+		if(m_nRange == 0.0000000001){
+			value = value * 1000000000000;
+			unit = "p";
+		}
+		else if(m_nRange == 0.0000001 || m_nRange == 0.00000001 || m_nRange == 0.000000001){
+			value = value * 1000000000;
+			unit = "n";
+		}
+		else if(m_nRange == 0.00003 || m_nRange == 0.0003 || m_nRange == 0.0001 || m_nRange == 0.00001 || m_nRange == 0.000001){
+			value = value * 1000000;
+			unit = QChar(0x00B5);
+		}else if(m_nRange == 0.003 || m_nRange == 0.03 || m_nRange == 0.3 || m_nRange == 0.001 || m_nRange == 0.01){
+			value = value * 1000;
+			unit = "m";
+		}else if(m_nRange == 3 || m_nRange == 30 || m_nRange == 300){
+			value = value;
+			unit = "";
+		}else if(m_nRange == 3000 || m_nRange == 30000 || m_nRange == 300000){
+			value = value / 1000;
+			unit = "K";
+		}else if(m_nRange == 1000000){
+			value = value / 1000000;
+			unit = "M";
+		}
 	}
 	if (l_nvalue >= 0){
 		if(rFlag)ui->Unit->setText(unit+ohms);

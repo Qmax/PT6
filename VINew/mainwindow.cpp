@@ -55,7 +55,10 @@ void MainWindow::InitializeVIFunctions()
 	VIProduct = m_objWaveFactory->getWaveProduct("VI", this);
 	VIProduct->setDimensions(17, 40, 324, 272);
 	VIProduct->setTickValue(0);
+	VIProduct->setFocusPolicy(Qt::NoFocus);
 	m_objVISubject->setWaveType(IV);
+
+	ui->butZoom->setParent(VIProduct);
 
 	LoadInteractiveValues();
 	LoadEmbeddedKeys();
@@ -3210,4 +3213,40 @@ void MainWindow::on_yAxisBox_valueChanged(double )
 	outFile.open(QIODevice::WriteOnly);
 	QTextStream ts(&outFile);
 	ts <<(ui->xAxisBox->value())<<endl<<(ui->yAxisBox->value())<<endl;
+}
+
+void MainWindow::on_butZoom_clicked()
+{
+    QPropertyAnimation *animation2 = new QPropertyAnimation(VIProduct, "geometry");
+    animation2->setEasingCurve(QEasingCurve::Linear);
+    animation2->setDuration(100);
+    QPropertyAnimation *animation1 = new QPropertyAnimation(ui->butZoom, "geometry");
+    animation1->setEasingCurve(QEasingCurve::Linear);
+    animation1->setDuration(100);
+
+    if(VIProduct->geometry().width()==324){
+        animation2->setStartValue(QRect(17, 40, 324, 272));
+        animation1->setStartValue(QRect(0, 0, 324, 272));
+        animation2->setEndValue(QRect(17, 40, 680, 545));
+        animation1->setEndValue(QRect(0, 0, 680, 545));
+        animation2->start();
+        animation1->start();
+    }
+    else{
+        animation2->setStartValue(QRect(17, 40, 680, 545));
+        animation1->setStartValue(QRect(0, 0, 680, 545));
+        animation2->setEndValue(QRect(17, 40, 324, 272));
+        animation1->setEndValue(QRect(0, 0, 324, 272));
+        animation2->start();
+        animation1->start();
+    }
+
+
+/*    if(VIProduct->geometry().width()==324){
+        VIProduct->setDimensions(17, 40, 680, 545);
+        ui->butZoom->setGeometry(0, 0, 680, 545);
+    }else{
+        VIProduct->setDimensions(17, 40, 324, 272);
+        ui->butZoom->setGeometry(0, 0, 324, 272);
+    }*/
 }
