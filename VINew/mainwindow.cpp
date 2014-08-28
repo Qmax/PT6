@@ -109,25 +109,25 @@ void MainWindow::InitializeVIFunctions()
 void MainWindow::InitializeLegendLabels(){
 
     l_objProbeStatus    =   new QLabel(VIProduct);
-    l_objProbeStatus->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objProbeStatus->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objProbeStatus->setStyleSheet("color:#d9d9d9");
     l_objProbeStatus->setGeometry(5,524,135,17);
     l_objProbeStatus->setText("SINGLE : PROBE-1");
 
     l_objPassFail       =   new QLabel(VIProduct);
-    l_objPassFail->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objPassFail->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objPassFail->setStyleSheet("color:#d9d9d9");
     l_objPassFail->setGeometry(585,45,135,17);
     l_objPassFail->setText("RESULT : PASS");
 
     l_objErrorPercentage=   new QLabel(VIProduct);
-    l_objErrorPercentage->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objErrorPercentage->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objErrorPercentage->setStyleSheet("color:#d9d9d9");
     l_objErrorPercentage->setGeometry(585,25,135,17);
     l_objErrorPercentage->setText("ERROR  : 5%");
 
     l_objLearnVerify    =   new QLabel(VIProduct);
-    l_objLearnVerify->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objLearnVerify->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objLearnVerify->setStyleSheet("color:#d9d9d9");
     l_objLearnVerify->setGeometry(585,5,135,17);
     l_objLearnVerify->setText("LEARNING.....");
@@ -142,64 +142,64 @@ void MainWindow::InitializeLegendLabels(){
     l_objTraceNumber2->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objTraceNumber2->setPalette(colorForIds[1]);
     l_objTraceNumber2->setGeometry(5,20,60,17);
-    l_objTraceNumber2->setText("T1  -----");
+    l_objTraceNumber2->setText("T1   -----");
 
     l_objTraceNumber3    =   new QLabel(VIProduct);
     l_objTraceNumber3->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objTraceNumber3->setPalette(colorForIds[2]);
     l_objTraceNumber3->setGeometry(5,35,60,17);
-    l_objTraceNumber3->setText("T2  -----");
+    l_objTraceNumber3->setText("T2   -----");
 
     l_objTraceNumber4    =   new QLabel(VIProduct);
     l_objTraceNumber4->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objTraceNumber4->setPalette(colorForIds[3]);
     l_objTraceNumber4->setGeometry(5,50,60,17);
-    l_objTraceNumber4->setText("T3  -----");
+    l_objTraceNumber4->setText("T3   -----");
 
     l_objTraceNumber5    =   new QLabel(VIProduct);
     l_objTraceNumber5->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objTraceNumber5->setPalette(colorForIds[4]);
     l_objTraceNumber5->setGeometry(5,65,60,17);
-    l_objTraceNumber5->setText("T4  -----");
+    l_objTraceNumber5->setText("T4   -----");
 
     l_objRefType        =   new QLabel(VIProduct);
-    l_objRefType->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objRefType->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objRefType->setStyleSheet("color:#d9d9d9");
     l_objRefType->setGeometry(5,447,135,17);
     l_objRefType->setText("REF      : FIXED");
 
     l_objCombinations   =   new QLabel(VIProduct);
-    l_objCombinations->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objCombinations->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objCombinations->setStyleSheet("color:#d9d9d9");
     l_objCombinations->setGeometry(5,467,135,17);
     l_objCombinations->setText("COMB  : 19");
 
     l_objDriveSettings  =   new QLabel(VIProduct);
-    l_objDriveSettings->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objDriveSettings->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objDriveSettings->setStyleSheet("color:#d9d9d9");
     l_objDriveSettings->setGeometry(5,506,150,17);
     l_objDriveSettings->setText("DRIVE   : 2.5V_2KE_2KHz");
 
     l_objComparison     =   new QLabel(VIProduct);
-    l_objComparison->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objComparison->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objComparison->setStyleSheet("color:#d9d9d9");
     l_objComparison->setGeometry(5,487,135,17);
     l_objComparison->setText("COMP   : AVERAGE");
 
     l_objKeyLeft        =   new QLabel(VIProduct);
-    l_objKeyLeft->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objKeyLeft->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objKeyLeft->setStyleSheet("color:#d9d9d9");
     l_objKeyLeft->setGeometry(585,487,135,17);
     l_objKeyLeft->setText("L  : RUN/STOP");
 
     l_objKeyRight       =   new QLabel(VIProduct);
-    l_objKeyRight->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objKeyRight->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objKeyRight->setStyleSheet("color:#d9d9d9");
     l_objKeyRight->setGeometry(585,524,135,17);
     l_objKeyRight->setText("R : DELETE");
 
     l_objKeyMiddle      =   new QLabel(VIProduct);
-    l_objKeyMiddle->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objKeyMiddle->setFont(QFont("DejaVu Sans", 10, 75, false));
     l_objKeyMiddle->setStyleSheet("color:#d9d9d9");
     l_objKeyMiddle->setGeometry(585,506,135,17);
     l_objKeyMiddle->setText("M : STORE");
