@@ -117,19 +117,19 @@ void MainWindow::InitializeLegendLabels(){
     l_objPassFail       =   new QLabel(VIProduct);
     l_objPassFail->setFont(QFont("DejaVu Sans", 12, 50, false));
     l_objPassFail->setStyleSheet("color:#d9d9d9");
-    l_objPassFail->setGeometry(590,45,135,17);
+    l_objPassFail->setGeometry(585,45,135,17);
     l_objPassFail->setText("RESULT : PASS");
 
     l_objErrorPercentage=   new QLabel(VIProduct);
     l_objErrorPercentage->setFont(QFont("DejaVu Sans", 12, 50, false));
     l_objErrorPercentage->setStyleSheet("color:#d9d9d9");
-    l_objErrorPercentage->setGeometry(590,25,135,17);
+    l_objErrorPercentage->setGeometry(585,25,135,17);
     l_objErrorPercentage->setText("ERROR  : 5%");
 
     l_objLearnVerify    =   new QLabel(VIProduct);
     l_objLearnVerify->setFont(QFont("DejaVu Sans", 12, 50, false));
     l_objLearnVerify->setStyleSheet("color:#d9d9d9");
-    l_objLearnVerify->setGeometry(590,5,135,17);
+    l_objLearnVerify->setGeometry(585,5,135,17);
     l_objLearnVerify->setText("LEARNING.....");
 
     l_objTraceNumber1    =   new QLabel(VIProduct);
@@ -189,19 +189,19 @@ void MainWindow::InitializeLegendLabels(){
     l_objKeyLeft        =   new QLabel(VIProduct);
     l_objKeyLeft->setFont(QFont("DejaVu Sans", 12, 50, false));
     l_objKeyLeft->setStyleSheet("color:#d9d9d9");
-    l_objKeyLeft->setGeometry(590,487,135,17);
+    l_objKeyLeft->setGeometry(585,487,135,17);
     l_objKeyLeft->setText("L  : RUN/STOP");
 
     l_objKeyRight       =   new QLabel(VIProduct);
     l_objKeyRight->setFont(QFont("DejaVu Sans", 12, 50, false));
     l_objKeyRight->setStyleSheet("color:#d9d9d9");
-    l_objKeyRight->setGeometry(590,524,135,17);
+    l_objKeyRight->setGeometry(585,524,135,17);
     l_objKeyRight->setText("R : DELETE");
 
     l_objKeyMiddle      =   new QLabel(VIProduct);
     l_objKeyMiddle->setFont(QFont("DejaVu Sans", 12, 50, false));
     l_objKeyMiddle->setStyleSheet("color:#d9d9d9");
-    l_objKeyMiddle->setGeometry(590,506,135,17);
+    l_objKeyMiddle->setGeometry(585,506,135,17);
     l_objKeyMiddle->setText("M : STORE");
 
 }
