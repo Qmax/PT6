@@ -26,6 +26,7 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QTextStream>
+#include <QLabel>
 
 #define MAXCOUNT 5
 #define REFERENCE_THRESHOLD	 0.4
@@ -101,6 +102,8 @@ protected:
         void InitializeUILibraries();
         void InitializeVIFunctions();
         void LoadInteractiveValues();
+        void InitializeLegendLabels();
+        void UpdateLegendLabels();
 
         void LoadMiddelLayer();
         void LoadUpperLayer();
@@ -169,6 +172,13 @@ protected:
     short int m_nCheckDegree;
     QString m_strFunctionKey;
     CALIB *m_objCalibData;
+
+    //Legend Labels Declaration
+    QLabel  *l_objProbeStatus,*l_objPassFail,*l_objErrorPercentage,*l_objLearnVerify;
+    QLabel  *l_objTraceNumber1,*l_objTraceNumber2,*l_objTraceNumber3,*l_objTraceNumber4,*l_objTraceNumber5;
+    QLabel  *l_objFrequency,*l_objImpedance,*l_objVoltage;
+    QLabel  *l_objKeyLeft,*l_objKeyRight,*l_objKeyMiddle;
+    QLabel  *l_objRefType,*l_objCombinations,*l_objDriveSettings,*l_objComparison;
 
 private:
     Ui::MainWindow *ui;

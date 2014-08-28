@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'icm.ui'
 **
-** Created: Tue Aug 26 18:56:21 2014
+** Created: Thu Aug 28 17:34:09 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -118,6 +118,7 @@ public:
     QCheckBox *checkBox;
     QCheckBox *calibrateDisplay;
     QPushButton *calibrate;
+    QLabel *noOFSamples;
     QFrame *selectFrame;
     QGroupBox *cBox;
     QPushButton *cBut;
@@ -2024,6 +2025,9 @@ public:
         icon8.addFile(QString::fromUtf8(":/Symbols/Letter-C-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         calibrate->setIcon(icon8);
         calibrate->setIconSize(QSize(48, 48));
+        noOFSamples = new QLabel(debugPanel);
+        noOFSamples->setObjectName(QString::fromUtf8("noOFSamples"));
+        noOFSamples->setGeometry(QRect(120, 10, 67, 17));
         selectFrame = new QFrame(centralWidget);
         selectFrame->setObjectName(QString::fromUtf8("selectFrame"));
         selectFrame->setGeometry(QRect(701, 54, 10, 60));
@@ -2858,6 +2862,7 @@ public:
         calibrateDisplay->setText(QApplication::translate("ICM", "Screen \n"
 "Calibration", 0, QApplication::UnicodeUTF8));
         calibrate->setText(QString());
+        noOFSamples->setText(QString());
         cBox->setTitle(QString());
         cBut->setText(QString());
         label_21->setText(QApplication::translate("ICM", "C", 0, QApplication::UnicodeUTF8));

@@ -298,7 +298,7 @@ void ICM::initialiseHWLibraries() {
 	hwInterface->setOffset(0);
 	hwInterface->setPhase(0);
 	IAppCard->setSPIAppendBit(0x8000);
-	hwInterface->setAmplitude(0.1);
+	hwInterface->setAmplitude(0.15);
 	hwInterface->SingleContinuous(CONTINUOUS);
 
 	QPluginLoader loader2("libSPIMemoryInterface.so", this);
@@ -852,6 +852,7 @@ void ICM::readADC2() {
 	IAppCard->setSPIAppendBit(0xC000);
 
 	noOFsamples = ui->spinBox_2->value();
+        ui->noOFSamples->setText(QString::number(noOFsamples));
 	double avgOut = 0.0;
 	if (ui->CapacitanceRanges->isVisible())
 		m_nImpedanceValue = m_lstRFCapcitance.value(C_Index);
@@ -969,6 +970,7 @@ double ICM::readADCR(QString str) {
 	IAppCard->setSPIAppendBit(0xC000);
 
 	noOFsamples = ui->spinBox_2->value();
+        ui->noOFSamples->setText(QString::number(noOFsamples));
 	double avgOut = 0.0;
 
 	m_nImpedanceValue = m_lstRFResistance.value(R_Index);
@@ -1613,12 +1615,12 @@ void ICM::on_OnOffSlider_valueChanged(int value) {
 	}
 }
 
-void ICM::on_AutoManualSlider_valueChanged(int value) {
-	if (value == 0) {
-
-	} else {
-	}
-}
+//void ICM::on_AutoManualSlider_valueChanged(int value) {
+//	if (value == 0) {
+//
+//	} else {
+//	}
+//}
 
 void ICM::on_Exit_clicked() {
 
@@ -2003,9 +2005,8 @@ void ICM::on_L300uH_clicked() {
 	m_nICMMGR = m_nICMMGR & 0xFFF8;
 	m_nICMMGR |= 1;
 	IAppCard->writeRegister(m_nICMMGR, 0x3A);
-	hwInterface->setFrequency(200000);
-	m_nFrequency = 200000;//50000
-
+	m_nFrequency = 155000;//160000;//150000;//200000;//50000
+	hwInterface->setFrequency(m_nFrequency);
 	IAppCard->writeRegister(0x1, 0x16);//changed to 0x1 on 12062014
 	//	IBackPlane->writeBackPlaneRegister(0x3, 0x26);
 	IPsoc->srcImpedanceSelection(SRC_IMP_100E);
@@ -2023,10 +2024,9 @@ void ICM::on_L3mH_clicked() {
 	m_nICMMGR = m_nICMMGR & 0xFFF8;
 	m_nICMMGR |= 1;//changed
 	IAppCard->writeRegister(m_nICMMGR, 0x3A);
-	hwInterface->setFrequency(2000);
 	//	m_nFrequency=390625;
-	m_nFrequency = 2000;
-
+	m_nFrequency = 2500;
+	hwInterface->setFrequency(m_nFrequency);
 	IAppCard->writeRegister(0x1, 0x16);
 	IPsoc->srcImpedanceSelection(SRC_IMP_0E);//added for 0E Selection
 
@@ -2850,13 +2850,13 @@ QString ICM::convertToUnits(double l_nvalue) {
 		if(rFlag)ui->Unit->setText(unit+ohms);
 		if(lFlag)ui->Unit->setText(unit+"H");
 		if(cFlag)ui->Unit->setText(unit+"F");
-		return (QString::number(value, 'f', 2));// + unit);
+		return (QString::number(value, 'f', 5));// + unit);
 	}
 	if (l_nvalue < 0){
 		if(rFlag)ui->Unit->setText(unit+ohms);
 		if(lFlag)ui->Unit->setText(unit+"H");
 		if(cFlag)ui->Unit->setText(unit+"F");
-		return (QString::number(value * -1, 'f', 2));// + unit);
+		return (QString::number(value * -1, 'f', 5));// + unit);
 	}
 
 }
@@ -3142,7 +3142,7 @@ void ICM::on_printImage_clicked() {
 	Pix.save("icm.jpg");
 }
 
-void ICM::on_hideSettings_clicked() {
+/*void ICM::on_hideSettings_clicked() {
 	//	if (m_bToolboxFlag == false) {
 	//		ToolBox(true);
 	//		m_bToolboxFlag = true;
@@ -3150,7 +3150,7 @@ void ICM::on_hideSettings_clicked() {
 	//		ToolBox(false);
 	//		m_bToolboxFlag = false;
 	//	}
-}
+}*/
 
 void ICM::on_pushButton_3_clicked() {
 	QWidget *newWidget = test->getPTAppBckPsoc();

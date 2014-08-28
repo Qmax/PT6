@@ -166,6 +166,7 @@ protected:
     void CalibrateDisplay(QString);
 
     void changeEvent(QEvent *e);
+    void on_printImage_clicked();
 
     QElapsedTimer timer;
     qint64 milliSec;
@@ -208,11 +209,11 @@ void on_lBut_clicked();
 void on_rBut_clicked();
 void on_exit_clicked();
 void on_RacRdc_clicked();
-void on_hideSettings_clicked();
+//void on_hideSettings_clicked();
 void on_pushButton_3_clicked();
 void GCalib2ICM(double,QString);
 
-void on_printImage_clicked();
+
 void on_chkLoad_clicked();
 void receiveValue(unsigned int);
 void receiveValue(double);
@@ -260,7 +261,7 @@ void callMeasuredEdit();
     void on_C1nF_clicked();
     void on_C100pF_clicked();
     void on_Exit_clicked();
-    void on_AutoManualSlider_valueChanged(int value);
+//    void on_AutoManualSlider_valueChanged(int value);
     void on_OnOffSlider_valueChanged(int value);
     void on_C_clicked();
     void on_L_clicked();

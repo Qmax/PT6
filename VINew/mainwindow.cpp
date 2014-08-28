@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_objVISubject->registerObserver(0,this);
 	InitializeUILibraries();
 	InitializeVIFunctions();
+        InitializeLegendLabels();
 
 }
 
@@ -105,6 +106,120 @@ void MainWindow::InitializeVIFunctions()
 
 }
 
+void MainWindow::InitializeLegendLabels(){
+
+    l_objProbeStatus    =   new QLabel(VIProduct);
+    l_objProbeStatus->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objProbeStatus->setStyleSheet("color:#d9d9d9");
+    l_objProbeStatus->setGeometry(5,524,135,17);
+    l_objProbeStatus->setText("SINGLE : PROBE-1");
+
+    l_objPassFail       =   new QLabel(VIProduct);
+    l_objPassFail->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objPassFail->setStyleSheet("color:#d9d9d9");
+    l_objPassFail->setGeometry(590,45,135,17);
+    l_objPassFail->setText("RESULT : PASS");
+
+    l_objErrorPercentage=   new QLabel(VIProduct);
+    l_objErrorPercentage->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objErrorPercentage->setStyleSheet("color:#d9d9d9");
+    l_objErrorPercentage->setGeometry(590,25,135,17);
+    l_objErrorPercentage->setText("ERROR  : 5%");
+
+    l_objLearnVerify    =   new QLabel(VIProduct);
+    l_objLearnVerify->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objLearnVerify->setStyleSheet("color:#d9d9d9");
+    l_objLearnVerify->setGeometry(590,5,135,17);
+    l_objLearnVerify->setText("LEARNING.....");
+
+    l_objTraceNumber1    =   new QLabel(VIProduct);
+    l_objTraceNumber1->setFont(QFont("DejaVu Sans", 10, 75, false));
+    l_objTraceNumber1->setPalette(QColor(200,0,0));
+    l_objTraceNumber1->setGeometry(5,5,60,17);
+    l_objTraceNumber1->setText("REF -----");
+
+    l_objTraceNumber2    =   new QLabel(VIProduct);
+    l_objTraceNumber2->setFont(QFont("DejaVu Sans", 10, 75, false));
+    l_objTraceNumber2->setPalette(colorForIds[1]);
+    l_objTraceNumber2->setGeometry(5,20,60,17);
+    l_objTraceNumber2->setText("T1  -----");
+
+    l_objTraceNumber3    =   new QLabel(VIProduct);
+    l_objTraceNumber3->setFont(QFont("DejaVu Sans", 10, 75, false));
+    l_objTraceNumber3->setPalette(colorForIds[2]);
+    l_objTraceNumber3->setGeometry(5,35,60,17);
+    l_objTraceNumber3->setText("T2  -----");
+
+    l_objTraceNumber4    =   new QLabel(VIProduct);
+    l_objTraceNumber4->setFont(QFont("DejaVu Sans", 10, 75, false));
+    l_objTraceNumber4->setPalette(colorForIds[3]);
+    l_objTraceNumber4->setGeometry(5,50,60,17);
+    l_objTraceNumber4->setText("T3  -----");
+
+    l_objTraceNumber5    =   new QLabel(VIProduct);
+    l_objTraceNumber5->setFont(QFont("DejaVu Sans", 10, 75, false));
+    l_objTraceNumber5->setPalette(colorForIds[4]);
+    l_objTraceNumber5->setGeometry(5,65,60,17);
+    l_objTraceNumber5->setText("T4  -----");
+
+    l_objRefType        =   new QLabel(VIProduct);
+    l_objRefType->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objRefType->setStyleSheet("color:#d9d9d9");
+    l_objRefType->setGeometry(5,447,135,17);
+    l_objRefType->setText("REF      : FIXED");
+
+    l_objCombinations   =   new QLabel(VIProduct);
+    l_objCombinations->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objCombinations->setStyleSheet("color:#d9d9d9");
+    l_objCombinations->setGeometry(5,467,135,17);
+    l_objCombinations->setText("COMB  : 19");
+
+    l_objDriveSettings  =   new QLabel(VIProduct);
+    l_objDriveSettings->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objDriveSettings->setStyleSheet("color:#d9d9d9");
+    l_objDriveSettings->setGeometry(5,506,150,17);
+    l_objDriveSettings->setText("DRIVE   : 2.5V_2KE_2KHz");
+
+    l_objComparison     =   new QLabel(VIProduct);
+    l_objComparison->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objComparison->setStyleSheet("color:#d9d9d9");
+    l_objComparison->setGeometry(5,487,135,17);
+    l_objComparison->setText("COMP   : AVERAGE");
+
+    l_objKeyLeft        =   new QLabel(VIProduct);
+    l_objKeyLeft->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objKeyLeft->setStyleSheet("color:#d9d9d9");
+    l_objKeyLeft->setGeometry(590,487,135,17);
+    l_objKeyLeft->setText("L  : RUN/STOP");
+
+    l_objKeyRight       =   new QLabel(VIProduct);
+    l_objKeyRight->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objKeyRight->setStyleSheet("color:#d9d9d9");
+    l_objKeyRight->setGeometry(590,524,135,17);
+    l_objKeyRight->setText("R : DELETE");
+
+    l_objKeyMiddle      =   new QLabel(VIProduct);
+    l_objKeyMiddle->setFont(QFont("DejaVu Sans", 12, 50, false));
+    l_objKeyMiddle->setStyleSheet("color:#d9d9d9");
+    l_objKeyMiddle->setGeometry(590,506,135,17);
+    l_objKeyMiddle->setText("M : STORE");
+
+}
+void MainWindow::UpdateLegendLabels(){
+    l_objDriveSettings->setText("DRIVE   : "+ui->lblVoltage->text()+"_"+ui->lblImpedance->text()+"_"+ui->lblFrequency->text());
+
+    if(ui->lblLeft->text()=="RUN/STOP" && m_startTimer==true)
+        l_objKeyLeft->setText("L  : STOP");
+    else if(ui->lblLeft->text()=="RUN/STOP" && m_startTimer==false)
+        l_objKeyLeft->setText("L  : RUN");
+    else if(ui->lblLeft->text()=="VOL/FQ/IMP")
+        l_objKeyLeft->setText("L  : VOLTAGE");
+    else
+        l_objKeyLeft->setText("L  : "+ui->lblLeft->text());
+
+    l_objKeyRight->setText("R : "+ui->lblRight->text());
+    l_objKeyMiddle->setText("M : "+ui->lblMiddle->text());
+}
 
 void MainWindow::setGraphValues()
 {
@@ -614,15 +729,19 @@ void MainWindow::doKeyFunction(int pKeyCode)
 			|| (m_objVISubject->getIndexTemplate(2,true) == "VOL/FQ/IMP" && (pKeyCode == 0x09 || pKeyCode == 0xc0))) {
 		if (m_nToggleIndex == 0) {
 			m_strFunctionKey = "VOLTAGE";
+                        UpdateLegendLabels();//Zoom Legend Update
 		}
 		if (m_nToggleIndex == 2) {
 			m_strFunctionKey = "FREQUENCY";
+                        UpdateLegendLabels();//Zoom Legend Update
 		}
 		if (m_nToggleIndex == 1) {
 			m_strFunctionKey = "IMPEDANCE";
+                        UpdateLegendLabels();//Zoom Legend Update
 		}
 		//                    qDebug()<<"Toggle Index:"<<m_nToggleIndex;
 		//switchString(m_nToggleIndex);
+                l_objKeyLeft->setText("L :  "+m_strFunctionKey);//Zoom Left Key Update
 	}
 
 	if (m_objVISubject->getIndexTemplate(0,true) == "VOLTAGE" ||m_objVISubject->getIndexTemplate(1,true)
@@ -1649,8 +1768,8 @@ void MainWindow::on_butUP_clicked()
 	isChangeActive = true;
 	isChangeActive1 = true;
 	LoadInteractiveValues();
+        UpdateLegendLabels();
 	setGraphValues();
-
 }
 
 void MainWindow::on_butDown_clicked()
@@ -1688,6 +1807,7 @@ void MainWindow::on_butDown_clicked()
 
 
 	LoadInteractiveValues();
+        UpdateLegendLabels();
 	setGraphValues();
 
 }
@@ -1967,6 +2087,7 @@ void MainWindow::on_butLearn_clicked()
 
 	QString l_strDriveSettings = objInteractiveData.getVoltageMap(m_nClipLVoltage).remove(" ")+"_"+objInteractiveData.getImpedanceMap(m_nClipLImepdance).remove(" ")+"_"+objInteractiveData.getFrequencyMap(m_nClipFrequency).remove(" ");
 	ui->lblDriveSettings->setText(l_strDriveSettings);
+        l_objDriveSettings->setText("DRIVE   : "+l_strDriveSettings);//Zoom Legend
 	//	qDebug()<< "PSOC CODE ID"<<hex<<m_objFunctionalObject->ReadPSOCCODEID();
 
 	//	ISplash->setLoadingText("Clip Learn in Progress....");
@@ -3231,6 +3352,7 @@ void MainWindow::on_butZoom_clicked()
         animation1->setEndValue(QRect(0, 0, 680, 545));
         animation2->start();
         animation1->start();
+        UpdateLegendLabels();
     }
     else{
         animation2->setStartValue(QRect(17, 40, 680, 545));

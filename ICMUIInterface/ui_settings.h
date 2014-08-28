@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settings.ui'
 **
-** Created: Thu Aug 7 17:34:42 2014
+** Created: Thu Aug 28 14:48:13 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -72,6 +72,8 @@ public:
     QComboBox *comboBox;
     QLabel *label_9;
     QPushButton *pushButton_2;
+    QLabel *label_10;
+    QLineEdit *lineEdit_7;
 
     void setupUi(QWidget *Settings)
     {
@@ -163,10 +165,10 @@ public:
         pushButton->setFocusPolicy(Qt::NoFocus);
         label = new QLabel(groupBox);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(10, 24, 167, 24));
+        label->setGeometry(QRect(10, 18, 167, 24));
         lineEdit = new QLineEdit(groupBox);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(170, 24, 96, 24));
+        lineEdit->setGeometry(QRect(170, 17, 96, 24));
         chkPOTSel = new QCheckBox(groupBox);
         chkPOTSel->setObjectName(QString::fromUtf8("chkPOTSel"));
         chkPOTSel->setGeometry(QRect(10, 161, 167, 28));
@@ -289,10 +291,10 @@ public:
 "     }"));
         lineEdit_2 = new QLineEdit(groupBox);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-        lineEdit_2->setGeometry(QRect(170, 60, 96, 24));
+        lineEdit_2->setGeometry(QRect(170, 44, 96, 24));
         label_2 = new QLabel(groupBox);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(10, 60, 167, 24));
+        label_2->setGeometry(QRect(10, 44, 167, 24));
         chkCapSet = new QCheckBox(groupBox);
         chkCapSet->setObjectName(QString::fromUtf8("chkCapSet"));
         chkCapSet->setGeometry(QRect(10, 132, 167, 28));
@@ -832,12 +834,12 @@ public:
         left->setIconSize(QSize(32, 32));
         comboBox = new QComboBox(groupBox);
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
-        comboBox->setGeometry(QRect(170, 100, 96, 24));
+        comboBox->setGeometry(QRect(170, 71, 96, 24));
         comboBox->setStyleSheet(QString::fromUtf8("color:cyan;\n"
 ""));
         label_9 = new QLabel(groupBox);
         label_9->setObjectName(QString::fromUtf8("label_9"));
-        label_9->setGeometry(QRect(10, 100, 150, 24));
+        label_9->setGeometry(QRect(10, 71, 150, 24));
         pushButton_2 = new QPushButton(groupBox);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
         pushButton_2->setGeometry(QRect(410, 261, 90, 50));
@@ -845,47 +847,12 @@ public:
         font4.setFamily(QString::fromUtf8("DejaVu Sans"));
         pushButton_2->setFont(font4);
         pushButton_2->setFocusPolicy(Qt::NoFocus);
-        groupBox_2->raise();
-        pushButton->raise();
-        label->raise();
-        lineEdit->raise();
-        chkPOTSel->raise();
-        chkDivSel->raise();
-        lineEdit_2->raise();
-        label_2->raise();
-        chkCapSet->raise();
-        line->raise();
-        label_3->raise();
-        label_4->raise();
-        R1RMSCAVG->raise();
-        R1RMSGAIN->raise();
-        R1RMSIN->raise();
-        R2RMSIN->raise();
-        R2RMSGAIN->raise();
-        R2RMSCAVG->raise();
-        ExtInt->raise();
-        label_5->raise();
-        lineEdit_3->raise();
-        lineEdit_4->raise();
-        label_6->raise();
-        ReadAppCard->raise();
-        WriteAppCard->raise();
-        adc1->raise();
-        adc2->raise();
-        groupBox_3->raise();
-        WriteAppCard_2->raise();
-        lineEdit_5->raise();
-        ReadAppCard_2->raise();
-        label_7->raise();
-        label_8->raise();
-        lineEdit_6->raise();
-        up->raise();
-        down->raise();
-        right->raise();
-        left->raise();
-        comboBox->raise();
-        label_9->raise();
-        pushButton_2->raise();
+        label_10 = new QLabel(groupBox);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+        label_10->setGeometry(QRect(10, 99, 150, 24));
+        lineEdit_7 = new QLineEdit(groupBox);
+        lineEdit_7->setObjectName(QString::fromUtf8("lineEdit_7"));
+        lineEdit_7->setGeometry(QRect(170, 98, 96, 24));
 
         retranslateUi(Settings);
 
@@ -900,7 +867,7 @@ public:
         label->setText(QApplication::translate("Settings", "Stimulus Voltage :", 0, QApplication::UnicodeUTF8));
         chkPOTSel->setText(QApplication::translate("Settings", "OP07 / LT1012", 0, QApplication::UnicodeUTF8));
         chkDivSel->setText(QApplication::translate("Settings", "DIV0 / DIV1", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("Settings", "Offset", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("Settings", "Offset :", 0, QApplication::UnicodeUTF8));
         chkCapSet->setText(QApplication::translate("Settings", "0.001uF/0.0001uF", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("Settings", "Receiver-1", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("Settings", "Receiver-2", 0, QApplication::UnicodeUTF8));
@@ -942,9 +909,10 @@ public:
          << QApplication::translate("Settings", "100000", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("Settings", "1000000", 0, QApplication::UnicodeUTF8)
         );
-        label_9->setText(QApplication::translate("Settings", "FeedBack(R)", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("Settings", "FeedBack(R) :", 0, QApplication::UnicodeUTF8));
         pushButton_2->setText(QApplication::translate("Settings", "Open/Short \n"
 " Calibration", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("Settings", "DC Voltage :", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

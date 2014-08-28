@@ -22,7 +22,7 @@ Settings::Settings(IPSOCCOMMUNICATION* psoc,HardwareInterface* hw,IApplicationCa
     IBackPlane->InitializeBpObject();
 
     objForceVoltage=ILineEdit->QmaxLineEdit(3,ui->groupBox);
-    objForceVoltage->setGeometry(170,24,96,24);
+    objForceVoltage->setGeometry(170,17,96,24);
 
 //    objFrequency=ILineEdit->QmaxLineEdit(4,ui->groupBox);
 //    objFrequency->setGeometry(150,150,105,40);
@@ -67,7 +67,7 @@ Settings::Settings(IPSOCCOMMUNICATION* psoc,HardwareInterface* hw,IApplicationCa
 
     //
 	objOffset=ILineEdit->QmaxLineEdit(1, ui->groupBox);
-	objOffset->setGeometry(170,60,96,24);
+        objOffset->setGeometry(170,44,96,24);
 
 	connect(objOffset,       SIGNAL(focussed(bool)), this, SLOT(callOffset()));
 	connect(this,SIGNAL(OffsetChange(double)),parent,SLOT(callOffsetChange(double)));
@@ -75,6 +75,12 @@ Settings::Settings(IPSOCCOMMUNICATION* psoc,HardwareInterface* hw,IApplicationCa
 
 	objOffset->setStyleSheet(	"border-width: 2px;border-style: outset;border-color: gray; 					    padding: 0 8px;     background: black;     selection-background-color: yellow;   color:white;     font: bold 14px;"    );
     //
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        objDCVoltage=ILineEdit->QmaxLineEdit(1, ui->groupBox);
+        objDCVoltage->setGeometry(170,98,96,24);
+        objDCVoltage->setStyleSheet(	"border-width: 2px;border-style: outset;border-color: gray; 					    padding: 0 8px;     background: black;     selection-background-color: yellow;   color:white;     font: bold 14px;"    );
+        connect(objDCVoltage,       SIGNAL(focussed(bool)), this, SLOT(callDCVoltage()));
+   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     m_nICMMGR=0;
 }
@@ -92,9 +98,13 @@ void Settings::receiveValue(double pValue){
                 emit FrequencyChange(m_nFrequency);
                 }
     	else if(m_nLineEditIndex==7){
-    	   		m_nOffset=pValue;
-    	   		emit OffsetChange(m_nOffset);
+                m_nOffset=pValue;
+                emit OffsetChange(m_nOffset);
     	}
+        else if(m_nLineEditIndex==8){
+                m_nDCVoltage=pValue;
+                hwInterface->setOffset(m_nDCVoltage);
+        }
  }
 void Settings::receiveValue(unsigned int pValue){
 	if(m_nLineEditIndex==1){
@@ -117,13 +127,16 @@ void Settings::receiveValue(unsigned int pValue){
 }
 void Settings::receiveValue(QString pValue){
     if(m_nLineEditIndex==3){
-                objForceVoltage->setText(pValue);
+            objForceVoltage->setText(pValue);
     }
     else if(m_nLineEditIndex==4){
 //                objFrequency->setText(pValue);
    }
     else if(m_nLineEditIndex==7){
-    			objOffset->setText(pValue);
+            objOffset->setText(pValue);
+    }
+    else if(m_nLineEditIndex==8){
+            objDCVoltage->setText(pValue);
     }
 }
 void Settings::callOffset(){
@@ -131,6 +144,12 @@ void Settings::callOffset(){
 		openNumKBPanel(1, 1, 'A', 10000000, -1000000000,this);
 		m_nLineEditIndex = 7;
 	}
+}
+void Settings::callDCVoltage(){
+        if (objDCVoltage->hasFocus()) {
+                openNumKBPanel(1, 1, 'v', 5, -5,this);
+                m_nLineEditIndex = 8;
+        }
 }
 void Settings::callAddressEdit() {
 	if (objAddress->hasFocus()) {

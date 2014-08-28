@@ -60,10 +60,11 @@ protected:
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	unsigned short int m_nAddress,m_nData;
 	unsigned short int m_nBPAddress,m_nBPData;
-	double m_nOffset;
+        double m_nOffset,m_nDCVoltage;
 	QLineEdit *objAddress,*objData;
 	QLineEdit *objBPAddress,*objBPData;
 	QLineEdit *objOffset;
+        QLineEdit *objDCVoltage;
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     void calculateDDSFrequency();
@@ -109,6 +110,7 @@ private slots:
 	void callBPAddressEdit();
 	void callBPDataEdit();
 	void callOffset();
+        void callDCVoltage();
 	//~~~~~~~~~~~~~~~~~~~~~~~~~
 	signals:
 	    	void FrequencyChange(double);
