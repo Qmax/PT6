@@ -3,7 +3,7 @@
 
 void PTInterfaceObject::InitPTLibrary(QString pStrFileName,QString pStrWindowName)
 {
-    qDebug()<< "InitPtLibrary";
+    //qDebug()<< "InitPtLibrary";
     m_strFileName = pStrFileName;
     m_strWindowName = pStrWindowName;
     m_mapMainWindowMenus = new QMap<QString, QList<PT_MENU*> >();

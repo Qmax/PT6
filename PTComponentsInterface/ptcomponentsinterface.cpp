@@ -5,7 +5,7 @@
 
 PTComponentsInterface::PTComponentsInterface(QObject *parent):QObject(parent)
 {
-	qDebug()<<"PTComponents Interface Initiated";
+	//qDebug()<<"PTComponents Interface Initiated";
 	pluginDMM=pluginFG=pluginSL=pluginSHL=pluginVI=pluginICM=pluginDSO=0;
 	ptDMM=ptVI=ptSL=ptSHL=ptFG=ptICM=ptDSO=0;
 }
@@ -20,11 +20,11 @@ void PTComponentsInterface::RegisterPTWidget(unsigned int pCatID)
 void PTComponentsInterface::LoadDMMPlugins()
 {
     //DMM
-	qDebug()<<"load DMM plugins";
+	//qDebug()<<"load DMM plugins";
 
 		pluginDMM = new QPluginLoader("libDMMInterface.so",this);
 		ptDMM = pluginDMM->instance();
-		qDebug()<<"pluginDMM->instance() --> "<<ptDMM;
+		//qDebug()<<"pluginDMM->instance() --> "<<ptDMM;
 		IDMM =qobject_cast<IPTDMMInterface*>(ptDMM);
     	m_PTFactories[IDMM->getGUID()]= dynamic_cast<QWidget*>(IDMM->getPTWidget());
     //}
@@ -32,7 +32,7 @@ void PTComponentsInterface::LoadDMMPlugins()
 
 void PTComponentsInterface::LoadDSOPlugins()
 {
-	qDebug()<<"load DSO plugin";
+	//qDebug()<<"load DSO plugin";
     pluginDSO=new QPluginLoader("libDSOInterface.so",this);
     ptDSO = pluginDSO->instance();
     IDSO =qobject_cast<IPTDSOInterface*>(ptDSO);
@@ -41,7 +41,7 @@ void PTComponentsInterface::LoadDSOPlugins()
 }
 void PTComponentsInterface::LoadFGPlugins(){
     //FG
-	qDebug()<<"load FG plugins";
+	//qDebug()<<"load FG plugins";
 
     pluginFG=new QPluginLoader("libFGInterface.so",this);
     ptFG = pluginFG->instance();
@@ -50,7 +50,7 @@ void PTComponentsInterface::LoadFGPlugins(){
 }
 void PTComponentsInterface::LoadVIPlugins(){
 //VI
-	qDebug()<<"load VI plugins";
+	//qDebug()<<"load VI plugins";
 
 	pluginVI=new QPluginLoader("libVIInterface.so",this);
 	ptVI = pluginVI->instance();
@@ -59,15 +59,14 @@ void PTComponentsInterface::LoadVIPlugins(){
 
 }
 void PTComponentsInterface::LoadSHLPlugins(){
-	qDebug()<<"load Short Locator test plugins";
-	qDebug()<<"dp-63";pluginSHL=new QPluginLoader("libSLInterface2.so",this);
-	qDebug()<<"dp-64";ptSHL = pluginSHL->instance();
-	qDebug()<<"dp-65";ISHL =qobject_cast<IPTSHLInterface*>(ptSHL);
-	qDebug()<<"dp-66";m_PTFactories[ISHL->getGUID()]= dynamic_cast<QWidget*>(ISHL->getPTWidget());
-	qDebug()<<"dp-67";}
+	pluginSHL=new QPluginLoader("libSLInterface2.so",this);
+	ptSHL = pluginSHL->instance();
+	ISHL =qobject_cast<IPTSHLInterface*>(ptSHL);
+	m_PTFactories[ISHL->getGUID()]= dynamic_cast<QWidget*>(ISHL->getPTWidget());
+}
 void PTComponentsInterface::LoadSLPlugins(){
  //SL
-	qDebug()<<"load SL plugins";
+	//qDebug()<<"load SL plugins";
 	pluginSL=new QPluginLoader("libSLInterface.so",this);
 	ptSL = pluginSL->instance();
 	ISL =qobject_cast<IPTSLInterface*>(ptSL);
@@ -75,7 +74,7 @@ void PTComponentsInterface::LoadSLPlugins(){
 }
 void PTComponentsInterface::LoadICMPlugins(){
  //SL
-	qDebug()<<"load ICM plugins";
+	//qDebug()<<"load ICM plugins";
 
 	pluginICM=new QPluginLoader("libICMUIInterface.so",this);
 	ptICM = pluginICM->instance();
@@ -85,7 +84,7 @@ void PTComponentsInterface::LoadICMPlugins(){
 
 void PTComponentsInterface::LoadPTPlugins()
 {
-	qDebug()<<"load multiple plugins";
+	//qDebug()<<"load multiple plugins";
     //DMM
     QPluginLoader pluginDMM("libDMMInterface.so",this);
     QObject *ptDMM = pluginDMM.instance();
@@ -128,7 +127,7 @@ void PTComponentsInterface::LoadPTPlugins()
 
 QWidget* PTComponentsInterface::InvokeApplication(unsigned pCatdID)
 {
-	qDebug()<<"inside Invoke application";
+	//qDebug()<<"inside Invoke application";
 
 		return m_PTFactories[pCatdID];
 }
@@ -136,7 +135,7 @@ QWidget* PTComponentsInterface::InvokeApplication(unsigned pCatdID)
 void PTComponentsInterface::removePlugin(unsigned int pCatID)
 {
 
-	qDebug()<< "Remove Plugin";
+	//qDebug()<< "Remove Plugin";
 	m_PTFactories[pCatID] =0;
 	//delete m_PTFactories[pCatID];
 }

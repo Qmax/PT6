@@ -220,7 +220,7 @@ private slots:
         void on_hold_clicked();
         void on_Auto_clicked();
         void on_calibrateDisplay_clicked();
-        void on_printImage_clicked();
+//        void on_printImage_clicked();
         void buttonPressed(int);
         void onMeasure(void);
         void GCalib2DMM(double,QString);

@@ -17,7 +17,7 @@ void MainWindowView::timerTimeout()
 {
     QTime objTime = QTime::currentTime();
     m_objDate = QDateTime::currentDateTime();
-    qDebug() << "executing thread id - "<<m_objDate;
+    //qDebug() << "executing thread id - "<<m_objDate;
     InitHeaderView(1,"Portable Tester");
 }
 
@@ -266,7 +266,7 @@ void MainWindowView::InitSidePane()
 
 void MainWindowView::hideWindows()
 {
-	qDebug() << "Hide WIndows";
+//	qDebug() << "Hide WIndows";
 //    mainpaneView->close();
 //    titleView->close();
     entireView->close();
@@ -277,7 +277,7 @@ void MainWindowView::hideWindows()
 
 void MainWindowView::showWindows()
 {
-	qDebug() << "Show WIndows";
+//	qDebug() << "Show WIndows";
 //    mainpaneView->show();
 //    titleView->show();
 

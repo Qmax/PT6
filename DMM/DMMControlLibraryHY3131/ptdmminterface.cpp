@@ -3,7 +3,7 @@
 
 PTDMMInterface::PTDMMInterface(QObject *parent):QObject(parent)
 {
-   qDebug()<< "Inside PTDMM Interfaces";
+//   qDebug()<< "Inside PTDMM Interfaces";
 //   m_objDMMWidget = new DMM;
 }
 

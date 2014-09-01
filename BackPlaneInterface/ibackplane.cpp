@@ -13,7 +13,7 @@ void IBackPlane::InitializeBpObject() {
 		close(g_nBackplaneFD);
 		//return 0;
 	}
-	qDebug() << "~~~~~~~~~~Backplane Interface Opened~~~~~~~~~~~";
+	//qDebug() << "~~~~~~~~~~Backplane Interface Opened~~~~~~~~~~~";
 	//return 1;
 }
 
@@ -1001,10 +1001,10 @@ unsigned char IBackPlane::verifyJtagID() {
 
 	readLSB = readBackPlaneRegister(PSOC_RLSW);
 	readMSB = readBackPlaneRegister(PSOC_RMSW);
-	//qDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
+	//qDebugqDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
 	unsigned int temp = (((readMSB | 0x00000000) << 16) | readLSB);
-	qDebug() << "JTAG Code ID:" << hex << temp << hex << "Parity:" << hex
-			<< ((readCMD & 0x0200) >> 9);
+	//qDebug() << "JTAG Code ID:" << hex << temp << hex << "Parity:" << hex
+			//<< ((readCMD & 0x0200) >> 9);
 	if (temp == getHexFileJtagID())
 		return 1;
 	else
@@ -1162,7 +1162,7 @@ unsigned char IBackPlane::eraseAll(){
 	 readLSB = readBackPlaneRegister(PSOC_RLSW);
 	 readMSB = readBackPlaneRegister(PSOC_RMSW);
 
-	 qDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
+	 //qDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
  //dummy read
 	readCMD = chkBusy = chkAck = ackLoop = 0;
 	 do {
@@ -1183,7 +1183,7 @@ unsigned char IBackPlane::eraseAll(){
 	 readLSB = readBackPlaneRegister(PSOC_RLSW);
 	 readMSB = readBackPlaneRegister(PSOC_RMSW);
 
-	 qDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
+	 //qDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
 
 //dummy read-2
 		readCMD = chkBusy = chkAck = ackLoop = 0;
@@ -1205,7 +1205,7 @@ unsigned char IBackPlane::eraseAll(){
 		 readLSB = readBackPlaneRegister(PSOC_RLSW);
 		 readMSB = readBackPlaneRegister(PSOC_RMSW);
 
-		 qDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
+		 //qDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
 
 //dummy read-3
 			readCMD = chkBusy = chkAck = ackLoop = 0;
@@ -1227,7 +1227,7 @@ unsigned char IBackPlane::eraseAll(){
 			 readLSB = readBackPlaneRegister(PSOC_RLSW);
 			 readMSB = readBackPlaneRegister(PSOC_RMSW);
 
-			 qDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
+			 //qDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
 
 //dummy read-4
 				readCMD = chkBusy = chkAck = ackLoop = 0;
@@ -1249,7 +1249,7 @@ unsigned char IBackPlane::eraseAll(){
 					readLSB = readBackPlaneRegister(PSOC_RLSW);
 					readMSB = readBackPlaneRegister(PSOC_RMSW);
 
-					qDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
+					//qDebug()<<"readLSB:"<<hex<<readLSB<<"readMSB:"<<hex<<readMSB;
 
 /*//actual read
 	 float time_elapsed=0;

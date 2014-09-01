@@ -12,7 +12,7 @@
 
 
 void  GpioEventInterface::InvokeGPIOEvent(QWidget *parent,QString driver, QString device,int *pKeyCode){
-    qDebug()<<"GPIO event invoked";
+    //qDebug()<<"GPIO event invoked";
     g_objGPIOevent = new GPIOEvent(parent,pKeyCode);
     g_objGPIOevent->create(driver,device);
 }
@@ -42,7 +42,7 @@ void GpioEventInterface::closefd(){
 bool GpioEventInterface::BlockSig(bool get){
         if(get==true){
             g_objGPIOevent->blockSignals(true);
-           // qDebug()<<"Signal Blocked";
+           // //qDebug()<<"Signal Blocked";
         }
         else if(get==false){
        g_objGPIOevent->blockSignals(false);
@@ -69,7 +69,7 @@ void GpioEventInterface::setSamplingType(SAMPLING_TYPE pType)
 Q_EXPORT_PLUGIN2(GpioEventInterface, GpioEventInterface)
 
 GPIOEvent::GPIOEvent(QWidget *parent,int *pKeyCode):QWidget(parent){
-    qDebug()<<"----------------------------GPIO LIBRARY STARTS----------------------------";
+    //qDebug()<<"----------------------------GPIO LIBRARY STARTS----------------------------";
 
         m_TW = parent;
         m_nKey = pKeyCode;
@@ -96,7 +96,7 @@ GPIOEvent::GPIOEvent(QWidget *parent,int *pKeyCode):QWidget(parent){
 
 GPIOEvent::~GPIOEvent(){
         IBackPlane->closeObject();
-        qDebug()<<"----------------------------GPIO LIBRARY ENDS----------------------------";
+        //qDebug()<<"----------------------------GPIO LIBRARY ENDS----------------------------";
 }
 
 void GPIOEvent::setAPPID(APPID pAPPID)
@@ -187,7 +187,7 @@ void GPIOEvent::create(QString driver, QString device)
 void GPIOEvent::startKnobDrive()
 {
 
-    qDebug()<<"Starting knob drive.....";
+    //qDebug()<<"Starting knob drive.....";
     IBackPlane->writeOtpLsb(0x00);
     IBackPlane->setTimer(0xf9);
     IBackPlane->setKnobCommandRegsiter(0x03);
@@ -247,7 +247,7 @@ void GPIOEvent::readKbdData()
         	QApplication::postEvent(m_TW,new QEvent(ShutDownEvent));
 
         if(l_nRegisterValue==0x900){
-                qDebug()<<"Probe&Knob";
+                //qDebug()<<"Probe&Knob";
                 QApplication::postEvent(m_TW,new QEvent(GpioEvent));
                 QApplication::postEvent(m_TW,new QEvent(KnobEvent));
         }

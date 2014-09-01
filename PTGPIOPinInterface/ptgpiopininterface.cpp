@@ -24,23 +24,23 @@ int toggleGPIO(char* gpioNo,int val){
 	return 1;
 }
 PTGPIOPinInterface::PTGPIOPinInterface() {
-    qDebug()<<"----------------------------GPIO PIN INTERFACE OPENED----------------------------";
+    //qDebug()<<"----------------------------GPIO PIN INTERFACE OPENED----------------------------";
 
     touch_value=1;
 	toggleGPIO("/dev/gpio/65",1);
 	toggleGPIO("/dev/gpio/66",1);
 }
 PTGPIOPinInterface::~PTGPIOPinInterface() {
-    qDebug()<<"----------------------------GPIO PIN INTERFACE CLOSED----------------------------";
+    //qDebug()<<"----------------------------GPIO PIN INTERFACE CLOSED----------------------------";
 
 }
 int PTGPIOPinInterface:: toggleTouchButton(){
 	if(touch_value==1){
 		touch_value=0;
-		qDebug() << ("\nTouch Disabled");
+		//qDebug() << ("\nTouch Disabled");
 	}else{
 		touch_value=1;
-		qDebug() << ("\nTouch Enabled");
+		//qDebug() << ("\nTouch Enabled");
 	}
 	toggleGPIO("/dev/gpio/124",touch_value);
 }

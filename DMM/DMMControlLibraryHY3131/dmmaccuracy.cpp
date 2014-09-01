@@ -5,6 +5,7 @@ DMMAccuracy::DMMAccuracy(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DMMAccuracy)
 {
+//	qDebug()<<"DMMAccuracy";
     ui->setupUi(this);
     this->setGeometry( QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,this->size(),qApp->desktop()->availableGeometry()));
     ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime());
@@ -128,7 +129,7 @@ void DMMAccuracy::on_dateTimeEdit_dateTimeChanged(QDateTime date)
 {
     QString cmd;
     QString l_strDate=date.toString();
-    qDebug()<<l_strDate;
+    //qDebug()<<l_strDate;
     QStringList l_arryDate=l_strDate.split(" ");
     QStringList l_arryTime=l_arryDate.at(3).split(":");
     if(l_arryDate.at(1)=="Jan")cmd="01"+l_arryDate.at(2)+l_arryTime.at(0)+l_arryTime.at(1)+l_arryDate.at(4);
@@ -143,7 +144,7 @@ void DMMAccuracy::on_dateTimeEdit_dateTimeChanged(QDateTime date)
     if(l_arryDate.at(1)=="Oct")cmd="10"+l_arryDate.at(2)+l_arryTime.at(0)+l_arryTime.at(1)+l_arryDate.at(4);
     if(l_arryDate.at(1)=="Nov")cmd="11"+l_arryDate.at(2)+l_arryTime.at(0)+l_arryTime.at(1)+l_arryDate.at(4);
     if(l_arryDate.at(1)=="Dec")cmd="12"+l_arryDate.at(2)+l_arryTime.at(0)+l_arryTime.at(1)+l_arryDate.at(4);
-    qDebug()<<cmd;
+    //qDebug()<<cmd;
     executeSystemCommand("date",cmd);
 }
 

@@ -70,7 +70,7 @@ PTDMMLibInterface::PTDMMLibInterface(QObject *parent):QObject(parent)
     avg=0;
     retval=0;
 
-    qDebug()<<"----------------------------PTDMM INTERFACE STARTS----------------------------";
+    //qDebug()<<"----------------------------PTDMM INTERFACE STARTS----------------------------";
 }
 PTDMMLibInterface::~PTDMMLibInterface()
 {
@@ -122,11 +122,11 @@ void PTDMMLibInterface::ApplyDACOffset(bool apply){
 			//qDebug()<<"Short Locator DAC offset";
 			if(apply==true){
 				l_nAD5318DW.m_nVout=ADCRxVoltage;//*(-1);
-				qDebug()<<"Applied Offset of "<<l_nAD5318DW.m_nVout<<"V";
+				//qDebug()<<"Applied Offset of "<<l_nAD5318DW.m_nVout<<"V";
 			}
 			else{
 				l_nAD5318DW.m_nVout=0.0;
-				qDebug()<<"Applied Offset of "<<l_nAD5318DW.m_nVout<<"V";
+				//qDebug()<<"Applied Offset of "<<l_nAD5318DW.m_nVout<<"V";
 			}
 			m_eSelect = DACF;
 			l_nAD5318DW.m_eDACSelect = m_eSelect;
@@ -141,7 +141,7 @@ void PTDMMLibInterface::ApplyDACOffset(bool apply){
 void PTDMMLibInterface::ApplyDACOffset(double apply){
     IAppCard->setSPIAppendBit(0xC000);
 		if(iamDMM==false){
-			qDebug()<<"Applied Offset of "<<apply<<"V";
+			//qDebug()<<"Applied Offset of "<<apply<<"V";
 			l_nAD5318DW.m_nVout=apply;
 			m_eSelect = DACF;
 			l_nAD5318DW.m_eDACSelect = m_eSelect;
@@ -254,14 +254,14 @@ double PTDMMLibInterface::displayResistance(unsigned int rValue)
     	avg=0;
     	l_nAIN=retval/noOfSamples;
     	retval=0;
-    	 qDebug("Converted Data : %f",l_nAIN);
+    	 //qDebug("Converted Data : %f",l_nAIN);
 
     }
     else if(rValue==R200mE){
     	for(avg=0;avg<(noOfSamples*2);avg++){
 
     		AIN=m_objAD7190->readADCDataRegister(m_nADC) & 0xFFFFFF;
-    		qDebug("ADC Data : %x",AIN);
+    		//qDebug("ADC Data : %x",AIN);
     	    if(AIN==overRange){
     	        return ret;
     	    }
@@ -359,7 +359,7 @@ double PTDMMLibInterface::displayResistance(unsigned int rValue)
 *///commented on 12062014
 
     //-------------------------------------------------------------------------------------
-    qDebug()<<"Resistance :"<<qSetRealNumberPrecision(7)<<Resistance;
+    //qDebug()<<"Resistance :"<<qSetRealNumberPrecision(7)<<Resistance;
 
 /*    double value = Resistance;
     static const double FACTOR = 32.0;
@@ -377,7 +377,7 @@ double PTDMMLibInterface::displayDiode(unsigned int rValue){
 	double l_nFactor1=0.0,l_nFactor2=0.0,l_nAIN=0.0,c_nAIN=0.0;
 
 			AIN=m_objAD7190->readADCDataRegister(m_nADC) & 0xFFFFFF;
-        qDebug("ADC Data : %x",AIN);
+        //qDebug("ADC Data : %x",AIN);
 
     double ret=999999999;
     if(AIN==overRange){
@@ -392,7 +392,7 @@ double PTDMMLibInterface::displayDiode(unsigned int rValue){
     	 gainValue=1;rangeValue=0.6;
     }
 
-    qDebug("Converted Data : %f",l_nAIN);
+    //qDebug("Converted Data : %f",l_nAIN);
     values.Data=AIN;
     values.ConvertedData=l_nAIN;
 

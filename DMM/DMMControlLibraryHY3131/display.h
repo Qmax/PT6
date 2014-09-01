@@ -89,7 +89,7 @@ public:
 		setXYWH();
 	}
 	void setValue(double l_nValue) {
-		qDebug() << "display.h-Data:" << l_nValue;
+		qDebug() << "display.h-Data:" << l_nValue<<" Range:"<<m_intRange;
 
 		QString l_strDecimelValue;
 		QString Inf=QChar(0x221E);
@@ -123,11 +123,12 @@ public:
 			else if(l_nValue==0)
 				l_intValue=0;*/
 //			l_intValue  = ((l_nValue >= 0) ? (int)(l_nValue + 0.5) : (int)(l_nValue - 0.5));
-			l_intValue = qRound(l_nValue);
+//			l_intValue = qRound(l_nValue);
+			l_intValue = int(l_nValue);
 //			qDebug()<<"after qRound:"<<l_intValue<<"\t"<<l_nValue;
 //_________________________________________________________________________________________
 			if (m_intRange == 3) {
-				if (l_intValue > 3)
+				if (l_nValue > 3.1)
 					setValue("OL");
 				else {
 					digits[0]->setText(QString::number(l_intValue, 10));
@@ -136,7 +137,7 @@ public:
 					l_nDecimelValue = l_nValue - (double)l_intValue;
 					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
 
-					qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
+					//qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[2]->setText(l_strDecimelValue.at(2));
@@ -162,14 +163,14 @@ public:
 			}
 //_________________________________________________________________________________________
 			else if (m_intRange == 5) {
-				if (l_intValue >5)
+				if (l_nValue >5.1)
 					setValue("OL");
 				else {
 					digits[0]->setText(QString::number(l_intValue, 10));
 					digits[1]->setText(".");
 					l_nDecimelValue = l_nValue - (double)l_intValue;
 					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
-					qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
+					//qDebug() << "1-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[2]->setText(l_strDecimelValue.at(2));
@@ -195,7 +196,7 @@ public:
 			}
 //_________________________________________________________________________________________
 			else if (m_intRange == 50) {
-				if (l_intValue >50)
+				if (l_nValue >51)
 					setValue("OL");
 				else {
 					Q = l_intValue / 10;
@@ -206,7 +207,7 @@ public:
 
 					l_nDecimelValue = l_nValue - (double)l_intValue;
 					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
-					qDebug() << "2-l_strDecimelValue->" << l_strDecimelValue;
+					//qDebug() << "2-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[3]->setText(l_strDecimelValue.at(2));
@@ -227,7 +228,7 @@ public:
 			}
 //_________________________________________________________________________________________
 			else if (m_intRange == 500) {
-				if (l_intValue >500)
+				if (l_nValue >510)
 					setValue("OL");
 				else {
 					Q = l_intValue / 100;
@@ -243,7 +244,7 @@ public:
 
 					l_nDecimelValue = l_nValue - (double)l_intValue;
 					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
-					qDebug() << "3-l_strDecimelValue->" << l_strDecimelValue;
+					////qDebug() << "3-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[4]->setText(l_strDecimelValue.at(2));
@@ -259,7 +260,7 @@ public:
 			}
 //_________________________________________________________________________________________
 			else if (m_intRange == 750) {
-				if (l_intValue >750)
+				if (l_nValue >760)
 					setValue("OL");
 				else {
 					Q = l_intValue / 100;
@@ -275,7 +276,7 @@ public:
 
 					l_nDecimelValue = l_nValue - (double)l_intValue;
 					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
-					qDebug() << "3-l_strDecimelValue->" << l_strDecimelValue;
+					//qDebug() << "3-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[4]->setText(l_strDecimelValue.at(2));
@@ -291,7 +292,7 @@ public:
 			}
 //_________________________________________________________________________________________
 			else if (m_intRange ==1000) {
-				if (l_intValue > 10000)
+				if (l_nValue > 1100)
 					setValue("OL");
 				else {
 					Q = l_intValue / 1000;
@@ -311,7 +312,7 @@ public:
 
 					l_nDecimelValue = l_nValue - (double)l_intValue;
 					l_strDecimelValue = QString::number(fabs(l_nDecimelValue),'f',10);
-					qDebug() << "4-l_strDecimelValue->" << l_strDecimelValue;
+					//qDebug() << "4-l_strDecimelValue->" << l_strDecimelValue;
 
 					if (l_strDecimelValue.length() >= 3)
 						digits[5]->setText(l_strDecimelValue.at(2));
@@ -344,7 +345,7 @@ public:
 
 	}
 	void setValue(QString strValue) {
-		qDebug() << "display.h(str)-Data:" << strValue;
+		//qDebug() << "display.h(str)-Data:" << strValue;
 		int signIndex = strValue.indexOf("-");
 		if (signIndex != -1) {
 			strValue = strValue.remove("-");

@@ -10,7 +10,7 @@
 
 void  PTKeyEventInterface::InvokeGPIOEvent(QWidget *parent,QString driver, QString device,int *pKeyCode)
 {
-    qDebug()<<"GPIO event invoked";
+    //qDebug()<<"GPIO event invoked";
     g_objKeyevent = new PTKeyEvent(parent,pKeyCode);
     g_objKeyevent->create(driver,device);
 
@@ -38,7 +38,7 @@ Q_EXPORT_PLUGIN2(PTKeyEventInterface, PTKeyEventInterface)
 
 PTKeyEvent::PTKeyEvent(QWidget *parent,int *pKeyCode):QWidget(parent)
 {
-    qDebug()<<"----------------------------GPIO LIBRARY KEY EVENT STARTS----------------------------";
+    //qDebug()<<"----------------------------GPIO LIBRARY KEY EVENT STARTS----------------------------";
 
         m_TW = parent;
         m_nKey = pKeyCode;
@@ -68,7 +68,7 @@ void PTKeyEvent::create(QString driver, QString pDevice)
         char str[2];
         sprintf(str,"%d", l_nDeviceIndex);
         strcat(device,str);
-        printf("Inside PTKeyboardDevice %s\n",device);
+//        printf("Inside PTKeyboardDevice %s\n",device);
         if((kbdFD = ::open(device,O_RDONLY)) == -1){
              printf ("%s is not a vaild device.\n", device);
         }
@@ -85,14 +85,14 @@ void PTKeyEvent::create(QString driver, QString pDevice)
     QString m_strDeviceName;
     QFile *m_nDevice;
     m_strDeviceName=device;
-    printf("%s\n",name);
+//    printf("%s\n",name);
     m_nDevice = new QFile(m_strDeviceName);
-    qDebug() << m_strDeviceName;
+    //qDebug() << m_strDeviceName;
     kbdFD = ::open(device,O_RDONLY);
     if(kbdFD >=0){
     m_notify = new QSocketNotifier(kbdFD, QSocketNotifier::Read,this);
     connect(m_notify, SIGNAL(activated(int)), this, SLOT(readKbdData()));
-    qDebug()<<"PTKeyPad Handler created!";
+    //qDebug()<<"PTKeyPad Handler created!";
     }
     else    {
         qDebug()<<"PTKeyPad Handler Problem!";
@@ -174,7 +174,7 @@ void PTKeyEvent::readKbdData()
             // We should handle only key events
             return;
         }
-        qDebug()<<"PTKeyEventInterface : event code :"<<event.code;
+        //qDebug()<<"PTKeyEventInterface : event code :"<<event.code;
         TranslatedKeyEvent translatedEvent(event);
         *m_nKey = translatedEvent.keyCode_;
         //emit pressed(translatedEvent.keyCode_);

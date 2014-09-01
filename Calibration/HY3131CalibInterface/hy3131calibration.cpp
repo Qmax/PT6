@@ -509,7 +509,7 @@ double HY3131Calibration::KRead(){
     while(KData>=1000)
         KData=KData/1000;
 
-    qDebug()<<"KData:"<<KData;
+    //qDebug()<<"KData:"<<KData;
     return KData;
 }
 
@@ -769,12 +769,12 @@ void HY3131Calibration::on_CompCalibration_clicked(bool checked)
 
             if(msgBox.clickedButton()!=skipButton){
 				KRefMinData[m_nMacroValue]=KRead();
-				qDebug()<<"KRefMinData"<<KRefMinData[m_nMacroValue];
+				//qDebug()<<"KRefMinData"<<KRefMinData[m_nMacroValue];
 				ui->leOffsetValue->setText(QString::number(KRefMinData[m_nMacroValue],'g',10));
 				updateCalibFile();
             }*/
 			KRefMinData[m_nMacroValue]=0;;
-			qDebug()<<"KRefMinData"<<KRefMinData[m_nMacroValue];
+			//qDebug()<<"KRefMinData"<<KRefMinData[m_nMacroValue];
 			ui->leOffsetValue->setText(QString::number(KRefMinData[m_nMacroValue],'g',10));
 			updateCalibFile();
 		//----------------------------------------------------------------------------------------------------------------------------
@@ -796,7 +796,7 @@ void HY3131Calibration::on_CompCalibration_clicked(bool checked)
 
             if(msgBox.clickedButton()!=skipButton){
 				KRefMaxData[m_nMacroValue]=KRead();
-				qDebug()<<"KRefMaxData"<<KRefMaxData[m_nMacroValue];
+				//qDebug()<<"KRefMaxData"<<KRefMaxData[m_nMacroValue];
 				ui->leMaxValue->setText(QString::number(KRefMaxData[m_nMacroValue],'g',10));
 				updateCalibFile();
             }
@@ -827,7 +827,7 @@ void HY3131Calibration::on_CompCalibration_clicked(bool checked)
 
             if(msgBox.clickedButton()!=skipButton){
 				HYMinRead[m_nMacroValue]=hy3131dmm->Measure2(m_nMacroValue);
-				qDebug()<<"HYMinRead"<<HYMinRead[m_nMacroValue];
+				//qDebug()<<"HYMinRead"<<HYMinRead[m_nMacroValue];
 				ui->leOffsetMeasured->setText(QString::number(HYMinRead[m_nMacroValue],'g',10));
 				updateCalibFile();
             }
@@ -848,7 +848,7 @@ void HY3131Calibration::on_CompCalibration_clicked(bool checked)
 
             if(msgBox.clickedButton()!=skipButton){
 				HYMaxRead[m_nMacroValue]=hy3131dmm->Measure2(m_nMacroValue);
-				qDebug()<<"HYMaxRead"<<HYMaxRead[m_nMacroValue];
+				//qDebug()<<"HYMaxRead"<<HYMaxRead[m_nMacroValue];
 				ui->leMaxMeasured->setText(QString::number(HYMaxRead[m_nMacroValue],'g',10));
 				updateCalibFile();
             }

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'dmm.h'
 **
-** Created: Fri Aug 8 10:53:44 2014
+** Created: Mon Sep 1 13:04:56 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -93,7 +93,7 @@ static const uint qt_meta_data_DMM[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      33,   14, // methods
+      32,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -133,9 +133,8 @@ static const uint qt_meta_data_DMM[] = {
      609,    4,    4,    4, 0x08,
      627,    4,    4,    4, 0x08,
      657,    4,    4,    4, 0x08,
-     681,    4,    4,    4, 0x08,
-     700,    4,    4,    4, 0x08,
-     712,    5,    4,    4, 0x08,
+     676,    4,    4,    4, 0x08,
+     688,    5,    4,    4, 0x08,
 
        0        // eod
 };
@@ -160,8 +159,8 @@ static const char qt_meta_stringdata_DMM[] = {
     "on_vac_clicked()\0on_vdc_clicked()\0"
     "on_hold_clicked()\0on_Auto_clicked()\0"
     "on_calibrateDisplay_clicked()\0"
-    "on_printImage_clicked()\0buttonPressed(int)\0"
-    "onMeasure()\0GCalib2DMM(double,QString)\0"
+    "buttonPressed(int)\0onMeasure()\0"
+    "GCalib2DMM(double,QString)\0"
 };
 
 const QMetaObject DMM::staticMetaObject = {
@@ -222,13 +221,12 @@ int DMM::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 26: on_hold_clicked(); break;
         case 27: on_Auto_clicked(); break;
         case 28: on_calibrateDisplay_clicked(); break;
-        case 29: on_printImage_clicked(); break;
-        case 30: buttonPressed((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 31: onMeasure(); break;
-        case 32: GCalib2DMM((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 29: buttonPressed((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 30: onMeasure(); break;
+        case 31: GCalib2DMM((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         default: ;
         }
-        _id -= 33;
+        _id -= 32;
     }
     return _id;
 }

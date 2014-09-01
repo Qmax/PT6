@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'pticminterface.h'
 **
-** Created: Thu Aug 28 14:37:57 2014
+** Created: Mon Sep 1 17:13:10 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!

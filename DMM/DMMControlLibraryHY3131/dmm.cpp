@@ -55,12 +55,9 @@ void customMessageHandler(QtMsgType type, const char *msg) {
 DMM::DMM(QWidget *parent) :
         QMainWindow(parent), ui(new Ui::DMM) {
     ui->setupUi(this);
-
     QPluginLoader hy3131Loader("libHY3131DMMLib.so", this);
     hy3131DMM = qobject_cast<IHY3131DMMLibInterface*> (hy3131Loader.instance());
-
     hy3131Calib = new HY3131Calibration();
-
     //BackPlaneInterfacePlugin
     QPluginLoader loader2("libBackPlaneInterface.so", this);
     IBackPlane = qobject_cast<IntefaceBackPlane*> (loader2.instance());
@@ -534,9 +531,9 @@ void DMM::onMeasure() {
         //*******************Diode*************************************
         if (Flag.diodeFlag == 1) {
             display.retvalHY3131 = hy3131DMM->Measure(DIODE);
-            qDebug()<<"display.retvalHY3131"<<display.retvalHY3131*10;
+            //qDebug()<<"display.retvalHY3131"<<display.retvalHY3131*10;
             display.retval = display.retvalHY3131*1e-3;
-            qDebug()<<"display.retval"<<display.retval;
+            //qDebug()<<"display.retval"<<display.retval;
             dis->setRange(500);
         }
         //*******************Continuity***********************************
@@ -570,8 +567,8 @@ void DMM::onMeasure() {
 
         if (ui->calibrateDisplay->isChecked()) {
             CalibrateDisplay(ui->label_5->text());
-            qDebug() << "Screen Calibration-Slope:" << calibedSlope
-                    << "Constant:" << calibedConstant;
+            //qDebug() << "Screen Calibration-Slope:" << calibedSlope
+                    //<< "Constant:" << calibedConstant;
             double y, x, c, m;
             x = display.retvalHY3131;
             c = calibedConstant;
@@ -676,22 +673,22 @@ void DMM::onMeasure() {
             }
 
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            if((ui->label_5->text()==mapResistance.value(2)||ui->label_5->text()==mapResistance.value(5)||ui->label_5->text()==mapCurrent.value(1)||ui->label_5->text()==mapDCVoltage.value(2)||ui->label_5->text()==mapACVoltage.value(2))&&(digitsLimiter(display.retvalHY3131)>5)){
+            if((ui->label_5->text()==mapResistance.value(2)||ui->label_5->text()==mapResistance.value(5)||ui->label_5->text()==mapCurrent.value(1)||ui->label_5->text()==mapDCVoltage.value(2)||ui->label_5->text()==mapACVoltage.value(2))&&(digitsLimiter(display.retvalHY3131)>5.1)){
                 dis->setValue("OL");
             }
-            else if((ui->label_5->text()==mapResistance.value(0)||ui->label_5->text()==mapResistance.value(3)||ui->label_5->text()==mapResistance.value(6)||ui->label_5->text()==mapCurrent.value(2)||ui->label_5->text()==mapDCVoltage.value(0)||ui->label_5->text()==mapDCVoltage.value(3)||ui->label_5->text()==mapACVoltage.value(0)||ui->label_5->text()==mapACVoltage.value(3))&&(digitsLimiter(display.retvalHY3131)>50)){
+            else if((ui->label_5->text()==mapResistance.value(0)||ui->label_5->text()==mapResistance.value(3)||ui->label_5->text()==mapResistance.value(6)||ui->label_5->text()==mapCurrent.value(2)||ui->label_5->text()==mapDCVoltage.value(0)||ui->label_5->text()==mapDCVoltage.value(3)||ui->label_5->text()==mapACVoltage.value(0)||ui->label_5->text()==mapACVoltage.value(3))&&(digitsLimiter(display.retvalHY3131)>51)){
                 dis->setValue("OL");
             }
-            else if((ui->label_5->text()==mapResistance.value(1)||ui->label_5->text()==mapResistance.value(4)||ui->label_5->text()==mapCurrent.value(0)||ui->label_5->text()==mapCurrent.value(3)||ui->label_5->text()==mapDCVoltage.value(1)||ui->label_5->text()==mapDCVoltage.value(4)||ui->label_5->text()==mapACVoltage.value(1)||ui->label_5->text()==mapACVoltage.value(4))&&(digitsLimiter(display.retvalHY3131)>500)){
+            else if((ui->label_5->text()==mapResistance.value(1)||ui->label_5->text()==mapResistance.value(4)||ui->label_5->text()==mapCurrent.value(0)||ui->label_5->text()==mapCurrent.value(3)||ui->label_5->text()==mapDCVoltage.value(1)||ui->label_5->text()==mapDCVoltage.value(4)||ui->label_5->text()==mapACVoltage.value(1)||ui->label_5->text()==mapACVoltage.value(4))&&(digitsLimiter(display.retvalHY3131)>510)){
                 dis->setValue("OL");
             }
-            else if((ui->label_5->text()==mapCurrent.value(4))&&(digitsLimiter(display.retvalHY3131)>3)){
+            else if((ui->label_5->text()==mapCurrent.value(4))&&(digitsLimiter(display.retvalHY3131)>3.1)){
                 dis->setValue("OL");
             }
-            else if((ui->label_5->text()==mapACVoltage.value(5))&&(digitsLimiter(display.retvalHY3131)>750)){
+            else if((ui->label_5->text()==mapACVoltage.value(5))&&(digitsLimiter(display.retvalHY3131)>760)){
                 dis->setValue("OL");
             }
-            else if((ui->label_5->text()==mapDCVoltage.value(4))&&(digitsLimiter(display.retvalHY3131)>1000)){
+            else if((ui->label_5->text()==mapDCVoltage.value(4))&&(digitsLimiter(display.retvalHY3131)>1100)){
                 dis->setValue("OL");
             }
             else{
@@ -706,9 +703,11 @@ void DMM::onMeasure() {
                  ui->adcConvData->setText(QString::number(values.ConvertedData, 'f', 16));*/
     }
     //<-------For Enabling graph plot-------
+/*
     plotSimpleDemo(ui->customPlot);
     ui->customPlot->graph()->rescaleAxes();
     ui->customPlot->replot();//------------->
+*/
 }
 void DMM::setupSimpleDemo(QCustomPlot *customPlot) {
     customPlot->addGraph();
@@ -908,7 +907,7 @@ void DMM::callMeasure(void) {
         }
         //***********************Current*************************************
         if (Flag.iFlag == 1) {
-            qDebug() << "Inside Curent Measure";
+            //qDebug() << "Inside Curent Measure";
             if (ui->label_5->text() == mapCurrent.value(0)) {
                 if (Flag.acFlag == 1) {
                     hy3131DMM->Configure(AC500uA);
@@ -962,7 +961,7 @@ void DMM::callMeasure(void) {
         if (Flag.runFlag == 1)
             m_nADCtimer->start(500);
     }
-    setupSimpleDemo(ui->customPlot);
+//    setupSimpleDemo(ui->customPlot);
 }
 void DMM::case_v() {
     ////qDebug()<<"case V";
@@ -996,7 +995,7 @@ void DMM::case_v() {
 
 }
 void DMM::case_i() {
-    qDebug() << "case I";
+    //qDebug() << "case I";
 
     if (Flag.dcFlag != 1)
         ui->textEdit_5->setText("AC ~");
@@ -1023,7 +1022,7 @@ void DMM::case_i() {
         ui->lineEdit_4->setText(micro + "A");
 }
 void DMM::case_ac() {
-    qDebug() << "case AC";
+    //qDebug() << "case AC";
     if (Flag.vFlag == 1) {
         ui->label_6->setText(mapACVoltage.value(nVoltagePrev));
         ui->label_5->setText(mapACVoltage.value(nVoltageCur));

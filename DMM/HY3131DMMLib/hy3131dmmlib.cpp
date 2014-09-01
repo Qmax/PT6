@@ -98,14 +98,14 @@ void HY3131DMMLib::on_ReadAll() {
 
 	for (int i = 55; i >= 0; i--) {
 		readData[i] = readDMMSPI(readAddr) & 0x000000FF;
-		qDebug()<<"Read Address:"<<hex<<readAddr<<"Read Data:"<<hex<<readData[i];
+		//qDebug()<<"Read Address:"<<hex<<readAddr<<"Read Data:"<<hex<<readData[i];
 		readAddr--;
 	}
 
 }
 void HY3131DMMLib::Configure(int8_t index){
 	busyState=true;
-	qDebug()<<"Range:"<<m_strRange[index];
+	//qDebug()<<"Range:"<<m_strRange[index];
 	//Reset DMMSPI
 	//	resetDMMSPI();
 	//Relay Switching
@@ -193,12 +193,13 @@ void HY3131DMMLib::Configure(int8_t index){
 }
 double HY3131DMMLib::Measure(int8_t index){
 	busyState=true;
+	double temp=0.0,rawData=0.0,temp1=0.0;
 //	qDebug()<<"Gain:"<<m_nGain[index]<<"Offset:"<<m_nOffset[index];
 
 	if(index==AC50mV || index==AC500mV ||index==AC5V || index==AC50V ||index==AC500V ||index==AC1000V || index==AC500uA || index==AC5mA ||index==AC50mA || index==AC500mA ||index==AC3A){
 		//		ReadData = sqrt((Measure2(index))-m_nOffset[index])/m_nGain[index];
 		double rawData =Measure2(index);
-		//qDebug()<<"rawData:"<<rawData;
+		//qDebug()<<"AC RawData:"<<rawData;
 //		ReadData = sqrt(((rawData)-m_nOffset[index]))/m_nGain[index]; //method-I
 
 /*
@@ -215,12 +216,13 @@ double HY3131DMMLib::Measure(int8_t index){
 	}
 	else{
 		double temp=Measure2(index);
+		//qDebug()<<"DC RawData:"<<rawData;
 		if(temp==999999999)
 			return temp;
 		else
 			ReadData=(temp-m_nOffset[index])/m_nGain[index]; //method-I
 	}
-	qDebug()<<"hy3131dmmlib.cpp-Measured Data :"<<ReadData;
+	//qDebug()<<"hy3131dmmlib.cpp-Measured Data :"<<ReadData;
 
 	busyState=false;
 
@@ -229,7 +231,10 @@ double HY3131DMMLib::Measure(int8_t index){
 }
 double HY3131DMMLib::Measure2(int8_t index){
 	busyState=true;
+	RawData=0.0;ADCDigital=0;
 	if(index==AC50mV || index==AC500mV ||index==AC5V || index==AC50V ||index==AC500V ||index==AC1000V || index==AC500uA || index==AC5mA ||index==AC50mA || index==AC500mA || index==AC3A){
+		if(minus==true)
+			minus=false;
 		RMSData=readRMS();
 		RawData = (double)RMSData;
 	}
@@ -251,7 +256,7 @@ double HY3131DMMLib::Measure2(int8_t index){
 	if(minus==true)
 		RawData=RawData*-1;
 
-	qDebug()<<"ADC Digital:"<<hex<<ADCDigital;
+	//qDebug()<<"ADC Digital:"<<hex<<ADCDigital;
 //	qDebug()<<"rawData:"<<RawData;
 	busyState=false;
 	return RawData;
@@ -406,8 +411,8 @@ u_int32_t HY3131DMMLib::readADC1(u_int8_t r0,u_int8_t r1,u_int8_t r2){
 		temp+=t2;
 	}
 	temp=temp/m_nSampleCount;
-	qDebug()<<"_______________________________________________________________";
-	qDebug()<<"ADC1 Read Data:"<<hex<<temp;
+	//qDebug()<<"_______________________________________________________________";
+	//qDebug()<<"ADC1 Read Data:"<<hex<<temp;
 	busyState=false;
 
 	return temp;
@@ -443,14 +448,14 @@ u_int32_t HY3131DMMLib::readLPF(){
 	_rms = _rms | _reg_t3;
 	_rms = _rms | _reg_t4;
 	/*(20062014)_rms = _rms | _reg_t5;*/
-	qDebug()<<"======================================================================";
+	//qDebug()<<"======================================================================";
 //	qDebug()<<"RMS ADC Read Data-Before Mask:"<<QString::number(_rms,16);
 
 	//Mask 0:37 Registers
 	/*_rms =_rms & 0x3FFFFFFFFFLL;*/
 	busyState=false;
 	//qDebug()<<"reg-0x9:"<<hex<<reg0<<endl<<"reg-0xA:"<<hex<<reg1<<endl<<"reg-0xB:"<<hex<<reg2<<endl<<"reg-0xC:"<<hex<<reg3<<endl<<"reg-0xD:"<<hex<<reg4<<endl
-	qDebug()<<"hy3131dmmlib.cpp-RMS ADC Read Data:"<<QString::number(_rms,16);
+	//qDebug()<<"hy3131dmmlib.cpp-RMS ADC Read Data:"<<QString::number(_rms,16);
 //	qDebug()<<"PKHMAX:"<<hex<<readPKHMAX();	usleep(100);
 //	qDebug()<<"PKHMIN:"<<hex<<readPKHMIN();	usleep(100);
 	return _rms;

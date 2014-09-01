@@ -42,8 +42,8 @@ PortableTester::PortableTester(QWidget *parent) :
     do{
         loginDialog->exec();
     }while(!m_nPassword);*/
-    qDebug()
-            << "----------------------------PORTABLE TESTER STARTS----------------------------";
+    //qDebug()
+            //<< "----------------------------PORTABLE TESTER STARTS----------------------------";
     
     //Set home Directory as Current Directory
     QDir::setCurrent("/home");
@@ -103,7 +103,7 @@ PortableTester::PortableTester(QWidget *parent) :
     IPTKeyEvent->InvokeGPIOEvent(this, "/dev/input/event2", "pt_kpp",&m_nPTKeyCode);
 //    IGPIOEvent->InvokeGPIOEvent(this, "/dev/input/event3", "gpioshutdown", &m_nPTShutDown);//do not uncomment VI will not work properly
     
-    qDebug() << "PT win Id" << this->winId();
+    //qDebug() << "PT win Id" << this->winId();
     isWindowOpen = false;
     
     msgBoxLive = false;
@@ -202,31 +202,31 @@ char PortableTester::showMessageBox(bool connect, bool abort,bool cancel, QStrin
     if (connect == true){
         connectButton = msgBox->addButton(okText, QMessageBox::YesRole);
         connectButton->setFont(QFont("DejaVu Sans", 18, 50, false));
-        qDebug()<<"163";
+        //qDebug()<<"163";
     }
     if (abort == true){
         abortButton = msgBox->addButton(NoText, QMessageBox::NoRole);
         abortButton	 ->setFont(QFont("DejaVu Sans", 18, 50, false));
-        qDebug()<<"167";
+        //qDebug()<<"167";
     }
     if (cancel==true){
         cancelButton =msgBox->addButton(cancelText, QMessageBox::RejectRole);
         cancelButton ->setFont(QFont("DejaVu Sans", 18, 50, false));
-        qDebug()<<"171";
+        //qDebug()<<"171";
     }
     msgBox->exec();
-    qDebug()<<"176";
+    //qDebug()<<"176";
     if (msgBox->clickedButton() == connectButton){
-        qDebug()<<"178";
+        //qDebug()<<"178";
         return 'Y';
     }
     if (abort == true){
-        qDebug()<<"182";
+        //qDebug()<<"182";
         if (msgBox->clickedButton() == abortButton)
             return 'N';
     }
     if (cancel == true){
-        qDebug()<<"187";
+        //qDebug()<<"187";
         if (msgBox->clickedButton() == cancelButton)
             return 'A';
     }
@@ -250,13 +250,13 @@ void PortableTester::checkButton() {
     l_objMainView->InitHeaderView(1, "PT6-QUTE");
 }
 void PortableTester::poweroff() {
-    qDebug()<<"poweroff";
+    //qDebug()<<"poweroff";
     IGPIOPin->killSystem();
 //    QProcess::execute("poweroff");
     
 }
 void PortableTester::houseKeeping() {
-    qDebug()<<"houseKeeping";
+    //qDebug()<<"houseKeeping";
     IBackPlane->closeObject();
     IPsoc->closeSerial();
     objTimer->stop();
@@ -321,7 +321,7 @@ void PortableTester::CreateButtons(QWidget *pWidget, QString strPanel) {
         PT_MENU *l_obj = l_lstWindowParams.at(l_nIndex);
         QSize l_tempSize(l_obj->m_nWidth, l_obj->m_nHeight);
         if (strPanel == "ApplicationPanel") {
-            qDebug() << l_obj->m_strImageName;
+            //qDebug() << l_obj->m_strImageName;
             AppButtons[l_nIndex] = new QmaxButton(l_obj->m_strButtonCaption,
                                                   l_tempSize, l_obj->m_strImageName, 0, l_nIndex, pWidget);
             AppButtons[l_nIndex]->setGeometry(l_obj->m_nXPos, l_obj->m_nYPos,
@@ -346,8 +346,8 @@ PortableTester::~PortableTester() {
     IPsoc->closeSerial();
     //delete ui;
     objTimer->stop();
-    qDebug()
-            << "----------------------------PORTABLE TESTER ENDS----------------------------";
+    //qDebug()
+            //<< "----------------------------PORTABLE TESTER ENDS----------------------------";
     delete *AppButtons;
     delete *FunctionalButtons;
     delete l_objMainView;
@@ -392,7 +392,7 @@ void PortableTester::initialitation() {
     splashIdle->setEnabled(false);
 }
 void PortableTester::on_shutDownButton_clicked() {
-    qDebug()<<"on_shutDownButton_clicked";
+    //qDebug()<<"on_shutDownButton_clicked";
     char ret = showMessageBox(true, true,true,"Are you sure to shut down/Restart the system?", "Shutdown","Reboot","Cancel");
     if (ret == 'Y') {
         l_objMainView->hideWindows();
@@ -424,7 +424,7 @@ void PortableTester::on_testjigButton_clicked() {
     QProcess::execute("./PortableTester -qws");
 }
 void PortableTester::changeEvent(QEvent *e) {
-    qDebug() << "Inside PortableTester Change Event" << e->type();
+    //qDebug() << "Inside PortableTester Change Event" << e->type();
     switch (e->type()) {
     case QEvent::LanguageChange:
         ui->retranslateUi(this);
@@ -497,10 +497,10 @@ void PortableTester::showButtons() {
 }
 
 void PortableTester::customEvent(QEvent* e) {
-    qDebug() << "Portable Tester-Custom Event";
+    //qDebug() << "Portable Tester-Custom Event";
     if(myID==0){
 	if (e->type() == ShutDownEvent) {
-            qDebug() << "GPIO Shutdown Application Layer";
+            //qDebug() << "GPIO Shutdown Application Layer";
 /*            houseKeeping();
             QSplashScreen *splash = new QSplashScreen;
             splash->setPixmap(QPixmap(":/images/image93.png").scaled(790, 590));
@@ -509,23 +509,23 @@ void PortableTester::customEvent(QEvent* e) {
             on_shutDownButton_clicked();
 	}
 	if (e->type() == ((QEvent::Type) 5678)) {
-            qDebug() << "Portable Tester-PT-Key Event";
+            //qDebug() << "Portable Tester-PT-Key Event";
             if (isWindowOpen == true)
                 return;
             if (m_nPTKeyCode == 1) {
-                qDebug() << ("\nMENU");
+                //qDebug() << ("\nMENU");
                 idleScreen();
                 
             }
             if (m_nPTKeyCode == 4) {
-                qDebug() << ("\nF1");
+                //qDebug() << ("\nF1");
                 buttonPressed(0);
                 //			for(int i=0;i<6;i++){
                 //				if(FunctionalButton[i]->geometry().y()==70)
                 //					Functions(i);
                 //			}
             } else if (m_nPTKeyCode == 5) {
-                qDebug() << ("\nF2");
+                //qDebug() << ("\nF2");
                 buttonPressed(1);
                 //			for(int i=0;i<6;i++){
                 //				if(FunctionalButton[i]->geometry().y()==170)
@@ -533,7 +533,7 @@ void PortableTester::customEvent(QEvent* e) {
                 //			}
                 
             } else if (m_nPTKeyCode == 6) {
-                qDebug() << ("\nF3");
+                //qDebug() << ("\nF3");
                 buttonPressed(2);
                 //			for(int i=0;i<6;i++){
                 //				if(FunctionalButton[i]->geometry().y()==270)
@@ -541,7 +541,7 @@ void PortableTester::customEvent(QEvent* e) {
                 //			}
                 
             } else if (m_nPTKeyCode == 7) {
-                qDebug() << ("\nF4");
+                //qDebug() << ("\nF4");
                 buttonPressed(3);
                 //			for(int i=0;i<6;i++){
                 //				if(FunctionalButton[i]->geometry().y()==370)
@@ -549,7 +549,7 @@ void PortableTester::customEvent(QEvent* e) {
                 //			}
                 
             } else if (m_nPTKeyCode == 8) {
-                qDebug() << ("\nF5");
+                //qDebug() << ("\nF5");
                 buttonPressed(4);
                 //			for(int i=0;i<6;i++){
                 //				if(FunctionalButton[i]->geometry().y()==470)
@@ -557,22 +557,22 @@ void PortableTester::customEvent(QEvent* e) {
                 //			}
                 
             } else if (m_nPTKeyCode == 2) {
-                qDebug() << ("\nESC");
+                //qDebug() << ("\nESC");
                 if (msgBoxLive == true) {
                     cancelButton->animateClick(1);
                 } else
                     buttonPressed(15);
             }
             else if(m_nPTKeyCode == 9){
-                qDebug() << ("\nUP");
+                //qDebug() << ("\nUP");
                 //			UpDownButton(_UP_);
             }
             else if(m_nPTKeyCode == 10){
-                qDebug() << ("\nDOWN");
+                //qDebug() << ("\nDOWN");
                 //			UpDownButton(_DOWN_);
             }
             else if (m_nPTKeyCode == 11) {
-                qDebug() << ("\nRIGHT");
+                //qDebug() << ("\nRIGHT");
                 if (msgBoxLive != true) {
                     
                 }
@@ -586,7 +586,7 @@ void PortableTester::customEvent(QEvent* e) {
                     
                 }
             } else if (m_nPTKeyCode == 12) {
-                qDebug() << ("\nLEFT");
+                //qDebug() << ("\nLEFT");
                 if (msgBoxLive != true) {
                     
                 }
@@ -601,7 +601,7 @@ void PortableTester::customEvent(QEvent* e) {
             }
             
             else if (m_nPTKeyCode == 13) {
-                qDebug() << ("\nENTER");
+                //qDebug() << ("\nENTER");
                 if (msgBoxLive == true) {
                     if (connectButton->hasFocus())
                         connectButton->animateClick(1);
@@ -630,7 +630,7 @@ void PortableTester::customEvent(QEvent* e) {
                     
                     process.setProcessEnvironment(env);
                     
-                    qDebug() << "Touch Command exported";
+                    //qDebug() << "Touch Command exported";
                     
                     m_bTouchFlag == true;
                 } else if (m_bTouchFlag == true) {
@@ -649,7 +649,7 @@ void PortableTester::customEvent(QEvent* e) {
                     
                     process.setProcessEnvironment(env);
                     
-                    qDebug() << "Mouse Command exported";
+                    //qDebug() << "Mouse Command exported";
                     
                     m_bTouchFlag == false;
                 }
@@ -739,7 +739,7 @@ void PortableTester::Functions(int pValue){
     else if (pValue == _VI_) {
         //		char connectStatus=showMessageBox(true,true,false,"Ensure proper VI cables connected.");
         //		if(connectStatus=='Y'){
-        qDebug()<<"VI Application";
+        //qDebug()<<"VI Application";
         IPT->LoadVIPlugins();
         myID = 0x56494D;
         QWidget *VI = IPT->InvokeApplication(myID);
@@ -821,7 +821,7 @@ void PortableTester::Functions(int pValue){
         //		}
     }
     else if(pValue == 16){
-        qDebug()<<"SHORT LOCATOR TESTJIG";
+        //qDebug()<<"SHORT LOCATOR TESTJIG";
         IPT->LoadSHLPlugins();
         myID = 0x999999;
         QWidget *SHL = IPT->InvokeApplication(myID);
@@ -833,7 +833,7 @@ void PortableTester::Functions(int pValue){
     
 }
 void PortableTester::buttonPressed(int pValue) {
-    qDebug() << "pValue:" << pValue;
+    //qDebug() << "pValue:" << pValue;
     //~~~~~~~~~~~~~MAIN 6 FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     if (pValue == 0) {
         Functions(_DMM_);
@@ -899,7 +899,7 @@ void PortableTester::paintEvent(QPaintEvent *pEvent) {
     QWidget::paintEvent(pEvent);
 }
 void PortableTester::UnHide() {
-    qDebug() << "UnHide";
+//    qDebug() << "UnHide";
     l_objMainView->InitHeaderView(0, "PT6-QUTE");
     l_objMainView->showWindows();
     baseFrame->setVisible(true);
