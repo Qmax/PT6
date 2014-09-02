@@ -76,7 +76,7 @@ void VIFunctionalLogic::ReadCalibrationFunctionFile(QString pStrName)
 }
 
 double VIFunctionalLogic::getReceiveCalibrationConstant(short int pVoltIndex)
-{Q_UNUSED(pVoltIndex)
+{
     int index=0;
     double l_nVoltValue = m_objVISubject->getVoltageValue();
 //    qDebug()<<"Voltage:"<<l_nVoltValue;
@@ -95,7 +95,7 @@ double VIFunctionalLogic::getReceiveCalibrationConstant(short int pVoltIndex)
 }
 
 double VIFunctionalLogic::getReceiveCalibrationGain(short int pVoltIndex)
-{Q_UNUSED(pVoltIndex)
+{
     double l_nVoltValue = m_objVISubject->getVoltageValue();
   //  qDebug()<<"Voltage:"<<l_nVoltValue;
     int index=0;
@@ -116,7 +116,7 @@ double VIFunctionalLogic::getReceiveCalibrationGain(short int pVoltIndex)
 void VIFunctionalLogic::storeCalibFile(QString pStrCalibFile,short unsigned int *pReadData)
 {
 	   // QFile *l_objDataFile = new QFile(pStrCalibFile);
-	Q_UNUSED(pStrCalibFile);
+
 	    FILE *l_nFD;
 	    unsigned int l_nFileData=0;
 	    	  //printf("receiveFIFO\n");
@@ -124,7 +124,7 @@ void VIFunctionalLogic::storeCalibFile(QString pStrCalibFile,short unsigned int 
 	    short int counter=0;
 	    short int l_nWaveCounter=0;
 	    short int l_nStartTick=100,l_nEndTick=200;
-	    Q_UNUSED(l_nEndTick)
+
 	   // bool ok=true;
 	   // if(l_objDataFile->open(QFile::WriteOnly))
 	   // {

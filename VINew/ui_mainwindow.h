@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue Sep 2 15:51:12 2014
+** Created: Tue Sep 2 18:10:21 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -2838,17 +2838,17 @@ public:
         butZoom->setDefault(true);
         butZoom->setFlat(true);
         MainWindow->setCentralWidget(centralWidget);
-        PCBox->raise();
-        grpInteractive->raise();
         debugPanel->raise();
-        frontPanel_VI->raise();
+        butZoom->raise();
+        grpInteractive->raise();
         startBox->raise();
-        storeBox->raise();
-        CalibBox->raise();
         deleteBox->raise();
         ExitBox->raise();
+        PCBox->raise();
+        CalibBox->raise();
+        storeBox->raise();
+        frontPanel_VI->raise();
         selectFrame->raise();
-        butZoom->raise();
 
         retranslateUi(MainWindow);
 

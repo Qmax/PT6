@@ -496,7 +496,7 @@ void Plotter::loopDrawCurves(QPainter *painter)
          dy = data[j].y();
          if(m_bUniPolar == true)
          {
-             float l_nDiv = (dy/2.0);Q_UNUSED(l_nDiv)
+             float l_nDiv = (dy/2.0);
 //             printf("UniPolar %f->%f\n",l_nDiv,dy - l_nDiv);
          }
          if(( data[j].x()>=settings.minX && data[j].x()<=settings.maxX))
@@ -711,7 +711,7 @@ void Plotter::drawCurves(QPainter *painter)
              dy = data[j].y();
              if(m_bUniPolar == true)
              {
-                 float l_nDiv = (dy/2.0);Q_UNUSED(l_nDiv)
+                 float l_nDiv = (dy/2.0);
 //                 printf("UniPolar %f->%f\n",l_nDiv,dy - l_nDiv);
              }
              if(( data[j].x()>=settings.minX && data[j].x()<=settings.maxX))

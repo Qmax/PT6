@@ -11829,17 +11829,17 @@ color: rgba(0, 0, 0, 0); }</string>
      <bool>true</bool>
     </property>
    </widget>
-   <zorder>PCBox</zorder>
-   <zorder>grpInteractive</zorder>
    <zorder>debugPanel</zorder>
-   <zorder>frontPanel_VI</zorder>
+   <zorder>butZoom</zorder>
+   <zorder>grpInteractive</zorder>
    <zorder>startBox</zorder>
-   <zorder>storeBox</zorder>
-   <zorder>CalibBox</zorder>
    <zorder>deleteBox</zorder>
    <zorder>ExitBox</zorder>
+   <zorder>PCBox</zorder>
+   <zorder>CalibBox</zorder>
+   <zorder>storeBox</zorder>
+   <zorder>frontPanel_VI</zorder>
    <zorder>selectFrame</zorder>
-   <zorder>butZoom</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

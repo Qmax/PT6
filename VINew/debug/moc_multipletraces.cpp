@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'multipletraces.h'
 **
-** Created: Tue Sep 2 15:52:20 2014
+** Created: Tue Sep 2 19:02:38 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -34,16 +34,16 @@ static const uint qt_meta_data_MultipleTraces[] = {
       16,   15,   15,   15, 0x08,
       25,   15,   15,   15, 0x08,
       38,   15,   15,   15, 0x08,
-      49,   15,   15,   15, 0x08,
-      64,   15,   15,   15, 0x08,
-      79,   15,   15,   15, 0x08,
+      51,   15,   15,   15, 0x08,
+      66,   15,   15,   15, 0x08,
+      81,   15,   15,   15, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MultipleTraces[] = {
     "MultipleTraces\0\0onNext()\0onPrevious()\0"
-    "closeApp()\0onPassTraces()\0onFailTraces()\0"
+    "closeAppMT()\0onPassTraces()\0onFailTraces()\0"
     "onAllTraces()\0"
 };
 
@@ -78,7 +78,7 @@ int MultipleTraces::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         switch (_id) {
         case 0: onNext(); break;
         case 1: onPrevious(); break;
-        case 2: closeApp(); break;
+        case 2: closeAppMT(); break;
         case 3: onPassTraces(); break;
         case 4: onFailTraces(); break;
         case 5: onAllTraces(); break;

@@ -8,8 +8,9 @@
 MultipleTraces::MultipleTraces(QWidget *parent,VIModel *pObjSubject,VIFunctionalLogic *pFunObj)
     : QMainWindow(parent,Qt::WindowSystemMenuHint)
 {
-	ui.setupUi(this);
-//	qDebug()<<"MultipleTraces Constructor";
+	uiMT.setupUi(this);
+	setWindowFlags(Qt::Widget);
+	//	qDebug()<<"MultipleTraces Constructor";
     m_obVImodel = pObjSubject;
     m_objFunctionLogic = pFunObj;
 	m_lstMultipleTraces.clear();
@@ -17,20 +18,20 @@ MultipleTraces::MultipleTraces(QWidget *parent,VIModel *pObjSubject,VIFunctional
 
     //m_lstMultipleTraces = m_obVImodel->getPinCombinations()
 	//m_lstMultipleTraces.sort();
-	connect(ui.objClose,SIGNAL(clicked()),this,SLOT(closeApp()));
-	connect(ui.butNext,SIGNAL(clicked()),this,SLOT(onNext()));
-	connect(ui.butPrev,SIGNAL(clicked()),this,SLOT(onPrevious()));
-	connect(ui.butPass,SIGNAL(clicked()),this,SLOT(onPassTraces()));
-	connect(ui.butFail,SIGNAL(clicked()),this,SLOT(onFailTraces()));
-	connect(ui.butALL,SIGNAL(clicked()),this,SLOT(onAllTraces()));
+	connect(uiMT.objClose,SIGNAL(clicked()),this,SLOT(closeAppMT()));
+	connect(uiMT.butNext,SIGNAL(clicked()),this,SLOT(onNext()));
+	connect(uiMT.butPrev,SIGNAL(clicked()),this,SLOT(onPrevious()));
+	connect(uiMT.butPass,SIGNAL(clicked()),this,SLOT(onPassTraces()));
+	connect(uiMT.butFail,SIGNAL(clicked()),this,SLOT(onFailTraces()));
+	connect(uiMT.butALL,SIGNAL(clicked()),this,SLOT(onAllTraces()));
 
 	m_nSelectedIndex=0;
 	//m_nEndIndex=0;
-	ui.lblCombinations->setText(QString::number(m_obVImodel->getChipDialog(4),10));
+	uiMT.lblCombinations->setText(QString::number(m_obVImodel->getChipDialog(4),10));
 	if(m_obVImodel->getChipDialog(4) > 6)
-		ui.lblCurrenttoTotal->setText("1 to "+ QString::number(m_obVImodel->getChipDialog(4),10));
+		uiMT.lblCurrenttoTotal->setText("1 to "+ QString::number(m_obVImodel->getChipDialog(4),10));
 	else
-		ui.lblCurrenttoTotal->setText(QString::number(m_obVImodel->getChipDialog(4),10)+ " to "+ QString::number(m_obVImodel->getChipDialog(4),10));
+		uiMT.lblCurrenttoTotal->setText(QString::number(m_obVImodel->getChipDialog(4),10)+ " to "+ QString::number(m_obVImodel->getChipDialog(4),10));
 
 	initializeWaveProduct();
 	isPassFlag=isFailFlag=false;
@@ -107,20 +108,20 @@ void MultipleTraces::calculateCombinationalTraces(bool pFlag)
 		}
 	}
     if(m_lstPassStrTraces.count() >0)
-    	ui.butPass->setDisabled(false);
+    	uiMT.butPass->setDisabled(false);
     else
-    	ui.butPass->setDisabled(true);
+    	uiMT.butPass->setDisabled(true);
     if(m_lstFailStrTraces.count() >0)
-    	ui.butFail->setDisabled(false);
+    	uiMT.butFail->setDisabled(false);
     else
-    	ui.butFail->setDisabled(true);
-    ui.butALL->setDisabled(false);
+    	uiMT.butFail->setDisabled(true);
+    uiMT.butALL->setDisabled(false);
     //isPassFlag=isFailFlag = true;
     qDebug() << "PassTraces Count:" << m_lstPassStrTraces.count();
     qDebug() << "FailTraces Count:" << m_lstFailStrTraces.count();
-	ui.butFail->setStyleSheet("QPushButton { background-color :rgb(88,88,87,255); color : white; }");
-	ui.butPass->setStyleSheet("QPushButton { background-color :rgb(88,88,87,255); color : white; }");
-	ui.butALL->setStyleSheet("QPushButton { background-color: rgb(82, 127, 162); color : white; }");
+	uiMT.butFail->setStyleSheet("QPushButton { background-color :rgb(88,88,87,255); color : white; }");
+	uiMT.butPass->setStyleSheet("QPushButton { background-color :rgb(88,88,87,255); color : white; }");
+	uiMT.butALL->setStyleSheet("QPushButton { background-color: rgb(82, 127, 162); color : white; }");
 
 }
 
@@ -128,7 +129,7 @@ void MultipleTraces::clickedPRSCR()
 {
 	QPixmap Pix;
     Pix = QPixmap();
-    //Pix = QPixmap::grabWidget(ui->FGSubwindow,0,0,800,600);
+    //Pix = QPixmap::grabWidget(uiMT->FGSubwindow,0,0,800,600);
     Pix = QPixmap::grabWindow(this->winId());
     Pix.save("MultipleTraces.jpg");
     QClipboard *board = QApplication::clipboard();
@@ -143,9 +144,9 @@ void MultipleTraces::setTestFlag(bool pFlag)
 	isPassFlag=isFailFlag=false;
     if(isLearn == true)
     {
-    	ui.butPass->setDisabled(true);
-    	ui.butFail->setDisabled(true);
-    	ui.butALL->setDisabled(true);
+    	uiMT.butPass->setDisabled(true);
+    	uiMT.butFail->setDisabled(true);
+    	uiMT.butALL->setDisabled(true);
     }
 
 }
@@ -158,15 +159,15 @@ void MultipleTraces::initializeWaveProduct()
 	   font.setBold(true);
 	   font.setPointSize(15);
         m_objWaveFactory = new WaveFormFactory();
-	    //ui.lbl1->setGeometry(9+l_nXIndex,9+l_nYIndex,200,12);
+	    //uiMT.lbl1->setGeometry(9+l_nXIndex,9+l_nYIndex,200,12);
 	    for(int l_nVIIndex=0;l_nVIIndex<6;l_nVIIndex++)
 	    {
 	    	VIProduct[l_nVIIndex] = m_objWaveFactory->getWaveProduct("VI",this);
-	    	VIProduct[l_nVIIndex]->setDimensions(10+l_nXIndex,25+l_nYIndex,150,150);
+	    	VIProduct[l_nVIIndex]->setDimensions(10+l_nXIndex,40+l_nYIndex,150,150);
 	    	VIProduct[l_nVIIndex]->setTickValue(0);
 	    	label[l_nVIIndex] = new QLabel(this);
 	    	label[l_nVIIndex]->setText("");
-	    	label[l_nVIIndex]->setGeometry(9+l_nXIndex,9+l_nYIndex,200,12);
+	    	label[l_nVIIndex]->setGeometry(9+l_nXIndex,24+l_nYIndex,200,12);
 	    	label[l_nVIIndex]->setStyleSheet("QLabel { color : white; }");
 	    	//label[l_nVIIndex]->setPalette(QColor(QColor(255,255,255,255)));
 	    	compareLabel[l_nVIIndex] = new QLabel(this);
@@ -380,8 +381,8 @@ void MultipleTraces::LoadVITraces(short int pStartIndex)
     if(m_obVImodel->getChipDialog(5) == 1)
     {
     	if(isFailFlag==true){
-    		ui.butFail->setEnabled(true);
-    		ui.butPass->setEnabled(true);
+    		uiMT.butFail->setEnabled(true);
+    		uiMT.butPass->setEnabled(true);
     	}
     }
 }
@@ -424,7 +425,7 @@ void MultipleTraces::onNext()
 	{
 		if(m_nSelectedIndex<m_lstFailStrTraces.count()-6 )
 			m_nSelectedIndex+=6;
-		ui.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstFailStrTraces.count(),10));
+		uiMT.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstFailStrTraces.count(),10));
 		clearTraces();
 		LoadFailTraces(m_nSelectedIndex);
 	}
@@ -432,14 +433,14 @@ void MultipleTraces::onNext()
 	{
 		if(m_nSelectedIndex<m_lstPassStrTraces.count()-6 )
 			m_nSelectedIndex+=6;
-		ui.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstPassStrTraces.count(),10));
+		uiMT.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstPassStrTraces.count(),10));
 		clearTraces();
 		LoadPassTraces(m_nSelectedIndex);
 	}
 	else{
 		if(m_nSelectedIndex<m_lstMultipleTraces.count()-6 )
 			m_nSelectedIndex+=6;
-		ui.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstMultipleTraces.count(),10));
+		uiMT.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstMultipleTraces.count(),10));
 		clearTraces();
 		LoadVITraces(m_nSelectedIndex);
 	}
@@ -455,30 +456,31 @@ void MultipleTraces::onPrevious()
 //    qDebug() << "Previous Move:"<<m_nSelectedIndex;
     if(isPassFlag == true)
     {
-    	ui.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstPassStrTraces.count(),10));
+    	uiMT.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstPassStrTraces.count(),10));
 		clearTraces();
 		LoadPassTraces(m_nSelectedIndex);
     }
     else if(isFailFlag == true)
     {
-    	ui.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstFailStrTraces.count(),10));
+    	uiMT.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstFailStrTraces.count(),10));
         clearTraces();
         LoadFailTraces(m_nSelectedIndex);
     }
     else
     {
-    	ui.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstMultipleTraces.count(),10));
+    	uiMT.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstMultipleTraces.count(),10));
         clearTraces();
         LoadVITraces(m_nSelectedIndex);
     }
-   // ui.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstMultipleTraces.count(),10));
+   // uiMT.lblCurrenttoTotal->setText(QString::number(m_nSelectedIndex+1,10)+ " to "+ QString::number(m_lstMultipleTraces.count(),10));
 
 }
 
-void MultipleTraces::closeApp()
+void MultipleTraces::closeAppMT()
 {
 	//clickedPRSCR();
-	this->close();
+//	this->close();
+	MultipleTraces::close();
 
 
 }
@@ -500,30 +502,30 @@ void MultipleTraces::onAllTraces()
 {
 	//border: 1px solid #2D5059;
 	//border-radius: 20px;
-	ui.butFail->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(88,88,87,255); color : white; }");
-	ui.butPass->setStyleSheet("QPushButton {border-radius: 20px; background-color : rgb(88,88,87,255); color : white; }");
-	ui.butALL->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(82,127,162,255); color : white; }");
+	uiMT.butFail->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(88,88,87,255); color : white; }");
+	uiMT.butPass->setStyleSheet("QPushButton {border-radius: 20px; background-color : rgb(88,88,87,255); color : white; }");
+	uiMT.butALL->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(82,127,162,255); color : white; }");
 	m_nSelectedIndex=0;
-	ui.lblCombinations->setText(QString::number(m_lstMultipleTraces.count(),10));
+	uiMT.lblCombinations->setText(QString::number(m_lstMultipleTraces.count(),10));
 	if(m_lstMultipleTraces.count() > 6)
-		ui.lblCurrenttoTotal->setText("1 to "+ QString::number(m_lstMultipleTraces.count(),10));
+		uiMT.lblCurrenttoTotal->setText("1 to "+ QString::number(m_lstMultipleTraces.count(),10));
 	else
-		ui.lblCurrenttoTotal->setText(QString::number(m_lstMultipleTraces.count(),10)+ " to "+ QString::number(m_lstMultipleTraces.count(),10));
+		uiMT.lblCurrenttoTotal->setText(QString::number(m_lstMultipleTraces.count(),10)+ " to "+ QString::number(m_lstMultipleTraces.count(),10));
 	clearTraces();
 	isPassFlag=isFailFlag=false;
 	LoadVITraces(m_nSelectedIndex);
 }
 void MultipleTraces::onFailTraces()
 {
-	ui.butALL->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(88,88,87,255); color : white; }");
-	ui.butPass->setStyleSheet("QPushButton {border-radius: 20px; background-color : rgb(88,88,87,255); color : white; }");
-	ui.butFail->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(82,127,162,255); color : white; }");
+	uiMT.butALL->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(88,88,87,255); color : white; }");
+	uiMT.butPass->setStyleSheet("QPushButton {border-radius: 20px; background-color : rgb(88,88,87,255); color : white; }");
+	uiMT.butFail->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(82,127,162,255); color : white; }");
 	m_nSelectedIndex=0;
-	ui.lblCombinations->setText(QString::number(m_lstFailStrTraces.count(),10));
+	uiMT.lblCombinations->setText(QString::number(m_lstFailStrTraces.count(),10));
 	if(m_lstFailStrTraces.count() > 6)
-		ui.lblCurrenttoTotal->setText("1 to "+ QString::number(m_lstFailStrTraces.count(),10));
+		uiMT.lblCurrenttoTotal->setText("1 to "+ QString::number(m_lstFailStrTraces.count(),10));
 	else
-		ui.lblCurrenttoTotal->setText(QString::number(m_lstFailStrTraces.count(),10)+ " to "+ QString::number(m_lstFailStrTraces.count(),10));
+		uiMT.lblCurrenttoTotal->setText(QString::number(m_lstFailStrTraces.count(),10)+ " to "+ QString::number(m_lstFailStrTraces.count(),10));
 	clearTraces();
 	isPassFlag = false;
 	isFailFlag=true;
@@ -533,14 +535,14 @@ void MultipleTraces::onFailTraces()
 void MultipleTraces::onPassTraces()
 {
 	m_nSelectedIndex=0;
-	ui.butALL->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(88,88,87,255); color : white; }");
-	ui.butFail->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(88,88,87,255); color : white; }");
-	ui.butPass->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(82,127,162,255); color : white; }");
-	ui.lblCombinations->setText(QString::number(m_lstPassStrTraces.count(),10));
+	uiMT.butALL->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(88,88,87,255); color : white; }");
+	uiMT.butFail->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(88,88,87,255); color : white; }");
+	uiMT.butPass->setStyleSheet("QPushButton { border-radius: 20px;background-color : rgb(82,127,162,255); color : white; }");
+	uiMT.lblCombinations->setText(QString::number(m_lstPassStrTraces.count(),10));
 	if(m_lstPassStrTraces.count() > 6)
-		ui.lblCurrenttoTotal->setText("1 to "+ QString::number(m_lstPassStrTraces.count(),10));
+		uiMT.lblCurrenttoTotal->setText("1 to "+ QString::number(m_lstPassStrTraces.count(),10));
 	else
-		ui.lblCurrenttoTotal->setText(QString::number(m_lstPassStrTraces.count(),10)+ " to "+ QString::number(m_lstPassStrTraces.count(),10));
+		uiMT.lblCurrenttoTotal->setText(QString::number(m_lstPassStrTraces.count(),10)+ " to "+ QString::number(m_lstPassStrTraces.count(),10));
 	clearTraces();
 	isFailFlag = false;
 	isPassFlag=true;

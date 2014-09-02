@@ -266,7 +266,7 @@ void MainWindowView::InitSidePane()
 
 void MainWindowView::hideWindows()
 {
-//	qDebug() << "Hide WIndows";
+	qDebug() << "Hide WIndows";
 //    mainpaneView->close();
 //    titleView->close();
     entireView->close();

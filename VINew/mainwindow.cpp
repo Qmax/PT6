@@ -31,7 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_objVISubject->registerObserver(0,this);
 	InitializeUILibraries();
 	InitializeVIFunctions();
-        InitializeLegendLabels();
+	InitializeLegendLabels();
+	on_butProClip_clicked();
 
 }
 
@@ -99,7 +100,6 @@ void MainWindow::InitializeVIFunctions()
 	m_objFunctionalObject->setTickValue(0);
 	readVISettings();
 	on_tblVI_clicked();
-	on_butProClip_clicked();
 
 	//ui->butViewTrace->setVisible(false);
 	//on_butAM_clicked();
@@ -466,6 +466,12 @@ void MainWindow::notifyClipObserver()
             }
 	m_isProbesOnly =false;
         m_bClipLearn=false;
+
+        l_objCombinations->setVisible(true);
+        l_objComparison->setVisible(true);
+        l_objRefType->setVisible(true);
+        l_objLearnVerify->setVisible(true);
+        l_objLearnVerify->setText("LEARN.");
 }
 
 void MainWindow::notifyProbeObserver()
@@ -1308,6 +1314,11 @@ void MainWindow::on_butProClip_clicked()
 			notifyProbeObserver();
 
 		m_bPCMode=true;
+
+        l_objCombinations->setVisible(false);
+        l_objComparison->setVisible(false);
+        l_objRefType->setVisible(false);
+        l_objLearnVerify->setVisible(false);
 	}
 }
 
@@ -1553,10 +1564,14 @@ void MainWindow::clipLearn(bool pLearnFlag)
 		m_biSLearnFlag = true;
 		m_objMultipleTraceDialog->LoadLearntTraces();
 	}
-	if(pLearnFlag==true)
+	if(pLearnFlag==true){
 		ui->lblTestStatus->setText("Learn Completed");
-	else
+		l_objLearnVerify->setText("LEARNED.");
+	}
+	else{
 		ui->lblTestStatus->setText("Verification Completed");
+		l_objLearnVerify->setText("VERIFIED.");
+	}
 
 
 	if(l_nValue==true)
@@ -2017,6 +2032,7 @@ void MainWindow::on_butProbe1_clicked()
 	m_nSelectedProbe=0;
 	usleep(1000);
 	m_objFunctionalObject->switchPROBES(PROBE1);
+	l_objProbeStatus->setText("SINGLE : PROBE-1");
 
 	if(m_objVISubject->getProbeDialog(0)==1)
 	{
@@ -2068,6 +2084,7 @@ void MainWindow::on_butProbe2_clicked()
 	m_nSelectedProbe=1;
 	usleep(1000);
 	m_objFunctionalObject->switchPROBES(PROBE2);
+	l_objProbeStatus->setText("SINGLE : PROBE-2");
 	if(m_objVISubject->getProbeDialog(0)==1)
 	{
 		//        ui->redPallete->setPalette(Qt::blue);
@@ -2126,6 +2143,7 @@ void MainWindow::on_butExternal_2_clicked()
 		/*ui->butExternal->setStyleSheet(knobOFF);//commented by rravivarman 24th july 2014*/
 		ui->butExternal_2->setStyleSheet(knobON);
 		m_objFunctionalObject->switchPROBES(EXT_FLY);
+		l_objProbeStatus->setText("ANALOG HIGHWAY");
 
 		if(m_objVISubject->getProbeDialog(0)==1) return;
 		m_nSelectedProbe=3;
@@ -2773,7 +2791,6 @@ bool MainWindow::checkforZeDiode()
 		//if(l_nPosPeakVoltage >=0.8 && l_nNetPeakVoltage <=-0.8)
 		return true;
 	}
-	return true;
 }
 
 bool MainWindow::binaryCapacitanceSearch(short int pVoltIndex )
@@ -2934,7 +2951,6 @@ bool MainWindow::binaryCapacitanceSearch(short int pVoltIndex )
 	}
 	if(m_nAutoCount>0)
 		return true;
-	return false;
 }
 void MainWindow::calcuateFitnessFunction(short int pIndex)
 {

@@ -42,11 +42,11 @@ protected:
     bool isLearn,isPassFlag,isFailFlag;
 private:
 
-	Ui::MultipleTracesClass ui;
+	Ui::MultipleTracesClass uiMT;
 private slots:
 	void onNext();
 	void onPrevious();
-	void closeApp();
+	void closeAppMT();
 	void onPassTraces();
 	void onFailTraces();
 	void onAllTraces();

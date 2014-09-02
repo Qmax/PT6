@@ -127,7 +127,6 @@ void VIModel::setProbeDialog(short pIndex, short pValue)
 short int VIModel::getProbeDialog(short pIndex)
 {
 	m_objProbeDialogClass->getIndex(pIndex);
-	return 0;
 }
 
 bool  VIModel::getCalibrationStatus(){

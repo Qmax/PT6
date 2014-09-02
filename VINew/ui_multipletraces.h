@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'multipletraces.ui'
 **
-** Created: Tue Sep 2 15:51:12 2014
+** Created: Tue Sep 2 19:02:14 2014
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QGroupBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
@@ -28,9 +29,14 @@ class Ui_MultipleTracesClass
 {
 public:
     QWidget *centralwidget;
-    QPushButton *objClose;
+    QGroupBox *groupBox;
+    QSplitter *butSplitter;
+    QPushButton *butPass;
+    QPushButton *butFail;
+    QPushButton *butALL;
     QPushButton *butPrev;
     QPushButton *butNext;
+    QPushButton *objClose;
     QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *lblPinComb;
@@ -39,10 +45,6 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *lblPinComb_2;
     QLabel *lblCurrenttoTotal;
-    QSplitter *butSplitter;
-    QPushButton *butPass;
-    QPushButton *butFail;
-    QPushButton *butALL;
 
     void setupUi(QMainWindow *MultipleTracesClass)
     {
@@ -123,236 +125,100 @@ public:
         MultipleTracesClass->setWindowIcon(icon);
         centralwidget = new QWidget(MultipleTracesClass);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        objClose = new QPushButton(centralwidget);
-        objClose->setObjectName(QString::fromUtf8("objClose"));
-        objClose->setGeometry(QRect(480, 390, 84, 51));
-        QFont font;
-        font.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font.setPointSize(16);
-        objClose->setFont(font);
-        objClose->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"border: 2px solid #8f8f91;\n"
-"border-radius: 20px;\n"
-"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
-"min-width: 80px;\n"
+        groupBox = new QGroupBox(centralwidget);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setGeometry(QRect(0, 0, 578, 450));
+        groupBox->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
+"color: rgb(255, 255, 255);\n"
+"font:bold 16px;\n"
+"	background-color: rgb(88, 88, 88);\n"
+"   border: 1px solid black;\n"
+"     border-radius: 5px;\n"
 "}\n"
-"QPushButton:pressed {\n"
-"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
-"}\n"
-"QPushButton:flat {\n"
-"border: none; \n"
-"}\n"
-"QPushButton:default {\n"
-"border-color: navy; \n"
+" QGroupBox::title {\n"
+"     subcontrol-origin: margin;\n"
+"     subcontrol-position: top center; /* position at the top center */\n"
+"     padding: 0 3px;\n"
+" }\n"
+"\n"
+"QLabel{\n"
+"color: rgb(255, 255, 255);\n"
 "}"));
-        butPrev = new QPushButton(centralwidget);
-        butPrev->setObjectName(QString::fromUtf8("butPrev"));
-        butPrev->setGeometry(QRect(300, 390, 84, 51));
-        butPrev->setFont(font);
-        butPrev->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"border: 2px solid #8f8f91;\n"
-"border-radius: 20px;\n"
-"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
-"min-width: 80px;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
-"}\n"
-"QPushButton:flat {\n"
-"border: none; \n"
-"}\n"
-"QPushButton:default {\n"
-"border-color: navy; \n"
-"}"));
-        butNext = new QPushButton(centralwidget);
-        butNext->setObjectName(QString::fromUtf8("butNext"));
-        butNext->setGeometry(QRect(390, 390, 84, 51));
-        butNext->setFont(font);
-        butNext->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"border: 2px solid #8f8f91;\n"
-"border-radius: 20px;\n"
-"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
-"min-width: 80px;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
-"}\n"
-"QPushButton:flat {\n"
-"border: none; \n"
-"}\n"
-"QPushButton:default {\n"
-"border-color: navy; \n"
-"}"));
-        layoutWidget = new QWidget(centralwidget);
-        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(9, 363, 251, 41));
-        horizontalLayout = new QHBoxLayout(layoutWidget);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        lblPinComb = new QLabel(layoutWidget);
-        lblPinComb->setObjectName(QString::fromUtf8("lblPinComb"));
-        QPalette palette1;
-        QBrush brush8(QColor(0, 170, 255, 255));
-        brush8.setStyle(Qt::SolidPattern);
-        palette1.setBrush(QPalette::Active, QPalette::Text, brush8);
-        palette1.setBrush(QPalette::Inactive, QPalette::Text, brush8);
-        palette1.setBrush(QPalette::Disabled, QPalette::Text, brush4);
-        lblPinComb->setPalette(palette1);
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font1.setPointSize(16);
-        font1.setBold(false);
-        font1.setWeight(50);
-        lblPinComb->setFont(font1);
-
-        horizontalLayout->addWidget(lblPinComb);
-
-        lblCombinations = new QLabel(layoutWidget);
-        lblCombinations->setObjectName(QString::fromUtf8("lblCombinations"));
-        QPalette palette2;
-        QBrush brush9(QColor(255, 255, 0, 255));
-        brush9.setStyle(Qt::SolidPattern);
-        palette2.setBrush(QPalette::Active, QPalette::WindowText, brush9);
-        QBrush brush10(QColor(85, 255, 255, 255));
-        brush10.setStyle(Qt::SolidPattern);
-        palette2.setBrush(QPalette::Active, QPalette::Text, brush10);
-        palette2.setBrush(QPalette::Inactive, QPalette::WindowText, brush9);
-        palette2.setBrush(QPalette::Inactive, QPalette::Text, brush10);
-        palette2.setBrush(QPalette::Disabled, QPalette::WindowText, brush4);
-        palette2.setBrush(QPalette::Disabled, QPalette::Text, brush4);
-        lblCombinations->setPalette(palette2);
-        QFont font2;
-        font2.setFamily(QString::fromUtf8("DejaVu Sans"));
-        font2.setPointSize(16);
-        font2.setBold(true);
-        font2.setWeight(75);
-        lblCombinations->setFont(font2);
-
-        horizontalLayout->addWidget(lblCombinations);
-
-        layoutWidget1 = new QWidget(centralwidget);
-        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(10, 400, 249, 45));
-        horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        lblPinComb_2 = new QLabel(layoutWidget1);
-        lblPinComb_2->setObjectName(QString::fromUtf8("lblPinComb_2"));
-        QPalette palette3;
-        palette3.setBrush(QPalette::Active, QPalette::Text, brush10);
-        QBrush brush11(QColor(85, 170, 255, 255));
-        brush11.setStyle(Qt::SolidPattern);
-        palette3.setBrush(QPalette::Active, QPalette::BrightText, brush11);
-        palette3.setBrush(QPalette::Active, QPalette::ButtonText, brush10);
-        palette3.setBrush(QPalette::Inactive, QPalette::Text, brush10);
-        palette3.setBrush(QPalette::Inactive, QPalette::BrightText, brush11);
-        palette3.setBrush(QPalette::Inactive, QPalette::ButtonText, brush10);
-        palette3.setBrush(QPalette::Disabled, QPalette::Text, brush4);
-        palette3.setBrush(QPalette::Disabled, QPalette::BrightText, brush11);
-        palette3.setBrush(QPalette::Disabled, QPalette::ButtonText, brush4);
-        lblPinComb_2->setPalette(palette3);
-        lblPinComb_2->setFont(font1);
-
-        horizontalLayout_2->addWidget(lblPinComb_2);
-
-        lblCurrenttoTotal = new QLabel(layoutWidget1);
-        lblCurrenttoTotal->setObjectName(QString::fromUtf8("lblCurrenttoTotal"));
-        QPalette palette4;
-        palette4.setBrush(QPalette::Active, QPalette::WindowText, brush9);
-        palette4.setBrush(QPalette::Active, QPalette::Text, brush10);
-        palette4.setBrush(QPalette::Active, QPalette::BrightText, brush11);
-        palette4.setBrush(QPalette::Active, QPalette::ButtonText, brush10);
-        palette4.setBrush(QPalette::Inactive, QPalette::WindowText, brush9);
-        palette4.setBrush(QPalette::Inactive, QPalette::Text, brush10);
-        palette4.setBrush(QPalette::Inactive, QPalette::BrightText, brush11);
-        palette4.setBrush(QPalette::Inactive, QPalette::ButtonText, brush10);
-        palette4.setBrush(QPalette::Disabled, QPalette::WindowText, brush4);
-        palette4.setBrush(QPalette::Disabled, QPalette::Text, brush4);
-        palette4.setBrush(QPalette::Disabled, QPalette::BrightText, brush11);
-        palette4.setBrush(QPalette::Disabled, QPalette::ButtonText, brush4);
-        lblCurrenttoTotal->setPalette(palette4);
-        lblCurrenttoTotal->setFont(font2);
-
-        horizontalLayout_2->addWidget(lblCurrenttoTotal);
-
-        butSplitter = new QSplitter(centralwidget);
+        butSplitter = new QSplitter(groupBox);
         butSplitter->setObjectName(QString::fromUtf8("butSplitter"));
         butSplitter->setGeometry(QRect(484, 70, 81, 211));
         butSplitter->setOrientation(Qt::Vertical);
         butPass = new QPushButton(butSplitter);
         butPass->setObjectName(QString::fromUtf8("butPass"));
-        QPalette palette5;
-        palette5.setBrush(QPalette::Active, QPalette::WindowText, brush6);
+        QPalette palette1;
+        palette1.setBrush(QPalette::Active, QPalette::WindowText, brush6);
         QLinearGradient gradient(0, 1, 1, 0);
         gradient.setSpread(QGradient::PadSpread);
         gradient.setCoordinateMode(QGradient::ObjectBoundingMode);
         gradient.setColorAt(0, QColor(26, 116, 219, 255));
         gradient.setColorAt(0.6, QColor(82, 147, 222, 255));
         gradient.setColorAt(1, QColor(255, 255, 255, 255));
-        QBrush brush12(gradient);
-        palette5.setBrush(QPalette::Active, QPalette::Button, brush12);
-        palette5.setBrush(QPalette::Active, QPalette::Text, brush6);
-        palette5.setBrush(QPalette::Active, QPalette::ButtonText, brush6);
+        QBrush brush8(gradient);
+        palette1.setBrush(QPalette::Active, QPalette::Button, brush8);
+        palette1.setBrush(QPalette::Active, QPalette::Text, brush6);
+        palette1.setBrush(QPalette::Active, QPalette::ButtonText, brush6);
         QLinearGradient gradient1(0, 1, 1, 0);
         gradient1.setSpread(QGradient::PadSpread);
         gradient1.setCoordinateMode(QGradient::ObjectBoundingMode);
         gradient1.setColorAt(0, QColor(26, 116, 219, 255));
         gradient1.setColorAt(0.6, QColor(82, 147, 222, 255));
         gradient1.setColorAt(1, QColor(255, 255, 255, 255));
-        QBrush brush13(gradient1);
-        palette5.setBrush(QPalette::Active, QPalette::Base, brush13);
+        QBrush brush9(gradient1);
+        palette1.setBrush(QPalette::Active, QPalette::Base, brush9);
         QLinearGradient gradient2(0, 1, 1, 0);
         gradient2.setSpread(QGradient::PadSpread);
         gradient2.setCoordinateMode(QGradient::ObjectBoundingMode);
         gradient2.setColorAt(0, QColor(26, 116, 219, 255));
         gradient2.setColorAt(0.6, QColor(82, 147, 222, 255));
         gradient2.setColorAt(1, QColor(255, 255, 255, 255));
-        QBrush brush14(gradient2);
-        palette5.setBrush(QPalette::Active, QPalette::Window, brush14);
-        palette5.setBrush(QPalette::Inactive, QPalette::WindowText, brush6);
+        QBrush brush10(gradient2);
+        palette1.setBrush(QPalette::Active, QPalette::Window, brush10);
+        palette1.setBrush(QPalette::Inactive, QPalette::WindowText, brush6);
         QLinearGradient gradient3(0, 1, 1, 0);
         gradient3.setSpread(QGradient::PadSpread);
         gradient3.setCoordinateMode(QGradient::ObjectBoundingMode);
         gradient3.setColorAt(0, QColor(26, 116, 219, 255));
         gradient3.setColorAt(0.6, QColor(82, 147, 222, 255));
         gradient3.setColorAt(1, QColor(255, 255, 255, 255));
-        QBrush brush15(gradient3);
-        palette5.setBrush(QPalette::Inactive, QPalette::Button, brush15);
-        palette5.setBrush(QPalette::Inactive, QPalette::Text, brush6);
-        palette5.setBrush(QPalette::Inactive, QPalette::ButtonText, brush6);
+        QBrush brush11(gradient3);
+        palette1.setBrush(QPalette::Inactive, QPalette::Button, brush11);
+        palette1.setBrush(QPalette::Inactive, QPalette::Text, brush6);
+        palette1.setBrush(QPalette::Inactive, QPalette::ButtonText, brush6);
         QLinearGradient gradient4(0, 1, 1, 0);
         gradient4.setSpread(QGradient::PadSpread);
         gradient4.setCoordinateMode(QGradient::ObjectBoundingMode);
         gradient4.setColorAt(0, QColor(26, 116, 219, 255));
         gradient4.setColorAt(0.6, QColor(82, 147, 222, 255));
         gradient4.setColorAt(1, QColor(255, 255, 255, 255));
-        QBrush brush16(gradient4);
-        palette5.setBrush(QPalette::Inactive, QPalette::Base, brush16);
+        QBrush brush12(gradient4);
+        palette1.setBrush(QPalette::Inactive, QPalette::Base, brush12);
         QLinearGradient gradient5(0, 1, 1, 0);
         gradient5.setSpread(QGradient::PadSpread);
         gradient5.setCoordinateMode(QGradient::ObjectBoundingMode);
         gradient5.setColorAt(0, QColor(26, 116, 219, 255));
         gradient5.setColorAt(0.6, QColor(82, 147, 222, 255));
         gradient5.setColorAt(1, QColor(255, 255, 255, 255));
-        QBrush brush17(gradient5);
-        palette5.setBrush(QPalette::Inactive, QPalette::Window, brush17);
-        QBrush brush18(QColor(211, 211, 211, 255));
-        brush18.setStyle(Qt::SolidPattern);
-        palette5.setBrush(QPalette::Disabled, QPalette::WindowText, brush18);
-        QBrush brush19(QColor(128, 128, 128, 255));
-        brush19.setStyle(Qt::SolidPattern);
-        palette5.setBrush(QPalette::Disabled, QPalette::Button, brush19);
-        palette5.setBrush(QPalette::Disabled, QPalette::Text, brush18);
-        palette5.setBrush(QPalette::Disabled, QPalette::ButtonText, brush18);
-        palette5.setBrush(QPalette::Disabled, QPalette::Base, brush19);
-        palette5.setBrush(QPalette::Disabled, QPalette::Window, brush19);
-        butPass->setPalette(palette5);
+        QBrush brush13(gradient5);
+        palette1.setBrush(QPalette::Inactive, QPalette::Window, brush13);
+        QBrush brush14(QColor(211, 211, 211, 255));
+        brush14.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Disabled, QPalette::WindowText, brush14);
+        QBrush brush15(QColor(128, 128, 128, 255));
+        brush15.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Disabled, QPalette::Button, brush15);
+        palette1.setBrush(QPalette::Disabled, QPalette::Text, brush14);
+        palette1.setBrush(QPalette::Disabled, QPalette::ButtonText, brush14);
+        palette1.setBrush(QPalette::Disabled, QPalette::Base, brush15);
+        palette1.setBrush(QPalette::Disabled, QPalette::Window, brush15);
+        butPass->setPalette(palette1);
+        QFont font;
+        font.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font.setPointSize(16);
         butPass->setFont(font);
         butPass->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "color:black;\n"
@@ -432,6 +298,167 @@ public:
 "border-color: navy; \n"
 "}"));
         butSplitter->addWidget(butALL);
+        butPrev = new QPushButton(groupBox);
+        butPrev->setObjectName(QString::fromUtf8("butPrev"));
+        butPrev->setGeometry(QRect(300, 390, 84, 51));
+        butPrev->setFont(font);
+        butPrev->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"border: 2px solid #8f8f91;\n"
+"border-radius: 20px;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
+"min-width: 80px;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton:flat {\n"
+"border: none; \n"
+"}\n"
+"QPushButton:default {\n"
+"border-color: navy; \n"
+"}"));
+        butNext = new QPushButton(groupBox);
+        butNext->setObjectName(QString::fromUtf8("butNext"));
+        butNext->setGeometry(QRect(390, 390, 84, 51));
+        butNext->setFont(font);
+        butNext->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"border: 2px solid #8f8f91;\n"
+"border-radius: 20px;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
+"min-width: 80px;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton:flat {\n"
+"border: none; \n"
+"}\n"
+"QPushButton:default {\n"
+"border-color: navy; \n"
+"}"));
+        objClose = new QPushButton(groupBox);
+        objClose->setObjectName(QString::fromUtf8("objClose"));
+        objClose->setGeometry(QRect(480, 390, 84, 51));
+        objClose->setFont(font);
+        objClose->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"border: 2px solid #8f8f91;\n"
+"border-radius: 20px;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
+"min-width: 80px;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton:flat {\n"
+"border: none; \n"
+"}\n"
+"QPushButton:default {\n"
+"border-color: navy; \n"
+"}"));
+        layoutWidget = new QWidget(groupBox);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(0, 360, 250, 41));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        lblPinComb = new QLabel(layoutWidget);
+        lblPinComb->setObjectName(QString::fromUtf8("lblPinComb"));
+        QPalette palette2;
+        palette2.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        lblPinComb->setPalette(palette2);
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font1.setPointSize(16);
+        font1.setBold(false);
+        font1.setWeight(50);
+        lblPinComb->setFont(font1);
+
+        horizontalLayout->addWidget(lblPinComb);
+
+        lblCombinations = new QLabel(layoutWidget);
+        lblCombinations->setObjectName(QString::fromUtf8("lblCombinations"));
+        QPalette palette3;
+        palette3.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette3.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette3.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette3.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette3.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette3.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        lblCombinations->setPalette(palette3);
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("DejaVu Sans"));
+        font2.setPointSize(16);
+        font2.setBold(true);
+        font2.setWeight(75);
+        lblCombinations->setFont(font2);
+
+        horizontalLayout->addWidget(lblCombinations);
+
+        layoutWidget1 = new QWidget(groupBox);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(0, 400, 249, 45));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        lblPinComb_2 = new QLabel(layoutWidget1);
+        lblPinComb_2->setObjectName(QString::fromUtf8("lblPinComb_2"));
+        QPalette palette4;
+        palette4.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette4.setBrush(QPalette::Active, QPalette::Text, brush);
+        QBrush brush16(QColor(85, 170, 255, 255));
+        brush16.setStyle(Qt::SolidPattern);
+        palette4.setBrush(QPalette::Active, QPalette::BrightText, brush16);
+        palette4.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette4.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette4.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette4.setBrush(QPalette::Inactive, QPalette::BrightText, brush16);
+        palette4.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette4.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette4.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette4.setBrush(QPalette::Disabled, QPalette::BrightText, brush16);
+        palette4.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        lblPinComb_2->setPalette(palette4);
+        lblPinComb_2->setFont(font1);
+
+        horizontalLayout_2->addWidget(lblPinComb_2);
+
+        lblCurrenttoTotal = new QLabel(layoutWidget1);
+        lblCurrenttoTotal->setObjectName(QString::fromUtf8("lblCurrenttoTotal"));
+        QPalette palette5;
+        palette5.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette5.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette5.setBrush(QPalette::Active, QPalette::BrightText, brush16);
+        palette5.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette5.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette5.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette5.setBrush(QPalette::Inactive, QPalette::BrightText, brush16);
+        palette5.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette5.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette5.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette5.setBrush(QPalette::Disabled, QPalette::BrightText, brush16);
+        palette5.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        lblCurrenttoTotal->setPalette(palette5);
+        lblCurrenttoTotal->setFont(font2);
+
+        horizontalLayout_2->addWidget(lblCurrenttoTotal);
+
         MultipleTracesClass->setCentralWidget(centralwidget);
 
         retranslateUi(MultipleTracesClass);
@@ -442,16 +469,17 @@ public:
     void retranslateUi(QMainWindow *MultipleTracesClass)
     {
         MultipleTracesClass->setWindowTitle(QApplication::translate("MultipleTracesClass", "MultipleTraces", 0, QApplication::UnicodeUTF8));
-        objClose->setText(QApplication::translate("MultipleTracesClass", "Close", 0, QApplication::UnicodeUTF8));
+        groupBox->setTitle(QApplication::translate("MultipleTracesClass", "Multiple Traces", 0, QApplication::UnicodeUTF8));
+        butPass->setText(QApplication::translate("MultipleTracesClass", "Pass", 0, QApplication::UnicodeUTF8));
+        butFail->setText(QApplication::translate("MultipleTracesClass", "Fail", 0, QApplication::UnicodeUTF8));
+        butALL->setText(QApplication::translate("MultipleTracesClass", "All", 0, QApplication::UnicodeUTF8));
         butPrev->setText(QApplication::translate("MultipleTracesClass", "Prev", 0, QApplication::UnicodeUTF8));
         butNext->setText(QApplication::translate("MultipleTracesClass", "Next", 0, QApplication::UnicodeUTF8));
+        objClose->setText(QApplication::translate("MultipleTracesClass", "Close", 0, QApplication::UnicodeUTF8));
         lblPinComb->setText(QApplication::translate("MultipleTracesClass", "No of Combinations:", 0, QApplication::UnicodeUTF8));
         lblCombinations->setText(QString());
         lblPinComb_2->setText(QApplication::translate("MultipleTracesClass", "Combinations:", 0, QApplication::UnicodeUTF8));
         lblCurrenttoTotal->setText(QString());
-        butPass->setText(QApplication::translate("MultipleTracesClass", "Pass", 0, QApplication::UnicodeUTF8));
-        butFail->setText(QApplication::translate("MultipleTracesClass", "Fail", 0, QApplication::UnicodeUTF8));
-        butALL->setText(QApplication::translate("MultipleTracesClass", "All", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
