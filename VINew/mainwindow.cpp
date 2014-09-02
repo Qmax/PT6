@@ -108,110 +108,126 @@ void MainWindow::InitializeVIFunctions()
 
 void MainWindow::InitializeLegendLabels(){
 
+    QString legendlabelStyle="color:#d9d9d9";
+    QFont legendFont(QFont("DejaVu Sans", 10, 75, false));
+    int rightSP=600,leftSP=5,legendLabelWidth=150,legendLabelHeight=17,traceLabelWidth=60;
+
     l_objProbeStatus    =   new QLabel(VIProduct);
-    l_objProbeStatus->setFont(QFont("DejaVu Sans", 10, 75, false));
-    l_objProbeStatus->setStyleSheet("color:#d9d9d9");
-    l_objProbeStatus->setGeometry(5,524,135,17);
+    l_objProbeStatus->setFont(legendFont);
+    l_objProbeStatus->setStyleSheet(legendlabelStyle);
+    l_objProbeStatus->setGeometry(leftSP,524,legendLabelWidth,legendLabelHeight);
     l_objProbeStatus->setText("SINGLE : PROBE-1");
 
     l_objPassFail       =   new QLabel(VIProduct);
-    l_objPassFail->setFont(QFont("DejaVu Sans", 10, 75, false));
-    l_objPassFail->setStyleSheet("color:#d9d9d9");
-    l_objPassFail->setGeometry(585,45,135,17);
+    l_objPassFail->setFont(legendFont);
+    l_objPassFail->setStyleSheet(legendlabelStyle);
+    l_objPassFail->setGeometry(rightSP,45,legendLabelWidth,legendLabelHeight);
     l_objPassFail->setText("RESULT : PASS");
 
     l_objErrorPercentage=   new QLabel(VIProduct);
-    l_objErrorPercentage->setFont(QFont("DejaVu Sans", 10, 75, false));
-    l_objErrorPercentage->setStyleSheet("color:#d9d9d9");
-    l_objErrorPercentage->setGeometry(585,25,135,17);
+    l_objErrorPercentage->setFont(legendFont);
+    l_objErrorPercentage->setStyleSheet(legendlabelStyle);
+    l_objErrorPercentage->setGeometry(rightSP,25,legendLabelWidth,legendLabelHeight);
     l_objErrorPercentage->setText("ERROR  : 5%");
 
     l_objLearnVerify    =   new QLabel(VIProduct);
-    l_objLearnVerify->setFont(QFont("DejaVu Sans", 10, 75, false));
-    l_objLearnVerify->setStyleSheet("color:#d9d9d9");
-    l_objLearnVerify->setGeometry(585,5,135,17);
+    l_objLearnVerify->setFont(legendFont);
+    l_objLearnVerify->setStyleSheet(legendlabelStyle);
+    l_objLearnVerify->setGeometry(rightSP,5,legendLabelWidth,legendLabelHeight);
     l_objLearnVerify->setText("LEARNING.....");
 
     l_objTraceNumber1    =   new QLabel(VIProduct);
-    l_objTraceNumber1->setFont(QFont("DejaVu Sans", 10, 75, false));
+    l_objTraceNumber1->setFont(legendFont);
     l_objTraceNumber1->setPalette(QColor(200,0,0));
-    l_objTraceNumber1->setGeometry(5,5,60,17);
+    l_objTraceNumber1->setGeometry(leftSP,5,traceLabelWidth,legendLabelHeight);
     l_objTraceNumber1->setText("REF -----");
 
     l_objTraceNumber2    =   new QLabel(VIProduct);
-    l_objTraceNumber2->setFont(QFont("DejaVu Sans", 10, 75, false));
+    l_objTraceNumber2->setFont(legendFont);
     l_objTraceNumber2->setPalette(colorForIds[1]);
-    l_objTraceNumber2->setGeometry(5,20,60,17);
+    l_objTraceNumber2->setGeometry(leftSP,20,traceLabelWidth,legendLabelHeight);
     l_objTraceNumber2->setText("T1   -----");
 
     l_objTraceNumber3    =   new QLabel(VIProduct);
-    l_objTraceNumber3->setFont(QFont("DejaVu Sans", 10, 75, false));
+    l_objTraceNumber3->setFont(legendFont);
     l_objTraceNumber3->setPalette(colorForIds[2]);
-    l_objTraceNumber3->setGeometry(5,35,60,17);
+    l_objTraceNumber3->setGeometry(leftSP,35,traceLabelWidth,legendLabelHeight);
     l_objTraceNumber3->setText("T2   -----");
 
     l_objTraceNumber4    =   new QLabel(VIProduct);
-    l_objTraceNumber4->setFont(QFont("DejaVu Sans", 10, 75, false));
+    l_objTraceNumber4->setFont(legendFont);
     l_objTraceNumber4->setPalette(colorForIds[3]);
-    l_objTraceNumber4->setGeometry(5,50,60,17);
+    l_objTraceNumber4->setGeometry(leftSP,50,traceLabelWidth,legendLabelHeight);
     l_objTraceNumber4->setText("T3   -----");
 
     l_objTraceNumber5    =   new QLabel(VIProduct);
-    l_objTraceNumber5->setFont(QFont("DejaVu Sans", 10, 75, false));
+    l_objTraceNumber5->setFont(legendFont);
     l_objTraceNumber5->setPalette(colorForIds[4]);
-    l_objTraceNumber5->setGeometry(5,65,60,17);
+    l_objTraceNumber5->setGeometry(leftSP,65,traceLabelWidth,legendLabelHeight);
     l_objTraceNumber5->setText("T4   -----");
 
     l_objRefType        =   new QLabel(VIProduct);
-    l_objRefType->setFont(QFont("DejaVu Sans", 10, 75, false));
-    l_objRefType->setStyleSheet("color:#d9d9d9");
-    l_objRefType->setGeometry(5,447,135,17);
+    l_objRefType->setFont(legendFont);
+    l_objRefType->setStyleSheet(legendlabelStyle);
+    l_objRefType->setGeometry(leftSP,447,legendLabelWidth,legendLabelHeight);
     l_objRefType->setText("REF      : FIXED");
 
     l_objCombinations   =   new QLabel(VIProduct);
-    l_objCombinations->setFont(QFont("DejaVu Sans", 10, 75, false));
-    l_objCombinations->setStyleSheet("color:#d9d9d9");
-    l_objCombinations->setGeometry(5,467,135,17);
+    l_objCombinations->setFont(legendFont);
+    l_objCombinations->setStyleSheet(legendlabelStyle);
+    l_objCombinations->setGeometry(leftSP,467,legendLabelWidth,legendLabelHeight);
     l_objCombinations->setText("COMB  : 19");
 
     l_objDriveSettings  =   new QLabel(VIProduct);
-    l_objDriveSettings->setFont(QFont("DejaVu Sans", 10, 75, false));
-    l_objDriveSettings->setStyleSheet("color:#d9d9d9");
-    l_objDriveSettings->setGeometry(5,506,150,17);
+    l_objDriveSettings->setFont(legendFont);
+    l_objDriveSettings->setStyleSheet(legendlabelStyle);
+    l_objDriveSettings->setGeometry(leftSP,506,150,legendLabelHeight);
     l_objDriveSettings->setText("DRIVE   : 2.5V_2KE_2KHz");
 
     l_objComparison     =   new QLabel(VIProduct);
-    l_objComparison->setFont(QFont("DejaVu Sans", 10, 75, false));
-    l_objComparison->setStyleSheet("color:#d9d9d9");
-    l_objComparison->setGeometry(5,487,135,17);
+    l_objComparison->setFont(legendFont);
+    l_objComparison->setStyleSheet(legendlabelStyle);
+    l_objComparison->setGeometry(leftSP,487,legendLabelWidth,legendLabelHeight);
     l_objComparison->setText("COMP   : AVERAGE");
 
     l_objKeyLeft        =   new QLabel(VIProduct);
-    l_objKeyLeft->setFont(QFont("DejaVu Sans", 10, 75, false));
-    l_objKeyLeft->setStyleSheet("color:#d9d9d9");
-    l_objKeyLeft->setGeometry(585,487,135,17);
+    l_objKeyLeft->setFont(legendFont);
+    l_objKeyLeft->setStyleSheet(legendlabelStyle);
+    l_objKeyLeft->setGeometry(rightSP,487,legendLabelWidth,legendLabelHeight);
     l_objKeyLeft->setText("L  : RUN/STOP");
 
     l_objKeyRight       =   new QLabel(VIProduct);
-    l_objKeyRight->setFont(QFont("DejaVu Sans", 10, 75, false));
-    l_objKeyRight->setStyleSheet("color:#d9d9d9");
-    l_objKeyRight->setGeometry(585,524,135,17);
+    l_objKeyRight->setFont(legendFont);
+    l_objKeyRight->setStyleSheet(legendlabelStyle);
+    l_objKeyRight->setGeometry(rightSP,524,legendLabelWidth,legendLabelHeight);
     l_objKeyRight->setText("R : DELETE");
 
     l_objKeyMiddle      =   new QLabel(VIProduct);
-    l_objKeyMiddle->setFont(QFont("DejaVu Sans", 10, 75, false));
-    l_objKeyMiddle->setStyleSheet("color:#d9d9d9");
-    l_objKeyMiddle->setGeometry(585,506,135,17);
+    l_objKeyMiddle->setFont(legendFont);
+    l_objKeyMiddle->setStyleSheet(legendlabelStyle);
+    l_objKeyMiddle->setGeometry(rightSP,506,legendLabelWidth,legendLabelHeight);
     l_objKeyMiddle->setText("M : STORE");
+
+	l_objTraceNumber1->setVisible(false);
+	l_objTraceNumber2->setVisible(false);
+	l_objTraceNumber3->setVisible(false);
+	l_objTraceNumber4->setVisible(false);
+	l_objTraceNumber5->setVisible(false);
+
+	l_objLearnVerify->setVisible(false);
+	l_objErrorPercentage->setVisible(false);
+	l_objPassFail->setVisible(false);
+
+	l_objRefType->setVisible(false);
+	l_objCombinations->setVisible(false);
+	l_objComparison->setVisible(false);
 
 }
 void MainWindow::UpdateLegendLabels(){
     l_objDriveSettings->setText("DRIVE   : "+ui->lblVoltage->text()+"_"+ui->lblImpedance->text()+"_"+ui->lblFrequency->text());
 
-    if(ui->lblLeft->text()=="RUN/STOP" && m_startTimer==true)
-        l_objKeyLeft->setText("L  : STOP");
-    else if(ui->lblLeft->text()=="RUN/STOP" && m_startTimer==false)
-        l_objKeyLeft->setText("L  : RUN");
+    if(ui->lblLeft->text()=="RUN/STOP")
+        l_objKeyLeft->setText("L  : RUN/STOP");
     else if(ui->lblLeft->text()=="VOL/FQ/IMP")
         l_objKeyLeft->setText("L  : VOLTAGE");
     else
@@ -428,18 +444,26 @@ void MainWindow::notifyClipObserver()
 	{
 		m_objFunctionalObject->generateFixedReference();
 		ui->lblRefereceType->setText("Fixed");
+                l_objRefType->setText("REF      : FIXED");
 		ui->lblNC->setText(QString::number(m_objVISubject->getChipDialog(4)));
+                l_objCombinations->setText("COMB  : "+QString::number(m_objVISubject->getChipDialog(4)));
 	}
 	else if(m_objVISubject->getChipDialog(2) == 1)
 	{
 		m_objFunctionalObject->generateMovingReference();
 		ui->lblRefereceType->setText("Moving");
+                l_objRefType->setText("REF      : MOVING");
 		ui->lblNC->setText(QString::number(m_objVISubject->getChipDialog(4)));
+                l_objCombinations->setText("COMB  : "+QString::number(m_objVISubject->getChipDialog(4)));
 	}
-        if(m_objVISubject->getChipDialog(5) == 0)
+        if(m_objVISubject->getChipDialog(5) == 0){
 		ui->lblComparisonMode->setText("Average");
-        else
+                l_objComparison->setText("COMP   : AVERAGE");
+            }
+        else{
 		ui->lblComparisonMode->setText("Envelope");
+                l_objComparison->setText("COMP   : ENVELOPE");
+            }
 	m_isProbesOnly =false;
         m_bClipLearn=false;
 }
@@ -465,10 +489,12 @@ void MainWindow::notifyProbeObserver()
 		if(m_nSelectedProbe==0){
 			m_objFunctionalObject->switchPROBES(PROBE1);
 			on_butProbe1_clicked();
+			l_objProbeStatus->setText("SINGLE : PROBE-1");
 		}
 		else if(m_nSelectedProbe==1){
 			m_objFunctionalObject->switchPROBES(PROBE2);
 			on_butProbe2_clicked();
+			l_objProbeStatus->setText("SINGLE : PROBE-2");
 		}
 		/*			else if(m_nSelectedProbe==2){
 				m_objFunctionalObject->switchPROBES(EXT_PROBE);
@@ -477,6 +503,7 @@ void MainWindow::notifyProbeObserver()
 		else if(m_nSelectedProbe==3){
 			m_objFunctionalObject->switchPROBES(EXT_FLY);
 			on_butExternal_2_clicked();
+			l_objProbeStatus->setText("ANALOG HIGHWAY");
 		}
 		m_objVISubject->clearWaveTraces();
 		for(int l_nDeleteIndex=1;l_nDeleteIndex<m_nStoreWaveIndex;l_nDeleteIndex++)
@@ -523,6 +550,7 @@ void MainWindow::notifyProbeObserver()
 		IGPIOEvent->setProbeFlag(1);
 		m_nStoreWaveIndex=2;
 		ui->lblProbeType->setText("DUAL");
+		l_objProbeStatus->setText("DUAL PROBE");
 
 		ui->ah1_inner->setVisible(true);
 		ui->ah1_outer->setStyleSheet("border:1px solid gray;border-radius:20px;image: url(:/new/prefix1/Button-Blank-Gray-icon.png);");
@@ -792,6 +820,7 @@ void MainWindow::doKeyFunction(int pKeyCode)
 
 void MainWindow::switchFunctions(short int pKey,short int pIncrement,short int pDecrement)
 {
+
 	//        qDebug()<<"Key String:"<<m_objVISubject->getIndexTemplate(pKey,true);
 	if (m_objVISubject->getIndexTemplate(pKey,true) == "STORE") {
 		on_storeButton_clicked();
@@ -1036,7 +1065,23 @@ void MainWindow::stopVITimer()
 		ui->redPallete->setPalette(Qt::red);
 	}
 	ui->edtErrPercentage->setText("");
+        l_objErrorPercentage->setText("");
 	ui->lblPassFail->setText("");
+        l_objPassFail->setText("");
+
+    	l_objTraceNumber1->setVisible(false);
+    	l_objTraceNumber2->setVisible(false);
+    	l_objTraceNumber3->setVisible(false);
+    	l_objTraceNumber4->setVisible(false);
+    	l_objTraceNumber5->setVisible(false);
+
+    	l_objLearnVerify->setVisible(false);
+    	l_objErrorPercentage->setVisible(false);
+    	l_objPassFail->setVisible(false);
+
+    	l_objRefType->setVisible(false);
+    	l_objCombinations->setVisible(false);
+    	l_objComparison->setVisible(false);
 	//m_objFunctionalObject->stopDrive();
 	//  ui->lblStatus->setText("Idle.");
 	//    movie->stop();
@@ -1051,10 +1096,17 @@ void MainWindow::startVITimer()
 	{
 		m_nDualIndex=0;
 		updateInteractive();
+
+		l_objTraceNumber1->setVisible(true);
 	}
 	else if(m_objVISubject->getProbeDialog(0) == 1 ) // DUAL PROBE
 	{
 		updateInteractive();
+
+		l_objTraceNumber1->setVisible(true);
+		l_objTraceNumber2->setVisible(true);
+		l_objErrorPercentage->setVisible(true);
+		l_objPassFail->setVisible(true);
 	}
 }
 
@@ -1122,7 +1174,9 @@ void MainWindow::displayComparison()
 		//qDebug()<< "Err Percentage:"<<l_nErrPercentage;
 		if (l_nErrPercentage >= m_objVISubject->getProbeThreshold()){
 			ui->edtErrPercentage->setText(QString::number(l_nErrPercentage, 10) + "%");
+                        l_objErrorPercentage->setText("ERROR  : "+QString::number(l_nErrPercentage, 10) + "%");
 			ui->lblPassFail->setText("FAIL");
+                        l_objPassFail->setText("RESULT : FAIL");
 		}
 		else if(l_nErrPercentage >=0)
 		{
@@ -1131,12 +1185,16 @@ void MainWindow::displayComparison()
 			{
 				//qDebug()<< "check Pass Message:"<<m_nStoreWaveIndex;
 				ui->edtErrPercentage->setText(QString::number(l_nErrPercentage, 10) + "%");
+                                l_objErrorPercentage->setText("ERROR  : "+QString::number(l_nErrPercentage, 10) + "%");
 				ui->lblPassFail->setText("PASS");
+                                l_objPassFail->setText("RESULT : PASS");
 			}
 			else
 			{
 				ui->edtErrPercentage->setText("");
+                                l_objErrorPercentage->setText("");
 				ui->lblPassFail->setText("");
+                                l_objPassFail->setText("");
 			}
 		}
 	}
@@ -1145,10 +1203,12 @@ void MainWindow::displayComparison()
 		if (VIProduct->compareBand(0) == true)
 		{
 			ui->edtErrPercentage->setText("PASS");
+                        l_objErrorPercentage->setText("ERROR  : PASS");
 		}
 		else
 		{
 			ui->edtErrPercentage->setText("FAIL");
+                        l_objErrorPercentage->setText("ERROR  : FAIL");
 		}
 	}
 }
@@ -1332,6 +1392,7 @@ void MainWindow::clipLearn(bool pLearnFlag)
 	{
 		//		qDebug() << "Clip Learn in Progress..";
 		l_strText = "Clip Learn in Progress.";
+                l_objLearnVerify->setText("LEARNING.....");
 		l_strLearnt = "Learnt_";
 		m_biSLearnFlag= false;
 	}
@@ -1339,6 +1400,7 @@ void MainWindow::clipLearn(bool pLearnFlag)
 	{
 		//		qDebug() << "Clip Verify in Progress..";
 		l_strText = "Clip Verify in Progress.";
+                l_objLearnVerify->setText("VERIFYING.....");
 		l_strLearnt = "Test_";
 	}
 	m_objFunctionalObject->DISABLEINT();
@@ -1408,6 +1470,8 @@ void MainWindow::clipLearn(bool pLearnFlag)
 			m_objFunctionalObject->converttoVoltage(m_objFunctionalObject->getFileData(l_strTestFileName),m_objVISubject->getVoltageValue(), l_objCalibData);
 			double l_nPosPeakVoltage = (m_objVISubject->getPosPeak()* m_objVISubject->getVoltageValue())/REFERENCE_THRESHOLD;
 			double l_nNetPeakVoltage = (m_objVISubject->getNegPeak()* m_objVISubject->getVoltageValue())/REFERENCE_THRESHOLD;
+			Q_UNUSED(l_nPosPeakVoltage)
+			Q_UNUSED(l_nNetPeakVoltage)
                         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //                                            qDebug()<<"PositivePeak:"<<l_nPosPeakVoltage;
 //                                            qDebug()<<"NegativePeak:"<<l_nNetPeakVoltage;
@@ -1675,6 +1739,51 @@ void MainWindow::storeTrace()
 		m_objVISubject->storeWaveTrace(m_nStoreWaveIndex-1,m_objFunctionalObject->getFileData(ACTUAL_FILENAME));
 		m_nStoreWaveIndex++;
 	}
+	//Legends~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	if(m_nStoreWaveIndex>1){
+		l_objErrorPercentage->setVisible(true);
+		l_objPassFail->setVisible(true);
+	}else{
+		l_objErrorPercentage->setVisible(false);
+		l_objPassFail->setVisible(false);
+	}
+	if(m_nStoreWaveIndex==1){
+		l_objTraceNumber1->setVisible(true);
+		l_objTraceNumber2->setVisible(false);
+		l_objTraceNumber3->setVisible(false);
+		l_objTraceNumber4->setVisible(false);
+		l_objTraceNumber5->setVisible(false);
+	}
+	if(m_nStoreWaveIndex==2){
+		l_objTraceNumber1->setVisible(true);
+		l_objTraceNumber2->setVisible(true);
+		l_objTraceNumber3->setVisible(false);
+		l_objTraceNumber4->setVisible(false);
+		l_objTraceNumber5->setVisible(false);
+	}
+	if(m_nStoreWaveIndex==3){
+		l_objTraceNumber1->setVisible(true);
+		l_objTraceNumber2->setVisible(true);
+		l_objTraceNumber3->setVisible(true);
+		l_objTraceNumber4->setVisible(false);
+		l_objTraceNumber5->setVisible(false);
+	}
+	if(m_nStoreWaveIndex==4){
+		l_objTraceNumber1->setVisible(true);
+		l_objTraceNumber2->setVisible(true);
+		l_objTraceNumber3->setVisible(true);
+		l_objTraceNumber4->setVisible(true);
+		l_objTraceNumber5->setVisible(false);
+	}
+	if(m_nStoreWaveIndex==5){
+		l_objTraceNumber1->setVisible(true);
+		l_objTraceNumber2->setVisible(true);
+		l_objTraceNumber3->setVisible(true);
+		l_objTraceNumber4->setVisible(true);
+		l_objTraceNumber5->setVisible(true);
+	}
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//	else
 	//	{
 	//		return;
@@ -1725,6 +1834,42 @@ void MainWindow::deleteTrace()
 			m_nStoreWaveIndex = 1;
 		ui->errPallete->setPalette(colorForIds[m_nStoreWaveIndex - 1]);
 
+		//Legends~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		if(m_nStoreWaveIndex==1){
+			l_objTraceNumber1->setVisible(true);
+			l_objTraceNumber2->setVisible(false);
+			l_objTraceNumber3->setVisible(false);
+			l_objTraceNumber4->setVisible(false);
+			l_objTraceNumber5->setVisible(false);
+		}
+		if(m_nStoreWaveIndex==2){
+			l_objTraceNumber1->setVisible(true);
+			l_objTraceNumber2->setVisible(true);
+			l_objTraceNumber3->setVisible(false);
+			l_objTraceNumber4->setVisible(false);
+			l_objTraceNumber5->setVisible(false);
+		}
+		if(m_nStoreWaveIndex==3){
+			l_objTraceNumber1->setVisible(true);
+			l_objTraceNumber2->setVisible(true);
+			l_objTraceNumber3->setVisible(true);
+			l_objTraceNumber4->setVisible(false);
+			l_objTraceNumber5->setVisible(false);
+		}
+		if(m_nStoreWaveIndex==4){
+			l_objTraceNumber1->setVisible(true);
+			l_objTraceNumber2->setVisible(true);
+			l_objTraceNumber3->setVisible(true);
+			l_objTraceNumber4->setVisible(true);
+			l_objTraceNumber5->setVisible(false);
+		}
+		if(m_nStoreWaveIndex==5){
+			l_objTraceNumber1->setVisible(true);
+			l_objTraceNumber2->setVisible(true);
+			l_objTraceNumber3->setVisible(true);
+			l_objTraceNumber4->setVisible(true);
+			l_objTraceNumber5->setVisible(true);
+		}
 	}
 	else
 	{
@@ -2337,8 +2482,8 @@ bool MainWindow::checkforOC()
 					"V_" + QString::number(m_objVISubject->getFrequencyValue(), 'f',
 						0) + "_HZ_" + QString::number(m_objVISubject->getImpedanceValue())
 		+ ".bin";*/
-	//	   qDebug()<<"Positive Peak:"<<m_objVISubject->getPosPeak()<<\
-	//			   "Negative Peak:"<<m_objVISubject->getNegPeak()<<\
+	//	   qDebug()<<"Positive Peak:"<<m_objVISubject->getPosPeak()<<
+	//			   "Negative Peak:"<<m_objVISubject->getNegPeak()<<
 	//			   "Range Voltage:"<<m_objVISubject->getVoltageValue();
 	l_nPosPeakVoltage = (m_objVISubject->getPosPeak() * m_objVISubject->getVoltageValue())/REFERENCE_THRESHOLD;
 	l_nNetPeakVoltage = (m_objVISubject->getNegPeak() * m_objVISubject->getVoltageValue())/REFERENCE_THRESHOLD;
@@ -2628,6 +2773,7 @@ bool MainWindow::checkforZeDiode()
 		//if(l_nPosPeakVoltage >=0.8 && l_nNetPeakVoltage <=-0.8)
 		return true;
 	}
+	return true;
 }
 
 bool MainWindow::binaryCapacitanceSearch(short int pVoltIndex )
@@ -2721,7 +2867,7 @@ bool MainWindow::binaryCapacitanceSearch(short int pVoltIndex )
 	{
 		l_nFreqIndex=0;
 		isCapFlag=true;
-		qDebug()<<"Capcitance";
+		qDebug()<<"Capacitance";
 	}
 	int l_nLoopIndex=0;
 	while(l_nLoopIndex<3)
@@ -2788,6 +2934,7 @@ bool MainWindow::binaryCapacitanceSearch(short int pVoltIndex )
 	}
 	if(m_nAutoCount>0)
 		return true;
+	return false;
 }
 void MainWindow::calcuateFitnessFunction(short int pIndex)
 {
@@ -2820,7 +2967,7 @@ void MainWindow::calcuateFitnessFunction(short int pIndex)
 	//	if(l_nCheckDegree>0){
 	//		m_nCapacitanceCount++;
 	//		//qDebug()<<"Divide Lower"<<"Actual Degree:"<<l_nActualDegree<<"CalibDegree:"<<l_nCalibrationDegree;
-	//	//	qDebug()<<"+++++++++Capciatance++++++++++++"<<l_nCheckDegree;
+	//	//	qDebug()<<"+++++++++Capacitance++++++++++++"<<l_nCheckDegree;
 	//	}
 	//	else{
 	//		//qDebug()<<"Divide Lower"<<"Actual Degree:"<<l_nActualDegree<<"CalibDegree:"<<l_nCalibrationDegree;
@@ -2832,7 +2979,7 @@ void MainWindow::calcuateFitnessFunction(short int pIndex)
 		qDebug()<<"Divide Lower"<<"Actual Degree:"<<l_nActualDegree<<"CalibDegree:"<<l_nCalibrationDegree;
 		int l_nCheckDegree = l_nActualDegree-l_nCalibrationDegree;
 		if(l_nCheckDegree>0){
-			qDebug()<<"+++++++++fit Capciatance++++++++++++"<<l_nCheckDegree;
+			qDebug()<<"+++++++++fit Capacitance++++++++++++"<<l_nCheckDegree;
 			m_nCapacitanceCount++;
 		}
 		else{
@@ -3348,18 +3495,20 @@ void MainWindow::on_butZoom_clicked()
     if(VIProduct->geometry().width()==324){
         animation2->setStartValue(QRect(17, 40, 324, 272));
         animation1->setStartValue(QRect(0, 0, 324, 272));
-        animation2->setEndValue(QRect(17, 40, 680, 545));
-        animation1->setEndValue(QRect(0, 0, 680, 545));
+        animation2->setEndValue(QRect(0, 30, 707, 560));
+        animation1->setEndValue(QRect(0, 0, 707, 560));
         animation2->start();
         animation1->start();
+        ui->butZoom->setStyleSheet("QPushButton {background-color: rgb(0, 0, 0,0);color: rgba(0, 0, 0, 0);border-style: groove;border-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-width:medium; } QPushButton:pressed {background-color: rgb(0, 0, 0,0);color: rgba(0, 0, 0, 0);border-style: groove;border-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-width:medium; } QPushButton:flat {background-color: rgb(0, 0, 0,0);color: rgba(0, 0, 0, 0);border-style: groove;border-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-width:medium; } QPushButton:default {background-color: rgb(0, 0, 0,0);color: rgba(0, 0, 0, 0);border-style: groove;border-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3a5976, stop: 1 #000000);border-width:medium; }");
         UpdateLegendLabels();
     }
     else{
-        animation2->setStartValue(QRect(17, 40, 680, 545));
-        animation1->setStartValue(QRect(0, 0, 680, 545));
+        animation2->setStartValue(QRect(0, 30, 707, 560));
+        animation1->setStartValue(QRect(0, 0, 707, 560));
         animation2->setEndValue(QRect(17, 40, 324, 272));
         animation1->setEndValue(QRect(0, 0, 324, 272));
         animation2->start();
+        ui->butZoom->setStyleSheet(" QPushButton {background-color: rgb(0, 0, 0,0);border:2px solid white:color: rgba(0, 0, 0, 0); } QPushButton:pressed {background-color:rg(0, 0, 0,0);border:2px solid white:color: rgba(0, 0, 0, 0); } QPushButton:flat {background-color: rgb(0, 0, 0,0);border:2px solid white:color: rgba(0, 0, 0, 0); } QPushButton:default {background-color: rgb(0, 0, 0,0);border:2px solid white:color: rgba(0, 0, 0, 0); }");
         animation1->start();
     }
 

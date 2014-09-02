@@ -172,17 +172,12 @@
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="asm-generic" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="bits" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="c++" kind="inc" path="" system="true"/>
-				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="crypto++" kind="inc" path="" system="true"/>
-				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="Qmax" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="Qt" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="QtCore" kind="inc" path="" system="true"/>
-				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="QtCrypto" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="QtDesigner" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="QtGui" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="QtMultimedia" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="QtNetwork" kind="inc" path="" system="true"/>
-				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="QtOpenGL" kind="inc" path="" system="true"/>
-				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="QtOpenVG" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="QtSql" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="QtSvg" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="QtTest" kind="inc" path="" system="true"/>
@@ -204,7 +199,6 @@
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="sys" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="theora" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="gio-unix-2.0" kind="inc" path="" system="true"/>
-				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="GL" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="GLES" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="GLES2" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="glib-2.0" kind="inc" path="" system="true"/>
@@ -229,14 +223,14 @@
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="ogg" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="openssl" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="phonon" kind="inc" path="" system="true"/>
-				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="poppler" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="drm" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="EGL" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="KHR" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="libelf" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="liboil-0.3" kind="inc" path="" system="true"/>
 				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="libxml2" kind="inc" path="" system="true"/>
-				<pathentry base-path="/usr/local/DigiEL-5.6/x-tools/arm-cortex_a8-linux-gnueabi/arm-cortex_a8-linux-gnueabi/sys-root/usr/include" include="cryptopp" kind="inc" path="" system="true"/>
+				<pathentry kind="src" path=""/>
+				<pathentry kind="out" path=""/>
 			</storageModule>
 		</cconfiguration>
 	</storageModule>

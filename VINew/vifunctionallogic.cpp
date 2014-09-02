@@ -76,7 +76,7 @@ void VIFunctionalLogic::ReadCalibrationFunctionFile(QString pStrName)
 }
 
 double VIFunctionalLogic::getReceiveCalibrationConstant(short int pVoltIndex)
-{
+{Q_UNUSED(pVoltIndex)
     int index=0;
     double l_nVoltValue = m_objVISubject->getVoltageValue();
 //    qDebug()<<"Voltage:"<<l_nVoltValue;
@@ -95,7 +95,7 @@ double VIFunctionalLogic::getReceiveCalibrationConstant(short int pVoltIndex)
 }
 
 double VIFunctionalLogic::getReceiveCalibrationGain(short int pVoltIndex)
-{
+{Q_UNUSED(pVoltIndex)
     double l_nVoltValue = m_objVISubject->getVoltageValue();
   //  qDebug()<<"Voltage:"<<l_nVoltValue;
     int index=0;
@@ -124,6 +124,7 @@ void VIFunctionalLogic::storeCalibFile(QString pStrCalibFile,short unsigned int 
 	    short int counter=0;
 	    short int l_nWaveCounter=0;
 	    short int l_nStartTick=100,l_nEndTick=200;
+	    Q_UNUSED(l_nEndTick)
 	   // bool ok=true;
 	   // if(l_objDataFile->open(QFile::WriteOnly))
 	   // {
@@ -851,6 +852,7 @@ stWaveData* VIFunctionalLogic::showVITrace(int pWaveTrace,short int pVoltIndex)
 {
 //stWaveData *objVIWaveData = new stWaveData;
 double l_nVoltArray[6]= {0.2,2.5,8.0,13.0};
+
 if(pWaveTrace == 1)
     {
     // VT

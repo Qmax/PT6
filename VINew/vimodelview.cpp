@@ -127,6 +127,7 @@ void VIModel::setProbeDialog(short pIndex, short pValue)
 short int VIModel::getProbeDialog(short pIndex)
 {
 	m_objProbeDialogClass->getIndex(pIndex);
+	return 0;
 }
 
 bool  VIModel::getCalibrationStatus(){
@@ -152,6 +153,7 @@ void  VIModel::setVerifyStatus(bool state){
 
 void VIModel::setAutoCurvePattern(short int pIndex,QString pStrName,QStringList pData)
 {
+
 	if(m_lstAutoCurveFitPatterns.contains(pStrName) == false)
 	{
 		m_lstAutoCurveFitPatterns.insert(pIndex,pStrName);
